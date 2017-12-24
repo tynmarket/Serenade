@@ -1,4 +1,4 @@
-package com.tyn_imarket.serenade;
+package com.tynmarket.serenade;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.tyn_imarket.serenade", appContext.getPackageName());
+        assertEquals("com.tynmarket.serenade", appContext.getPackageName());
     }
 }

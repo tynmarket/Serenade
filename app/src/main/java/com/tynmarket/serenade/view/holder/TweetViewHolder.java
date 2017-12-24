@@ -1,10 +1,10 @@
-package com.tyn_imarket.serenade.view.holder;
+package com.tynmarket.serenade.view.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.tyn_imarket.serenade.R;
+import com.tynmarket.serenade.R;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.

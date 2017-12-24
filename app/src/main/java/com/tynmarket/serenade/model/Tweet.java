@@ -1,4 +1,4 @@
-package com.tyn_imarket.serenade.model;
+package com.tynmarket.serenade.model;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.

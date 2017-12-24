@@ -1,13 +1,13 @@
-package com.tyn_imarket.serenade.view.adapter;
+package com.tynmarket.serenade.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tyn_imarket.serenade.R;
-import com.tyn_imarket.serenade.model.Tweet;
-import com.tyn_imarket.serenade.view.holder.TweetViewHolder;
+import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.Tweet;
+import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
 

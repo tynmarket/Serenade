@@ -1,4 +1,4 @@
-package com.tyn_imarket.serenade;
+package com.tynmarket.serenade;
 
 import org.junit.Test;
 
