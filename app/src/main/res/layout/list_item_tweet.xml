@@ -31,19 +31,19 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/tweet_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/header"
-        android:text="text" />
+        android:text="tweet_text" />
 
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/text"
+        android:layout_below="@+id/tweet_text"
         android:orientation="horizontal">
 
         <TextView
