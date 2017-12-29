@@ -17,6 +17,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public TweetViewHolder(View itemView) {
         super(itemView);
         this.view = itemView;
-        this.text = (TextView) itemView.findViewById(R.id.text);
+        this.text = (TextView) itemView.findViewById(R.id.name);
     }
 }
