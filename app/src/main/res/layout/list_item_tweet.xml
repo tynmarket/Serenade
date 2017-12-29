@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,13 +22,13 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name" />
+            tools:text="name" />
 
         <TextView
             android:id="@+id/screen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="screen_name" />
+            tools:text="screen_name" />
     </LinearLayout>
 
     <TextView
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/header"
-        android:text="tweet_text" />
+        tools:text="tweet_text" />
 
     <LinearLayout
         android:id="@+id/footer"
@@ -50,14 +51,13 @@
             android:id="@+id/footer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="footer1" />
+            tools:text="footer1" />
 
         <TextView
             android:id="@+id/footer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="footer2" />
-
+            tools:text="footer2" />
     </LinearLayout>
 
 </RelativeLayout>
