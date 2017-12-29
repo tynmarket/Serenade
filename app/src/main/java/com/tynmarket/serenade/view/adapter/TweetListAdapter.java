@@ -30,7 +30,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-        holder.text.setText(this.tweets.get(position).getText());
+        holder.name.setText(this.tweets.get(position).getName());
     }
 
     @Override

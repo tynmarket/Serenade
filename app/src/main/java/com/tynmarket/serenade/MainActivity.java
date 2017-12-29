@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < 5; i++) {
                 Tweet tweet = new Tweet();
-                String text = String.format("%s%d", content, i);
-                tweet.setText(text);
+                String name = String.format("%s%d", content, i);
+                tweet.setName(name);
                 tweets.add(tweet);
             }
 

@@ -12,11 +12,11 @@ import com.tynmarket.serenade.R;
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
     private View view;
-    public TextView text;
+    public TextView name;
 
     public TweetViewHolder(View itemView) {
         super(itemView);
         this.view = itemView;
-        this.text = (TextView) itemView.findViewById(R.id.name);
+        this.name = (TextView) itemView.findViewById(R.id.name);
     }
 }
