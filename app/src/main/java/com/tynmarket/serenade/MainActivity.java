@@ -141,8 +141,12 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < 5; i++) {
                 Tweet tweet = new Tweet();
-                String name = String.format("%s%d", content, i);
+                String name = String.format("%s%d", "名前", i);
+                String screenName = String.format("%s%d", "スクリーン名", i);
+                String tweetText = String.format("%s%d", "ツイート内容", i);
                 tweet.setName(name);
+                tweet.setScreenName(screenName);
+                tweet.setTweetText(tweetText);
                 tweets.add(tweet);
             }
 
