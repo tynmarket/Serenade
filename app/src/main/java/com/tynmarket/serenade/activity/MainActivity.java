@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.Tweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        initTwitterConfig();
     }
 
 
@@ -91,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initTwitterConfig() {
+        Log.d("DEBUG", String.format("apiKey: %s", BuildConfig.API_KEY));
+        Log.d("DEBUG", String.format("apiSecret: %s", BuildConfig.API_SECRET));
     }
 
     /**
