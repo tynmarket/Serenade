@@ -1,4 +1,4 @@
-package com.tynmarket.serenade;
+package com.tynmarket.serenade.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.Tweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 

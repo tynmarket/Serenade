@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.tynmarket.serenade.MainActivity$PlaceholderFragment">
+    tools:context="com.tynmarket.serenade.activity.MainActivity$PlaceholderFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tweet_list"
