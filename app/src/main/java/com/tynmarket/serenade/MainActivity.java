@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.tynmarket.serenade.model.Tweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
@@ -140,13 +141,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Tweet> tweets = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
-                Tweet tweet = new Tweet();
-                String name = String.format("%s%d", "名前", i);
-                String screenName = String.format("%s%d", "スクリーン名", i);
-                String tweetText = String.format("%s%d", "ツイート内容", i);
-                tweet.setName(name);
-                tweet.setScreenName(screenName);
-                tweet.setTweetText(tweetText);
+                Tweet tweet = fromJson(i + 1);
                 tweets.add(tweet);
             }
 
@@ -154,6 +149,12 @@ public class MainActivity extends AppCompatActivity {
             rv.setAdapter(adapter);
 
             return rootView;
+        }
+
+        private Tweet fromJson(int i) {
+            Gson gson = new Gson();
+            String jsonText = String.format("{\"name\":\"名前%d\",\"screenName\":\"スクリーン名%d\",\"tweetText\":\"ツイート内容%d\"}", i, i, i);
+            return gson.fromJson(jsonText, Tweet.class);
         }
     }
 
