@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.Tweet;
@@ -72,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initTwitterConfig();
+        Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
+        startActivity(i);
     }
 
 
@@ -98,8 +105,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTwitterConfig() {
-        Log.d("DEBUG", String.format("apiKey: %s", BuildConfig.API_KEY));
-        Log.d("DEBUG", String.format("apiSecret: %s", BuildConfig.API_SECRET));
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig(BuildConfig.API_KEY, BuildConfig.API_SECRET))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
     }
 
     /**
