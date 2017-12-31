@@ -3,7 +3,6 @@ apply plugin: 'deploygate'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.tynmarket.serenade"
         minSdkVersion 23
