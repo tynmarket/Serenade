@@ -1,9 +1,18 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/saveactions_settings.xml
-/.idea/libraries
+
+# IntelliJ
+*.iml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/saveactions_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/dictionaries
+.idea/libraries
+
 .DS_Store
 /build
 /captures
