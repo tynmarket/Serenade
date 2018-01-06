@@ -40,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void success(Result<TwitterSession> result) {
                 Toast.makeText(LoginActivity.this, "ログイン成功", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override
             public void failure(TwitterException exception) {
                 Toast.makeText(LoginActivity.this, "ログイン失敗", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }

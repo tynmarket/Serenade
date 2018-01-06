@@ -33,6 +33,7 @@ import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_LOGIN = 1001;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -77,10 +78,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initTwitterConfig();
+
         Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
-        startActivity(i);
+        startActivityForResult(i, REQUEST_CODE_LOGIN);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_LOGIN) {
+            if (resultCode == RESULT_OK) {
+                loadHomeTimeline();
+            } else {
+                Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+    }
+
+    private void loadHomeTimeline() {
+        Log.d("Serenade", "loadHomeTimeline()");
     }
 
     /**
