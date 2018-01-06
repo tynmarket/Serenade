@@ -20,17 +20,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
+import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.Tweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN = 1001;
@@ -126,7 +134,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadHomeTimeline() {
-        Log.d("Serenade", "loadHomeTimeline()");
+        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
+        StatusesService statusesService = twitterApiClient.getStatusesService();
+        Call<List<Tweet>> call = statusesService.homeTimeline(20, null, null, false, false, false, true);
+        call.enqueue(new Callback<List<Tweet>>() {
+            @Override
+            public void success(Result<List<Tweet>> result) {
+                Log.d("Serenade", "homeTimeline success");
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                Log.d("Serenade", "homeTimeline failure");
+            }
+        });
     }
 
     /**
@@ -178,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Tweet> tweets = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
-                Tweet tweet = fromJson(i + 1);
+                Tweet tweet = dummyTweet(i);
                 tweets.add(tweet);
             }
 
@@ -188,10 +209,18 @@ public class MainActivity extends AppCompatActivity {
             return rootView;
         }
 
-        private Tweet fromJson(int i) {
-            Gson gson = new Gson();
-            String jsonText = String.format("{\"name\":\"名前%d\",\"screenName\":\"スクリーン名%d\",\"tweetText\":\"ツイート内容%d\"}", i, i, i);
-            return gson.fromJson(jsonText, Tweet.class);
+        private Tweet dummyTweet(int i) {
+            Tweet tweet = new Tweet(null, "createdAt", null, null,
+                    null, 0, false, "filterLevel", i + 1,
+                    String.valueOf(i + 1), "inReplyToScreenName", 0,
+                    "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
+                    "lang", null, false, null, 0,
+                    "quotedStatusIdStr", null, 0, false,
+                    null, "source", String.format("ツイート内容 %d", i + 1), null,
+                    false, null, false, null,
+                    "withheldScope", null);
+
+            return tweet;
         }
     }
 

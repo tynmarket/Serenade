@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.Tweet;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-        holder.name.setText(this.tweets.get(position).getName());
-        holder.screenName.setText(this.tweets.get(position).getScreenName());
-        holder.tweetText.setText(this.tweets.get(position).getTweetText());
+        holder.name.setText("name");//this.tweets.get(position).getName());
+        holder.screenName.setText("screenName");//this.tweets.get(position).getScreenName());
+        holder.tweetText.setText("tweetText");//this.tweets.get(position).getTweetText());
     }
 
     @Override
