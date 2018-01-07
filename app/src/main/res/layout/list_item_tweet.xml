@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
-        android:paddingStart="@dimen/spacing_medium"
-        android:paddingEnd="0dp">
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="0dp">
 
         <TextView
             android:id="@+id/name"
@@ -60,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/tweet_text"
-        android:paddingStart="@dimen/spacing_medium"
-        android:paddingEnd="0dp">
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="0dp">
 
         <TextView
             android:id="@+id/footer1"
