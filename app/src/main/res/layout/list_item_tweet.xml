@@ -13,10 +13,12 @@
 
     <LinearLayout
         android:id="@+id/header"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
-        android:orientation="horizontal">
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="0dp">
 
         <TextView
             android:id="@+id/name"
@@ -44,15 +46,19 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/header"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="0dp"
         tools:text="tweet_text" />
 
     <LinearLayout
         android:id="@+id/footer"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/tweet_text"
-        android:orientation="horizontal">
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="0dp">
 
         <TextView
             android:id="@+id/footer1"
