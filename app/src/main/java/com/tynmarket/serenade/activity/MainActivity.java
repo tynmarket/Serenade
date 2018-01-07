@@ -30,6 +30,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         initTwitterConfig();
 
         Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
-        startActivityForResult(i, REQUEST_CODE_LOGIN);
+        //startActivityForResult(i, REQUEST_CODE_LOGIN);
     }
 
     @Override
@@ -217,10 +218,28 @@ public class MainActivity extends AppCompatActivity {
                     "lang", null, false, null, 0,
                     "quotedStatusIdStr", null, 0, false,
                     null, "source", String.format("ツイート内容 %d", i + 1), null,
-                    false, null, false, null,
+                    false, dummyUser(i), false, null,
                     "withheldScope", null);
 
             return tweet;
+        }
+
+        private User dummyUser(int i) {
+            User user = new User(false, "createdAt", false,
+                    false, "description", "emailAddress",
+                    null, 0, false, 0,
+                    0, false, 0, "idStr", false,
+                    "lang", 0, "location", String.format("name %d", i + 1),
+                    "profileBackgroundColor", "profileBackgroundImageUrl",
+                    "profileBackgroundImageUrlHttps", false,
+                    "profileBannerUrl", "profileImageUrl",
+                    "profileImageUrlHttps", "profileLinkColor",
+                    "profileSidebarBorderColor", "profileSidebarFillColor",
+                    "profileTextColor", false, false,
+                    String.format("screenName %d", i + 1), false, null, 0,
+                    "timeZone", "url", 0, false, null,
+                    "withheldScope");
+            return user;
         }
     }
 
