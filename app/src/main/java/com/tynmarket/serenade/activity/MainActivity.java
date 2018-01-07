@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     "profileImageUrlHttps", "profileLinkColor",
                     "profileSidebarBorderColor", "profileSidebarFillColor",
                     "profileTextColor", false, false,
-                    String.format("tynmarket %d", i + 1), false, null, 0,
+                    String.format("@tynmarket %d", i + 1), false, null, 0,
                     "timeZone", "url", 0, false, null,
                     "withheldScope");
             return user;
