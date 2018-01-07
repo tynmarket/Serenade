@@ -233,14 +233,14 @@ public class MainActivity extends AppCompatActivity {
                     false, "description", "emailAddress",
                     null, 0, false, 0,
                     0, false, 0, "idStr", false,
-                    "lang", 0, "location", String.format("name %d", i + 1),
+                    "lang", 0, "location", String.format("ティン＠iMarket管理人 %d", i + 1),
                     "profileBackgroundColor", "profileBackgroundImageUrl",
                     "profileBackgroundImageUrlHttps", false,
                     "profileBannerUrl", "profileImageUrl",
                     "profileImageUrlHttps", "profileLinkColor",
                     "profileSidebarBorderColor", "profileSidebarFillColor",
                     "profileTextColor", false, false,
-                    String.format("screenName %d", i + 1), false, null, 0,
+                    String.format("tynmarket %d", i + 1), false, null, 0,
                     "timeZone", "url", 0, false, null,
                     "withheldScope");
             return user;
