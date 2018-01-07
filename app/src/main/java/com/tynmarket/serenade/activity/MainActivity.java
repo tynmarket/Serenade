@@ -217,11 +217,15 @@ public class MainActivity extends AppCompatActivity {
                     "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
                     "lang", null, false, null, 0,
                     "quotedStatusIdStr", null, 0, false,
-                    null, "source", String.format("ツイート内容 %d", i + 1), null,
+                    null, "source", dummyText(i), null,
                     false, dummyUser(i), false, null,
                     "withheldScope", null);
 
             return tweet;
+        }
+
+        private String dummyText(int i) {
+            return String.format("ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容 %d", i + 1);
         }
 
         private User dummyUser(int i) {
