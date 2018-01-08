@@ -11,6 +11,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.
@@ -45,5 +46,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
+    }
+
+    public void refresh(List<Tweet> newTweets) {
+        tweets.clear();
+        tweets.addAll(newTweets);
+        notifyDataSetChanged();
     }
 }

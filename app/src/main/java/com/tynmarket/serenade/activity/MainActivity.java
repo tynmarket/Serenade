@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    public static TweetListAdapter mHomeTimelineAdapter;
+    public static TweetListAdapter mFavoritesListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         initTwitterConfig();
 
         Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
-        //startActivityForResult(i, REQUEST_CODE_LOGIN);
+        startActivityForResult(i, REQUEST_CODE_LOGIN);
     }
 
     @Override
@@ -138,10 +141,12 @@ public class MainActivity extends AppCompatActivity {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
         Call<List<Tweet>> call = statusesService.homeTimeline(20, null, null, false, false, false, true);
+
         call.enqueue(new Callback<List<Tweet>>() {
             @Override
             public void success(Result<List<Tweet>> result) {
                 Log.d("Serenade", "homeTimeline success");
+                mHomeTimelineAdapter.refresh(result.data);
             }
 
             @Override
@@ -179,23 +184,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.tweet_list);
 
             LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             manager.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(manager);
-
-            int section = getArguments().getInt(ARG_SECTION_NUMBER);
-            String content;
-
-            if (section == 1) {
-                content = "ツイート";
-            } else if (section == 2) {
-                content = "いいね";
-            } else {
-                content = "未定";
-            }
 
             ArrayList<Tweet> tweets = new ArrayList<>();
 
@@ -204,7 +199,16 @@ public class MainActivity extends AppCompatActivity {
                 tweets.add(tweet);
             }
 
-            RecyclerView.Adapter adapter = new TweetListAdapter(tweets);
+            int section = getArguments().getInt(ARG_SECTION_NUMBER);
+            RecyclerView.Adapter adapter;
+
+            if (section == 1) {
+                adapter = mHomeTimelineAdapter = new TweetListAdapter(tweets);
+            } else if (section == 2) {
+                adapter = mFavoritesListAdapter = new TweetListAdapter(tweets);
+            } else {
+                adapter = new TweetListAdapter(tweets);
+            }
             rv.setAdapter(adapter);
 
             return rootView;
