@@ -58,7 +58,7 @@
         tools:text="tweet_text" />
 
     <LinearLayout
-        android:id="@+id/footer"
+        android:id="@+id/actions"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,16 +68,25 @@
         android:layout_marginEnd="0dp">
 
         <TextView
-            android:id="@+id/footer1"
+            android:id="@+id/talk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="footer1" />
+            android:layout_weight="1"
+            tools:text="talk" />
 
         <TextView
-            android:id="@+id/footer2"
+            android:id="@+id/retweet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="footer2" />
+            android:layout_weight="1"
+            tools:text="retweet" />
+
+        <TextView
+            android:id="@+id/fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="fav" />
     </LinearLayout>
 
 </RelativeLayout>
