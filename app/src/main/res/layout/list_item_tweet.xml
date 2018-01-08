@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/header"
+        android:paddingTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="0dp"
-        android:paddingTop="@dimen/spacing_small"
         android:textColor="?android:textColorPrimary"
         tools:text="tweet_text" />
 
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/tweet_text"
-        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="0dp">
 
