@@ -96,7 +96,8 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/actions"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        android:background="@color/tw__light_gray" />
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:background="@color/tw__light_gray"
+        android:alpha="0.5" />
 </RelativeLayout>
