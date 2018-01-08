@@ -35,6 +35,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         User user = tweet.user;
         holder.name.setText(user.name);
         holder.screenName.setText(user.screenName);
+        holder.createdAt.setText(tweet.createdAt);
         holder.tweetText.setText(tweet.text);
     }
 

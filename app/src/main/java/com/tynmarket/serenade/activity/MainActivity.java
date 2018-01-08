@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private Tweet dummyTweet(int i) {
-            Tweet tweet = new Tweet(null, "createdAt", null, null,
+            Tweet tweet = new Tweet(null, "10時間", null, null,
                     null, 0, false, "filterLevel", i + 1,
                     String.valueOf(i + 1), "inReplyToScreenName", 0,
                     "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
