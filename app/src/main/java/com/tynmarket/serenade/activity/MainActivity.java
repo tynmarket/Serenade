@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     false, "description", "emailAddress",
                     null, 0, false, 0,
                     0, false, 0, "idStr", false,
-                    "lang", 0, "location", String.format("ティン＠iMarket管理人 %d", i + 1),
+                    "lang", 0, "location", String.format("ティン＠iMarket管理人あああ %d", i + 1),
                     "profileBackgroundColor", "profileBackgroundImageUrl",
                     "profileBackgroundImageUrlHttps", false,
                     "profileBannerUrl", "profileImageUrl",
