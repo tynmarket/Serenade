@@ -37,6 +37,7 @@ import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
+import com.tynmarket.serenade.view.fragment.RefreshFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,12 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
+            RefreshFragment fragment = new RefreshFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
+
             loadHomeTimeline();
+
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         });
 
         initTwitterConfig();
