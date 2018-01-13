@@ -20,6 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.ListPreloader;
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
+import com.bumptech.glide.util.FixedPreloadSizeProvider;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -166,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final int MAX_PRELOAD = 10;
 
         public PlaceholderFragment() {
         }
@@ -185,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.tweet_list);
 
+            // Layout
             LinearLayoutManager manager = new LinearLayoutManager(getActivity());
             manager.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(manager);
@@ -200,8 +204,9 @@ public class MainActivity extends AppCompatActivity {
                 tweets.add(tweet);
             }
 
+            // Adapter
             int section = getArguments().getInt(ARG_SECTION_NUMBER);
-            RecyclerView.Adapter adapter;
+            TweetListAdapter adapter;
 
             if (section == 1) {
                 adapter = mHomeTimelineAdapter = new TweetListAdapter(tweets);
@@ -211,6 +216,13 @@ public class MainActivity extends AppCompatActivity {
                 adapter = new TweetListAdapter(tweets);
             }
             rv.setAdapter(adapter);
+
+            // Glide
+            int iconSize = TweetListAdapter.ICON_SIZE;
+            ListPreloader.PreloadSizeProvider provider = new FixedPreloadSizeProvider(iconSize, iconSize);
+            RecyclerViewPreloader<Tweet> loader =
+                    new RecyclerViewPreloader<Tweet>(this, adapter, provider, MAX_PRELOAD);
+            rv.addOnScrollListener(loader);
 
             return rootView;
         }
@@ -242,7 +254,8 @@ public class MainActivity extends AppCompatActivity {
                     "profileBackgroundColor", "profileBackgroundImageUrl",
                     "profileBackgroundImageUrlHttps", false,
                     "profileBannerUrl", "profileImageUrl",
-                    "profileImageUrlHttps", "profileLinkColor",
+                    "https://pbs.twimg.com/profile_images/742013491/06c940e6-s_normal.png",
+                    "profileLinkColor",
                     "profileSidebarBorderColor", "profileSidebarFillColor",
                     "profileTextColor", false, false,
                     String.format("@tynmarket %d", i + 1), false, null, 0,

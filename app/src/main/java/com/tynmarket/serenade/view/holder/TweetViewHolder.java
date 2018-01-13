@@ -2,6 +2,7 @@ package com.tynmarket.serenade.view.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tynmarket.serenade.R;
@@ -11,7 +12,7 @@ import com.tynmarket.serenade.R;
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
-    private View view;
+    public ImageView icon;
     public TextView name;
     public TextView screenName;
     public TextView createdAt;
@@ -23,7 +24,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     public TweetViewHolder(View itemView) {
         super(itemView);
-        this.view = itemView;
+        this.icon = (ImageView) itemView.findViewById(R.id.icon);
         this.name = (TextView) itemView.findViewById(R.id.name);
         this.screenName = (TextView) itemView.findViewById(R.id.screen_name);
         this.createdAt = (TextView) itemView.findViewById(R.id.created_at);
