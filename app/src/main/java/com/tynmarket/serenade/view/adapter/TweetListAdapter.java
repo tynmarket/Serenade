@@ -56,7 +56,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
                 .apply(requestOptions)
                 .into(holder.icon);
         holder.name.setText(user.name);
-        holder.screenName.setText(user.screenName);
+        holder.screenName.setText(String.format("@%s", user.screenName));
         holder.createdAt.setText(tweet.createdAt);
         holder.tweetText.setText(tweet.text);
         holder.talk.setText("talk");
