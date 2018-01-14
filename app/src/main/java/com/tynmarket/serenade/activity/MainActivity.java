@@ -89,10 +89,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener((View view) -> {
             RefreshFragment fragment = new RefreshFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
-
-            loadHomeTimeline();
-
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            loadHomeTimeline(fragment);
         });
 
         initTwitterConfig();
@@ -144,15 +141,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadHomeTimeline() {
+        loadHomeTimeline(null);
+    }
+
+    private void loadHomeTimeline(RefreshFragment fragment) {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call<List<Tweet>> call = statusesService.homeTimeline(20, null, null, false, false, false, true);
+        Call<List<Tweet>> call = statusesService.homeTimeline(50, null, null, false, false, false, true);
 
         call.enqueue(new Callback<List<Tweet>>() {
             @Override
             public void success(Result<List<Tweet>> result) {
                 Log.d("Serenade", "homeTimeline success");
                 mHomeTimelineAdapter.refresh(result.data);
+
+                if (fragment != null) {
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
             }
 
             @Override
@@ -161,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Serenade", "homeTimeline failure");
                 TwitterApiException e = (TwitterApiException) exception;
                 Log.d("Serenade", String.format("code: %d", e.getStatusCode()));
+
+                if (fragment != null) {
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                }
             }
         });
     }
