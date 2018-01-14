@@ -39,6 +39,7 @@ import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.fragment.RefreshFragment;
+import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
-            RefreshFragment fragment = new RefreshFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
+            RefreshFragment fragment = showRefreshIndicator();
             loadHomeTimeline(fragment);
         });
 
@@ -140,13 +140,21 @@ public class MainActivity extends AppCompatActivity {
         Twitter.initialize(config);
     }
 
-    private void loadHomeTimeline() {
-        loadHomeTimeline(null);
+    public void loadHomeTimeline() {
+        loadHomeTimeline(null, true);
+    }
+
+    public void loadPreviousTimeline(RefreshFragment fragment) {
+        loadHomeTimeline(fragment, false);
+    }
+
+    public void loadHomeTimeline(RefreshFragment fragment) {
+        loadHomeTimeline(fragment, true);
     }
 
     // TODO: Transaction
     // http://blog.techium.jp/entry/2016/05/27/023716
-    private void loadHomeTimeline(RefreshFragment fragment) {
+    private void loadHomeTimeline(RefreshFragment fragment, boolean refresh) {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
         Call<List<Tweet>> call = statusesService.homeTimeline(50, null, null, false, false, false, true);
@@ -155,12 +163,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void success(Result<List<Tweet>> result) {
                 Log.d("Serenade", "homeTimeline success");
-                mHomeTimelineAdapter.refresh(result.data);
 
-                if (fragment != null) {
+                if (refresh) {
+                    mHomeTimelineAdapter.refresh(result.data);
                     // TODO: Not scroll if no new tweets
                     ((RecyclerView) findViewById(R.id.tweet_list)).getLayoutManager().scrollToPosition(0);
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                } else {
+                    mHomeTimelineAdapter.addTweets(result.data);
+                    InfiniteTimelineScrollListener.mRefreshing = false;
+                }
+
+                if (fragment != null) {
+                    hideRefreshFragment(fragment);
                 }
             }
 
@@ -170,12 +184,23 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Serenade", "homeTimeline failure");
                 TwitterApiException e = (TwitterApiException) exception;
                 Log.d("Serenade", String.format("code: %d", e.getStatusCode()));
+                InfiniteTimelineScrollListener.mRefreshing = false;
 
                 if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                    hideRefreshFragment(fragment);
                 }
             }
         });
+    }
+
+    public RefreshFragment showRefreshIndicator() {
+        RefreshFragment fragment = new RefreshFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
+        return fragment;
+    }
+
+    public void hideRefreshFragment(RefreshFragment fragment) {
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     /**
@@ -241,6 +266,9 @@ public class MainActivity extends AppCompatActivity {
             RecyclerViewPreloader<Tweet> loader =
                     new RecyclerViewPreloader<Tweet>(this, adapter, provider, MAX_PRELOAD);
             rv.addOnScrollListener(loader);
+
+            // Infinite scroll
+            rv.addOnScrollListener(new InfiniteTimelineScrollListener());
 
             return rootView;
         }

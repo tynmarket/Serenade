@@ -75,6 +75,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         notifyDataSetChanged();
     }
 
+    public void addTweets(List<Tweet> prevTweets) {
+        tweets.addAll(prevTweets);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public List<Tweet> getPreloadItems(int position) {

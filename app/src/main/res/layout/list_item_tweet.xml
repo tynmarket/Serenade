@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/icon_size_list_item_tweet"
