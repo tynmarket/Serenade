@@ -27,6 +27,7 @@ import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterApiException;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -156,7 +157,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void failure(TwitterException exception) {
+                // TODO: Late limit(Status 429)
                 Log.d("Serenade", "homeTimeline failure");
+                TwitterApiException e = (TwitterApiException) exception;
+                Log.d("Serenade", String.format("code: %d", e.getStatusCode()));
             }
         });
     }
