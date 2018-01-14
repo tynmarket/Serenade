@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
         loadHomeTimeline(null);
     }
 
+    // TODO: Transaction
+    // http://blog.techium.jp/entry/2016/05/27/023716
     private void loadHomeTimeline(RefreshFragment fragment) {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
