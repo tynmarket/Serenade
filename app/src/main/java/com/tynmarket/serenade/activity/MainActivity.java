@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
                 mHomeTimelineAdapter.refresh(result.data);
 
                 if (fragment != null) {
+                    // TODO: Not scroll if no new tweets
+                    ((RecyclerView) findViewById(R.id.tweet_list)).getLayoutManager().scrollToPosition(0);
                     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                 }
             }
