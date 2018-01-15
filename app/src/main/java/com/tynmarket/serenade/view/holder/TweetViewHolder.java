@@ -12,6 +12,7 @@ import com.tynmarket.serenade.R;
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
+    public Long id;
     public ImageView icon;
     public TextView name;
     public TextView screenName;

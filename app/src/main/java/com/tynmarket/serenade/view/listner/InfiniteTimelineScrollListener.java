@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.tynmarket.serenade.activity.MainActivity;
 import com.tynmarket.serenade.view.fragment.RefreshFragment;
+import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 /**
  * Created by tyn-iMarket on 2018/01/14.
@@ -28,7 +29,8 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
 
             MainActivity activity = (MainActivity) recyclerView.getContext();
             RefreshFragment fragment = activity.showRefreshIndicator();
-            activity.loadPreviousTimeline(fragment);
+            TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
+            activity.loadPreviousTimeline(fragment, lastItem.id - 1);
         }
     }
 }

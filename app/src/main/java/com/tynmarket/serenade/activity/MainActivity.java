@@ -48,6 +48,7 @@ import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN = 1001;
+    private int ITEM_COUNT = 50;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -141,23 +142,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadHomeTimeline() {
-        loadHomeTimeline(null, true);
+        loadHomeTimeline(null, true, null);
     }
 
-    public void loadPreviousTimeline(RefreshFragment fragment) {
-        loadHomeTimeline(fragment, false);
+    public void loadPreviousTimeline(RefreshFragment fragment, Long maxId) {
+        loadHomeTimeline(fragment, false, maxId);
     }
 
     public void loadHomeTimeline(RefreshFragment fragment) {
-        loadHomeTimeline(fragment, true);
+        loadHomeTimeline(fragment, true, null);
     }
 
     // TODO: Transaction
     // http://blog.techium.jp/entry/2016/05/27/023716
-    private void loadHomeTimeline(RefreshFragment fragment, boolean refresh) {
+    private void loadHomeTimeline(RefreshFragment fragment, boolean refresh, Long maxId) {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call<List<Tweet>> call = statusesService.homeTimeline(50, null, null, false, false, false, true);
+        Call<List<Tweet>> call = statusesService.homeTimeline(ITEM_COUNT, null, maxId, false, false, false, true);
 
         call.enqueue(new Callback<List<Tweet>>() {
             @Override

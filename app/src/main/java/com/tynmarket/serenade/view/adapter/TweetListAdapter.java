@@ -51,6 +51,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
 
+        holder.id = tweet.id;
         manager
                 .load(user.profileImageUrlHttps)
                 .apply(requestOptions)
@@ -76,8 +77,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
     }
 
     public void addTweets(List<Tweet> prevTweets) {
+        int itemCount = tweets.size();
         tweets.addAll(prevTweets);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(itemCount, prevTweets.size());
     }
 
     @NonNull
