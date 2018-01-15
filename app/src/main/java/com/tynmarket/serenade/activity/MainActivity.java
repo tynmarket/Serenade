@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -33,10 +32,11 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.TwitterUtil;
+import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.fragment.RefreshFragment;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Tweet> tweets = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
-                Tweet tweet = dummyTweet(i);
+                Tweet tweet = TwitterUtil.dummyTweet(i);
                 tweets.add(tweet);
             }
 
@@ -272,80 +272,6 @@ public class MainActivity extends AppCompatActivity {
             rv.addOnScrollListener(new InfiniteTimelineScrollListener());
 
             return rootView;
-        }
-
-        private Tweet dummyTweet(int i) {
-            Tweet tweet = new Tweet(null, "10時間", null, null,
-                    null, 0, false, "filterLevel", i + 1,
-                    String.valueOf(i + 1), "inReplyToScreenName", 0,
-                    "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
-                    "lang", null, false, null, 0,
-                    "quotedStatusIdStr", null, 0, false,
-                    null, "source", dummyText(i), null,
-                    false, dummyUser(i), false, null,
-                    "withheldScope", null);
-
-            return tweet;
-        }
-
-        private String dummyText(int i) {
-            return String.format("ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容 %d", i + 1);
-        }
-
-        private User dummyUser(int i) {
-            User user = new User(false, "createdAt", false,
-                    false, "description", "emailAddress",
-                    null, 0, false, 0,
-                    0, false, 0, "idStr", false,
-                    "lang", 0, "location", String.format("ティン＠iMarket管理人あああ %d", i + 1),
-                    "profileBackgroundColor", "profileBackgroundImageUrl",
-                    "profileBackgroundImageUrlHttps", false,
-                    "profileBannerUrl", "profileImageUrl",
-                    "https://pbs.twimg.com/profile_images/742013491/06c940e6-s_normal.png",
-                    "profileLinkColor",
-                    "profileSidebarBorderColor", "profileSidebarFillColor",
-                    "profileTextColor", false, false,
-                    String.format("tynmarket %d", i + 1), false, null, 0,
-                    "timeZone", "url", 0, false, null,
-                    "withheldScope");
-            return user;
-        }
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "ツイート";
-                case 1:
-                    return "いいね";
-                case 2:
-                    return "未定";
-            }
-            return null;
         }
     }
 }
