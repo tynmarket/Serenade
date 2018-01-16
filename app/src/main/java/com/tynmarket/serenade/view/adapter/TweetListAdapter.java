@@ -62,7 +62,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         holder.tweetText.setText(tweet.text);
         holder.talk.setText("talk");
         holder.retweet.setText("retweet");
-        holder.fav.setText("fav");
     }
 
     @Override

@@ -85,12 +85,13 @@
             android:layout_weight="1"
             tools:text="retweet" />
 
-        <TextView
+        <ImageView
             android:id="@+id/fav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/fav_off"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
-            tools:text="fav" />
+            android:tint="@android:color/darker_gray" />
     </LinearLayout>
 
     <View

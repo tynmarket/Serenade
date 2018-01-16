@@ -20,7 +20,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public TextView tweetText;
     public TextView talk;
     public TextView retweet;
-    public TextView fav;
+    public ImageView fav;
 
 
     public TweetViewHolder(View itemView) {
@@ -32,6 +32,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.tweetText = (TextView) itemView.findViewById(R.id.tweet_text);
         this.talk = (TextView) itemView.findViewById(R.id.talk);
         this.retweet = (TextView) itemView.findViewById(R.id.retweet);
-        this.fav = (TextView) itemView.findViewById(R.id.fav);
+        this.fav = (ImageView) itemView.findViewById(R.id.fav);
     }
 }
