@@ -1,12 +1,21 @@
 package com.tynmarket.serenade.view.holder;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
+
+import retrofit2.Call;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.
@@ -37,11 +46,38 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.retweet = (TextView) itemView.findViewById(R.id.retweet);
         this.fav = (ImageView) itemView.findViewById(R.id.fav);
         fav.setOnClickListener((View v) -> {
+            TwitterApiClient client = TwitterCore.getInstance().getApiClient();
+            FavoriteService service = client.getFavoriteService();
+
             if (favorited) {
                 favorited = false;
+                Call<Tweet> call = service.destroy(tweet.id, true);
+                call.enqueue(new Callback<Tweet>() {
+                    @Override
+                    public void success(Result<Tweet> result) {
+                        Log.d("Serenade", "fav destroy: success");
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+                        Log.d("Serenade", "fav destroy: failure");
+                    }
+                });
                 fav.setImageResource(R.drawable.fav_off);
             } else {
                 favorited = true;
+                Call<Tweet> call = service.create(tweet.id, true);
+                call.enqueue(new Callback<Tweet>() {
+                    @Override
+                    public void success(Result<Tweet> result) {
+                        Log.d("Serenade", "fav create: success");
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+                        Log.d("Serenade", "fav create: failure");
+                    }
+                });
                 fav.setImageResource(R.drawable.fav_on);
             }
         });
