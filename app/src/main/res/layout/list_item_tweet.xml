@@ -90,8 +90,7 @@
             app:srcCompat="@drawable/fav_off"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_weight="1"
-            android:tint="@android:color/darker_gray" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View

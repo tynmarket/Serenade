@@ -51,7 +51,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
 
-        holder.id = tweet.id;
+        holder.tweet = tweet;
+        holder.favorited = tweet.favorited;
+
         manager
                 .load(user.profileImageUrlHttps)
                 .apply(requestOptions)

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 
 /**
@@ -12,7 +13,9 @@ import com.tynmarket.serenade.R;
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
-    public Long id;
+    public Tweet tweet;
+    public boolean favorited;
+
     public ImageView icon;
     public TextView name;
     public TextView screenName;
@@ -33,5 +36,14 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.talk = (TextView) itemView.findViewById(R.id.talk);
         this.retweet = (TextView) itemView.findViewById(R.id.retweet);
         this.fav = (ImageView) itemView.findViewById(R.id.fav);
+        fav.setOnClickListener((View v) -> {
+            if (favorited) {
+                favorited = false;
+                fav.setImageResource(R.drawable.fav_off);
+            } else {
+                favorited = true;
+                fav.setImageResource(R.drawable.fav_on);
+            }
+        });
     }
 }
