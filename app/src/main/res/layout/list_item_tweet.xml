@@ -49,6 +49,7 @@
             tools:text="created_at" />
     </LinearLayout>
 
+    <!-- TODO: show image, RT, link -->
     <TextView
         android:id="@+id/tweet_text"
         android:layout_width="wrap_content"
@@ -87,6 +88,7 @@
             android:layout_weight="1"
             tools:text="retweet" />
 
+        <!-- TODO: Fav count -->
         <ImageView
             android:id="@+id/fav"
             app:srcCompat="@drawable/fav_off"
