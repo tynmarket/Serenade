@@ -51,6 +51,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
 
+        holder.setAdapter(this);
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
 
@@ -81,6 +82,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         int itemCount = tweets.size();
         tweets.addAll(prevTweets);
         notifyItemRangeInserted(itemCount, prevTweets.size());
+    }
+
+    public void replaceTweet(int position, Tweet tweet) {
+        tweets.set(position, tweet);
     }
 
     @NonNull

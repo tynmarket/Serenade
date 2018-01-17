@@ -14,6 +14,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 import retrofit2.Call;
 
@@ -22,8 +23,10 @@ import retrofit2.Call;
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
+    private TweetListAdapter adapter;
+
     public Tweet tweet;
-    public boolean favorited;
+    private boolean favorited;
 
     public ImageView icon;
     public TextView name;
@@ -44,7 +47,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.talk = (TextView) itemView.findViewById(R.id.talk);
         this.retweet = (TextView) itemView.findViewById(R.id.retweet);
         this.fav = (ImageView) itemView.findViewById(R.id.fav);
-        // TODO: change data
+
+        // TODO: already created/destroyed
         fav.setOnClickListener((View v) -> {
             TwitterApiClient client = TwitterCore.getInstance().getApiClient();
             FavoriteService service = client.getFavoriteService();
@@ -56,6 +60,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void success(Result<Tweet> result) {
                         Log.d("Serenade", "fav destroy: success");
+                        adapter.replaceTweet(getAdapterPosition(), result.data);
                     }
 
                     @Override
@@ -71,6 +76,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void success(Result<Tweet> result) {
                         Log.d("Serenade", "fav create: success");
+                        adapter.replaceTweet(getAdapterPosition(), result.data);
                     }
 
                     @Override
@@ -82,6 +88,11 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
+
+    public void setAdapter(TweetListAdapter adapter) {
+        this.adapter = adapter;
+    }
+
 
     public void setFavorited(boolean favorited) {
         this.favorited = favorited;
