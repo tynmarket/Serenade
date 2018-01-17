@@ -8,5 +8,6 @@
     <dimen name="spacing_medium">8dp</dimen>
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="icon_size_list_item_tweet">48dp</dimen>
-    <dimen name="text_size_x_small">13sp</dimen>
+    <dimen name="text_size_l_small">13sp</dimen>
+    <dimen name="text_size_x_small">15sp</dimen>
 </resources>
