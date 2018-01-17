@@ -34,7 +34,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public TextView retweet;
     public ImageView fav;
 
-
     public TweetViewHolder(View itemView) {
         super(itemView);
         this.icon = (ImageView) itemView.findViewById(R.id.icon);
@@ -45,6 +44,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.talk = (TextView) itemView.findViewById(R.id.talk);
         this.retweet = (TextView) itemView.findViewById(R.id.retweet);
         this.fav = (ImageView) itemView.findViewById(R.id.fav);
+        // TODO: change data
         fav.setOnClickListener((View v) -> {
             TwitterApiClient client = TwitterCore.getInstance().getApiClient();
             FavoriteService service = client.getFavoriteService();
@@ -81,5 +81,10 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 fav.setImageResource(R.drawable.fav_on);
             }
         });
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+        fav.setImageResource(favorited ? R.drawable.fav_on : R.drawable.fav_off);
     }
 }
