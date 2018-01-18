@@ -37,7 +37,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
         this.requestOptions = new RequestOptions();
-        requestOptions.override(ICON_SIZE);
+        //requestOptions.override(ICON_SIZE);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
 
         manager
                 .load(user.profileImageUrlHttps)
-                .apply(requestOptions)
+                //.apply(requestOptions)
                 .into(holder.icon);
         holder.name.setText(user.name);
         holder.screenName.setText(String.format("@%s", user.screenName));
@@ -102,8 +102,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
     @Override
     public RequestBuilder getPreloadRequestBuilder(@NonNull Tweet item) {
         return manager
-                .load(item.user.profileImageUrlHttps)
-                .apply(requestOptions);
+                .load(item.user.profileImageUrlHttps);
+        //.apply(requestOptions);
     }
 
     @Nullable

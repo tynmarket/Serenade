@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
-import com.bumptech.glide.util.FixedPreloadSizeProvider;
+import com.bumptech.glide.util.ViewPreloadSizeProvider;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -260,7 +260,8 @@ public class MainActivity extends AppCompatActivity {
 
             // Glide
             int iconSize = TweetListAdapter.ICON_SIZE;
-            ListPreloader.PreloadSizeProvider provider = new FixedPreloadSizeProvider(iconSize, iconSize);
+            //ListPreloader.PreloadSizeProvider provider = new FixedPreloadSizeProvider(iconSize, iconSize);
+            ListPreloader.PreloadSizeProvider provider = new ViewPreloadSizeProvider();
             RecyclerViewPreloader<Tweet> loader =
                     new RecyclerViewPreloader<Tweet>(this, adapter, provider, MAX_PRELOAD);
             rv.addOnScrollListener(loader);

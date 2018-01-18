@@ -7,6 +7,7 @@
 
     <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
     <!-- TODO: Vector Image -->
+    <!-- TODO: rough image by Glide? -->
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/icon_size_list_item_tweet"
@@ -63,13 +64,21 @@
         android:textColor="?android:textColorPrimary"
         tools:text="tweet_text" />
 
+    <!-- TODO: Movie -->
+    <ImageView
+        android:id="@+id/tweet_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tweet_text"
+        android:layout_centerHorizontal="true" />
+
     <LinearLayout
         android:id="@+id/actions"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/tweet_text"
+        android:layout_below="@+id/tweet_photo"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="0dp">
