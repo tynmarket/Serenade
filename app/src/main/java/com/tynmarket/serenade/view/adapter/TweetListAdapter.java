@@ -107,7 +107,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
     }
 
     private String getLargeProfileImageUrlHttps(User user) {
-        return user.profileImageUrlHttps.replace("_normal", "_bigger");
+        return user.profileImageUrlHttps.replace("_normal", "");
     }
 
     @Nullable
