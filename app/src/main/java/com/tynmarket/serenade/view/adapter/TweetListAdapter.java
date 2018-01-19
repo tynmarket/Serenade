@@ -1,18 +1,13 @@
 package com.tynmarket.serenade.view.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.ListPreloader;
-import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.request.RequestOptions;
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
@@ -27,17 +22,12 @@ import java.util.List;
  * Created by tyn-iMarket on 2017/12/18.
  */
 
-public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> implements ListPreloader.PreloadModelProvider<Tweet> {
-    public static final int ICON_SIZE = 48;
-
+public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private ArrayList<Tweet> tweets;
-    private RequestOptions requestOptions;
     private RequestManager manager;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
-        this.requestOptions = new RequestOptions();
-        //requestOptions.override(ICON_SIZE);
     }
 
     @Override
@@ -54,19 +44,29 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
         String photoUrl = getPhotoUrl(tweet);
-        Log.d("Serenade", String.format("photoUrl: %s", photoUrl));
         holder.setAdapter(this);
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
 
-        manager
-                .load(getLargeProfileImageUrlHttps(user))
-                //.apply(requestOptions)
-                .into(holder.icon);
+        manager.load(getOriginalProfileImageUrlHttps(user)).into(holder.icon);
         holder.name.setText(user.name);
         holder.screenName.setText(String.format("@%s", user.screenName));
         holder.createdAt.setText(tweet.createdAt);
         holder.tweetText.setText(tweet.text);
+        if (photoUrl != null) {
+            manager.load(photoUrl).into(holder.tweetPhoto);
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) holder.tweetPhoto.getLayoutParams();
+            int topMargin = holder.itemView.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
+            lp.setMargins(lp.leftMargin, topMargin, lp.rightMargin, lp.bottomMargin);
+            lp.height = holder.itemView.getContext().getResources().getDimensionPixelSize(R.dimen.image_height_tweet_photo);
+            holder.tweetPhoto.setLayoutParams(lp);
+        } else {
+            holder.tweetPhoto.setImageDrawable(null);
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) holder.tweetPhoto.getLayoutParams();
+            lp.setMargins(lp.leftMargin, 0, lp.rightMargin, lp.bottomMargin);
+            lp.height = 0;
+            holder.tweetPhoto.setLayoutParams(lp);
+        }
         holder.talk.setText("talk");
         holder.retweet.setText("retweet");
     }
@@ -92,21 +92,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         tweets.set(position, tweet);
     }
 
-    @NonNull
-    @Override
-    public List<Tweet> getPreloadItems(int position) {
-        return tweets.subList(position, position + 1);
-    }
-
-    @Nullable
-    @Override
-    public RequestBuilder getPreloadRequestBuilder(@NonNull Tweet item) {
-        return manager
-                .load(item.user.profileImageUrlHttps);
-        //.apply(requestOptions);
-    }
-
-    private String getLargeProfileImageUrlHttps(User user) {
+    private String getOriginalProfileImageUrlHttps(User user) {
         return user.profileImageUrlHttps.replace("_normal", "");
     }
 

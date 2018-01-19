@@ -7,7 +7,6 @@
 
     <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
     <!-- TODO: Vector Image -->
-    <!-- TODO: rough image by Glide? -->
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/icon_size_list_item_tweet"
@@ -59,18 +58,21 @@
         android:layout_below="@+id/header"
         android:paddingTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
-        android:layout_marginEnd="0dp"
         android:textSize="@dimen/text_size_x_small"
         android:textColor="?android:textColorPrimary"
         tools:text="tweet_text" />
 
     <!-- TODO: Movie -->
+    <!-- TODO: Boarder Radius -->
+    <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
     <ImageView
         android:id="@+id/tweet_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/image_width_tweet_photo"
+        android:layout_height="0dp"
+        android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/tweet_text"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/actions"
