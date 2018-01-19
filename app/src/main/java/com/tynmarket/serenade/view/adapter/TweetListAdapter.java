@@ -60,7 +60,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         holder.setFavorited(tweet.favorited);
 
         manager
-                .load(user.profileImageUrlHttps)
+                .load(getLargeProfileImageUrlHttps(user))
                 //.apply(requestOptions)
                 .into(holder.icon);
         holder.name.setText(user.name);
@@ -104,6 +104,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> impl
         return manager
                 .load(item.user.profileImageUrlHttps);
         //.apply(requestOptions);
+    }
+
+    private String getLargeProfileImageUrlHttps(User user) {
+        return user.profileImageUrlHttps.replace("_normal", "_bigger");
     }
 
     @Nullable

@@ -1,6 +1,8 @@
 package com.tynmarket.serenade.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import com.bumptech.glide.util.ViewPreloadSizeProvider;
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initTwitterConfig();
-
+        //clearAllGlideCache();
         Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
         startActivityForResult(i, REQUEST_CODE_LOGIN);
     }
@@ -189,6 +192,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void clearAllGlideCache() {
+        Glide glide = Glide.get(MainActivity.this);
+        glide.clearMemory();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                glide.clearDiskCache();
+                Log.d("Serenade", "clearDiskCache() finish");
+                return null;
+            }
+        }.execute();
     }
 
     public RefreshFragment showRefreshIndicator() {

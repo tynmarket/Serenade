@@ -38,7 +38,7 @@ public class TwitterUtil {
                 "profileBackgroundColor", "profileBackgroundImageUrl",
                 "profileBackgroundImageUrlHttps", false,
                 "profileBannerUrl", "profileImageUrl",
-                "https://pbs.twimg.com/profile_images/742013491/06c940e6-s_normal.png",
+                "https://pbs.twimg.com/profile_images/742013491/06c940e6-s_bigger.png",
                 "profileLinkColor",
                 "profileSidebarBorderColor", "profileSidebarFillColor",
                 "profileTextColor", false, false,
