@@ -50,6 +50,8 @@
     </LinearLayout>
 
     <!-- TODO: show image, RT, link -->
+    <!-- TODO: Remove underline from links -->
+    <!-- TODO: Open link via Twitter App or Serenade -->
     <TextView
         android:id="@+id/tweet_text"
         android:layout_width="wrap_content"
@@ -60,9 +62,11 @@
         android:layout_marginStart="@dimen/spacing_medium"
         android:textSize="@dimen/text_size_x_small"
         android:textColor="?android:textColorPrimary"
+        android:autoLink="web"
         tools:text="tweet_text" />
 
     <!-- TODO: Movie -->
+    <!-- TODO: Custom view? -->
     <!-- TODO: Boarder Radius -->
     <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
     <ImageView
