@@ -32,7 +32,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private ViewContentLoader imageLoader;
     private Integer tweetPhotoHeight;
     private Integer tweetPhotoTopMargin;
-    private Integer retweetContainerBottomMargin;
+    private Integer originalRetweetContainerTopMargin;
+    private Integer retweetContainerVerticalMargin;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
@@ -52,8 +53,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         if (tweetPhotoTopMargin == null) {
             tweetPhotoTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
         }
-        if (retweetContainerBottomMargin == null) {
-            retweetContainerBottomMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
+        if (originalRetweetContainerTopMargin == null) {
+            originalRetweetContainerTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_large);
+        }
+        if (retweetContainerVerticalMargin == null) {
+            retweetContainerVerticalMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_small);
         }
 
         return new TweetViewHolder(view);
@@ -76,13 +80,13 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
         if (tweet.retweetedStatus != null) {
             textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
-                    null, null, null, retweetContainerBottomMargin);
+                    null, retweetContainerVerticalMargin, null, retweetContainerVerticalMargin);
             profileImageUrlHttps = get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
             name = tweet.retweetedStatus.user.name;
             screenName = tweet.retweetedStatus.user.screenName;
             tweetText = replaceUrlWithDisplayUrl(tweet.retweetedStatus);
         } else {
-            textLoader.unsetText(holder.retweetUserName, null, null, null, 0);
+            textLoader.unsetText(holder.retweetUserName, null, originalRetweetContainerTopMargin, null, 0);
             profileImageUrlHttps = get200xProfileImageUrlHttps(user);
             name = user.name;
             screenName = user.screenName;
