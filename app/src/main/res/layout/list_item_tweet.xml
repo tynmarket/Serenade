@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- TODO: Show retweet icon -->
         <ImageView
+            android:id="@+id/retweet_by_user"
             android:layout_width="@dimen/icon_size_list_item_tweet"
             android:layout_height="wrap_content" />
 

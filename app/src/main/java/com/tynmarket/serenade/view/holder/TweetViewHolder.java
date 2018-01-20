@@ -29,6 +29,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private boolean favorited;
 
     public TextView retweetUserName;
+    public ImageView retweetByUser;
     public ImageView icon;
     public TextView name;
     public TextView screenName;
@@ -42,6 +43,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public TweetViewHolder(View itemView) {
         super(itemView);
         this.retweetUserName = (TextView) itemView.findViewById(R.id.retweet_user_name);
+        this.retweetByUser = (ImageView) itemView.findViewById(R.id.retweet_by_user);
         this.icon = (ImageView) itemView.findViewById(R.id.icon);
         this.name = (TextView) itemView.findViewById(R.id.name);
         this.screenName = (TextView) itemView.findViewById(R.id.screen_name);
