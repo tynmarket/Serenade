@@ -11,6 +11,7 @@ import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
+import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
@@ -52,7 +53,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.name.setText(user.name);
         holder.screenName.setText(String.format("@%s", user.screenName));
         holder.createdAt.setText(tweet.createdAt);
-        holder.tweetText.setText(tweet.text);
+        holder.tweetText.setText(replaceUrlWithDisplayUrl(tweet));
         if (photoUrl != null) {
             manager.load(photoUrl).into(holder.tweetPhoto);
             ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) holder.tweetPhoto.getLayoutParams();
@@ -94,6 +95,21 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     private String getOriginalProfileImageUrlHttps(User user) {
         return user.profileImageUrlHttps.replace("_normal", "_200x200");
+    }
+
+    private String replaceUrlWithDisplayUrl(Tweet tweet) {
+        String text = tweet.text;
+
+        List<UrlEntity> entities = tweet.entities.urls;
+        if (entities.size() == 0) {
+            return text;
+        }
+
+        for (UrlEntity entity : entities) {
+            text = text.replace(entity.url, entity.displayUrl);
+        }
+
+        return text;
     }
 
     @Nullable
