@@ -49,7 +49,7 @@
             tools:text="created_at" />
     </LinearLayout>
 
-    <!-- TODO: show image, RT, link -->
+    <!-- TODO: show image, RT, link, hash tag -->
     <!-- TODO: Remove underline from links -->
     <!-- TODO: Open link via Twitter App or Serenade -->
     <TextView
@@ -58,17 +58,20 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/header"
-        android:paddingTop="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_l_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:textSize="@dimen/text_size_x_small"
         android:textColor="?android:textColorPrimary"
         android:autoLink="web"
         tools:text="tweet_text" />
 
+    <!-- TODO: quotedStatus View -->
+
     <!-- TODO: Movie -->
     <!-- TODO: Custom view? -->
     <!-- TODO: Boarder Radius -->
     <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
+    <!-- TODO: Multi image -->
     <ImageView
         android:id="@+id/tweet_photo"
         android:layout_width="@dimen/image_width_tweet_photo"

@@ -7,6 +7,7 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="spacing_large">12dp</dimen>
     <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_l_medium">6dp</dimen>
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="icon_size_list_item_tweet">48dp</dimen>
     <dimen name="text_size_l_small">13sp</dimen>
