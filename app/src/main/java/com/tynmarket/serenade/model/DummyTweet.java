@@ -12,17 +12,26 @@ import java.util.List;
  * Created by tyn-iMarket on 2018/01/15.
  */
 
-public class TwitterUtil {
-    public static Tweet dummyTweet(int i) {
+public class DummyTweet {
+    public static Tweet tweet(int i) {
+        return tweet(i, null, dummyUser(i));
+    }
+
+    private static Tweet tweet(int i, Tweet retweetedStatus, User user) {
         return new Tweet(null, "10時間", null, dummyEntities(),
                 null, 0, false, "filterLevel", i + 1,
                 String.valueOf(i + 1), "inReplyToScreenName", 0,
                 "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
                 "lang", null, false, null, 0,
                 "quotedStatusIdStr", null, 0, false,
-                null, "source", dummyText(i), null,
-                false, dummyUser(i), false, null,
+                retweetedStatus, "source", dummyText(i), null,
+                false, user, false, null,
                 "withheldScope", null);
+    }
+
+    public static Tweet tweetWithRetweetedStatus(int i) {
+        Tweet retweetedStatus = tweet(i, null, dummyUser(i, "リツイートされた人"));
+        return tweet(i, retweetedStatus, dummyUser(i));
     }
 
     private static String dummyText(int i) {
@@ -30,11 +39,15 @@ public class TwitterUtil {
     }
 
     private static User dummyUser(int i) {
+        return dummyUser(i, String.format("ティン＠iMarket管理人あああ %d", i + 1));
+    }
+
+    private static User dummyUser(int i, String name) {
         return new User(false, "createdAt", false,
                 false, "description", "emailAddress",
                 null, 0, false, 0,
                 0, false, 0, "idStr", false,
-                "lang", 0, "location", String.format("ティン＠iMarket管理人あああ %d", i + 1),
+                "lang", 0, "location", name,
                 "profileBackgroundColor", "profileBackgroundImageUrl",
                 "profileBackgroundImageUrlHttps", false,
                 "profileBannerUrl", "profileImageUrl",
@@ -45,6 +58,7 @@ public class TwitterUtil {
                 String.format("tynmarket %d", i + 1), false, null, 0,
                 "timeZone", "url", 0, false, null,
                 "withheldScope");
+
     }
 
     private static TweetEntities dummyEntities() {

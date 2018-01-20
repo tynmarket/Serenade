@@ -2,6 +2,7 @@ package com.tynmarket.serenade.view.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
+import com.tynmarket.serenade.view.util.ViewContentLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,11 @@ import java.util.List;
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private ArrayList<Tweet> tweets;
     private RequestManager manager;
+    private ViewContentLoader textLoader;
+    private ViewContentLoader imageLoader;
+    private Integer tweetPhotoHeight;
+    private Integer tweetPhotoTopMargin;
+    private Integer retweetContainerBottomMargin;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
@@ -33,40 +40,63 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d("Serenade", "onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
         // TODO: GlideApp
         manager = Glide.with(parent.getContext());
+        textLoader = new ViewContentLoader();
+        imageLoader = new ViewContentLoader(manager);
+        if (tweetPhotoHeight == null) {
+            tweetPhotoHeight = parent.getContext().getResources().getDimensionPixelSize(R.dimen.image_height_tweet_photo);
+        }
+        if (tweetPhotoTopMargin == null) {
+            tweetPhotoTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
+        }
+        if (retweetContainerBottomMargin == null) {
+            retweetContainerBottomMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
+        }
 
         return new TweetViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
+        Log.d("Serenade", "onBindViewHolder");
+        holder.setAdapter(this);
+
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
+        String profileImageUrlHttps;
+        String name;
+        String screenName;
+        String tweetText;
         String photoUrl = getPhotoUrl(tweet);
-        holder.setAdapter(this);
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
 
-        manager.load(getOriginalProfileImageUrlHttps(user)).into(holder.icon);
-        holder.name.setText(user.name);
-        holder.screenName.setText(String.format("@%s", user.screenName));
-        holder.createdAt.setText(tweet.createdAt);
-        holder.tweetText.setText(replaceUrlWithDisplayUrl(tweet));
-        if (photoUrl != null) {
-            manager.load(photoUrl).into(holder.tweetPhoto);
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) holder.tweetPhoto.getLayoutParams();
-            int topMargin = holder.itemView.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
-            lp.setMargins(lp.leftMargin, topMargin, lp.rightMargin, lp.bottomMargin);
-            lp.height = holder.itemView.getContext().getResources().getDimensionPixelSize(R.dimen.image_height_tweet_photo);
-            holder.tweetPhoto.setLayoutParams(lp);
+        if (tweet.retweetedStatus != null) {
+            textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
+                    null, null, null, retweetContainerBottomMargin);
+            profileImageUrlHttps = get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
+            name = tweet.retweetedStatus.user.name;
+            screenName = tweet.retweetedStatus.user.screenName;
+            tweetText = replaceUrlWithDisplayUrl(tweet.retweetedStatus);
         } else {
-            holder.tweetPhoto.setImageDrawable(null);
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) holder.tweetPhoto.getLayoutParams();
-            lp.setMargins(lp.leftMargin, 0, lp.rightMargin, lp.bottomMargin);
-            lp.height = 0;
-            holder.tweetPhoto.setLayoutParams(lp);
+            textLoader.unsetText(holder.retweetUserName, null, null, null, 0);
+            profileImageUrlHttps = get200xProfileImageUrlHttps(user);
+            name = user.name;
+            screenName = user.screenName;
+            tweetText = replaceUrlWithDisplayUrl(tweet);
+        }
+
+        manager.load(profileImageUrlHttps).into(holder.icon);
+        setNameAndText(holder, name, screenName, tweetText);
+        holder.createdAt.setText(tweet.createdAt);
+        if (photoUrl != null) {
+            imageLoader.loadImage(holder.tweetPhoto, photoUrl, tweetPhotoHeight,
+                    null, tweetPhotoTopMargin, null, null);
+        } else {
+            imageLoader.unloadImage(holder.tweetPhoto, null, 0, null, null);
         }
         holder.talk.setText("talk");
         holder.retweet.setText("retweet");
@@ -93,7 +123,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         tweets.set(position, tweet);
     }
 
-    private String getOriginalProfileImageUrlHttps(User user) {
+    private String get200xProfileImageUrlHttps(User user) {
         return user.profileImageUrlHttps.replace("_normal", "_200x200");
     }
 
@@ -110,6 +140,12 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         return text;
+    }
+
+    private void setNameAndText(TweetViewHolder holder, String name, String screenName, String tweetText) {
+        holder.name.setText(name);
+        holder.screenName.setText(String.format("@%s", screenName));
+        holder.tweetText.setText(tweetText);
     }
 
     @Nullable

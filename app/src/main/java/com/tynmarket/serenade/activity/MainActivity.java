@@ -34,7 +34,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.TwitterUtil;
+import com.tynmarket.serenade.model.DummyTweet;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.fragment.RefreshFragment;
@@ -256,7 +256,13 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<Tweet> tweets = new ArrayList<>();
 
             for (int i = 0; i < 10; i++) {
-                Tweet tweet = TwitterUtil.dummyTweet(i);
+                Tweet tweet;
+
+                if (i == 1) {
+                    tweet = DummyTweet.tweetWithRetweetedStatus(i);
+                } else {
+                    tweet = DummyTweet.tweet(i);
+                }
                 tweets.add(tweet);
             }
 
