@@ -253,18 +253,7 @@ public class MainActivity extends AppCompatActivity {
             manager.setOrientation(LinearLayoutManager.VERTICAL);
             rv.setLayoutManager(manager);
 
-            ArrayList<Tweet> tweets = new ArrayList<>();
-
-            for (int i = 0; i < 10; i++) {
-                Tweet tweet;
-
-                if (i == 1) {
-                    tweet = DummyTweet.tweetWithRetweetedStatus(i);
-                } else {
-                    tweet = DummyTweet.tweet(i);
-                }
-                tweets.add(tweet);
-            }
+            ArrayList<Tweet> tweets = DummyTweet.dummyTweets();
 
             // Adapter
             int section = getArguments().getInt(ARG_SECTION_NUMBER);

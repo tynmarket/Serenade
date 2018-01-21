@@ -5,6 +5,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.User;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,25 +14,48 @@ import java.util.List;
  */
 
 public class DummyTweet {
-    public static Tweet tweet(int i) {
-        return tweet(i, null, dummyUser(i));
+    public static ArrayList<Tweet> dummyTweets() {
+        ArrayList<Tweet> tweets = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            Tweet tweet;
+
+            if (i == 1) {
+                tweet = tweetWithRetweetedStatus(i);
+            } else if (i == 2) {
+                tweet = tweetWithQuotedStatus(i);
+            } else {
+                tweet = tweet(i);
+            }
+            tweets.add(tweet);
+        }
+        return tweets;
     }
 
-    private static Tweet tweet(int i, Tweet retweetedStatus, User user) {
-        return new Tweet(null, "10時間", null, dummyEntities(),
+    private static Tweet tweet(int i) {
+        return tweet(i, dummyEntities(), null, null, dummyUser(i));
+    }
+
+    private static Tweet tweet(int i, TweetEntities entities, Tweet retweetedStatus, Tweet quotedStatus, User user) {
+        return new Tweet(null, "10時間", null, entities,
                 null, 0, false, "filterLevel", i + 1,
                 String.valueOf(i + 1), "inReplyToScreenName", 0,
                 "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
                 "lang", null, false, null, 0,
-                "quotedStatusIdStr", null, 0, false,
+                "quotedStatusIdStr", quotedStatus, 0, false,
                 retweetedStatus, "source", dummyText(i), null,
                 false, user, false, null,
                 "withheldScope", null);
     }
 
-    public static Tweet tweetWithRetweetedStatus(int i) {
-        Tweet retweetedStatus = tweet(i, null, dummyUser(i, "リツイートされた人"));
-        return tweet(i, retweetedStatus, dummyUser(i));
+    private static Tweet tweetWithRetweetedStatus(int i) {
+        Tweet retweetedStatus = tweet(i, null, null, null, dummyUser(i, "リツイートされた人"));
+        return tweet(i, dummyEntities(), retweetedStatus, null, dummyUser(i));
+    }
+
+    private static Tweet tweetWithQuotedStatus(int i) {
+        Tweet quotedStatus = tweet(i, dummyEntities(), null, null, dummyUser(i, "引用リツイートされた人"));
+        return tweet(i, dummyEntities(null), null, quotedStatus, dummyUser(i));
     }
 
     private static String dummyText(int i) {
@@ -62,13 +86,19 @@ public class DummyTweet {
     }
 
     private static TweetEntities dummyEntities() {
-        return new TweetEntities(null, null, dummyMediaEntity(), null, null);
+        return new TweetEntities(null, null,
+                dummyMediaEntity("https://pbs.twimg.com/media/DT00eThV4AAgQSl.jpg"),
+                null, null);
     }
 
-    private static List<MediaEntity> dummyMediaEntity() {
+    private static TweetEntities dummyEntities(String mediaUrlHttps) {
+        return new TweetEntities(null, null, dummyMediaEntity(mediaUrlHttps), null, null);
+    }
+
+    private static List<MediaEntity> dummyMediaEntity(String mediaUrlHttps) {
         MediaEntity entity = new MediaEntity("url", "expandedUrl", "displayUrl",
                 0, 1, 10, "idStr", "mediaUrl",
-                "https://pbs.twimg.com/media/DT00eThV4AAgQSl.jpg",
+                mediaUrlHttps,
                 null, 0, "sourceStatusIdStr",
                 "photo", null, null);
         return Collections.singletonList(entity);

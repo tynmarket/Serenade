@@ -30,10 +30,12 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private RequestManager manager;
     private ViewContentLoader textLoader;
     private ViewContentLoader imageLoader;
+    // TODO: Utility class
     private Integer tweetPhotoHeight;
     private Integer tweetPhotoTopMargin;
-    private Integer originalRetweetContainerTopMargin;
-    private Integer retweetContainerVerticalMargin;
+    private Integer spacingLarge;
+    private Integer spacingMedium;
+    private Integer spacingSmall;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
@@ -53,11 +55,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         if (tweetPhotoTopMargin == null) {
             tweetPhotoTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
         }
-        if (originalRetweetContainerTopMargin == null) {
-            originalRetweetContainerTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_large);
+        if (spacingLarge == null) {
+            spacingLarge = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_large);
         }
-        if (retweetContainerVerticalMargin == null) {
-            retweetContainerVerticalMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_small);
+        if (spacingMedium == null) {
+            spacingMedium = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
+        }
+        if (spacingSmall == null) {
+            spacingSmall = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_small);
         }
 
         return new TweetViewHolder(view);
@@ -78,30 +83,61 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
 
+        // TODO: split by view type?
+        // Retweet
         if (tweet.retweetedStatus != null) {
             textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
-                    null, retweetContainerVerticalMargin, null, retweetContainerVerticalMargin);
+                    null, spacingSmall, null, spacingSmall);
             profileImageUrlHttps = get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
             name = tweet.retweetedStatus.user.name;
             screenName = tweet.retweetedStatus.user.screenName;
             tweetText = replaceUrlWithDisplayUrl(tweet.retweetedStatus);
         } else {
-            textLoader.unsetText(holder.retweetUserName, null, originalRetweetContainerTopMargin, null, 0);
+            textLoader.unsetText(holder.retweetUserName,
+                    null, spacingLarge, null, 0);
             profileImageUrlHttps = get200xProfileImageUrlHttps(user);
             name = user.name;
             screenName = user.screenName;
             tweetText = replaceUrlWithDisplayUrl(tweet);
         }
 
+        // TODO: split by view type?
+        //Quoted retweet
+        if (tweet.quotedStatus != null) {
+            textLoader.setText(holder.quotedName, tweet.quotedStatus.user.name,
+                    null, spacingMedium, null, null);
+            textLoader.setText(holder.quotedScreenName, tweet.quotedStatus.user.screenName,
+                    spacingSmall, spacingMedium, null, null);
+            textLoader.setText(holder.quotedTweetText, tweet.quotedStatus.text,
+                    null, spacingMedium, null, null);
+            // TODO: Not appear
+            imageLoader.loadImage(holder.quotedTweetPhoto, getPhotoUrl(tweet.quotedStatus), tweetPhotoHeight,
+                    null, tweetPhotoTopMargin, null, null);
+        } else {
+            textLoader.unsetText(holder.quotedName,
+                    null, 0, null, null);
+            textLoader.unsetText(holder.quotedScreenName,
+                    0, 0, null, null);
+            textLoader.unsetText(holder.quotedTweetText,
+                    null, 0, null, null);
+            imageLoader.unloadImage(holder.quotedTweetPhoto,
+                    null, 0, null, null);
+        }
+
         manager.load(profileImageUrlHttps).into(holder.icon);
         setNameAndText(holder, name, screenName, tweetText);
         holder.createdAt.setText(tweet.createdAt);
+
+        // Image
         if (photoUrl != null) {
             imageLoader.loadImage(holder.tweetPhoto, photoUrl, tweetPhotoHeight,
                     null, tweetPhotoTopMargin, null, null);
         } else {
-            imageLoader.unloadImage(holder.tweetPhoto, null, 0, null, null);
+            imageLoader.unloadImage(holder.tweetPhoto,
+                    null, 0, null, null);
         }
+
+        // Actions
         holder.talk.setText("talk");
         holder.retweet.setText("retweet");
     }
@@ -131,6 +167,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         return user.profileImageUrlHttps.replace("_normal", "_200x200");
     }
 
+    // TODO: Invalid url of tweet and others?
     private String replaceUrlWithDisplayUrl(Tweet tweet) {
         String text = tweet.text;
 

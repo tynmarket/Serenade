@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -32,18 +33,18 @@
     <!-- TODO: Vector Image -->
     <ImageView
         android:id="@+id/icon"
+        android:layout_below="@+id/retweet_container"
         android:layout_width="@dimen/icon_size_list_item_tweet"
         android:layout_height="@dimen/icon_size_list_item_tweet"
-        android:layout_below="@+id/retweet_container"
         app:srcCompat="@drawable/default_profile" />
 
     <LinearLayout
         android:id="@+id/nameContainer"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/retweet_container"
         android:layout_toEndOf="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="0dp">
 
@@ -79,10 +80,10 @@
     <!-- TODO: Open link via Twitter App or Serenade -->
     <TextView
         android:id="@+id/tweet_text"
+        android:layout_below="@+id/nameContainer"
+        android:layout_toEndOf="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/nameContainer"
         android:layout_marginTop="@dimen/spacing_l_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:textSize="@dimen/text_size_x_small"
@@ -97,22 +98,69 @@
     <!-- TODO: Boarder Radius -->
     <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
     <!-- TODO: Multi image -->
+    <!-- TODO: Must unfix layout_width -->
     <ImageView
         android:id="@+id/tweet_photo"
-        android:layout_width="@dimen/image_width_tweet_photo"
-        android:layout_height="0dp"
         android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/tweet_text"
+        android:layout_width="@dimen/image_width_tweet_photo"
+        android:layout_height="0dp"
         android:layout_marginStart="@dimen/spacing_medium"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:src="@drawable/peing" />
+
+    <RelativeLayout
+        android:id="@+id/quoted_tweet"
+        android:layout_below="@+id/tweet_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_icon_and_margin">
+
+        <TextView
+            android:id="@+id/quoted_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="?android:textColorPrimary"
+            tools:text="quoted_name" />
+
+        <TextView
+            android:id="@+id/quoted_screen_name"
+            android:layout_toEndOf="@+id/quoted_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_l_small"
+            tools:text="quoted_screen_name" />
+
+        <TextView
+            android:id="@+id/quoted_tweet_text"
+            android:layout_below="@+id/quoted_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:textColor="?android:textColorPrimary"
+            tools:text="quoted_tweet_text" />
+
+        <ImageView
+            android:id="@+id/quoted_tweet_photo"
+            android:layout_below="@+id/quoted_tweet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/actions"
         android:orientation="horizontal"
+        android:layout_below="@+id/quoted_tweet"
+        android:layout_toEndOf="@+id/icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/tweet_photo"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="0dp">
