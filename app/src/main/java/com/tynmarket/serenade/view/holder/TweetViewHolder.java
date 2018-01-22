@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -63,6 +64,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.fav = (ImageView) itemView.findViewById(R.id.fav);
 
         // TODO: already created/destroyed
+        // TODO: Animation
+        // TODO: Disable double click
         fav.setOnClickListener((View v) -> {
             TwitterApiClient client = TwitterCore.getInstance().getApiClient();
             FavoriteService service = client.getFavoriteService();
@@ -74,12 +77,14 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void success(Result<Tweet> result) {
                         Log.d("Serenade", "fav destroy: success");
+                        Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
                         adapter.replaceTweet(getAdapterPosition(), result.data);
                     }
 
                     @Override
                     public void failure(TwitterException exception) {
                         Log.d("Serenade", "fav destroy: failure");
+                        Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                     }
                 });
                 fav.setImageResource(R.drawable.fav_off);
@@ -90,11 +95,13 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void success(Result<Tweet> result) {
                         Log.d("Serenade", "fav create: success");
+                        Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                         adapter.replaceTweet(getAdapterPosition(), result.data);
                     }
 
                     @Override
                     public void failure(TwitterException exception) {
+                        Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
                         Log.d("Serenade", "fav create: failure");
                     }
                 });

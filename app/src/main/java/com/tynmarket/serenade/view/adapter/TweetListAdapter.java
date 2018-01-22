@@ -2,7 +2,6 @@ package com.tynmarket.serenade.view.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d("Serenade", "onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
         // TODO: GlideApp
         manager = Glide.with(parent.getContext());
@@ -70,7 +68,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-        Log.d("Serenade", "onBindViewHolder");
         holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
