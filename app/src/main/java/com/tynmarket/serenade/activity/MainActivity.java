@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.Callback;
@@ -35,6 +36,7 @@ import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.DummyTweet;
+import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.fragment.RefreshFragment;
@@ -164,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void success(Result<List<Tweet>> result) {
                 Log.d("Serenade", "homeTimeline success");
+                debugTimeline(result.data);
 
                 if (refresh) {
                     mHomeTimelineAdapter.refresh(result.data);
@@ -183,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
             public void failure(TwitterException exception) {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "homeTimeline failure");
+                Toast.makeText(fragment.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
 
                 if (fragment != null) {
@@ -190,6 +194,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public RefreshFragment showRefreshIndicator() {
+        RefreshFragment fragment = new RefreshFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
+        return fragment;
+    }
+
+    public void hideRefreshFragment(RefreshFragment fragment) {
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -206,14 +220,29 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
-    public RefreshFragment showRefreshIndicator() {
-        RefreshFragment fragment = new RefreshFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
-        return fragment;
-    }
-
-    public void hideRefreshFragment(RefreshFragment fragment) {
-        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+    private void debugTimeline(List<Tweet> tweets) {
+        for (int i = 0; i < tweets.size(); i++) {
+            Tweet tweet = tweets.get(i);
+            String photoUrl = null;
+            String quotedPhotoUrl = null;
+            Tweet quotedStatus = tweet.quotedStatus;
+            Log.d("Serenade", String.format("timelime: %d", i));
+            Log.d("Serenade", tweet.user.name);
+            Log.d("Serenade", tweet.text);
+            photoUrl = TweetUtil.photoUrl(tweet);
+            if (photoUrl != null) {
+                Log.d("Serenade", photoUrl);
+            }
+            if (quotedStatus != null) {
+                Log.d("Serenade", String.format("quoted status: %d", i));
+                Log.d("Serenade", quotedStatus.user.name);
+                Log.d("Serenade", quotedStatus.text);
+                quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
+                if (quotedPhotoUrl != null) {
+                    Log.d("Serenade", quotedPhotoUrl);
+                }
+            }
+        }
     }
 
     /**

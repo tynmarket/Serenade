@@ -18,6 +18,7 @@
             android:layout_width="@dimen/icon_size_list_item_tweet"
             android:layout_height="wrap_content" />
 
+        <!-- TODO: Reply to -->
         <TextView
             android:id="@+id/retweet_user_name"
             android:layout_width="wrap_content"

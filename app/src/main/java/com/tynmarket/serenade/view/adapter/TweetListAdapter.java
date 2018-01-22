@@ -81,6 +81,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.setFavorited(tweet.favorited);
 
         // TODO: split by view type?
+        // TODO: Retweet quoted tweet
         // Retweet
         if (tweet.retweetedStatus != null) {
             textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
