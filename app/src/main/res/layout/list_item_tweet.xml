@@ -29,90 +29,94 @@
             tools:text="ティンがリツイート" />
     </LinearLayout>
 
-    <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
-    <!-- TODO: Vector Image -->
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_below="@+id/retweet_container"
-        android:layout_width="@dimen/icon_size_list_item_tweet"
-        android:layout_height="@dimen/icon_size_list_item_tweet"
-        app:srcCompat="@drawable/default_profile" />
-
-    <LinearLayout
-        android:id="@+id/nameContainer"
-        android:orientation="horizontal"
-        android:layout_below="@+id/retweet_container"
-        android:layout_toEndOf="@+id/icon"
+    <RelativeLayout
+        android:id="@+id/tweet_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:layout_marginEnd="0dp">
+        android:layout_below="@+id/retweet_container">
+        <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
+        <!-- TODO: Vector Image -->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/icon_size_list_item_tweet"
+            android:layout_height="@dimen/icon_size_list_item_tweet"
+            app:srcCompat="@drawable/default_profile" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
-            tools:text="name" />
-
-        <TextView
-            android:id="@+id/screen_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:maxLines="1"
-            android:textSize="@dimen/text_size_l_small"
-            tools:text="screen_name" />
-
-        <TextView
-            android:id="@+id/created_at"
+        <LinearLayout
+            android:id="@+id/nameContainer"
+            android:orientation="horizontal"
+            android:layout_toEndOf="@+id/icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:maxLines="1"
-            tools:text="created_at" />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginEnd="0dp">
 
-    <!-- TODO: show image, RT, link, hash tag -->
-    <!-- TODO: Remove underline from links -->
-    <!-- TODO: Open link via Twitter App or Serenade -->
-    <TextView
-        android:id="@+id/tweet_text"
-        android:layout_below="@+id/nameContainer"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_l_medium"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:textSize="@dimen/text_size_x_small"
-        android:textColor="?android:textColorPrimary"
-        android:autoLink="web"
-        tools:text="tweet_text" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimary"
+                tools:text="name" />
 
-    <!-- TODO: quotedStatus View -->
+            <TextView
+                android:id="@+id/screen_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_l_small"
+                tools:text="screen_name" />
 
-    <!-- TODO: Movie -->
-    <!-- TODO: Custom view? -->
-    <!-- TODO: Boarder Radius -->
-    <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
-    <!-- TODO: Multi image -->
-    <!-- TODO: Must unfix layout_width -->
-    <ImageView
-        android:id="@+id/tweet_photo"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/tweet_text"
-        android:layout_width="@dimen/image_width_tweet_photo"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/peing" />
+            <TextView
+                android:id="@+id/created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                tools:text="created_at" />
+        </LinearLayout>
+
+        <!-- TODO: show image, RT, link, hash tag -->
+        <!-- TODO: Remove underline from links -->
+        <!-- TODO: Open link via Twitter App or Serenade -->
+        <TextView
+            android:id="@+id/tweet_text"
+            android:layout_below="@+id/nameContainer"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l_medium"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:textSize="@dimen/text_size_x_small"
+            android:textColor="?android:textColorPrimary"
+            android:autoLink="web"
+            tools:text="tweet_text" />
+
+        <!-- TODO: quotedStatus View -->
+
+        <!-- TODO: Movie -->
+        <!-- TODO: Custom view? -->
+        <!-- TODO: Boarder Radius -->
+        <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
+        <!-- TODO: Multi image -->
+        <!-- TODO: Must unfix layout_width -->
+        <ImageView
+            android:id="@+id/tweet_photo"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_below="@+id/tweet_text"
+            android:layout_width="@dimen/image_width_tweet_photo"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/peing" />
+    </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/quoted_tweet"
-        android:layout_below="@+id/tweet_photo"
-        android:layout_width="wrap_content"
+        android:id="@+id/quoted_tweet_container"
+        android:layout_below="@+id/tweet_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_icon_and_margin">
 
@@ -157,42 +161,43 @@
     <LinearLayout
         android:id="@+id/actions"
         android:orientation="horizontal"
-        android:layout_below="@+id/quoted_tweet"
-        android:layout_toEndOf="@+id/icon"
+        android:layout_below="@+id/quoted_tweet_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_icon_and_margin"
         android:layout_marginEnd="0dp">
 
         <TextView
-            android:id="@+id/talk"
+            android:id="@+id/reply"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="talk" />
+            android:padding="@dimen/spacing_medium"
+            tools:text="reply" />
 
         <TextView
             android:id="@+id/retweet"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:padding="@dimen/spacing_medium"
             tools:text="retweet" />
 
         <!-- TODO: Fav count -->
         <ImageView
             android:id="@+id/fav"
             app:srcCompat="@drawable/fav_off"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_width="@dimen/icon_size_action_with_padding"
+            android:layout_height="@dimen/icon_size_action_with_padding"
+            android:padding="@dimen/spacing_medium" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/actions"
-        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_small"
         android:background="@color/tw__light_gray"
         android:alpha="0.5" />
 </RelativeLayout>

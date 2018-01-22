@@ -135,7 +135,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         // Actions
-        holder.talk.setText("talk");
+        holder.reply.setText("reply");
         holder.retweet.setText("retweet");
     }
 
