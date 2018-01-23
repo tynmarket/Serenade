@@ -6,6 +6,7 @@ import android.util.Log;
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
+import com.twitter.sdk.android.core.models.UrlEntity;
 
 import java.util.List;
 
@@ -45,20 +46,38 @@ public class TweetUtil {
     public static void debugTimeline(List<Tweet> tweets) {
         for (int i = 0; i < tweets.size(); i++) {
             Tweet tweet = tweets.get(i);
-            String photoUrl = null;
-            String quotedPhotoUrl = null;
             Tweet quotedStatus = tweet.quotedStatus;
+            TweetEntities entities = tweet.entities;
+            List<UrlEntity> urls;
+
+            String photoUrl = photoUrl(tweet);
+            String quotedPhotoUrl;
+
             Log.d("Serenade", String.format("timelime: %d", i));
             Log.d("Serenade", tweet.user.name);
             Log.d("Serenade", tweet.text);
-            photoUrl = TweetUtil.photoUrl(tweet);
+
             if (photoUrl != null) {
                 Log.d("Serenade", photoUrl);
             }
+
+            if (entities != null) {
+                urls = entities.urls;
+
+                if (urls != null) {
+                    for (UrlEntity url : urls) {
+                        Log.d("Serenade", String.format("url: %s", url.url));
+                        Log.d("Serenade", String.format("expandedUrl: %s", url.expandedUrl));
+                        Log.d("Serenade", String.format("displayUrl: %s", url.displayUrl));
+                    }
+                }
+            }
+
             if (quotedStatus != null) {
                 Log.d("Serenade", String.format("quoted status: %d", i));
                 Log.d("Serenade", quotedStatus.user.name);
                 Log.d("Serenade", quotedStatus.text);
+
                 quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
                 if (quotedPhotoUrl != null) {
                     Log.d("Serenade", quotedPhotoUrl);
