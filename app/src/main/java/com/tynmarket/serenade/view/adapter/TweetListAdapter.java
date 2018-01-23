@@ -1,6 +1,5 @@
 package com.tynmarket.serenade.view.adapter;
 
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +7,18 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.util.ViewContentLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.
@@ -72,24 +72,29 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
+        Tweet retweetedStatus = tweet.retweetedStatus;
+        Tweet quotedStatus = tweet.quotedStatus;
+
+
+        holder.tweet = tweet;
+        holder.setFavorited(tweet.favorited);
+
         String profileImageUrlHttps;
         String name;
         String screenName;
         String tweetText;
-        String photoUrl = getPhotoUrl(tweet);
-        holder.tweet = tweet;
-        holder.setFavorited(tweet.favorited);
+        String photoUrl = photoUrl(tweet);
 
         // TODO: split by view type?
         // TODO: Retweet quoted tweet
         // Retweet
-        if (tweet.retweetedStatus != null) {
+        if (retweetedStatus != null) {
             textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
                     null, spacingSmall, null, spacingSmall);
-            profileImageUrlHttps = get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
-            name = tweet.retweetedStatus.user.name;
-            screenName = tweet.retweetedStatus.user.screenName;
-            tweetText = replaceUrlWithDisplayUrl(tweet.retweetedStatus);
+            profileImageUrlHttps = get200xProfileImageUrlHttps(retweetedStatus.user);
+            name = retweetedStatus.user.name;
+            screenName = retweetedStatus.user.screenName;
+            tweetText = replaceUrlWithDisplayUrl(retweetedStatus);
         } else {
             textLoader.unsetText(holder.retweetUserName,
                     null, spacingLarge, null, 0);
@@ -100,17 +105,20 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         // TODO: split by view type?
-        //Quoted retweet
-        if (tweet.quotedStatus != null) {
-            textLoader.setText(holder.quotedName, tweet.quotedStatus.user.name,
+        // Quoted retweet
+        if (quotedStatus != null) {
+            textLoader.setText(holder.quotedName, quotedStatus.user.name,
                     null, spacingMedium, null, null);
-            textLoader.setText(holder.quotedScreenName, tweet.quotedStatus.user.screenName,
+            textLoader.setText(holder.quotedScreenName, quotedStatus.user.screenName,
                     spacingSmall, spacingMedium, null, null);
-            textLoader.setText(holder.quotedTweetText, tweet.quotedStatus.text,
+            textLoader.setText(holder.quotedTweetText, quotedStatus.text,
                     null, spacingMedium, null, null);
-            // TODO: Not appear
-            imageLoader.loadImage(holder.quotedTweetPhoto, getPhotoUrl(tweet.quotedStatus), tweetPhotoHeight,
-                    null, tweetPhotoTopMargin, null, null);
+
+            String quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
+            if (quotedPhotoUrl != null) {
+                imageLoader.loadImage(holder.quotedTweetPhoto, photoUrl(quotedStatus), tweetPhotoHeight,
+                        null, tweetPhotoTopMargin, null, null);
+            }
         } else {
             textLoader.unsetText(holder.quotedName,
                     null, 0, null, null);
@@ -185,33 +193,5 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.name.setText(name);
         holder.screenName.setText(String.format("@%s", screenName));
         holder.tweetText.setText(tweetText);
-    }
-
-    @Nullable
-    private String getPhotoUrl(Tweet tweet) {
-        TweetEntities entities = tweet.entities;
-        if (entities == null) {
-            return null;
-        }
-
-        List<MediaEntity> mediaList = entities.media;
-        if (mediaList.size() == 0) {
-            return null;
-        }
-
-        // TODO: stream function (API 24)
-        MediaEntity entity = null;
-        for (MediaEntity m : mediaList) {
-            if (m.type.equals("photo")) {
-                entity = m;
-                break;
-            }
-        }
-
-        if (entity != null) {
-            return entity.mediaUrlHttps;
-        } else {
-            return null;
-        }
     }
 }

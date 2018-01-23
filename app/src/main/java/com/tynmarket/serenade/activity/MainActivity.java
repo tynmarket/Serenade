@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void success(Result<List<Tweet>> result) {
                 Log.d("Serenade", "homeTimeline success");
-                debugTimeline(result.data);
+                TweetUtil.debugTimeline(result.data);
 
                 if (refresh) {
                     mHomeTimelineAdapter.refresh(result.data);
@@ -218,31 +218,6 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         }.execute();
-    }
-
-    private void debugTimeline(List<Tweet> tweets) {
-        for (int i = 0; i < tweets.size(); i++) {
-            Tweet tweet = tweets.get(i);
-            String photoUrl = null;
-            String quotedPhotoUrl = null;
-            Tweet quotedStatus = tweet.quotedStatus;
-            Log.d("Serenade", String.format("timelime: %d", i));
-            Log.d("Serenade", tweet.user.name);
-            Log.d("Serenade", tweet.text);
-            photoUrl = TweetUtil.photoUrl(tweet);
-            if (photoUrl != null) {
-                Log.d("Serenade", photoUrl);
-            }
-            if (quotedStatus != null) {
-                Log.d("Serenade", String.format("quoted status: %d", i));
-                Log.d("Serenade", quotedStatus.user.name);
-                Log.d("Serenade", quotedStatus.text);
-                quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
-                if (quotedPhotoUrl != null) {
-                    Log.d("Serenade", quotedPhotoUrl);
-                }
-            }
-        }
     }
 
     /**
