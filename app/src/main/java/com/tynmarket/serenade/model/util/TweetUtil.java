@@ -53,12 +53,12 @@ public class TweetUtil {
             String photoUrl = photoUrl(tweet);
             String quotedPhotoUrl;
 
-            Log.d("Serenade", String.format("timelime: %d", i));
-            Log.d("Serenade", tweet.user.name);
-            Log.d("Serenade", tweet.text);
+            Log.d("Serenade", String.format("timeline: %d", i));
+            Log.d("Serenade", String.format("name: %s", tweet.user.name));
+            Log.d("Serenade", String.format("text: %s", tweet.text));
 
             if (photoUrl != null) {
-                Log.d("Serenade", photoUrl);
+                Log.d("Serenade", String.format("photoUrl: %s", photoUrl));
             }
 
             if (entities != null) {
@@ -75,14 +75,15 @@ public class TweetUtil {
 
             if (quotedStatus != null) {
                 Log.d("Serenade", String.format("quoted status: %d", i));
-                Log.d("Serenade", quotedStatus.user.name);
-                Log.d("Serenade", quotedStatus.text);
+                Log.d("Serenade", String.format("name: %s", quotedStatus.user.name));
+                Log.d("Serenade", String.format("text: %s", quotedStatus.text));
 
                 quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
                 if (quotedPhotoUrl != null) {
-                    Log.d("Serenade", quotedPhotoUrl);
+                    Log.d("Serenade", String.format("photoUrl: %s", quotedPhotoUrl));
                 }
             }
+            Log.d("Setenade", "");
         }
     }
 }

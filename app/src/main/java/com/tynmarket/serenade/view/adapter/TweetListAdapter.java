@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -82,6 +81,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         String profileImageUrlHttps;
         String name;
         String screenName;
+        // TODO: Show displayUrl, move to url
         String tweetText;
         String photoUrl = photoUrl(tweet);
 
@@ -94,14 +94,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             profileImageUrlHttps = get200xProfileImageUrlHttps(retweetedStatus.user);
             name = retweetedStatus.user.name;
             screenName = retweetedStatus.user.screenName;
-            tweetText = replaceUrlWithDisplayUrl(retweetedStatus);
+            tweetText = retweetedStatus.text;
         } else {
             textLoader.unsetText(holder.retweetUserName,
                     null, spacingLarge, null, 0);
             profileImageUrlHttps = get200xProfileImageUrlHttps(user);
             name = user.name;
             screenName = user.screenName;
-            tweetText = replaceUrlWithDisplayUrl(tweet);
+            tweetText = tweet.text;
         }
 
         // TODO: split by view type?
@@ -171,22 +171,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     private String get200xProfileImageUrlHttps(User user) {
         return user.profileImageUrlHttps.replace("_normal", "_200x200");
-    }
-
-    // TODO: Invalid url of tweet and others?
-    private String replaceUrlWithDisplayUrl(Tweet tweet) {
-        String text = tweet.text;
-
-        List<UrlEntity> entities = tweet.entities.urls;
-        if (entities.size() == 0) {
-            return text;
-        }
-
-        for (UrlEntity entity : entities) {
-            text = text.replace(entity.url, entity.displayUrl);
-        }
-
-        return text;
     }
 
     private void setNameAndText(TweetViewHolder holder, String name, String screenName, String tweetText) {
