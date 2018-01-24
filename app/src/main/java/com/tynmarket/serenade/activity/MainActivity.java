@@ -32,6 +32,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
@@ -92,7 +93,16 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
             RefreshFragment fragment = showRefreshIndicator();
-            loadHomeTimeline(fragment);
+            int position = mViewPager.getCurrentItem();
+            switch (position) {
+                case 0:
+                    loadHomeTimeline(fragment);
+                case 1:
+                    loadFavoriteList(fragment);
+                case 2:
+                    // To be ...
+            }
+
         });
 
         initTwitterConfig();
@@ -157,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO: Transaction
     // http://blog.techium.jp/entry/2016/05/27/023716
+    // TODO: I18n
     private void loadHomeTimeline(RefreshFragment fragment, boolean refresh, Long maxId) {
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
@@ -196,6 +207,51 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void loadFavoriteList(RefreshFragment fragment) {
+        loadFavoriteList(fragment, true, null);
+    }
+
+    public void loadFavoriteList(RefreshFragment fragment, boolean refresh, String maxId) {
+        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
+        FavoriteService service = twitterApiClient.getFavoriteService();
+        Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxId, true);
+
+        call.enqueue(new Callback<List<Tweet>>() {
+            @Override
+            public void success(Result<List<Tweet>> result) {
+                Log.d("Serenade", "favoriteList success");
+                TweetUtil.debugTimeline(result.data);
+
+                if (refresh) {
+                    mFavoritesListAdapter.refresh(result.data);
+                    // TODO: Not scroll if no new tweets
+                    ((RecyclerView) findViewById(R.id.tweet_list)).getLayoutManager().scrollToPosition(0);
+                } else {
+                    mFavoritesListAdapter.addTweets(result.data);
+                    InfiniteTimelineScrollListener.mRefreshing = false;
+                }
+
+                if (fragment != null) {
+                    hideRefreshFragment(fragment);
+                }
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // TODO: Late limit(Status 429)
+                Log.d("Serenade", "favoriteList failure");
+                Toast.makeText(fragment.getContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+                InfiniteTimelineScrollListener.mRefreshing = false;
+
+                if (fragment != null) {
+                    hideRefreshFragment(fragment);
+                }
+            }
+        });
+    }
+
+    // TODO: Not to show multiple indicators
+    // TODO: Show indicator on current view.
     public RefreshFragment showRefreshIndicator() {
         RefreshFragment fragment = new RefreshFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();

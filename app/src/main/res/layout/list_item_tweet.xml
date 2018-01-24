@@ -37,6 +37,7 @@
         android:layout_below="@+id/retweet_container">
         <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
         <!-- TODO: Vector Image -->
+        <!-- TODO: Move to profile -->
         <ImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/icon_size_list_item_tweet"

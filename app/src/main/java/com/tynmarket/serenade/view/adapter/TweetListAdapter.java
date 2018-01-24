@@ -74,7 +74,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         Tweet retweetedStatus = tweet.retweetedStatus;
         Tweet quotedStatus = tweet.quotedStatus;
 
-
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
 
@@ -176,6 +175,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private void setNameAndText(TweetViewHolder holder, String name, String screenName, String tweetText) {
         holder.name.setText(name);
         holder.screenName.setText(String.format("@%s", screenName));
+        // TODO: Move to profile on clicking screenName
         holder.tweetText.setText(tweetText);
     }
 }
