@@ -149,6 +149,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_large"
             android:textColor="?android:textColorPrimary"
+            android:autoLink="web"
             tools:text="quoted_tweet_text" />
 
         <ImageView
