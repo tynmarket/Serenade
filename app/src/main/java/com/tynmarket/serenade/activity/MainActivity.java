@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     loadHomeTimeline(fragment);
                 case 1:
-                    loadFavoriteList(fragment);
+                    loadFavoriteList();
                 case 2:
                     // To be ...
             }
@@ -207,11 +207,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void loadFavoriteList(RefreshFragment fragment) {
-        loadFavoriteList(fragment, true, null);
+    public void loadFavoriteList() {
+        loadFavoriteList(true, null);
     }
 
-    public void loadFavoriteList(RefreshFragment fragment, boolean refresh, String maxId) {
+    public void loadFavoriteList(boolean refresh, String maxId) {
+        mFavoritesListAdapter.showRefreshIndicator();
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         FavoriteService service = twitterApiClient.getFavoriteService();
         Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxId, true);
@@ -230,22 +231,16 @@ public class MainActivity extends AppCompatActivity {
                     mFavoritesListAdapter.addTweets(result.data);
                     InfiniteTimelineScrollListener.mRefreshing = false;
                 }
-
-                if (fragment != null) {
-                    hideRefreshFragment(fragment);
-                }
+                mFavoritesListAdapter.hideRefreshIndicator();
             }
 
             @Override
             public void failure(TwitterException exception) {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "favoriteList failure");
-                Toast.makeText(fragment.getContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
-
-                if (fragment != null) {
-                    hideRefreshFragment(fragment);
-                }
+                mFavoritesListAdapter.hideRefreshIndicator();
             }
         });
     }

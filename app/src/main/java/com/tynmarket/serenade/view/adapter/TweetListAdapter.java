@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -24,6 +25,10 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
  */
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private boolean refreshing = false;
+
     private ArrayList<Tweet> tweets;
     private RequestManager manager;
     private ViewContentLoader textLoader;
@@ -40,6 +45,20 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+        this.progressBar = recyclerView.getRootView().findViewById(R.id.refresh);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        // necessary?
+        this.recyclerView = null;
+        this.progressBar = null;
+    }
+
+    @Override
+    // parent is RecyclerView
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
         // TODO: GlideApp
@@ -150,6 +169,16 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
+    }
+
+    public void showRefreshIndicator() {
+        refreshing = true;
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideRefreshIndicator() {
+        refreshing = false;
+        progressBar.setVisibility(View.GONE);
     }
 
     public void refresh(List<Tweet> newTweets) {

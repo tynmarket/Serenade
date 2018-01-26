@@ -8,8 +8,20 @@
     android:background="@color/white"
     tools:context="com.tynmarket.serenade.activity.MainActivity$PlaceholderFragment">
 
+    <!-- TODO: Set background image -->
+    <!-- TODO: Too large -->
+    <ProgressBar
+        android:id="@+id/refresh"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyle" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tweet_list"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item_tweet" />
