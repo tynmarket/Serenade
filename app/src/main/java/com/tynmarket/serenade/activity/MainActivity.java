@@ -40,7 +40,6 @@ import com.tynmarket.serenade.model.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
-import com.tynmarket.serenade.view.fragment.RefreshFragment;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
 import java.util.ArrayList;
@@ -92,15 +91,17 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Double click
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
-            RefreshFragment fragment = showRefreshIndicator();
             int position = mViewPager.getCurrentItem();
             switch (position) {
                 case 0:
-                    loadHomeTimeline(fragment);
+                    loadHomeTimeline();
+                    break;
                 case 1:
                     loadFavoriteList();
+                    break;
                 case 2:
                     // To be ...
+                    break;
             }
 
         });
@@ -154,21 +155,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadHomeTimeline() {
-        loadHomeTimeline(null, true, null);
+        loadHomeTimeline(true, null);
     }
 
-    public void loadPreviousTimeline(RefreshFragment fragment, Long maxId) {
-        loadHomeTimeline(fragment, false, maxId);
-    }
-
-    public void loadHomeTimeline(RefreshFragment fragment) {
-        loadHomeTimeline(fragment, true, null);
+    public void loadPreviousTimeline(Long maxId) {
+        loadHomeTimeline(false, maxId);
     }
 
     // TODO: Transaction
     // http://blog.techium.jp/entry/2016/05/27/023716
     // TODO: I18n
-    private void loadHomeTimeline(RefreshFragment fragment, boolean refresh, Long maxId) {
+    private void loadHomeTimeline(boolean refresh, Long maxId) {
+        mHomeTimelineAdapter.showRefreshIndicator();
+
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
         Call<List<Tweet>> call = statusesService.homeTimeline(ITEM_COUNT, null, maxId, false, false, false, true);
@@ -187,22 +186,17 @@ public class MainActivity extends AppCompatActivity {
                     mHomeTimelineAdapter.addTweets(result.data);
                     InfiniteTimelineScrollListener.mRefreshing = false;
                 }
-
-                if (fragment != null) {
-                    hideRefreshFragment(fragment);
-                }
+                mHomeTimelineAdapter.hideRefreshIndicator();
             }
 
             @Override
             public void failure(TwitterException exception) {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "homeTimeline failure");
-                Toast.makeText(fragment.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
 
-                if (fragment != null) {
-                    hideRefreshFragment(fragment);
-                }
+                mHomeTimelineAdapter.hideRefreshIndicator();
             }
         });
     }
@@ -213,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadFavoriteList(boolean refresh, String maxId) {
         mFavoritesListAdapter.showRefreshIndicator();
+
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         FavoriteService service = twitterApiClient.getFavoriteService();
         Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxId, true);
@@ -238,23 +233,11 @@ public class MainActivity extends AppCompatActivity {
             public void failure(TwitterException exception) {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "favoriteList failure");
-                Toast.makeText(getApplicationContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
                 mFavoritesListAdapter.hideRefreshIndicator();
             }
         });
-    }
-
-    // TODO: Not to show multiple indicators
-    // TODO: Show indicator on current view.
-    public RefreshFragment showRefreshIndicator() {
-        RefreshFragment fragment = new RefreshFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.recyclerViewContainer, fragment).commit();
-        return fragment;
-    }
-
-    public void hideRefreshFragment(RefreshFragment fragment) {
-        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     @SuppressLint("StaticFieldLeak")

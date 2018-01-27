@@ -25,9 +25,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
  */
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private boolean refreshing = false;
 
     private ArrayList<Tweet> tweets;
     private RequestManager manager;
@@ -46,14 +44,12 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
         this.progressBar = recyclerView.getRootView().findViewById(R.id.refresh);
     }
 
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         // necessary?
-        this.recyclerView = null;
         this.progressBar = null;
     }
 
@@ -172,12 +168,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     }
 
     public void showRefreshIndicator() {
-        refreshing = true;
         progressBar.setVisibility(View.VISIBLE);
     }
 
     public void hideRefreshIndicator() {
-        refreshing = false;
         progressBar.setVisibility(View.GONE);
     }
 

@@ -2,10 +2,9 @@ package com.tynmarket.serenade.view.listner;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.tynmarket.serenade.activity.MainActivity;
-import com.tynmarket.serenade.view.fragment.RefreshFragment;
+import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 /**
@@ -25,12 +24,11 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
 
         if (!mRefreshing && position + childCount == totalCount) {
             mRefreshing = true;
-            Log.d("Serenade", "Refreshing");
-
+            ((TweetListAdapter) recyclerView.getAdapter()).showRefreshIndicator();
             MainActivity activity = (MainActivity) recyclerView.getContext();
-            RefreshFragment fragment = activity.showRefreshIndicator();
+
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
-            activity.loadPreviousTimeline(fragment, lastItem.tweet.id - 1);
+            activity.loadPreviousTimeline(lastItem.tweet.id - 1);
         }
     }
 }
