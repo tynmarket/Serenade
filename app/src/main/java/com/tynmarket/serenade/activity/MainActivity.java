@@ -166,10 +166,6 @@ public class MainActivity extends AppCompatActivity {
         loadHomeTimeline(true, null);
     }
 
-    public void loadHomeTimeline(Long maxId) {
-        loadHomeTimeline(true, maxId);
-    }
-
     // TODO: Transaction
     // http://blog.techium.jp/entry/2016/05/27/023716
     // TODO: I18n
@@ -207,10 +203,6 @@ public class MainActivity extends AppCompatActivity {
                 mHomeTimelineAdapter.hideRefreshIndicator();
             }
         });
-    }
-
-    public void loadFavoriteList(String maxIdStr) {
-        loadFavoriteList(true, maxIdStr);
     }
 
     public void loadFavoriteList(boolean refresh, String maxIdStr) {
