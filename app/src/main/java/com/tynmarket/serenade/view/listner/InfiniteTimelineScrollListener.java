@@ -28,7 +28,7 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
             MainActivity activity = (MainActivity) recyclerView.getContext();
 
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
-            activity.loadPreviousTimeline(lastItem.tweet.id - 1);
+            activity.loadPreviousTweets(lastItem.tweet.id - 1);
         }
     }
 }

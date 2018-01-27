@@ -91,19 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Double click
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
-            int position = mViewPager.getCurrentItem();
-            switch (position) {
-                case 0:
-                    loadHomeTimeline();
-                    break;
-                case 1:
-                    loadFavoriteList();
-                    break;
-                case 2:
-                    // To be ...
-                    break;
-            }
-
+            loadTweets(true, null);
         });
 
         initTwitterConfig();
@@ -154,12 +142,32 @@ public class MainActivity extends AppCompatActivity {
         Twitter.initialize(config);
     }
 
+    public void loadPreviousTweets(Long maxId) {
+        loadTweets(false, maxId);
+    }
+
+    public void loadTweets(boolean refresh, Long maxId) {
+        int position = mViewPager.getCurrentItem();
+        switch (position) {
+            case 0:
+                loadHomeTimeline(refresh, maxId);
+                break;
+            case 1:
+                String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
+                loadFavoriteList(refresh, maxIdStr);
+                break;
+            case 2:
+                // To be ...
+                break;
+        }
+    }
+
     public void loadHomeTimeline() {
         loadHomeTimeline(true, null);
     }
 
-    public void loadPreviousTimeline(Long maxId) {
-        loadHomeTimeline(false, maxId);
+    public void loadHomeTimeline(Long maxId) {
+        loadHomeTimeline(true, maxId);
     }
 
     // TODO: Transaction
@@ -201,16 +209,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void loadFavoriteList() {
-        loadFavoriteList(true, null);
+    public void loadFavoriteList(String maxIdStr) {
+        loadFavoriteList(true, maxIdStr);
     }
 
-    public void loadFavoriteList(boolean refresh, String maxId) {
+    public void loadFavoriteList(boolean refresh, String maxIdStr) {
         mFavoritesListAdapter.showRefreshIndicator();
 
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         FavoriteService service = twitterApiClient.getFavoriteService();
-        Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxId, true);
+        Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxIdStr, true);
 
         call.enqueue(new Callback<List<Tweet>>() {
             @Override
