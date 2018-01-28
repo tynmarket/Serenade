@@ -244,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
     private void clearAllGlideCache() {
         Glide glide = Glide.get(MainActivity.this);
         glide.clearMemory();
+        // TODO: Lambda syntax
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {

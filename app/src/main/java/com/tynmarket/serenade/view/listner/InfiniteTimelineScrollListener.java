@@ -22,6 +22,7 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
         int totalCount = recyclerView.getAdapter().getItemCount();
         int childCount = recyclerView.getChildCount();
 
+        // TODO: Not load if last tweet is loaded
         if (!mRefreshing && position + childCount == totalCount) {
             mRefreshing = true;
             ((TweetListAdapter) recyclerView.getAdapter()).showRefreshIndicator();
