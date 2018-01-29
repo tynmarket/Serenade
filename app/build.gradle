@@ -45,5 +45,6 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
+    compile 'org.greenrobot:eventbus:3.1.1'
     testCompile 'junit:junit:4.12'
 }
