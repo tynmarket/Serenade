@@ -65,9 +65,12 @@ public class TweetListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        this.rv = (RecyclerView) rootView.findViewById(R.id.tweet_list);
+        this.rv = rootView.findViewById(R.id.tweet_list);
 
-        this.sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
+        }
 
         // Layout
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
