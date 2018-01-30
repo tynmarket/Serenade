@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.view.fragment;
+package com.tynmarket.serenade.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

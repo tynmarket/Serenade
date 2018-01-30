@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.tynmarket.serenade.view.fragment.TweetListFragment;
+import com.tynmarket.serenade.fragment.TweetListFragment;
 
 /**
  * Created by tyn-iMarket on 2018/01/15.
