@@ -6,50 +6,30 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
-import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
-import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.DummyTweet;
-import com.tynmarket.serenade.model.util.TweetUtil;
+import com.tynmarket.serenade.event.LoadFavoritesListEvent;
+import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
-import com.tynmarket.serenade.view.adapter.TweetListAdapter;
-import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
+import org.greenrobot.eventbus.EventBus;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN = 1001;
-    private int ITEM_COUNT = 50;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -65,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
-    public static TweetListAdapter mHomeTimelineAdapter;
-    public static TweetListAdapter mFavoritesListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
+                // TODO: FIX unable to load
                 loadHomeTimeline();
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
@@ -150,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
         int position = mViewPager.getCurrentItem();
         switch (position) {
             case 0:
-                loadHomeTimeline(refresh, maxId);
+                EventBus.getDefault().post(new LoadHomeTimelineEvent(refresh, maxId));
                 break;
             case 1:
                 String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
-                loadFavoriteList(refresh, maxIdStr);
+                EventBus.getDefault().post(new LoadFavoritesListEvent(refresh, maxIdStr));
                 break;
             case 2:
                 // To be ...
@@ -163,81 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadHomeTimeline() {
-        loadHomeTimeline(true, null);
-    }
-
-    // TODO: Transaction
-    // http://blog.techium.jp/entry/2016/05/27/023716
-    // TODO: I18n
-    private void loadHomeTimeline(boolean refresh, Long maxId) {
-        mHomeTimelineAdapter.showRefreshIndicator();
-
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call<List<Tweet>> call = statusesService.homeTimeline(ITEM_COUNT, null, maxId, false, false, false, true);
-
-        call.enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Log.d("Serenade", "homeTimeline success");
-                TweetUtil.debugTimeline(result.data);
-
-                if (refresh) {
-                    mHomeTimelineAdapter.refresh(result.data);
-                    // TODO: Not scroll if no new tweets
-                    ((RecyclerView) findViewById(R.id.tweet_list)).getLayoutManager().scrollToPosition(0);
-                } else {
-                    mHomeTimelineAdapter.addTweets(result.data);
-                    InfiniteTimelineScrollListener.mRefreshing = false;
-                }
-                mHomeTimelineAdapter.hideRefreshIndicator();
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // TODO: Late limit(Status 429)
-                Log.d("Serenade", "homeTimeline failure");
-                Toast.makeText(getApplication(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                InfiniteTimelineScrollListener.mRefreshing = false;
-
-                mHomeTimelineAdapter.hideRefreshIndicator();
-            }
-        });
-    }
-
-    public void loadFavoriteList(boolean refresh, String maxIdStr) {
-        mFavoritesListAdapter.showRefreshIndicator();
-
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        FavoriteService service = twitterApiClient.getFavoriteService();
-        Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, maxIdStr, true);
-
-        call.enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Log.d("Serenade", "favoriteList success");
-                TweetUtil.debugTimeline(result.data);
-
-                if (refresh) {
-                    mFavoritesListAdapter.refresh(result.data);
-                    // TODO: Not scroll if no new tweets
-                    ((RecyclerView) findViewById(R.id.tweet_list)).getLayoutManager().scrollToPosition(0);
-                } else {
-                    mFavoritesListAdapter.addTweets(result.data);
-                    InfiniteTimelineScrollListener.mRefreshing = false;
-                }
-                mFavoritesListAdapter.hideRefreshIndicator();
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // TODO: Late limit(Status 429)
-                Log.d("Serenade", "favoriteList failure");
-                Toast.makeText(getApplication(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                InfiniteTimelineScrollListener.mRefreshing = false;
-                mFavoritesListAdapter.hideRefreshIndicator();
-            }
-        });
+        EventBus.getDefault().post(new LoadHomeTimelineEvent(true, null));
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -253,64 +157,5 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         }.execute();
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        private static final int MAX_PRELOAD = 10;
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.tweet_list);
-
-            // Layout
-            LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-            manager.setOrientation(LinearLayoutManager.VERTICAL);
-            rv.setLayoutManager(manager);
-
-            ArrayList<Tweet> tweets = DummyTweet.dummyTweets();
-
-            // Adapter
-            int section = getArguments().getInt(ARG_SECTION_NUMBER);
-            TweetListAdapter adapter;
-
-            if (section == 1) {
-                adapter = mHomeTimelineAdapter = new TweetListAdapter(tweets);
-            } else if (section == 2) {
-                adapter = mFavoritesListAdapter = new TweetListAdapter(tweets);
-            } else {
-                adapter = new TweetListAdapter(tweets);
-            }
-            rv.setAdapter(adapter);
-
-            // Infinite scroll
-            rv.addOnScrollListener(new InfiniteTimelineScrollListener());
-
-            return rootView;
-        }
     }
 }
