@@ -43,17 +43,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        this.progressBar = recyclerView.getRootView().findViewById(R.id.refresh);
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        // necessary?
-        this.progressBar = null;
-    }
-
-    @Override
     // parent is RecyclerView
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
@@ -165,14 +154,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
-    }
-
-    public void showRefreshIndicator() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    public void hideRefreshIndicator() {
-        progressBar.setVisibility(View.GONE);
     }
 
     public void refresh(List<Tweet> newTweets) {

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
@@ -48,6 +49,7 @@ public class TweetListFragment extends Fragment {
 
     private int sectionNumber;
     private RecyclerView rv;
+    private ProgressBar progressBar;
     private TweetListAdapter adapter;
 
     public TweetListFragment() {
@@ -66,6 +68,7 @@ public class TweetListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         this.rv = rootView.findViewById(R.id.tweet_list);
+        this.progressBar = rootView.findViewById(R.id.refresh);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -86,6 +89,7 @@ public class TweetListFragment extends Fragment {
         rv.addOnScrollListener(new InfiniteTimelineScrollListener() {
             @Override
             public void loadPreviousTweets(long maxId) {
+                showRefreshIndicator();
                 loadTweets(false, maxId);
             }
         });
@@ -129,7 +133,7 @@ public class TweetListFragment extends Fragment {
             return;
         }
 
-        adapter.showRefreshIndicator();
+        showRefreshIndicator();
 
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         StatusesService statusesService = twitterApiClient.getStatusesService();
@@ -149,7 +153,7 @@ public class TweetListFragment extends Fragment {
                     adapter.addTweets(result.data);
                     InfiniteTimelineScrollListener.mRefreshing = false;
                 }
-                adapter.hideRefreshIndicator();
+                hideRefreshIndicator();
             }
 
             @Override
@@ -159,7 +163,7 @@ public class TweetListFragment extends Fragment {
                 Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
 
-                adapter.hideRefreshIndicator();
+                hideRefreshIndicator();
             }
         });
     }
@@ -170,7 +174,7 @@ public class TweetListFragment extends Fragment {
             return;
         }
 
-        adapter.showRefreshIndicator();
+        showRefreshIndicator();
 
         TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
         FavoriteService service = twitterApiClient.getFavoriteService();
@@ -190,7 +194,7 @@ public class TweetListFragment extends Fragment {
                     adapter.addTweets(result.data);
                     InfiniteTimelineScrollListener.mRefreshing = false;
                 }
-                adapter.hideRefreshIndicator();
+                hideRefreshIndicator();
             }
 
             @Override
@@ -199,8 +203,16 @@ public class TweetListFragment extends Fragment {
                 Log.d("Serenade", "favoriteList failure");
                 Toast.makeText(rv.getContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
                 InfiniteTimelineScrollListener.mRefreshing = false;
-                adapter.hideRefreshIndicator();
+                hideRefreshIndicator();
             }
         });
+    }
+
+    public void showRefreshIndicator() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideRefreshIndicator() {
+        progressBar.setVisibility(View.GONE);
     }
 }
