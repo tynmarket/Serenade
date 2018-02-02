@@ -89,7 +89,6 @@ public class TweetListFragment extends Fragment {
         rv.addOnScrollListener(new InfiniteTimelineScrollListener() {
             @Override
             public void loadPreviousTweets(long maxId) {
-                showRefreshIndicator();
                 loadTweets(false, maxId);
             }
         });

@@ -71,6 +71,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
+        // TODO: Method too long
         holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
