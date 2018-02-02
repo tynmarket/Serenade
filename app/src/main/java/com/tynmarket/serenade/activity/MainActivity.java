@@ -22,8 +22,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.event.LoadFavoritesListEvent;
 import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
+import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Double click
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
-            loadTweets(true, null);
+            int sectionNumber = mViewPager.getCurrentItem() + 1;
+            TweetList.loadTweets(sectionNumber, true, null);
         });
 
         initTwitterConfig();
@@ -118,22 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-    }
-
-    public void loadTweets(boolean refresh, Long maxId) {
-        int position = mViewPager.getCurrentItem();
-        switch (position) {
-            case 0:
-                EventBus.getDefault().post(new LoadHomeTimelineEvent(refresh, maxId));
-                break;
-            case 1:
-                String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
-                EventBus.getDefault().post(new LoadFavoritesListEvent(refresh, maxIdStr));
-                break;
-            case 2:
-                // To be ...
-                break;
-        }
     }
 
     public void loadHomeTimeline() {
