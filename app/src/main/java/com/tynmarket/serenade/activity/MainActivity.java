@@ -120,10 +120,6 @@ public class MainActivity extends AppCompatActivity {
         Twitter.initialize(config);
     }
 
-    public void loadPreviousTweets(Long maxId) {
-        loadTweets(false, maxId);
-    }
-
     public void loadTweets(boolean refresh, Long maxId) {
         int position = mViewPager.getCurrentItem();
         switch (position) {

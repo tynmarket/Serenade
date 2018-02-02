@@ -83,9 +83,29 @@ public class TweetListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         // Infinite scroll
-        rv.addOnScrollListener(new InfiniteTimelineScrollListener());
+        rv.addOnScrollListener(new InfiniteTimelineScrollListener() {
+            @Override
+            public void loadPreviousTweets(long maxId) {
+                loadTweets(false, maxId);
+            }
+        });
 
         return rootView;
+    }
+
+    public void loadTweets(boolean refresh, Long maxId) {
+        switch (sectionNumber) {
+            case 1:
+                EventBus.getDefault().post(new LoadHomeTimelineEvent(refresh, maxId));
+                break;
+            case 2:
+                String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
+                EventBus.getDefault().post(new LoadFavoritesListEvent(refresh, maxIdStr));
+                break;
+            case 3:
+                // To be ...
+                break;
+        }
     }
 
     @Override
