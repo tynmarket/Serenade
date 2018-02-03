@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- TODO: Ripple Effect -->
+    <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
     <LinearLayout
         android:id="@+id/retweet_container"
         android:orientation="horizontal"

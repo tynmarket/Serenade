@@ -67,7 +67,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.retweet = itemView.findViewById(R.id.retweet);
         this.fav = itemView.findViewById(R.id.fav);
 
-        // Open Twitter app for profile page
+        // Open tweet
+        setOnTweetTextClickListener();
+        // Open profile
         setOnIconClickListener();
 
         // TODO: already created/destroyed
@@ -126,12 +128,22 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         fav.setImageResource(favorited ? R.drawable.fav_on : R.drawable.fav_off);
     }
 
+    private void setOnTweetTextClickListener() {
+        tweetText.setOnClickListener(v -> {
+            Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
+            itemView.getContext().startActivity(intent);
+        });
+    }
+
     @SuppressWarnings("SpellCheckingInspection")
     private void setOnIconClickListener() {
         // TODO: State pressed
         // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
         icon.setOnClickListener(v -> {
-            Uri uri = TwitterUtil.profileUri((String) screenName.getText());
+            Uri uri = TwitterUtil.profileUri(tweet.user.screenName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
