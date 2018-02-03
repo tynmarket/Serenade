@@ -12,7 +12,7 @@ import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListener {
     // TODO: https://github.com/JakeWharton/RxBinding
-    public static boolean mRefreshing = false;
+    public boolean mRefreshing = false;
 
     private int sectionNumber;
 

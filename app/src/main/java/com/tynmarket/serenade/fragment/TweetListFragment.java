@@ -51,6 +51,7 @@ public class TweetListFragment extends Fragment {
     private RecyclerView rv;
     private ProgressBar progressBar;
     private TweetListAdapter adapter;
+    private InfiniteTimelineScrollListener scrollListener;
 
     public TweetListFragment() {
     }
@@ -86,7 +87,8 @@ public class TweetListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         // Infinite scroll
-        rv.addOnScrollListener(new InfiniteTimelineScrollListener(sectionNumber));
+        this.scrollListener = new InfiniteTimelineScrollListener(sectionNumber);
+        rv.addOnScrollListener(scrollListener);
 
         return rootView;
     }
@@ -130,7 +132,7 @@ public class TweetListFragment extends Fragment {
                     rv.getLayoutManager().scrollToPosition(0);
                 } else {
                     adapter.addTweets(result.data);
-                    InfiniteTimelineScrollListener.mRefreshing = false;
+                    scrollListener.mRefreshing = false;
                 }
                 hideRefreshIndicator();
             }
@@ -140,7 +142,7 @@ public class TweetListFragment extends Fragment {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "homeTimeline failure");
                 Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                InfiniteTimelineScrollListener.mRefreshing = false;
+                scrollListener.mRefreshing = false;
 
                 hideRefreshIndicator();
             }
@@ -171,7 +173,7 @@ public class TweetListFragment extends Fragment {
                     rv.getLayoutManager().scrollToPosition(0);
                 } else {
                     adapter.addTweets(result.data);
-                    InfiniteTimelineScrollListener.mRefreshing = false;
+                    scrollListener.mRefreshing = false;
                 }
                 hideRefreshIndicator();
             }
@@ -181,7 +183,7 @@ public class TweetListFragment extends Fragment {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", "favoriteList failure");
                 Toast.makeText(rv.getContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                InfiniteTimelineScrollListener.mRefreshing = false;
+                scrollListener.mRefreshing = false;
                 hideRefreshIndicator();
             }
         });
