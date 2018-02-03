@@ -6,26 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
-import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.event.LoadFavoriteListEvent;
-import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
+import com.tynmarket.serenade.event.LoadTweetListEvent;
+import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.DummyTweet;
-import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
@@ -33,9 +23,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
 
 /**
  * Created by tyn-iMarket on 2018/01/29.
@@ -52,9 +39,6 @@ public class TweetListFragment extends Fragment {
     private ProgressBar progressBar;
     private TweetListAdapter adapter;
     private InfiniteTimelineScrollListener scrollListener;
-
-    public TweetListFragment() {
-    }
 
     public static TweetListFragment newInstance(int sectionNumber) {
         TweetListFragment fragment = new TweetListFragment();
@@ -105,88 +89,26 @@ public class TweetListFragment extends Fragment {
         super.onStop();
     }
 
-    // TODO: Transaction
-    // http://blog.techium.jp/entry/2016/05/27/023716
-    // TODO: I18n
     @Subscribe
-    public void onLoadHomeTimelineEvent(LoadHomeTimelineEvent event) {
-        if (sectionNumber != SECTION_NUMBER_HOME_TIMELINE) {
-            return;
+    public void onStartLoadTweetListEvent(StartLoadTweetListEvent event) {
+        if (event.sectionNumber == sectionNumber) {
+            showRefreshIndicator();
         }
-
-        showRefreshIndicator();
-
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        StatusesService statusesService = twitterApiClient.getStatusesService();
-        Call<List<Tweet>> call = statusesService.homeTimeline(ITEM_COUNT, null, event.maxId, false, false, false, true);
-
-        call.enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Log.d("Serenade", "homeTimeline success");
-                TweetUtil.debugTimeline(result.data);
-
-                if (event.refresh) {
-                    adapter.refresh(result.data);
-                    // TODO: Not scroll if no new tweets
-                    rv.getLayoutManager().scrollToPosition(0);
-                } else {
-                    adapter.addTweets(result.data);
-                    scrollListener.mRefreshing = false;
-                }
-                hideRefreshIndicator();
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // TODO: Late limit(Status 429)
-                Log.d("Serenade", "homeTimeline failure");
-                Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                scrollListener.mRefreshing = false;
-
-                hideRefreshIndicator();
-            }
-        });
     }
 
     @Subscribe
-    public void onLoadFavoriteListEvent(LoadFavoriteListEvent event) {
-        if (sectionNumber != SECTION_NUMBER_FAVORITE_LIST) {
-            return;
-        }
-
-        showRefreshIndicator();
-
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        FavoriteService service = twitterApiClient.getFavoriteService();
-        Call<List<Tweet>> call = service.list(null, null, ITEM_COUNT, null, event.maxIdStr, true);
-
-        call.enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Log.d("Serenade", "favoriteList success");
-                TweetUtil.debugTimeline(result.data);
-
-                if (event.refresh) {
-                    adapter.refresh(result.data);
-                    // TODO: Not scroll if no new tweets
-                    rv.getLayoutManager().scrollToPosition(0);
-                } else {
-                    adapter.addTweets(result.data);
-                    scrollListener.mRefreshing = false;
-                }
-                hideRefreshIndicator();
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // TODO: Late limit(Status 429)
-                Log.d("Serenade", "favoriteList failure");
-                Toast.makeText(rv.getContext(), "いいねを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+    public void onLoadTweetListEvent(LoadTweetListEvent event) {
+        if (event.sectionNumber == sectionNumber) {
+            if (event.refresh) {
+                adapter.refresh(event.tweets);
+                // TODO: Not scroll if no new tweets
+                rv.getLayoutManager().scrollToPosition(0);
+            } else {
+                adapter.addTweets(event.tweets);
                 scrollListener.mRefreshing = false;
-                hideRefreshIndicator();
             }
-        });
+            hideRefreshIndicator();
+        }
     }
 
     public void showRefreshIndicator() {
