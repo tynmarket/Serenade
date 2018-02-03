@@ -5,7 +5,7 @@ package com.tynmarket.serenade.event;
  */
 
 public class LoadFailureTweetListEvent {
-    public int sectionNumber;
+    public final int sectionNumber;
 
     public LoadFailureTweetListEvent(int sectionNumber) {
         this.sectionNumber = sectionNumber;

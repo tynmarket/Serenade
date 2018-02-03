@@ -29,21 +29,21 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public Tweet tweet;
     private boolean favorited;
 
-    public TextView retweetUserName;
-    public ImageView retweetByUser;
-    public ImageView icon;
-    public TextView name;
-    public TextView screenName;
-    public TextView createdAt;
-    public TextView tweetText;
-    public ImageView tweetPhoto;
-    public TextView quotedName;
-    public TextView quotedScreenName;
-    public TextView quotedTweetText;
-    public ImageView quotedTweetPhoto;
-    public TextView reply;
-    public TextView retweet;
-    private ImageView fav;
+    public final TextView retweetUserName;
+    private final ImageView retweetByUser;
+    public final ImageView icon;
+    public final TextView name;
+    public final TextView screenName;
+    public final TextView createdAt;
+    public final TextView tweetText;
+    public final ImageView tweetPhoto;
+    public final TextView quotedName;
+    public final TextView quotedScreenName;
+    public final TextView quotedTweetText;
+    public final ImageView quotedTweetPhoto;
+    public final TextView reply;
+    public final TextView retweet;
+    private final ImageView fav;
 
     public TweetViewHolder(View itemView) {
         super(itemView);

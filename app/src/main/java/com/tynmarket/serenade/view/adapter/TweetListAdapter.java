@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -25,9 +24,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
  */
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
-    private ProgressBar progressBar;
-
-    private ArrayList<Tweet> tweets;
+    private final ArrayList<Tweet> tweets;
     private RequestManager manager;
     private ViewContentLoader textLoader;
     private ViewContentLoader imageLoader;

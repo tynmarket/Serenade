@@ -9,9 +9,9 @@ import java.util.List;
  */
 
 public class LoadTweetListEvent {
-    public int sectionNumber;
-    public List<Tweet> tweets;
-    public boolean refresh;
+    public final int sectionNumber;
+    public final List<Tweet> tweets;
+    public final boolean refresh;
 
     public LoadTweetListEvent(int sectionNumber, List<Tweet> tweets, boolean refresh) {
         this.sectionNumber = sectionNumber;

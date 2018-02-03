@@ -14,7 +14,7 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
     // TODO: https://github.com/JakeWharton/RxBinding
     public boolean mRefreshing = false;
 
-    private int sectionNumber;
+    private final int sectionNumber;
 
     public InfiniteTimelineScrollListener(int sectionNumber) {
         this.sectionNumber = sectionNumber;

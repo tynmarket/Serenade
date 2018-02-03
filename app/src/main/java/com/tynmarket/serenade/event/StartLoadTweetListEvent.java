@@ -5,7 +5,7 @@ package com.tynmarket.serenade.event;
  */
 
 public class StartLoadTweetListEvent {
-    public int sectionNumber;
+    public final int sectionNumber;
 
     public StartLoadTweetListEvent(int sectionNumber) {
         this.sectionNumber = sectionNumber;

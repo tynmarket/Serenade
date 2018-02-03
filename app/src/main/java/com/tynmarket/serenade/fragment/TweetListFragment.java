@@ -32,9 +32,6 @@ import java.util.ArrayList;
 
 public class TweetListFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private final int ITEM_COUNT = 50;
-    private final int SECTION_NUMBER_HOME_TIMELINE = 1;
-    private final int SECTION_NUMBER_FAVORITE_LIST = 2;
 
     private int sectionNumber;
     private RecyclerView rv;
@@ -124,11 +121,11 @@ public class TweetListFragment extends Fragment {
         }
     }
 
-    public void showRefreshIndicator() {
+    private void showRefreshIndicator() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    public void hideRefreshIndicator() {
+    private void hideRefreshIndicator() {
         progressBar.setVisibility(View.GONE);
     }
 }
