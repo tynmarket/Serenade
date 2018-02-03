@@ -1,5 +1,7 @@
 package com.tynmarket.serenade.view.holder;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 import retrofit2.Call;
@@ -30,6 +33,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private boolean favorited;
 
     public final TextView retweetUserName;
+    @SuppressWarnings("all")
     private final ImageView retweetByUser;
     public final ImageView icon;
     public final TextView name;
@@ -62,6 +66,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.reply = itemView.findViewById(R.id.reply);
         this.retweet = itemView.findViewById(R.id.retweet);
         this.fav = itemView.findViewById(R.id.fav);
+
+        // Open Twitter app for profile page
+        setOnIconClickListener();
 
         // TODO: already created/destroyed
         // TODO: Animation
@@ -114,9 +121,21 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.adapter = adapter;
     }
 
-
     public void setFavorited(boolean favorited) {
         this.favorited = favorited;
         fav.setImageResource(favorited ? R.drawable.fav_on : R.drawable.fav_off);
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private void setOnIconClickListener() {
+        // TODO: State pressed
+        // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
+        icon.setOnClickListener(v -> {
+            Uri uri = TwitterUtil.profileUri((String) screenName.getText());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
+            itemView.getContext().startActivity(intent);
+        });
     }
 }

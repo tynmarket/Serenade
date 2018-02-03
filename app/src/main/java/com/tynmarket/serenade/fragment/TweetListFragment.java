@@ -17,7 +17,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
-import com.tynmarket.serenade.model.DummyTweet;
+import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 

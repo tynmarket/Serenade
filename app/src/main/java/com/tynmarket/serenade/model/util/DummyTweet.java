@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.model;
+package com.tynmarket.serenade.model.util;
 
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;

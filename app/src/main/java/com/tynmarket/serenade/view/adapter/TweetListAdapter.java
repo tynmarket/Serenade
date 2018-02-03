@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         return new TweetViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         // TODO: Method too long
