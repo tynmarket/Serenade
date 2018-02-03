@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.DummyTweet;
@@ -107,6 +109,17 @@ public class TweetListFragment extends Fragment {
                 adapter.addTweets(event.tweets);
                 scrollListener.mRefreshing = false;
             }
+            hideRefreshIndicator();
+        }
+    }
+
+    @Subscribe
+    public void onLoadFailureTweetListEvent(LoadFailureTweetListEvent event) {
+        if (event.sectionNumber == sectionNumber) {
+            // TODO: I18n
+            Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
+            scrollListener.mRefreshing = false;
+
             hideRefreshIndicator();
         }
     }

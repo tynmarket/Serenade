@@ -10,6 +10,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -46,11 +47,8 @@ public class TweetList {
             public void failure(TwitterException exception) {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", String.format("loadTweets failure: %d", sectionNumber));
-                // TODO: Post Event
-                // Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-                // scrollListener.mRefreshing = false;
 
-                // hideRefreshIndicator();
+                EventBus.getDefault().post(new LoadFailureTweetListEvent(sectionNumber));
             }
         });
     }
