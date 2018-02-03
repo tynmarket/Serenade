@@ -29,39 +29,39 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public Tweet tweet;
     private boolean favorited;
 
-    public TextView retweetUserName;
-    public ImageView retweetByUser;
-    public ImageView icon;
-    public TextView name;
-    public TextView screenName;
-    public TextView createdAt;
-    public TextView tweetText;
-    public ImageView tweetPhoto;
-    public TextView quotedName;
-    public TextView quotedScreenName;
-    public TextView quotedTweetText;
-    public ImageView quotedTweetPhoto;
-    public TextView reply;
-    public TextView retweet;
-    private ImageView fav;
+    public final TextView retweetUserName;
+    private final ImageView retweetByUser;
+    public final ImageView icon;
+    public final TextView name;
+    public final TextView screenName;
+    public final TextView createdAt;
+    public final TextView tweetText;
+    public final ImageView tweetPhoto;
+    public final TextView quotedName;
+    public final TextView quotedScreenName;
+    public final TextView quotedTweetText;
+    public final ImageView quotedTweetPhoto;
+    public final TextView reply;
+    public final TextView retweet;
+    private final ImageView fav;
 
     public TweetViewHolder(View itemView) {
         super(itemView);
-        this.retweetUserName = (TextView) itemView.findViewById(R.id.retweet_user_name);
-        this.retweetByUser = (ImageView) itemView.findViewById(R.id.retweet_by_user);
-        this.icon = (ImageView) itemView.findViewById(R.id.icon);
-        this.name = (TextView) itemView.findViewById(R.id.name);
-        this.screenName = (TextView) itemView.findViewById(R.id.screen_name);
-        this.createdAt = (TextView) itemView.findViewById(R.id.created_at);
-        this.tweetText = (TextView) itemView.findViewById(R.id.tweet_text);
-        this.tweetPhoto = (ImageView) itemView.findViewById(R.id.tweet_photo);
-        this.quotedName = (TextView) itemView.findViewById(R.id.quoted_name);
-        this.quotedScreenName = (TextView) itemView.findViewById(R.id.quoted_screen_name);
-        this.quotedTweetText = (TextView) itemView.findViewById(R.id.quoted_tweet_text);
-        this.quotedTweetPhoto = (ImageView) itemView.findViewById(R.id.quoted_tweet_photo);
-        this.reply = (TextView) itemView.findViewById(R.id.reply);
-        this.retweet = (TextView) itemView.findViewById(R.id.retweet);
-        this.fav = (ImageView) itemView.findViewById(R.id.fav);
+        this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
+        this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
+        this.icon = itemView.findViewById(R.id.icon);
+        this.name = itemView.findViewById(R.id.name);
+        this.screenName = itemView.findViewById(R.id.screen_name);
+        this.createdAt = itemView.findViewById(R.id.created_at);
+        this.tweetText = itemView.findViewById(R.id.tweet_text);
+        this.tweetPhoto = itemView.findViewById(R.id.tweet_photo);
+        this.quotedName = itemView.findViewById(R.id.quoted_name);
+        this.quotedScreenName = itemView.findViewById(R.id.quoted_screen_name);
+        this.quotedTweetText = itemView.findViewById(R.id.quoted_tweet_text);
+        this.quotedTweetPhoto = itemView.findViewById(R.id.quoted_tweet_photo);
+        this.reply = itemView.findViewById(R.id.reply);
+        this.retweet = itemView.findViewById(R.id.retweet);
+        this.fav = itemView.findViewById(R.id.fav);
 
         // TODO: already created/destroyed
         // TODO: Animation

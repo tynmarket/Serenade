@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.tynmarket.serenade.activity.MainActivity;
+import com.tynmarket.serenade.fragment.TweetListFragment;
 
 /**
  * Created by tyn-iMarket on 2018/01/15.
@@ -19,7 +19,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return MainActivity.PlaceholderFragment.newInstance(position + 1);
+        return TweetListFragment.newInstance(position + 1);
     }
 
     @Override

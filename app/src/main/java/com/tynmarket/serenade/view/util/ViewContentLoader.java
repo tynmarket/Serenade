@@ -63,10 +63,10 @@ public class ViewContentLoader {
                                                    @Nullable Integer rightMargin, @Nullable Integer bottomMargin) {
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         lp.setMargins(
-                leftMargin != null ? leftMargin.intValue() : lp.leftMargin,
-                topMargin != null ? topMargin.intValue() : lp.topMargin,
-                rightMargin != null ? rightMargin.intValue() : lp.rightMargin,
-                bottomMargin != null ? bottomMargin.intValue() : lp.bottomMargin);
+                leftMargin != null ? leftMargin : lp.leftMargin,
+                topMargin != null ? topMargin : lp.topMargin,
+                rightMargin != null ? rightMargin : lp.rightMargin,
+                bottomMargin != null ? bottomMargin : lp.bottomMargin);
 
         return lp;
     }

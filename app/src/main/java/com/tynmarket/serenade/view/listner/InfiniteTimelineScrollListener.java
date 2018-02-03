@@ -3,8 +3,7 @@ package com.tynmarket.serenade.view.listner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.tynmarket.serenade.activity.MainActivity;
-import com.tynmarket.serenade.view.adapter.TweetListAdapter;
+import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 /**
@@ -13,7 +12,13 @@ import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListener {
     // TODO: https://github.com/JakeWharton/RxBinding
-    public static boolean mRefreshing = false;
+    public boolean mRefreshing = false;
+
+    private final int sectionNumber;
+
+    public InfiniteTimelineScrollListener(int sectionNumber) {
+        this.sectionNumber = sectionNumber;
+    }
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -25,11 +30,10 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
         // TODO: Not load if last tweet is loaded
         if (!mRefreshing && position + childCount == totalCount) {
             mRefreshing = true;
-            ((TweetListAdapter) recyclerView.getAdapter()).showRefreshIndicator();
-            MainActivity activity = (MainActivity) recyclerView.getContext();
 
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
-            activity.loadPreviousTweets(lastItem.tweet.id - 1);
+            long maxId = lastItem.tweet.id - 1;
+            TweetList.loadTweets(sectionNumber, false, maxId);
         }
     }
 }

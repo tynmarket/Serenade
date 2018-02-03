@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -25,9 +24,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
  */
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
-    private ProgressBar progressBar;
-
-    private ArrayList<Tweet> tweets;
+    private final ArrayList<Tweet> tweets;
     private RequestManager manager;
     private ViewContentLoader textLoader;
     private ViewContentLoader imageLoader;
@@ -40,17 +37,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        this.progressBar = recyclerView.getRootView().findViewById(R.id.refresh);
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        // necessary?
-        this.progressBar = null;
     }
 
     @Override
@@ -82,6 +68,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
+        // TODO: Method too long
         holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
@@ -165,14 +152,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
-    }
-
-    public void showRefreshIndicator() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    public void hideRefreshIndicator() {
-        progressBar.setVisibility(View.GONE);
     }
 
     public void refresh(List<Tweet> newTweets) {
