@@ -91,21 +91,6 @@ public class TweetListFragment extends Fragment {
         return rootView;
     }
 
-    public void loadTweets(boolean refresh, Long maxId) {
-        switch (sectionNumber) {
-            case 1:
-                EventBus.getDefault().post(new LoadHomeTimelineEvent(refresh, maxId));
-                break;
-            case 2:
-                String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
-                EventBus.getDefault().post(new LoadFavoritesListEvent(refresh, maxIdStr));
-                break;
-            case 3:
-                // To be ...
-                break;
-        }
-    }
-
     @Override
     public void onStart() {
         super.onStart();
