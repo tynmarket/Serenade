@@ -83,7 +83,7 @@ public class TweetUtil {
                     Log.d("Serenade", String.format("photoUrl: %s", quotedPhotoUrl));
                 }
             }
-            Log.d("Setenade", "");
+            Log.d("Serenade", "");
         }
     }
 }
