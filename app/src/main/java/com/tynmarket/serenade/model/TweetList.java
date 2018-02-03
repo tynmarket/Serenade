@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.model;
 
-import com.tynmarket.serenade.event.LoadFavoritesListEvent;
+import com.tynmarket.serenade.event.LoadFavoriteListEvent;
 import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,7 +17,7 @@ public class TweetList {
                 break;
             case 2:
                 String maxIdStr = maxId != null ? String.valueOf(maxId) : null;
-                EventBus.getDefault().post(new LoadFavoritesListEvent(refresh, maxIdStr));
+                EventBus.getDefault().post(new LoadFavoriteListEvent(refresh, maxIdStr));
                 break;
             case 3:
                 // To be ...

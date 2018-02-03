@@ -22,7 +22,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.event.LoadFavoritesListEvent;
+import com.tynmarket.serenade.event.LoadFavoriteListEvent;
 import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
 import com.tynmarket.serenade.model.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -150,7 +150,7 @@ public class TweetListFragment extends Fragment {
     }
 
     @Subscribe
-    public void onLoadFavoritesListEvent(LoadFavoritesListEvent event) {
+    public void onLoadFavoriteListEvent(LoadFavoriteListEvent event) {
         if (sectionNumber != SECTION_NUMBER_FAVORITE_LIST) {
             return;
         }
