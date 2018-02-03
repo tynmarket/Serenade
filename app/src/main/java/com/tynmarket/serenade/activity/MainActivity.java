@@ -22,11 +22,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.event.LoadHomeTimelineEvent;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.view.adapter.SectionsPagerAdapter;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN = 1001;
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
                 // TODO: FIX unable to load
-                loadHomeTimeline();
+                TweetList.loadTweets(1, true, null);
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
             }
@@ -119,10 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-    }
-
-    public void loadHomeTimeline() {
-        EventBus.getDefault().post(new LoadHomeTimelineEvent(true, null));
     }
 
     @SuppressLint("StaticFieldLeak")
