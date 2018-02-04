@@ -10,8 +10,8 @@ import com.tynmarket.serenade.fragment.TweetListFragment;
  * Created by tyn-iMarket on 2018/01/15.
  */
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    public SectionsPagerAdapter(FragmentManager fm) {
+public class TweetListPagerAdapter extends FragmentPagerAdapter {
+    public TweetListPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
