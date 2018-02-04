@@ -18,6 +18,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -159,9 +160,12 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setOnSlideButtonClickListener() {
+        // Open slide
         slideButton.setOnClickListener(v -> {
             String displayUrl = TweetUtil.displayUrl(tweet);
-            Toast.makeText(itemView.getContext(), displayUrl, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
+            intent.putExtra(SlideActivity.DISPLAY_URL, displayUrl);
+            itemView.getContext().startActivity(intent);
         });
     }
 }

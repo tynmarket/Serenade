@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initTwitterConfig();
-        Intent i = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
-        startActivityForResult(i, REQUEST_CODE_LOGIN);
+        Intent intent = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_LOGIN);
     }
 
     @Override
