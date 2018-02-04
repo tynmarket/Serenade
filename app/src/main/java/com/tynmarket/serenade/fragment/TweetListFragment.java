@@ -65,7 +65,7 @@ public class TweetListFragment extends Fragment {
         rv.setLayoutManager(manager);
 
         // Adapter
-        ArrayList<Tweet> tweets = DummyTweet.dummyTweets();
+        ArrayList<Tweet> tweets = DummyTweet.tweets();
         this.adapter = new TweetListAdapter(tweets);
         rv.setAdapter(adapter);
 

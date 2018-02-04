@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
@@ -45,6 +47,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final TextView quotedScreenName;
     public final TextView quotedTweetText;
     public final ImageView quotedTweetPhoto;
+    public final Button slideButton;
     public final TextView reply;
     public final TextView retweet;
     private final ImageView fav;
@@ -63,14 +66,17 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.quotedScreenName = itemView.findViewById(R.id.quoted_screen_name);
         this.quotedTweetText = itemView.findViewById(R.id.quoted_tweet_text);
         this.quotedTweetPhoto = itemView.findViewById(R.id.quoted_tweet_photo);
+        this.slideButton = itemView.findViewById(R.id.slide_button);
         this.reply = itemView.findViewById(R.id.reply);
         this.retweet = itemView.findViewById(R.id.retweet);
         this.fav = itemView.findViewById(R.id.fav);
 
-        // Open tweet
-        setOnTweetTextClickListener();
         // Open profile
         setOnIconClickListener();
+        // Open tweet
+        setOnTweetTextClickListener();
+        // Open slide
+        setOnSlideButtonClickListener();
 
         // TODO: already created/destroyed
         // TODO: Animation
@@ -132,6 +138,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         tweetText.setOnClickListener(v -> {
             Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: FLAG_ACTIVITY
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
             itemView.getContext().startActivity(intent);
@@ -148,6 +155,13 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
             itemView.getContext().startActivity(intent);
+        });
+    }
+
+    private void setOnSlideButtonClickListener() {
+        slideButton.setOnClickListener(v -> {
+            String displayUrl = TweetUtil.displayUrl(tweet);
+            Toast.makeText(itemView.getContext(), displayUrl, Toast.LENGTH_SHORT).show();
         });
     }
 }

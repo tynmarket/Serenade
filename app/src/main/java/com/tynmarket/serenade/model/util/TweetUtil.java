@@ -15,21 +15,18 @@ import java.util.List;
  */
 
 public class TweetUtil {
+    private static final String HOST_SPEAKERDECK = "speakerdeck.com";
+
     @Nullable
     public static String photoUrl(Tweet tweet) {
-        TweetEntities entities = tweet.entities;
-        if (entities == null) {
-            return null;
-        }
-
-        List<MediaEntity> mediaList = entities.media;
-        if (mediaList.size() == 0) {
+        List<MediaEntity> media = tweet.entities.media;
+        if (media.size() == 0) {
             return null;
         }
 
         // TODO: stream function (API 24)
         MediaEntity entity = null;
-        for (MediaEntity m : mediaList) {
+        for (MediaEntity m : media) {
             if (m.type.equals("photo")) {
                 entity = m;
                 break;
@@ -38,6 +35,34 @@ public class TweetUtil {
 
         if (entity != null) {
             return entity.mediaUrlHttps;
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean containSlide(Tweet tweet) {
+        UrlEntity url = url(tweet);
+        if (url != null) {
+            return url.displayUrl.startsWith(HOST_SPEAKERDECK);
+        } else {
+            return false;
+        }
+    }
+
+    @Nullable
+    public static String displayUrl(Tweet tweet) {
+        UrlEntity url = url(tweet);
+        if (url != null) {
+            return url.displayUrl;
+        } else {
+            return null;
+        }
+    }
+
+    public static UrlEntity url(Tweet tweet) {
+        List<UrlEntity> urls = tweet.entities.urls;
+        if (urls.size() > 0) {
+            return urls.get(0);
         } else {
             return null;
         }

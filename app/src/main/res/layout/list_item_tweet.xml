@@ -163,10 +163,19 @@
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/slide_button"
+        android:layout_below="@+id/quoted_tweet_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_icon_and_margin"
+        android:text="@string/slide_button" />
+
     <LinearLayout
         android:id="@+id/actions"
         android:orientation="horizontal"
-        android:layout_below="@+id/quoted_tweet_container"
+        android:layout_below="@+id/slide_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_icon_and_margin"

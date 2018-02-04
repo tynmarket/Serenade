@@ -3,9 +3,11 @@ package com.tynmarket.serenade.model.util;
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
+import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
  */
 
 public class DummyTweet {
-    public static ArrayList<Tweet> dummyTweets() {
+    public static ArrayList<Tweet> tweets() {
         ArrayList<Tweet> tweets = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
@@ -24,6 +26,8 @@ public class DummyTweet {
                 tweet = tweetWithRetweetedStatus(i);
             } else if (i == 2) {
                 tweet = tweetWithQuotedStatus(i);
+            } else if (i == 3) {
+                tweet = tweetWithSlide(i);
             } else {
                 tweet = tweet(i);
             }
@@ -33,7 +37,7 @@ public class DummyTweet {
     }
 
     private static Tweet tweet(int i) {
-        return tweet(i, dummyEntities(), null, null, dummyUser(i));
+        return tweet(i, entities(), null, null, user(i));
     }
 
     private static Tweet tweet(int i, TweetEntities entities, Tweet retweetedStatus, Tweet quotedStatus, User user) {
@@ -43,30 +47,34 @@ public class DummyTweet {
                 "inReplyToStatusIdStr", 0, "inReplyToUserIdStr",
                 "lang", null, false, null, 0,
                 "quotedStatusIdStr", quotedStatus, 0, false,
-                retweetedStatus, "source", dummyText(i), null,
+                retweetedStatus, "source", tweetText(i), null,
                 false, user, false, null,
                 "withheldScope", null);
     }
 
     private static Tweet tweetWithRetweetedStatus(int i) {
-        Tweet retweetedStatus = tweet(i, null, null, null, dummyUser(i, "リツイートされた人"));
-        return tweet(i, dummyEntities(), retweetedStatus, null, dummyUser(i));
+        Tweet retweetedStatus = tweet(i, null, null, null, user(i, "リツイートされた人"));
+        return tweet(i, entities(), retweetedStatus, null, user(i));
     }
 
     private static Tweet tweetWithQuotedStatus(int i) {
-        Tweet quotedStatus = tweet(i, dummyEntities(), null, null, dummyUser(i, "引用リツイートされた人"));
-        return tweet(i, dummyEntities(null), null, quotedStatus, dummyUser(i));
+        Tweet quotedStatus = tweet(i, entities(), null, null, user(i, "引用リツイートされた人"));
+        return tweet(i, entities(null), null, quotedStatus, user(i));
     }
 
-    private static String dummyText(int i) {
+    private static Tweet tweetWithSlide(int i) {
+        return tweet(i, slideEntities(), null, null, user(i));
+    }
+
+    private static String tweetText(int i) {
         return String.format("ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容ツイート内容 %d", i + 1);
     }
 
-    private static User dummyUser(int i) {
-        return dummyUser(i, String.format("ティン＠iMarket管理人あああ %d", i + 1));
+    private static User user(int i) {
+        return user(i, String.format("ティン＠iMarket管理人あああ %d", i + 1));
     }
 
-    private static User dummyUser(int i, String name) {
+    private static User user(int i, String name) {
         return new User(false, "createdAt", false,
                 false, "description", "emailAddress",
                 null, 0, false, 0,
@@ -85,22 +93,29 @@ public class DummyTweet {
 
     }
 
-    private static TweetEntities dummyEntities() {
+    private static TweetEntities entities() {
         return new TweetEntities(null, null,
-                dummyMediaEntity("https://pbs.twimg.com/media/DT00eThV4AAgQSl.jpg"),
+                media("https://pbs.twimg.com/media/DT00eThV4AAgQSl.jpg"),
                 null, null);
     }
 
-    private static TweetEntities dummyEntities(String mediaUrlHttps) {
-        return new TweetEntities(null, null, dummyMediaEntity(mediaUrlHttps), null, null);
+    private static TweetEntities entities(String mediaUrlHttps) {
+        return new TweetEntities(null, null, media(mediaUrlHttps), null, null);
     }
 
-    private static List<MediaEntity> dummyMediaEntity(String mediaUrlHttps) {
+    private static List<MediaEntity> media(String mediaUrlHttps) {
         MediaEntity entity = new MediaEntity("url", "expandedUrl", "displayUrl",
                 0, 1, 10, "idStr", "mediaUrl",
                 mediaUrlHttps,
                 null, 0, "sourceStatusIdStr",
                 "photo", null, null);
         return Collections.singletonList(entity);
+    }
+
+    private static TweetEntities slideEntities() {
+        UrlEntity url = new UrlEntity("url", "expandedUrl",
+                "speakerdeck.com/timakin/architecture-and-benefits-of-ab-test-allocation-system", 0, 1);
+        List<UrlEntity> urls = Arrays.asList(url);
+        return new TweetEntities(urls, null, null, null, null);
     }
 }

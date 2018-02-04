@@ -146,6 +146,13 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
                     null, 0, null, null);
         }
 
+        // Slide button
+        if (TweetUtil.containSlide(tweet)) {
+            holder.slideButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.slideButton.setVisibility(View.GONE);
+        }
+
         // Actions
         holder.reply.setText("reply");
         holder.retweet.setText("retweet");
