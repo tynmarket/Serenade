@@ -30,5 +30,6 @@ public class SlideActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.slide_viewer_view_pager);
         SlideViewerPagerAdapter adapter = new SlideViewerPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(2);
     }
 }
