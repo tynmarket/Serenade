@@ -12,6 +12,14 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.SpeakerDeck;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by tynmarket on 2018/02/04.
@@ -40,10 +48,38 @@ public class SlideFragment extends Fragment {
             sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
         }
 
+        loadSlideHtml();
+
         String url = String.format("https://speakerd.s3.amazonaws.com/presentations/f763f8798a5542ac8f3779472f34caef/slide_%d.jpg", sectionNumber - 1);
         Log.d("Serenade", url);
+        // TODO: Retry on failure
         Glide.with(this).load(url).into(slideImage);
 
         return rootView;
+    }
+
+    private void loadSlideHtml() {
+        Call<ResponseBody> call = SpeakerDeck.getApiClient().slideHtml("timakin", "architecture-and-benefits-of-ab-test-allocation-system");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    ResponseBody resp = response.body();
+                    try {
+                        String html = resp.string();
+                        Log.d("Serenade", String.format("html: %s", html));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // TODO: 404
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // TODO: Network error
+            }
+        });
     }
 }
