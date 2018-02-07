@@ -73,11 +73,14 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.fav = itemView.findViewById(R.id.fav);
 
         // Open profile
+        // TODO: Set listener to quoted status
         setOnIconClickListener();
         // Open tweet
+        // TODO: Set listener to quoted status
         setOnTweetTextClickListener();
         // Open slide
         setOnSlideButtonClickListener();
+        // TODO: Show fullscreen image
 
         // TODO: already created/destroyed
         // TODO: Animation

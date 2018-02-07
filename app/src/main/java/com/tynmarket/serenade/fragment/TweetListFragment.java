@@ -47,6 +47,7 @@ public class TweetListFragment extends Fragment {
         return fragment;
     }
 
+    // TODO: Restore state on screen rotation
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

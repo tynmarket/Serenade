@@ -84,7 +84,7 @@
 
         <!-- TODO: show image, RT, link, hash tag -->
         <!-- TODO: Remove underline from links -->
-        <!-- TODO: Open link via Twitter App or Serenade -->
+        <!-- TODO: Widen between lines -->
         <TextView
             android:id="@+id/tweet_text"
             android:layout_below="@+id/nameContainer"

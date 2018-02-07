@@ -187,6 +187,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.name.setText(name);
         holder.screenName.setText(String.format("@%s", screenName));
         // TODO: Move to profile on clicking screenName
+        // TODO: Replace escaped character
         holder.tweetText.setText(tweetText);
     }
 }
