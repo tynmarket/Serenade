@@ -67,7 +67,7 @@ public class SlideFragment extends Fragment {
                     ResponseBody resp = response.body();
                     try {
                         String html = resp.string();
-                        Log.d("Serenade", String.format("html: %s", html));
+                        Log.d("Serenade", String.format("html: %s", SpeakerDeck.slideUrlFromHtml(html)));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
