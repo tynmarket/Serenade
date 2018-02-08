@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.SpeakerDeck;
@@ -32,7 +31,6 @@ public class SlideActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String expandedUrl = extras.getString(EXPANDED_URL);
-        Toast.makeText(this, expandedUrl, Toast.LENGTH_SHORT).show();
 
         String[] params = SpeakerDeck.slideHtmlParams(expandedUrl);
         Call<ResponseBody> call = SpeakerDeck.getApiClient().slideHtml(params[0], params[1]);
