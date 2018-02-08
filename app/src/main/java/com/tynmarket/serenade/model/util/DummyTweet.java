@@ -113,8 +113,8 @@ public class DummyTweet {
     }
 
     private static TweetEntities slideEntities() {
-        UrlEntity url = new UrlEntity("url", "expandedUrl",
-                "speakerdeck.com/timakin/architecture-and-benefits-of-ab-test-allocation-system", 0, 1);
+        UrlEntity url = new UrlEntity("url", "https://speakerdeck.com/timakin/architecture-and-benefits-of-ab-test-allocation-system",
+                "displayUrl", 0, 1);
         List<UrlEntity> urls = Arrays.asList(url);
         return new TweetEntities(urls, null, null, null, null);
     }

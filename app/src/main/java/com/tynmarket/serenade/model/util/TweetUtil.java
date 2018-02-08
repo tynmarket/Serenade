@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
+import com.tynmarket.serenade.model.SpeakerDeck;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 public class TweetUtil {
-    private static final String HOST_SPEAKERDECK = "speakerdeck.com";
+    private static final String HOST_SPEAKERDECK = "https://speakerdeck.com";
 
     @Nullable
     public static String photoUrl(Tweet tweet) {
@@ -43,17 +44,17 @@ public class TweetUtil {
     public static boolean containSlide(Tweet tweet) {
         UrlEntity url = url(tweet);
         if (url != null) {
-            return url.displayUrl.startsWith(HOST_SPEAKERDECK);
+            return url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
         } else {
             return false;
         }
     }
 
     @Nullable
-    public static String displayUrl(Tweet tweet) {
+    public static String expandedUrl(Tweet tweet) {
         UrlEntity url = url(tweet);
         if (url != null) {
-            return url.displayUrl;
+            return url.expandedUrl;
         } else {
             return null;
         }

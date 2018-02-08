@@ -14,7 +14,7 @@ import com.tynmarket.serenade.view.adapter.SlideViewerPagerAdapter;
  */
 
 public class SlideActivity extends AppCompatActivity {
-    public static final String DISPLAY_URL = "display_url";
+    public static final String EXPANDED_URL = "expanded_url";
 
     private ViewPager mViewPager;
 
@@ -24,8 +24,8 @@ public class SlideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slide);
 
         Bundle extras = getIntent().getExtras();
-        String displayUrl = extras.getString(DISPLAY_URL);
-        Toast.makeText(this, displayUrl, Toast.LENGTH_SHORT).show();
+        String expandedUrl = extras.getString(EXPANDED_URL);
+        Toast.makeText(this, expandedUrl, Toast.LENGTH_SHORT).show();
 
         mViewPager = findViewById(R.id.slide_viewer_view_pager);
         SlideViewerPagerAdapter adapter = new SlideViewerPagerAdapter(getSupportFragmentManager());

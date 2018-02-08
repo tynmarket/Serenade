@@ -165,9 +165,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnSlideButtonClickListener() {
         // Open slide
         slideButton.setOnClickListener(v -> {
-            String displayUrl = TweetUtil.displayUrl(tweet);
+            String expandedUrl = TweetUtil.expandedUrl(tweet);
             Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
-            intent.putExtra(SlideActivity.DISPLAY_URL, displayUrl);
+            intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
             itemView.getContext().startActivity(intent);
         });
     }

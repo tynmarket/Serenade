@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
  */
 
 public class SpeakerDeck {
-    private static final String SPEAKER_DECK_URL = "https://speakerdeck.com/";
+    public static final String SPEAKER_DECK_URL = "https://speakerdeck.com/";
     private static final Pattern p = Pattern.compile("<meta property=\"og:image\" content=\"(.+)slide_0.jpg\" />");
 
     private static Retrofit retrofit;
