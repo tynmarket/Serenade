@@ -11,13 +11,16 @@ import com.tynmarket.serenade.fragment.SlideFragment;
  */
 
 public class SlideViewerPagerAdapter extends FragmentStatePagerAdapter {
-    public SlideViewerPagerAdapter(FragmentManager fm) {
+    private String slideUrl;
+
+    public SlideViewerPagerAdapter(FragmentManager fm, String slideUrl) {
         super(fm);
+        this.slideUrl = slideUrl;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return SlideFragment.newInstance(position + 1);
+        return SlideFragment.newInstance(position + 1, slideUrl);
     }
 
     @Override

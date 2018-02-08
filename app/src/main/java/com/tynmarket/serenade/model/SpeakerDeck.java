@@ -15,17 +15,23 @@ import retrofit2.Retrofit;
 
 public class SpeakerDeck {
     public static final String SPEAKER_DECK_URL = "https://speakerdeck.com/";
+
+    private static final Retrofit retrofit = new Retrofit.Builder().baseUrl(SPEAKER_DECK_URL).build();
+
     private static final Pattern p = Pattern.compile("<meta property=\"og:image\" content=\"(.+)slide_0.jpg\" />");
 
-    private static Retrofit retrofit;
-
     public static SpeakerDeckApi getApiClient() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(SPEAKER_DECK_URL)
-                    .build();
-        }
         return retrofit.create(SpeakerDeckApi.class);
+    }
+
+    public static String[] slideHtmlParams(String expandedUrl) {
+        String[] strings = expandedUrl.split("/");
+        int size = strings.length;
+        String[] params = new String[2];
+        params[0] = strings[size - 2];
+        params[1] = strings[size - 1];
+
+        return params;
     }
 
     @Nullable
