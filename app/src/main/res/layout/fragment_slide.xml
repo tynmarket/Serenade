@@ -15,4 +15,6 @@
         android:id="@+id/slide_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <!-- TODO: Back button -->
 </LinearLayout>

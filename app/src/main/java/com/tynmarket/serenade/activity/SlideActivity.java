@@ -27,6 +27,7 @@ public class SlideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: Show loading
         setContentView(R.layout.activity_slide);
 
         Bundle extras = getIntent().getExtras();
@@ -46,6 +47,7 @@ public class SlideActivity extends AppCompatActivity {
                         String slideUrl = SpeakerDeck.slideUrlFromHtml(html);
                         Log.d("Serenade", String.format("slideUrl: %s", slideUrl));
 
+                        // TODO: setContentView again?
                         initViewPager(slideUrl);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -60,8 +62,6 @@ public class SlideActivity extends AppCompatActivity {
                 // TODO: Network error
             }
         });
-
-        // TODO: Show loading
     }
 
     private void initViewPager(String slideUrl) {
