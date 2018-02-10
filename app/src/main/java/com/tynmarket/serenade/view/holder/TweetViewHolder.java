@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,17 +39,30 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final TextView retweetUserName;
     @SuppressWarnings("all")
     private final ImageView retweetByUser;
+
+    // Tweet
     public final ImageView icon;
     public final TextView name;
     public final TextView screenName;
     public final TextView createdAt;
     public final TextView tweetText;
     public final ImageView tweetPhoto;
+
+    // Quoted tweet
     public final TextView quotedName;
     public final TextView quotedScreenName;
     public final TextView quotedTweetText;
     public final ImageView quotedTweetPhoto;
+
+    // Twitter Card Summary
+    public final RelativeLayout cardSummary;
+    public final ImageView cardSummaryImage;
+    public final TextView cardSummaryTitle;
+
+    // Slide
     public final Button slideButton;
+
+    // Action
     public final TextView reply;
     public final TextView retweet;
     private final ImageView fav;
@@ -67,6 +81,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.quotedScreenName = itemView.findViewById(R.id.quoted_screen_name);
         this.quotedTweetText = itemView.findViewById(R.id.quoted_tweet_text);
         this.quotedTweetPhoto = itemView.findViewById(R.id.quoted_tweet_photo);
+        this.cardSummary = itemView.findViewById(R.id.card_summary);
+        this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);
+        this.cardSummaryTitle = itemView.findViewById(R.id.card_summary_title);
         this.slideButton = itemView.findViewById(R.id.slide_button);
         this.reply = itemView.findViewById(R.id.reply);
         this.retweet = itemView.findViewById(R.id.retweet);
@@ -78,6 +95,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // Open tweet
         // TODO: Set listener to quoted status
         setOnTweetTextClickListener();
+        // Open Twitter Card URL
+        setOnCardSummaryClickListener();
         // Open slide
         setOnSlideButtonClickListener();
         // TODO: Show fullscreen image
@@ -158,6 +177,15 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
+            itemView.getContext().startActivity(intent);
+        });
+    }
+
+    private void setOnCardSummaryClickListener() {
+        cardSummary.setOnClickListener(v -> {
+            String url = TweetUtil.url(tweet);
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             itemView.getContext().startActivity(intent);
         });
     }

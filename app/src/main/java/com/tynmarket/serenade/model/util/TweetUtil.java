@@ -42,7 +42,7 @@ public class TweetUtil {
     }
 
     public static boolean containSlide(Tweet tweet) {
-        UrlEntity url = url(tweet);
+        UrlEntity url = urlEntity(tweet);
         if (url != null) {
             return url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
         } else {
@@ -52,7 +52,7 @@ public class TweetUtil {
 
     @Nullable
     public static String expandedUrl(Tweet tweet) {
-        UrlEntity url = url(tweet);
+        UrlEntity url = urlEntity(tweet);
         if (url != null) {
             return url.expandedUrl;
         } else {
@@ -60,7 +60,17 @@ public class TweetUtil {
         }
     }
 
-    public static UrlEntity url(Tweet tweet) {
+    @Nullable
+    public static String url(Tweet tweet) {
+        UrlEntity url = urlEntity(tweet);
+        if (url != null) {
+            return url.url;
+        } else {
+            return null;
+        }
+    }
+
+    public static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {
             return urls.get(0);

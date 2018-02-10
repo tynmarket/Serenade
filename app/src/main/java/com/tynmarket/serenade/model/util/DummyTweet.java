@@ -1,10 +1,13 @@
 package com.tynmarket.serenade.model.util;
 
+import android.support.v4.util.LongSparseArray;
+
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.model.TwitterCard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +31,8 @@ public class DummyTweet {
                 tweet = tweetWithQuotedStatus(i);
             } else if (i == 3) {
                 tweet = tweetWithSlide(i);
+            } else if (i == 4) {
+                tweet = tweetWithCardSummary(i);
             } else {
                 tweet = tweet(i);
             }
@@ -36,8 +41,29 @@ public class DummyTweet {
         return tweets;
     }
 
+    public static LongSparseArray<TwitterCard> twitterCards() {
+        LongSparseArray<TwitterCard> cards = new LongSparseArray<>();
+
+        TwitterCard summary = new TwitterCard(
+                TwitterCard.CARD_SUMMARY,
+                "https://www3.nhk.or.jp/news/img/fb_futa16_600px.png",
+                "放送法規定 憲法に違反せず” 最高裁 改めて判断 | NHKニュース"
+        );
+
+        TwitterCard summaryLarge = new TwitterCard(
+                TwitterCard.CARD_SUMMARY_LARGE,
+                "http://dol.ismcdn.jp/mwimgs/7/c/-/img_7cf57e479808fe68c759edf1cb35160567079.jpg",
+                "三流リーダーは気前がよく、二流リーダーは単なるケチ、一流リーダーは「○○なケチ」である。 | 優れたリーダーはみな小心者である。 | ダイヤモンド・オンライン,"
+        );
+
+        cards.put(5L, summary);
+        cards.put(6L, summaryLarge);
+
+        return cards;
+    }
+
     private static Tweet tweet(int i) {
-        return tweet(i, entities(), null, null, user(i));
+        return tweet(i, mediaEntities(), null, null, user(i));
     }
 
     private static Tweet tweet(int i, TweetEntities entities, Tweet retweetedStatus, Tweet quotedStatus, User user) {
@@ -54,16 +80,20 @@ public class DummyTweet {
 
     private static Tweet tweetWithRetweetedStatus(int i) {
         Tweet retweetedStatus = tweet(i, null, null, null, user(i, "リツイートされた人"));
-        return tweet(i, entities(), retweetedStatus, null, user(i));
+        return tweet(i, mediaEntities(), retweetedStatus, null, user(i));
     }
 
     private static Tweet tweetWithQuotedStatus(int i) {
-        Tweet quotedStatus = tweet(i, entities(), null, null, user(i, "引用リツイートされた人"));
-        return tweet(i, entities(null), null, quotedStatus, user(i));
+        Tweet quotedStatus = tweet(i, mediaEntities(), null, null, user(i, "引用リツイートされた人"));
+        return tweet(i, entities(), null, quotedStatus, user(i));
     }
 
     private static Tweet tweetWithSlide(int i) {
         return tweet(i, slideEntities(), null, null, user(i));
+    }
+
+    private static Tweet tweetWithCardSummary(int i) {
+        return tweet(i, urlEntities(), null, null, user(i));
     }
 
     private static String tweetText(int i) {
@@ -94,13 +124,25 @@ public class DummyTweet {
     }
 
     private static TweetEntities entities() {
-        return new TweetEntities(null, null,
-                media("https://pbs.twimg.com/media/DT00eThV4AAgQSl.jpg"),
-                null, null);
+        return new TweetEntities(null, null, null, null, null);
     }
 
-    private static TweetEntities entities(String mediaUrlHttps) {
-        return new TweetEntities(null, null, media(mediaUrlHttps), null, null);
+    private static TweetEntities mediaEntities() {
+        return new TweetEntities(null, null, media("https://pbs.twimg.com/media/DVolgDHUMAIoU6l.jpg"), null, null);
+    }
+
+    private static TweetEntities slideEntities() {
+        UrlEntity url = new UrlEntity("url", "https://speakerdeck.com/timakin/architecture-and-benefits-of-ab-test-allocation-system",
+                "displayUrl", 0, 1);
+        List<UrlEntity> urls = Arrays.asList(url);
+        return new TweetEntities(urls, null, null, null, null);
+    }
+
+    private static TweetEntities urlEntities() {
+        UrlEntity url = new UrlEntity("https://www3.nhk.or.jp/news/html/20180210/k10011323891000.html", "expandedUrl",
+                "displayUrl", 0, 1);
+        List<UrlEntity> urls = Arrays.asList(url);
+        return new TweetEntities(urls, null, null, null, null);
     }
 
     private static List<MediaEntity> media(String mediaUrlHttps) {
@@ -110,12 +152,5 @@ public class DummyTweet {
                 null, 0, "sourceStatusIdStr",
                 "photo", null, null);
         return Collections.singletonList(entity);
-    }
-
-    private static TweetEntities slideEntities() {
-        UrlEntity url = new UrlEntity("url", "https://speakerdeck.com/timakin/architecture-and-benefits-of-ab-test-allocation-system",
-                "displayUrl", 0, 1);
-        List<UrlEntity> urls = Arrays.asList(url);
-        return new TweetEntities(urls, null, null, null, null);
     }
 }

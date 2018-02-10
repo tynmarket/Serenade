@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- TODO: Set textColor ?android:textColorPrimary or textColorPrimary -->
+
     <!-- TODO: Ripple Effect -->
     <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
     <LinearLayout
@@ -163,13 +165,44 @@
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/slide_button"
+    <RelativeLayout
+        android:id="@+id/card_summary"
         android:layout_below="@+id/quoted_tweet_container"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_icon_and_margin"
+        android:background="@drawable/shape_border">
+
+        <!-- TODO: Corner radius -->
+        <ImageView
+            android:id="@+id/card_summary_image"
+            android:layout_width="@dimen/image_size_summary_image"
+            android:layout_height="@dimen/image_size_summary_image"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/nhk" />
+
+        <TextView
+            android:id="@+id/card_summary_title"
+            android:layout_toEndOf="@+id/card_summary_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_size_summary_image"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/spacing_medium"
+            android:maxLines="2"
+            android:textColor="?android:textColorPrimary"
+            tools:text="summary_title" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/slide_button"
+        android:layout_below="@+id/card_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_icon_and_margin"
+        android:visibility="gone"
         android:text="@string/slide_button" />
 
     <LinearLayout

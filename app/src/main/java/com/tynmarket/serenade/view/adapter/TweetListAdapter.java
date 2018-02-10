@@ -1,7 +1,9 @@
 package com.tynmarket.serenade.view.adapter;
 
 import android.annotation.SuppressLint;
+import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.util.ViewContentLoader;
@@ -26,6 +30,8 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
+    private final LongSparseArray<TwitterCard> cards;
+
     private RequestManager manager;
     private ViewContentLoader textLoader;
     private ViewContentLoader imageLoader;
@@ -38,6 +44,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
+        this.cards = DummyTweet.twitterCards();
     }
 
     @Override
@@ -71,12 +78,15 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         // TODO: Method too long
+        // TODO: Control visibility by using View.GONE
         holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
         Tweet retweetedStatus = tweet.retweetedStatus;
         Tweet quotedStatus = tweet.quotedStatus;
+
+        Log.d("Serenade", String.format("onBindViewHolder: %d", tweet.id));
 
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
@@ -87,6 +97,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Show displayUrl, move to url
         String tweetText;
         String photoUrl = photoUrl(tweet);
+        TwitterCard card = cards.get(tweet.id);
 
         // TODO: split by view type?
         // TODO: Retweet quoted tweet
@@ -105,6 +116,19 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             name = user.name;
             screenName = user.screenName;
             tweetText = tweet.text;
+        }
+
+        manager.load(profileImageUrlHttps).into(holder.icon);
+        setNameAndText(holder, name, screenName, tweetText);
+        holder.createdAt.setText(tweet.createdAt);
+
+        // Image
+        if (photoUrl != null) {
+            imageLoader.loadImage(holder.tweetPhoto, photoUrl, tweetPhotoHeight,
+                    null, tweetPhotoTopMargin, null, null);
+        } else {
+            imageLoader.unloadImage(holder.tweetPhoto,
+                    null, 0, null, null);
         }
 
         // TODO: split by view type?
@@ -133,17 +157,15 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
                     null, 0, null, null);
         }
 
-        manager.load(profileImageUrlHttps).into(holder.icon);
-        setNameAndText(holder, name, screenName, tweetText);
-        holder.createdAt.setText(tweet.createdAt);
-
-        // Image
-        if (photoUrl != null) {
-            imageLoader.loadImage(holder.tweetPhoto, photoUrl, tweetPhotoHeight,
-                    null, tweetPhotoTopMargin, null, null);
+        // Twitter Card Summary
+        if (card != null && card.isSummary()) {
+            manager.load(card.image).into(holder.cardSummaryImage);
+            holder.cardSummaryTitle.setText(card.title);
+            holder.cardSummary.setVisibility(View.VISIBLE);
         } else {
-            imageLoader.unloadImage(holder.tweetPhoto,
-                    null, 0, null, null);
+            holder.cardSummaryImage.setImageDrawable(null);
+            holder.cardSummaryTitle.setText(null);
+            holder.cardSummary.setVisibility(View.GONE);
         }
 
         // Slide button
