@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 TweetList.loadTweets(1, true, null);
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
+                TweetList.loadTwitterCards(1);
             }
         }
     }

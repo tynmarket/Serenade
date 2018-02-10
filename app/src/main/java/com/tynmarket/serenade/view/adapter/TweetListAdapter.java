@@ -14,7 +14,6 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
-import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.util.ViewContentLoader;
@@ -30,7 +29,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
-    private final LongSparseArray<TwitterCard> cards;
+    private LongSparseArray<TwitterCard> cards;
 
     private RequestManager manager;
     private ViewContentLoader textLoader;
@@ -44,7 +43,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
-        this.cards = DummyTweet.twitterCards();
+        this.cards = new LongSparseArray<>();
     }
 
     @Override
@@ -199,6 +198,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public void replaceTweet(int position, Tweet tweet) {
         tweets.set(position, tweet);
+    }
+
+    public void refreshCards(LongSparseArray<TwitterCard> cards) {
+        this.cards = cards;
     }
 
     private String get200xProfileImageUrlHttps(User user) {

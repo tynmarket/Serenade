@@ -16,6 +16,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
+import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -119,6 +120,13 @@ public class TweetListFragment extends Fragment {
             scrollListener.mRefreshing = false;
 
             hideRefreshIndicator();
+        }
+    }
+
+    @Subscribe
+    public void onLoadTwitterCardsEvent(LoadTwitterCardsEvent event) {
+        if (event.sectionNumber == sectionNumber) {
+            adapter.refreshCards(event.cards);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.tynmarket.serenade.model;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.twitter.sdk.android.core.Callback;
@@ -12,7 +14,9 @@ import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
+import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -40,7 +44,7 @@ public class TweetList {
                 Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
                 TweetUtil.debugTimeline(result.data);
 
-                EventBus.getDefault().post(new LoadTweetListEvent(sectionNumber, result.data, refresh));
+                eventBus().post(new LoadTweetListEvent(sectionNumber, result.data, refresh));
             }
 
             @Override
@@ -48,9 +52,34 @@ public class TweetList {
                 // TODO: Late limit(Status 429)
                 Log.d("Serenade", String.format("loadTweets failure: %d", sectionNumber));
 
-                EventBus.getDefault().post(new LoadFailureTweetListEvent(sectionNumber));
+                eventBus().post(new LoadFailureTweetListEvent(sectionNumber));
             }
         });
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public static void loadTwitterCards(int sectionNumber) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                eventBus().post(new LoadTwitterCardsEvent(sectionNumber, DummyTweet.twitterCards()));
+            }
+        }.execute();
+    }
+
+
+    private static EventBus eventBus() {
+        return EventBus.getDefault();
     }
 
     private static Call<List<Tweet>> callApi(int sectionNumber, Long maxId) {
