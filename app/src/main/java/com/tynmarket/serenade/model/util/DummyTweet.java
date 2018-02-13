@@ -1,7 +1,5 @@
 package com.tynmarket.serenade.model.util;
 
-import android.support.v4.util.LongSparseArray;
-
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
@@ -12,6 +10,7 @@ import com.tynmarket.serenade.model.TwitterCard;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,6 +18,8 @@ import java.util.List;
  */
 
 public class DummyTweet {
+    private static final String CARD_SUMMARY_URL = "https://www3.nhk.or.jp/news/html/20180210/k10011323751000.html";
+
     public static ArrayList<Tweet> tweets() {
         ArrayList<Tweet> tweets = new ArrayList<>();
 
@@ -41,8 +42,8 @@ public class DummyTweet {
         return tweets;
     }
 
-    public static LongSparseArray<TwitterCard> twitterCards() {
-        LongSparseArray<TwitterCard> cards = new LongSparseArray<>();
+    public static HashMap<String, TwitterCard> twitterCards() {
+        HashMap<String, TwitterCard> cards = new HashMap<>();
 
         TwitterCard summary = new TwitterCard(
                 TwitterCard.CARD_SUMMARY,
@@ -56,8 +57,8 @@ public class DummyTweet {
                 "三流リーダーは気前がよく、二流リーダーは単なるケチ、一流リーダーは「○○なケチ」である。 | 優れたリーダーはみな小心者である。 | ダイヤモンド・オンライン,"
         );
 
-        cards.put(5L, summary);
-        cards.put(6L, summaryLarge);
+        cards.put(CARD_SUMMARY_URL, summary);
+        cards.put("http://diamond.jp/articles/-/155475", summaryLarge);
 
         return cards;
     }
@@ -139,7 +140,7 @@ public class DummyTweet {
     }
 
     private static TweetEntities urlEntities() {
-        UrlEntity url = new UrlEntity("https://www3.nhk.or.jp/news/html/20180210/k10011323891000.html", "expandedUrl",
+        UrlEntity url = new UrlEntity("url", CARD_SUMMARY_URL,
                 "displayUrl", 0, 1);
         List<UrlEntity> urls = Arrays.asList(url);
         return new TweetEntities(urls, null, null, null, null);

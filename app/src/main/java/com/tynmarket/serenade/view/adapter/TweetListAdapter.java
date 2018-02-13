@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.view.adapter;
 
 import android.annotation.SuppressLint;
-import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +18,7 @@ import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.util.ViewContentLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
@@ -29,7 +29,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
-    private LongSparseArray<TwitterCard> cards;
+    private HashMap<String, TwitterCard> cards;
 
     private RequestManager manager;
     private ViewContentLoader textLoader;
@@ -43,7 +43,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
-        this.cards = new LongSparseArray<>();
+        this.cards = new HashMap<>();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Show displayUrl, move to url
         String tweetText;
         String photoUrl = photoUrl(tweet);
-        TwitterCard card = cards.get(tweet.id);
+        TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         // TODO: split by view type?
         // TODO: Retweet quoted tweet
@@ -201,7 +201,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         tweets.set(position, tweet);
     }
 
-    public void refreshCards(LongSparseArray<TwitterCard> cards) {
+    public void refreshCards(HashMap<String, TwitterCard> cards) {
         this.cards = cards;
     }
 

@@ -185,7 +185,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnCardSummaryClickListener() {
         cardSummary.setOnClickListener(v -> {
-            String url = TweetUtil.url(tweet);
+            String url = TweetUtil.expandedUrl(tweet);
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             itemView.getContext().startActivity(intent);
