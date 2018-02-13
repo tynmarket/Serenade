@@ -36,6 +36,8 @@ public class TweetListPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return "いいね";
             case 2:
+                // TODO: mention timeline?
+                // TODO: Background fetch logic
                 return "未定";
         }
         return null;

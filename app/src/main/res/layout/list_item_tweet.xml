@@ -87,6 +87,8 @@
         <!-- TODO: show image, RT, link, hash tag -->
         <!-- TODO: Remove underline from links -->
         <!-- TODO: Widen between lines -->
+        <!-- TODO: Effect when click a link -->
+        <!-- TODO: Wide clickable link area -->
         <TextView
             android:id="@+id/tweet_text"
             android:layout_below="@+id/nameContainer"

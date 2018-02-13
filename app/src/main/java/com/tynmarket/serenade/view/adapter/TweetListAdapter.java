@@ -168,6 +168,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         // Slide button
+        // TODO: SlideShare
         if (TweetUtil.containSlide(tweet)) {
             holder.slideButton.setVisibility(View.VISIBLE);
         } else {
