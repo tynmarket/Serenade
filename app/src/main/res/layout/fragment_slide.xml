@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- TODO: Full screen when landscape view -->
+    <!-- TODO: Full screen with landscape view -->
+    <!-- TODO: Jump 5 or 10 pages -->
+    <!-- TODO: Horizontal progress bar -->
 
     <!-- TODO: Page number -->
     <TextView

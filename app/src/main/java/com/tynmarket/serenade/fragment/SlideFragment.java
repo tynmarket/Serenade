@@ -45,6 +45,8 @@ public class SlideFragment extends Fragment {
 
         String url = String.format("%sslide_%d.jpg", slideUrl, sectionNumber - 1);
         // TODO: Retry on failure
+        // TODO: Error handling, indicate last page
+        // https://takeshiyako.blogspot.jp/2015/08/android-glide.html
         Glide.with(this).load(url).into(slideImage);
 
         return rootView;
