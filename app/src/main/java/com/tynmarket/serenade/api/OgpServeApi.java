@@ -2,7 +2,7 @@ package com.tynmarket.serenade.api;
 
 import com.tynmarket.serenade.model.TwitterCard;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,5 +15,5 @@ import retrofit2.http.Query;
 public interface OgpServeApi {
     // TODO: /twitter_cards
     @GET("/")
-    Call<Map<String, TwitterCard>> twitterCards(@Query("urls[]") String... urls);
+    Call<HashMap<String, TwitterCard>> twitterCards(@Query("urls[]") String... urls);
 }
