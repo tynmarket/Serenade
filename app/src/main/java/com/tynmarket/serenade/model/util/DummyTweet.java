@@ -18,7 +18,8 @@ import java.util.List;
  */
 
 public class DummyTweet {
-    private static final String CARD_SUMMARY_URL = "https://www3.nhk.or.jp/news/html/20180210/k10011323751000.html";
+    public static final String CARD_SUMMARY_URL = "https://www3.nhk.or.jp/news/html/20180210/k10011323751000.html";
+    public static final String CARD_SUMMARY_LARGE_URL = "http://diamond.jp/articles/-/155475";
 
     public static ArrayList<Tweet> tweets() {
         ArrayList<Tweet> tweets = new ArrayList<>();
@@ -42,6 +43,7 @@ public class DummyTweet {
         return tweets;
     }
 
+    @SuppressWarnings("all")
     public static HashMap<String, TwitterCard> twitterCards() {
         HashMap<String, TwitterCard> cards = new HashMap<>();
 
@@ -58,7 +60,7 @@ public class DummyTweet {
         );
 
         cards.put(CARD_SUMMARY_URL, summary);
-        cards.put("http://diamond.jp/articles/-/155475", summaryLarge);
+        cards.put(CARD_SUMMARY_LARGE_URL, summaryLarge);
 
         return cards;
     }

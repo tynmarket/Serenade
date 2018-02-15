@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.model;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.twitter.sdk.android.core.Callback;
@@ -12,6 +11,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.api.OgpServeApi;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
@@ -21,9 +21,13 @@ import com.tynmarket.serenade.model.util.TweetUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by tyn-iMarket on 2018/02/01.
@@ -31,6 +35,13 @@ import retrofit2.Call;
 
 public class TweetList {
     private static final int ITEM_COUNT = 50;
+    private static final String OGP_SERVE_URL = "http://35.230.36.246:8080/";
+
+    private static final Retrofit retrofit = new Retrofit
+            .Builder()
+            .baseUrl(OGP_SERVE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     // TODO: Caching
     public static void loadTweets(int sectionNumber, boolean refresh, Long maxId) {
@@ -59,22 +70,24 @@ public class TweetList {
 
     @SuppressLint("StaticFieldLeak")
     public static void loadTwitterCards(int sectionNumber) {
-        new AsyncTask<Void, Void, Void>() {
+        Call<HashMap<String, TwitterCard>> call = ogpServeApi().twitterCards(DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_URL);
+
+        call.enqueue(new retrofit2.Callback<HashMap<String, TwitterCard>>() {
             @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            public void onResponse(Call<HashMap<String, TwitterCard>> call, Response<HashMap<String, TwitterCard>> response) {
+                if (response.isSuccessful()) {
+                    eventBus().post(new LoadTwitterCardsEvent(sectionNumber, response.body()));
+                } else {
+                    // TODO: Notify error
+                    Log.d("Serenade", String.format("twitterCards response error: %d", sectionNumber));
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                eventBus().post(new LoadTwitterCardsEvent(sectionNumber, DummyTweet.twitterCards()));
+            public void onFailure(Call<HashMap<String, TwitterCard>> call, Throwable t) {
+                Log.d("Serenade", "twitterCards: failure");
             }
-        }.execute();
+        });
     }
 
 
@@ -102,5 +115,9 @@ public class TweetList {
                 break;
         }
         return call;
+    }
+
+    private static OgpServeApi ogpServeApi() {
+        return retrofit.create(OgpServeApi.class);
     }
 }

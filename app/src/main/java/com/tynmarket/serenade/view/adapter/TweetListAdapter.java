@@ -20,6 +20,7 @@ import com.tynmarket.serenade.view.util.ViewContentLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
@@ -29,7 +30,7 @@ import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
-    private HashMap<String, TwitterCard> cards;
+    private Map<String, TwitterCard> cards;
 
     private RequestManager manager;
     private ViewContentLoader textLoader;
@@ -201,7 +202,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         tweets.set(position, tweet);
     }
 
-    public void refreshCards(HashMap<String, TwitterCard> cards) {
+    public void refreshCards(Map<String, TwitterCard> cards) {
         this.cards = cards;
     }
 
