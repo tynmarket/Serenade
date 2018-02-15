@@ -45,7 +45,7 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
-    compile 'org.greenrobot:eventbus:3.1.1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     testCompile 'junit:junit:4.12'
 }
