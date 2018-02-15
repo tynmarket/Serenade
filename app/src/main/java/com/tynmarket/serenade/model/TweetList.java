@@ -45,6 +45,7 @@ public class TweetList {
 
     // TODO: Caching
     public static void loadTweets(int sectionNumber, boolean refresh, Long maxId) {
+        // TODO: Progress bar displayed infinitely?
         EventBus.getDefault().post(new StartLoadTweetListEvent(sectionNumber));
         Call<List<Tweet>> call = callApi(sectionNumber, maxId);
 
