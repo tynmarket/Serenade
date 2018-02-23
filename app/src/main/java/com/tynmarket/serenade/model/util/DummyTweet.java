@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class DummyTweet {
-    public static final String CARD_SUMMARY_URL = "https://www3.nhk.or.jp/news/html/20180210/k10011323751000.html";
+    public static final String CARD_SUMMARY_URL = "https://saruwakakun.com/life/recipe";
     public static final String CARD_SUMMARY_LARGE_URL = "http://diamond.jp/articles/-/155475";
 
     public static ArrayList<Tweet> tweets() {
@@ -49,8 +49,8 @@ public class DummyTweet {
 
         TwitterCard summary = new TwitterCard(
                 TwitterCard.CARD_SUMMARY,
-                "https://www3.nhk.or.jp/news/img/fb_futa16_600px.png",
-                "放送法規定 憲法に違反せず” 最高裁 改めて判断 | NHKニュース"
+                "https://saruwakakun.com/wp-content/uploads/2017/05/nopowerban.png",
+                "力尽きたときのためのレシピ 〜超簡単に作れるズボラ飯〜"
         );
 
         TwitterCard summaryLarge = new TwitterCard(

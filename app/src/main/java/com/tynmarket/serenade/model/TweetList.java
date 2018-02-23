@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TweetList {
     private static final int ITEM_COUNT = 50;
-    private static final String OGP_SERVE_URL = "http://35.230.36.246:8080/";
+    private static final String OGP_SERVE_URL = "http://35.230.21.63:8080/";
 
     private static final Retrofit retrofit = new Retrofit
             .Builder()
@@ -72,6 +72,7 @@ public class TweetList {
     @SuppressLint("StaticFieldLeak")
     public static void loadTwitterCards(int sectionNumber) {
         Call<HashMap<String, TwitterCard>> call = ogpServeApi().twitterCards(DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_URL);
+        Log.d("Serenade", String.format("url: %s", call.request().url()));
 
         call.enqueue(new retrofit2.Callback<HashMap<String, TwitterCard>>() {
             @Override
