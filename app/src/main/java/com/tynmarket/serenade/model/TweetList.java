@@ -11,6 +11,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.api.OgpServeApi;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
@@ -35,11 +36,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TweetList {
     private static final int ITEM_COUNT = 50;
-    private static final String OGP_SERVE_URL = "http://35.230.21.63:8080/";
+    private static final String OGPSERVE_URL = BuildConfig.OGPSERVE_URL;
 
     private static final Retrofit retrofit = new Retrofit
             .Builder()
-            .baseUrl(OGP_SERVE_URL)
+            .baseUrl(OGPSERVE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 

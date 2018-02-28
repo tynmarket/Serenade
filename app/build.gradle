@@ -15,7 +15,7 @@ android {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField "String", "API_KEY", "\"${properties.getProperty("apiKey")}\""
         buildConfigField "String", "API_SECRET", "\"${properties.getProperty("apiSecret")}\""
-
+        buildConfigField "String", "OGPSERVE_URL", "\"${properties.getProperty("ogpserveUrl")}\""
     }
     buildTypes {
         release {
