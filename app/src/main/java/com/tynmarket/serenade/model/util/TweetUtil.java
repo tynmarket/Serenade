@@ -60,16 +60,6 @@ public class TweetUtil {
         }
     }
 
-    @Nullable
-    public static String url(Tweet tweet) {
-        UrlEntity url = urlEntity(tweet);
-        if (url != null) {
-            return url.url;
-        } else {
-            return null;
-        }
-    }
-
     public static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {

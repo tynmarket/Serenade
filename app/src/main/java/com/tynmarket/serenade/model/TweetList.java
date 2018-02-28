@@ -22,6 +22,7 @@ import com.tynmarket.serenade.model.util.TweetUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +58,9 @@ public class TweetList {
                 Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
                 TweetUtil.debugTimeline(result.data);
 
+                // Request Twitter Cards to ogpserve
+                loadTwitterCards(sectionNumber, result.data);
+
                 eventBus().post(new LoadTweetListEvent(sectionNumber, result.data, refresh));
             }
 
@@ -72,7 +76,17 @@ public class TweetList {
 
     @SuppressLint("StaticFieldLeak")
     public static void loadTwitterCards(int sectionNumber) {
-        Call<HashMap<String, TwitterCard>> call = ogpServeApi().twitterCards(DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_URL);
+        String[] urls = {DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_URL};
+        loadTwitterCards(sectionNumber, urls);
+    }
+
+    private static void loadTwitterCards(int sectionNumber, List<Tweet> tweets) {
+        List<String> urls = urlsFromTweets(tweets);
+        loadTwitterCards(sectionNumber, urls.toArray(new String[urls.size()]));
+    }
+
+    private static void loadTwitterCards(int sectionNumber, String[] urls) {
+        Call<HashMap<String, TwitterCard>> call = ogpServeApi().twitterCards(urls);
         Log.d("Serenade", String.format("url: %s", call.request().url()));
 
         call.enqueue(new retrofit2.Callback<HashMap<String, TwitterCard>>() {
@@ -92,7 +106,6 @@ public class TweetList {
             }
         });
     }
-
 
     private static EventBus eventBus() {
         return EventBus.getDefault();
@@ -122,5 +135,17 @@ public class TweetList {
 
     private static OgpServeApi ogpServeApi() {
         return retrofit.create(OgpServeApi.class);
+    }
+
+    private static ArrayList<String> urlsFromTweets(List<Tweet> tweets) {
+        ArrayList<String> urls = new ArrayList<>();
+
+        for (Tweet tweet : tweets) {
+            String expandedUrl = TweetUtil.expandedUrl(tweet);
+            if (expandedUrl != null) {
+                urls.add(expandedUrl);
+            }
+        }
+        return urls;
     }
 }

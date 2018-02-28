@@ -2,7 +2,6 @@ package com.tynmarket.serenade.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +84,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         User user = tweet.user;
         Tweet retweetedStatus = tweet.retweetedStatus;
         Tweet quotedStatus = tweet.quotedStatus;
-
-        Log.d("Serenade", String.format("onBindViewHolder: %d", tweet.id));
 
         holder.tweet = tweet;
         holder.setFavorited(tweet.favorited);
