@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.model.util;
 
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -55,6 +56,17 @@ public class TweetUtil {
         UrlEntity url = urlEntity(tweet);
         if (url != null) {
             return url.expandedUrl;
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
+    public static String expandedUrlHost(Tweet tweet) {
+        String expandedUrl = expandedUrl(tweet);
+        if (expandedUrl != null) {
+            Uri uri = Uri.parse(expandedUrl);
+            return uri.getHost();
         } else {
             return null;
         }

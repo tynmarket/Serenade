@@ -80,6 +80,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Control visibility by using View.GONE
         holder.setAdapter(this);
 
+        // TODO: Make Tweet wrapper class to use utility method
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
         Tweet retweetedStatus = tweet.retweetedStatus;
@@ -158,10 +159,12 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         if (card != null && card.isSummary()) {
             manager.load(card.image).into(holder.cardSummaryImage);
             holder.cardSummaryTitle.setText(card.title);
+            holder.cardSummaryHost.setText(TweetUtil.expandedUrlHost(tweet));
             holder.cardSummary.setVisibility(View.VISIBLE);
         } else {
             holder.cardSummaryImage.setImageDrawable(null);
             holder.cardSummaryTitle.setText(null);
+            holder.cardSummaryHost.setText(null);
             holder.cardSummary.setVisibility(View.GONE);
         }
 

@@ -167,6 +167,7 @@
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
+    <!-- TODO: Larger size -->
     <RelativeLayout
         android:id="@+id/card_summary"
         android:layout_below="@+id/quoted_tweet_container"
@@ -185,16 +186,31 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/nhk" />
 
-        <TextView
-            android:id="@+id/card_summary_title"
-            android:layout_toEndOf="@+id/card_summary_image"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/image_size_summary_image"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/spacing_medium"
-            android:maxLines="2"
-            android:textColor="?android:textColorPrimary"
-            tools:text="summary_title" />
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/card_summary_image"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/card_summary_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_medium"
+                android:maxLines="2"
+                android:textColor="?android:textColorPrimary"
+                tools:text="summary_title" />
+
+            <TextView
+                android:id="@+id/card_summary_host"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/card_summary_title"
+                android:paddingStart="@dimen/spacing_medium"
+                android:textSize="@dimen/text_size_small"
+                tools:text="summary_host" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <Button
