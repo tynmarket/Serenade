@@ -72,6 +72,28 @@ public class TweetUtil {
         }
     }
 
+    @Nullable
+    public static String expandedUrlDomain(Tweet tweet) {
+        String expandedUrl = expandedUrl(tweet);
+        if (expandedUrl != null) {
+            Uri uri = Uri.parse(expandedUrl);
+            String[] parts = uri.getHost().split("\\.");
+            int length = parts[0].length();
+
+            if (parts[0].equals("www")) {
+                return parts[1];
+            } else if (length == 1 || length == 2) {
+                // b.hatena.ne.jp
+                // jp.routers.com
+                return parts[1];
+            } else {
+                return parts[0];
+            }
+        } else {
+            return null;
+        }
+    }
+
     public static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {

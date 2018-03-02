@@ -76,7 +76,7 @@ public class TweetList {
 
     @SuppressLint("StaticFieldLeak")
     public static void loadTwitterCards(int sectionNumber) {
-        String[] urls = {DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_URL};
+        String[] urls = {DummyTweet.CARD_SUMMARY_URL, DummyTweet.CARD_SUMMARY_LARGE_IMAGE_URL};
         loadTwitterCards(sectionNumber, urls);
     }
 

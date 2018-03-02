@@ -156,16 +156,26 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         // Twitter Card Summary
-        if (card != null && card.isSummary()) {
-            manager.load(card.image).into(holder.cardSummaryImage);
+        if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
             holder.cardSummaryTitle.setText(card.title);
             holder.cardSummaryHost.setText(TweetUtil.expandedUrlHost(tweet));
+
+            if (card.isSummary()) {
+                holder.cardSummaryLargeImageText.setVisibility(View.GONE);
+                manager.load(card.image).into(holder.cardSummaryImage);
+            } else {
+                String domain = TweetUtil.expandedUrlDomain(tweet);
+                holder.cardSummaryLargeImageText.setText(domain.toUpperCase());
+                holder.cardSummaryLargeImageText.setVisibility(View.VISIBLE);
+            }
+
             holder.cardSummary.setVisibility(View.VISIBLE);
         } else {
+            holder.cardSummary.setVisibility(View.GONE);
             holder.cardSummaryImage.setImageDrawable(null);
+            holder.cardSummaryLargeImageText.setText(null);
             holder.cardSummaryTitle.setText(null);
             holder.cardSummaryHost.setText(null);
-            holder.cardSummary.setVisibility(View.GONE);
         }
 
         // Slide button

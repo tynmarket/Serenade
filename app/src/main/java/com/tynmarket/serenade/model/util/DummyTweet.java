@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DummyTweet {
     public static final String CARD_SUMMARY_URL = "https://saruwakakun.com/life/recipe";
-    public static final String CARD_SUMMARY_LARGE_URL = "http://diamond.jp/articles/-/155475";
+    public static final String CARD_SUMMARY_LARGE_IMAGE_URL = "http://diamond.jp/articles/-/155475";
 
     public static ArrayList<Tweet> tweets() {
         ArrayList<Tweet> tweets = new ArrayList<>();
@@ -35,6 +35,8 @@ public class DummyTweet {
                 tweet = tweetWithSlide(i);
             } else if (i == 4) {
                 tweet = tweetWithCardSummary(i);
+            } else if (i == 5) {
+                tweet = tweetWithCardSummaryLarge(i);
             } else {
                 tweet = tweet(i);
             }
@@ -54,13 +56,13 @@ public class DummyTweet {
         );
 
         TwitterCard summaryLarge = new TwitterCard(
-                TwitterCard.CARD_SUMMARY_LARGE,
+                TwitterCard.CARD_SUMMARY_LARGE_Image,
                 "http://dol.ismcdn.jp/mwimgs/7/c/-/img_7cf57e479808fe68c759edf1cb35160567079.jpg",
                 "三流リーダーは気前がよく、二流リーダーは単なるケチ、一流リーダーは「○○なケチ」である。 | 優れたリーダーはみな小心者である。 | ダイヤモンド・オンライン,"
         );
 
         cards.put(CARD_SUMMARY_URL, summary);
-        cards.put(CARD_SUMMARY_LARGE_URL, summaryLarge);
+        cards.put(CARD_SUMMARY_LARGE_IMAGE_URL, summaryLarge);
 
         return cards;
     }
@@ -96,7 +98,11 @@ public class DummyTweet {
     }
 
     private static Tweet tweetWithCardSummary(int i) {
-        return tweet(i, urlEntities(), null, null, user(i));
+        return tweet(i, cardSummaryUrlEntities(), null, null, user(i));
+    }
+
+    private static Tweet tweetWithCardSummaryLarge(int i) {
+        return tweet(i, cardSummaryLargeImageUrlEntities(), null, null, user(i));
     }
 
     private static String tweetText(int i) {
@@ -141,8 +147,15 @@ public class DummyTweet {
         return new TweetEntities(urls, null, null, null, null);
     }
 
-    private static TweetEntities urlEntities() {
+    private static TweetEntities cardSummaryUrlEntities() {
         UrlEntity url = new UrlEntity("url", CARD_SUMMARY_URL,
+                "displayUrl", 0, 1);
+        List<UrlEntity> urls = Arrays.asList(url);
+        return new TweetEntities(urls, null, null, null, null);
+    }
+
+    private static TweetEntities cardSummaryLargeImageUrlEntities() {
+        UrlEntity url = new UrlEntity("url", CARD_SUMMARY_LARGE_IMAGE_URL,
                 "displayUrl", 0, 1);
         List<UrlEntity> urls = Arrays.asList(url);
         return new TweetEntities(urls, null, null, null, null);

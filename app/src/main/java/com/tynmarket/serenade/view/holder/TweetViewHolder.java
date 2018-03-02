@@ -57,6 +57,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     // Twitter Card Summary
     public final RelativeLayout cardSummary;
     public final ImageView cardSummaryImage;
+    public final TextView cardSummaryLargeImageText;
     public final TextView cardSummaryTitle;
     public final TextView cardSummaryHost;
 
@@ -84,6 +85,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.quotedTweetPhoto = itemView.findViewById(R.id.quoted_tweet_photo);
         this.cardSummary = itemView.findViewById(R.id.card_summary);
         this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);
+        this.cardSummaryLargeImageText = itemView.findViewById(R.id.card_summary_large_image_text);
         this.cardSummaryTitle = itemView.findViewById(R.id.card_summary_title);
         this.cardSummaryHost = itemView.findViewById(R.id.card_summary_host);
         this.slideButton = itemView.findViewById(R.id.slide_button);

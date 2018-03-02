@@ -186,6 +186,15 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/nhk" />
 
+        <TextView
+            android:id="@+id/card_summary_large_image_text"
+            android:layout_width="@dimen/image_size_summary_image"
+            android:layout_height="@dimen/image_size_summary_image"
+            android:gravity="center"
+            android:background="@color/white_smoke"
+            android:textColor="@color/silver"
+            tools:text="summary_large_image_text" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
