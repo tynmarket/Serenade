@@ -43,4 +43,9 @@
         android:layout_marginTop="@dimen/spacing_large"
         tools:text="488フォロー  1,958フォロワー" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:background="@color/tw__light_gray" />
 </LinearLayout>

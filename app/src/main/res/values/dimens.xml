@@ -16,6 +16,7 @@
     <dimen name="image_height_tweet_photo">190dp</dimen>
     <dimen name="image_size_summary_image">80dp</dimen>
 
+    <!-- TODO: Rename x to l (larger) and l to s (smaller) -->
     <dimen name="text_size_2l_small">12sp</dimen>
     <dimen name="text_size_l_small">13sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
@@ -29,4 +30,5 @@
     <dimen name="spacing_l_medium">6dp</dimen>
     <dimen name="spacing_medium">8dp</dimen>
     <dimen name="spacing_large">12dp</dimen>
+    <dimen name="spacing_x_large">14dp</dimen>
 </resources>
