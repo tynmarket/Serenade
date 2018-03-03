@@ -128,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
             // TODO: Transition
             startActivity(intent);
         });
+
+        // Open post tweet
+        findViewById(R.id.profile_tweet_link).setOnClickListener(v -> {
+            Uri uri = Uri.parse("https://twitter.com/intent/tweet");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            // TODO: startActivityForResult
+            startActivity(intent);
+        });
     }
 
     private void initTwitterConfig() {

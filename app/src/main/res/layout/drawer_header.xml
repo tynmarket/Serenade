@@ -10,6 +10,8 @@
     android:layout_marginEnd="@dimen/drawer_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin">
 
+    <!-- TODO: Adjust margin vertical -->
+
     <!-- icon -->
     <ImageView
         android:id="@+id/profile_icon"
@@ -67,4 +69,18 @@
         android:textColor="?android:textColorPrimary"
         android:text="@string/profile_profile_link"
         tools:text="プロフィール" />
+
+    <!-- TODO: Ripple effect -->
+    <TextView
+        android:id="@+id/profile_tweet_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:drawableStart="@drawable/twitter"
+        android:drawablePadding="@dimen/spacing_x_large"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/profile_tweet_link"
+        tools:text="ツイートする" />
+
 </LinearLayout>
