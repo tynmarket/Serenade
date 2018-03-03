@@ -22,6 +22,7 @@ public class ProfileLoader {
         TextView name = activity.findViewById(R.id.profile_name);
         TextView screenName = activity.findViewById(R.id.profile_screen_name);
         TextView followAndFollower = activity.findViewById(R.id.profile_follow_and_follower);
+        //TextView profileLink = activity.findViewById(R.id.profile_profile_link);
 
         // icon
         RequestManager manager = Glide.with(activity);

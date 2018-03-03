@@ -10,12 +10,14 @@
     android:layout_marginEnd="@dimen/drawer_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin">
 
+    <!-- icon -->
     <ImageView
         android:id="@+id/profile_icon"
         android:layout_width="@dimen/icon_size_list_item_tweet"
         android:layout_height="@dimen/icon_size_list_item_tweet"
         app:srcCompat="@drawable/default_profile" />
 
+    <!-- name -->
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
@@ -27,6 +29,7 @@
         android:textColor="?android:textColorPrimary"
         tools:text="name" />
 
+    <!-- screen name -->
     <TextView
         android:id="@+id/profile_screen_name"
         android:layout_width="wrap_content"
@@ -36,6 +39,7 @@
         android:textSize="@dimen/text_size_l_small"
         tools:text="screen_name" />
 
+    <!-- follow and follower -->
     <TextView
         android:id="@+id/profile_follow_and_follower"
         android:layout_width="wrap_content"
@@ -48,4 +52,18 @@
         android:layout_height="1px"
         android:layout_marginTop="@dimen/spacing_x_large"
         android:background="@color/tw__light_gray" />
+
+    <!-- profile -->
+    <!-- TODO: Make drawable size larger -->
+    <TextView
+        android:id="@+id/profile_profile_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:drawableStart="@drawable/profile"
+        android:drawablePadding="@dimen/spacing_x_large"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/profile_profile_link"
+        tools:text="プロフィール" />
 </LinearLayout>

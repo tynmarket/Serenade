@@ -3,4 +3,5 @@
     <string name="app_name">Serenade</string>
     <string name="action_settings">設定</string>
     <string name="slide_button">スライドを開く</string>
+    <string name="profile_profile_link">プロフィール</string>
 </resources>
