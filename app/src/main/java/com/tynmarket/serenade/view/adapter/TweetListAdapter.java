@@ -13,6 +13,7 @@ import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
+import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.util.ViewContentLoader;
 
@@ -103,14 +104,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         if (retweetedStatus != null) {
             textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
                     null, spacingSmall, null, spacingSmall);
-            profileImageUrlHttps = get200xProfileImageUrlHttps(retweetedStatus.user);
+            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(retweetedStatus.user);
             name = retweetedStatus.user.name;
             screenName = retweetedStatus.user.screenName;
             tweetText = retweetedStatus.text;
         } else {
             textLoader.unsetText(holder.retweetUserName,
                     null, spacingLarge, null, 0);
-            profileImageUrlHttps = get200xProfileImageUrlHttps(user);
+            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
             name = user.name;
             screenName = user.screenName;
             tweetText = tweet.text;
@@ -214,10 +215,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public void refreshCards(Map<String, TwitterCard> cards) {
         this.cards = cards;
-    }
-
-    private String get200xProfileImageUrlHttps(User user) {
-        return user.profileImageUrlHttps.replace("_normal", "_200x200");
     }
 
     private void setNameAndText(TweetViewHolder holder, String name, String screenName, String tweetText) {

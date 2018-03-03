@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/drawer_horizontal_margin"
+    android:layout_marginEnd="@dimen/drawer_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+    <ImageView
+        android:id="@+id/profile_icon"
+        android:layout_width="@dimen/icon_size_list_item_tweet"
+        android:layout_height="@dimen/icon_size_list_item_tweet"
+        app:srcCompat="@drawable/default_profile" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:maxLines="1"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:textColor="?android:textColorPrimary"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/profile_screen_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_l_small"
+        android:maxLines="1"
+        android:textSize="@dimen/text_size_l_small"
+        tools:text="screen_name" />
 
 </LinearLayout>

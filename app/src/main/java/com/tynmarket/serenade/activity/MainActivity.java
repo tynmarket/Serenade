@@ -18,8 +18,14 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.event.LoadUserEvent;
+import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
+import com.tynmarket.serenade.view.util.ProfileLoader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN = 1001;
@@ -66,11 +72,25 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // TODO: FIX unable to load
                 TweetList.loadTweets(1, true, null);
+                LoginUser.loadUser();
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
                 TweetList.loadTwitterCards(1);
+                LoginUser.loadUser();
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override
@@ -93,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Subscribe
+    public void onLoadUserEvent(LoadUserEvent event) {
+        ProfileLoader.loadProfile(this, event.user);
     }
 
     private void initTwitterConfig() {
