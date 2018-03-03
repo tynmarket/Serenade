@@ -1,6 +1,7 @@
 package com.tynmarket.serenade.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -21,6 +22,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
+import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
 import com.tynmarket.serenade.view.util.ProfileLoader;
 
@@ -118,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onLoadUserEvent(LoadUserEvent event) {
         ProfileLoader.loadProfile(this, event.user);
+
+        // Open profile
+        findViewById(R.id.profile_profile_link).setOnClickListener(v -> {
+            Uri uri = TwitterUtil.profileUri(event.user.screenName);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
     }
 
     private void initTwitterConfig() {
