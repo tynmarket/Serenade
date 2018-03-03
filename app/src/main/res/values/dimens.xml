@@ -1,6 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="width_max">384dp</dimen>
+    <dimen name="width_drawer_max">320dp</dimen>
     <dimen name="activity_horizontal_margin">14dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>

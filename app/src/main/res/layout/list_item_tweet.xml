@@ -186,6 +186,7 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/nhk" />
 
+        <!-- TODO: Border -->
         <TextView
             android:id="@+id/card_summary_large_image_text"
             android:layout_width="@dimen/image_size_summary_image"
