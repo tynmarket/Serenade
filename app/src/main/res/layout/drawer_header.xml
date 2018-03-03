@@ -36,4 +36,11 @@
         android:textSize="@dimen/text_size_l_small"
         tools:text="screen_name" />
 
+    <TextView
+        android:id="@+id/profile_follow_and_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        tools:text="488フォロー  1,958フォロワー" />
+
 </LinearLayout>

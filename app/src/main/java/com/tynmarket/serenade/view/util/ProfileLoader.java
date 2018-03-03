@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.view.util;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,10 +16,12 @@ import com.tynmarket.serenade.model.util.UserUtil;
  */
 
 public class ProfileLoader {
+    @SuppressLint("SetTextI18n")
     public static void loadProfile(AppCompatActivity activity, User user) {
         ImageView icon = activity.findViewById(R.id.profile_icon);
         TextView name = activity.findViewById(R.id.profile_name);
         TextView screenName = activity.findViewById(R.id.profile_screen_name);
+        TextView followAndFollower = activity.findViewById(R.id.profile_follow_and_follower);
 
         // icon
         RequestManager manager = Glide.with(activity);
@@ -29,5 +32,8 @@ public class ProfileLoader {
 
         // screen name
         screenName.setText(String.format("@%s", user.screenName));
+
+        // follow and follower
+        followAndFollower.setText("488フォロー  1,958フォロワー");
     }
 }
