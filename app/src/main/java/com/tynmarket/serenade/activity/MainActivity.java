@@ -1,7 +1,9 @@
 package com.tynmarket.serenade.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -68,19 +70,37 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_LOGIN);
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
                 // TODO: FIX unable to load
                 TweetList.loadTweets(1, true, null);
-                LoginUser.loadUser();
+                //LoginUser.loadUser();
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
                 TweetList.loadTwitterCards(1);
-                LoginUser.loadUser();
+                //LoginUser.loadUser();
             }
         }
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                LoginUser.loadUser();
+            }
+        }.execute();
     }
 
     @Override

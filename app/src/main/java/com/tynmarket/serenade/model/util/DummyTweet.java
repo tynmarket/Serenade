@@ -129,7 +129,6 @@ public class DummyTweet {
                 String.format("tynmarket %d", i + 1), false, null, 0,
                 "timeZone", "url", 0, false, null,
                 "withheldScope");
-
     }
 
     private static TweetEntities entities() {
