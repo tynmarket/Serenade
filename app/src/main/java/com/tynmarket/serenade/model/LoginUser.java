@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.model;
 
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.util.DummyUser;
@@ -39,5 +40,9 @@ public class LoginUser {
             });
             */
         }
+    }
+
+    public static void signOut() {
+        TwitterCore.getInstance().getSessionManager().clearActiveSession();
     }
 }

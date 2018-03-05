@@ -7,4 +7,7 @@
     <string name="tweet_link">ツイートする</string>
     <string name="support_link">お問い合わせ</string>
     <string name="sign_out">ログアウト</string>
+
+    <!-- Toast -->
+    <string name="sign_out_success">ログアウトしました</string>
 </resources>

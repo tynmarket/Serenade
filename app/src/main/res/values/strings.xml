@@ -6,4 +6,7 @@
     <string name="tweet_link">Post tweet</string>
     <string name="support_link">Support</string>
     <string name="sign_out">Sign out</string>
+
+    <!-- Toast -->
+    <string name="sign_out_success">Signed out successfully</string>
 </resources>

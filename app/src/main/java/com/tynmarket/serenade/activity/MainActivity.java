@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -165,6 +166,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             startActivity(intent);
+        });
+
+        // Sign out from twitter
+        findViewById(R.id.sign_out).setOnClickListener(v -> {
+            LoginUser.signOut();
+
+            String text = getString(R.string.sign_out_success);
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+            // TODO: Move to sign in page
         });
     }
 
