@@ -96,4 +96,18 @@
         android:text="@string/support_link"
         tools:text="お問い合わせ" />
 
+    <!-- TODO: Ripple effect -->
+    <TextView
+        android:id="@+id/sign_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:paddingStart="@dimen/padding_start_sing_out"
+        android:drawableStart="@drawable/sign_out"
+        android:drawablePadding="@dimen/drawable_padding_sign_out"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/sign_out"
+        tools:text="ログアウト" />
+
 </LinearLayout>

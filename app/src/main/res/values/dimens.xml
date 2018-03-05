@@ -31,4 +31,8 @@
     <dimen name="spacing_medium">8dp</dimen>
     <dimen name="spacing_large">12dp</dimen>
     <dimen name="spacing_x_large">14dp</dimen>
+
+    <!-- sing out -->
+    <dimen name="padding_start_sing_out">3dp</dimen>
+    <dimen name="drawable_padding_sign_out">11dp</dimen>
 </resources>
