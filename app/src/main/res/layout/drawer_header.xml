@@ -59,7 +59,7 @@
     <!-- TODO: Make drawable size larger -->
     <!-- TODO: Ripple effect -->
     <TextView
-        android:id="@+id/profile_profile_link"
+        android:id="@+id/profile_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_x_large"
@@ -67,12 +67,12 @@
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
         android:textColor="?android:textColorPrimary"
-        android:text="@string/profile_profile_link"
+        android:text="@string/profile_link"
         tools:text="プロフィール" />
 
     <!-- TODO: Ripple effect -->
     <TextView
-        android:id="@+id/profile_tweet_link"
+        android:id="@+id/tweet_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_x_large"
@@ -80,7 +80,7 @@
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
         android:textColor="?android:textColorPrimary"
-        android:text="@string/profile_tweet_link"
+        android:text="@string/tweet_link"
         tools:text="ツイートする" />
 
 </LinearLayout>

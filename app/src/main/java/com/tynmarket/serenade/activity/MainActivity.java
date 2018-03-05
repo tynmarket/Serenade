@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         ProfileLoader.loadProfile(this, event.user);
 
         // Open profile
-        findViewById(R.id.profile_profile_link).setOnClickListener(v -> {
+        findViewById(R.id.profile_link).setOnClickListener(v -> {
             Uri uri = TwitterUtil.profileUri(event.user.screenName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Open post tweet
-        findViewById(R.id.profile_tweet_link).setOnClickListener(v -> {
+        findViewById(R.id.tweet_link).setOnClickListener(v -> {
             Uri uri = Uri.parse("https://twitter.com/intent/tweet");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
