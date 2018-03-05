@@ -157,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
             // TODO: startActivityForResult
             startActivity(intent);
         });
+
+        // Open support page
+        findViewById(R.id.support_link).setOnClickListener(v -> {
+            // TODO: Replace to google form
+            Uri uri = Uri.parse("https://twitter.com/intent/tweet");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
     }
 
     private void initTwitterConfig() {
