@@ -85,6 +85,19 @@
 
     <!-- TODO: Ripple effect -->
     <TextView
+        android:id="@+id/notification_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_x_large"
+        android:drawableStart="@drawable/notification"
+        android:drawablePadding="@dimen/spacing_x_large"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/notification_link"
+        tools:text="通知" />
+
+    <!-- TODO: Ripple effect -->
+    <TextView
         android:id="@+id/support_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

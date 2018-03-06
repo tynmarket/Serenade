@@ -159,6 +159,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Open notifications
+        findViewById(R.id.notification_link).setOnClickListener(v -> {
+            // TODO: Transition
+            Uri uri = Uri.parse("https://twitter.com/i/notifications");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
+
         // Open support page
         findViewById(R.id.support_link).setOnClickListener(v -> {
             // TODO: Replace to google form
