@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -144,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Open profile
         findViewById(R.id.profile_link).setOnClickListener(v -> {
+            closeDrawer();
+
             Uri uri = TwitterUtil.profileUri(event.user.screenName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
@@ -152,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Open post tweet
         findViewById(R.id.tweet_link).setOnClickListener(v -> {
+            closeDrawer();
+
             Uri uri = Uri.parse("https://twitter.com/intent/tweet");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
@@ -161,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Open notifications
         findViewById(R.id.notification_link).setOnClickListener(v -> {
+            closeDrawer();
+
             // TODO: Transition
             Uri uri = Uri.parse("https://twitter.com/i/notifications");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -170,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Open support page
         findViewById(R.id.support_link).setOnClickListener(v -> {
+            closeDrawer();
+
             // TODO: Replace to google form
             Uri uri = Uri.parse("https://twitter.com/intent/tweet");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -184,7 +194,14 @@ public class MainActivity extends AppCompatActivity {
             String text = getString(R.string.sign_out_success);
             Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
             // TODO: Move to sign in page
+
+            closeDrawer();
         });
+    }
+
+    private void closeDrawer() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     private void initTwitterConfig() {
