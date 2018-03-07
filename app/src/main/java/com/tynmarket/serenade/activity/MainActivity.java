@@ -31,12 +31,13 @@ import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
+import com.tynmarket.serenade.view.listner.OpenDrawerOnSwipeListener;
 import com.tynmarket.serenade.view.util.ProfileLoader;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, ViewPager.OnTouchListener, GestureDetector.OnGestureListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnTouchListener {
     private static final int REQUEST_CODE_LOGIN = 1001;
 
     /**
@@ -56,11 +57,21 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // primary sections of the activity.
         TweetListPagerAdapter mSectionsPagerAdapter = new TweetListPagerAdapter(getSupportFragmentManager());
 
+        // Open Drawer
+        OpenDrawerOnSwipeListener listener = new OpenDrawerOnSwipeListener() {
+            @Override
+            public void onSwipe() {
+                openDrawer();
+            }
+        };
+        mGestureDetector = new GestureDetector(this, listener);
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
-        mViewPager.addOnPageChangeListener(this);
+        mViewPager.addOnPageChangeListener(listener);
+        //noinspection AndroidLintClickableViewAccessibility
         mViewPager.setOnTouchListener(this);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
@@ -72,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             int sectionNumber = mViewPager.getCurrentItem() + 1;
             TweetList.loadTweets(sectionNumber, true, null);
         });
-
-        mGestureDetector = new GestureDetector(this, this);
 
         initTwitterConfig();
         Intent intent = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
@@ -128,29 +137,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         mGestureDetector.onTouchEvent(event);
+        v.performClick();
         return false;
-    }
-
-    private int position = 0;
-    private float positionOffse = 0;
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (this.position != position) {
-            this.position = position;
-        }
-        if (this.positionOffse != positionOffset) {
-            this.positionOffse = positionOffset;
-        }
-        //Log.d("Serenade", String.format("position: %d, positionOffset: %f", position, positionOffset));
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
     }
 
     @Override
@@ -251,36 +239,5 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private void closeDrawer() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-    }
-
-    @Override
-    public boolean onDown(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent e) {
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (position == 0 && positionOffse == 0 && velocityX >= 200) {
-            openDrawer();
-        }
-        return false;
     }
 }
