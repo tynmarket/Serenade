@@ -13,8 +13,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,13 +36,14 @@ import com.tynmarket.serenade.view.util.ProfileLoader;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, ViewPager.OnTouchListener, GestureDetector.OnGestureListener {
     private static final int REQUEST_CODE_LOGIN = 1001;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private GestureDetector mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(2);
+        mViewPager.addOnPageChangeListener(this);
+        mViewPager.setOnTouchListener(this);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             int sectionNumber = mViewPager.getCurrentItem() + 1;
             TweetList.loadTweets(sectionNumber, true, null);
         });
+
+        mGestureDetector = new GestureDetector(this, this);
 
         initTwitterConfig();
         Intent intent = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
@@ -116,6 +123,34 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        mGestureDetector.onTouchEvent(event);
+        return false;
+    }
+
+    private int position = 0;
+    private float positionOffse = 0;
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        if (this.position != position) {
+            this.position = position;
+        }
+        if (this.positionOffse != positionOffset) {
+            this.positionOffse = positionOffset;
+        }
+        //Log.d("Serenade", String.format("position: %d, positionOffset: %f", position, positionOffset));
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
     }
 
     @Override
@@ -199,11 +234,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void closeDrawer() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-    }
-
     private void initTwitterConfig() {
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
@@ -211,5 +241,46 @@ public class MainActivity extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+    }
+
+    private void openDrawer() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.openDrawer(GravityCompat.START);
+    }
+
+    private void closeDrawer() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (position == 0 && positionOffse == 0 && velocityX >= 200) {
+            openDrawer();
+        }
+        return false;
     }
 }
