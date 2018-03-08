@@ -6,6 +6,7 @@
     <string name="profile_link">プロフィール</string>
     <string name="tweet_link">ツイートする</string>
     <string name="notification_link">通知</string>
+    <string name="search_link">検索</string>
     <string name="support_link">お問い合わせ</string>
     <string name="sign_out">ログアウト</string>
 

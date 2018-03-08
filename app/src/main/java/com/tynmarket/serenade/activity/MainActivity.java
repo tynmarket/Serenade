@@ -199,6 +199,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             startActivity(intent);
         });
 
+        // Open search (dummy page of query 'a')
+        findViewById(R.id.search_link).setOnClickListener(v -> {
+            closeDrawer();
+
+            // TODO: Transition
+            Uri uri = Uri.parse("https://twitter.com/search?q=a");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
+
         // Open support page
         findViewById(R.id.support_link).setOnClickListener(v -> {
             closeDrawer();

@@ -5,6 +5,7 @@
     <string name="profile_link">Profile</string>
     <string name="tweet_link">Post tweet</string>
     <string name="notification_link">Notification</string>
+    <string name="search_link">Search</string>
     <string name="support_link">Support</string>
     <string name="sign_out">Sign out</string>
 
