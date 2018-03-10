@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'deploygate'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
@@ -49,4 +50,10 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
 }
+
+apply plugin: 'com.google.gms.google-services'
