@@ -8,8 +8,9 @@ android {
         applicationId "com.tynmarket.serenade"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 1
-        versionName "0.0.1-alpha"
+        // Auto increment https://qiita.com/mickamy/items/0285ce1035ec1a224ae7
+        versionCode 2
+        versionName "0.0.2-alpha"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         def properties = new Properties()
@@ -20,7 +21,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {

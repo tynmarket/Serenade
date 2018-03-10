@@ -5,6 +5,7 @@ local.properties
 app/release
 google-services.json
 google-services.base64
+google-services-debug.base64
 
 # IntelliJ
 *.iml
