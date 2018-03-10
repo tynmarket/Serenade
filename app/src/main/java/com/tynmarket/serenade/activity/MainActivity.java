@@ -214,8 +214,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         findViewById(R.id.support_link).setOnClickListener(v -> {
             closeDrawer();
 
-            // TODO: Replace to google form
-            Uri uri = Uri.parse("https://twitter.com/intent/tweet");
+            // TODO: English version
+            Uri uri = Uri.parse("https://goo.gl/forms/A1WAEstc076I49dx1");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             startActivity(intent);
