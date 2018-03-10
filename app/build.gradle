@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'com.android.support:appcompat-v7:27.0.2'
@@ -42,11 +42,11 @@ dependencies {
     implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'com.github.bumptech.glide:glide:4.5.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
-    compile ("com.github.bumptech.glide:recyclerview-integration:4.5.0") {
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.5.0") {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
