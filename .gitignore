@@ -1,6 +1,8 @@
 *.iml
 .gradle
 /local.properties
+*.jks
+app/release
 
 # IntelliJ
 *.iml
