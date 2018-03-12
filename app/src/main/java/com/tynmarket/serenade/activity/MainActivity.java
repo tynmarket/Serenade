@@ -40,21 +40,29 @@ import org.greenrobot.eventbus.Subscribe;
 public class MainActivity extends AppCompatActivity implements ViewPager.OnTouchListener {
     private static final int REQUEST_CODE_LOGIN = 1001;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
     private GestureDetector mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initTwitterConfig();
+        boolean signedIn = LoginUser.signedIn();
+
+        if (signedIn) {
+            continueMainActivity();
+        } else {
+            startLoginActivity();
+        }
+    }
+
+    private void continueMainActivity() {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         TweetListPagerAdapter mSectionsPagerAdapter = new TweetListPagerAdapter(getSupportFragmentManager());
 
         // Open Drawer
@@ -84,7 +92,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             TweetList.loadTweets(sectionNumber, true, null);
         });
 
-        initTwitterConfig();
+        TweetList.loadTweets(1, true, null);
+    }
+
+    private void startLoginActivity() {
         Intent intent = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
         startActivityForResult(intent, REQUEST_CODE_LOGIN);
     }

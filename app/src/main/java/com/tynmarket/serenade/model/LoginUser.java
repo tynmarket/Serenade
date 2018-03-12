@@ -1,6 +1,7 @@
 package com.tynmarket.serenade.model;
 
 import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.util.DummyUser;
@@ -15,6 +16,11 @@ public class LoginUser {
     private static LoginUser loginUser;
 
     private User user;
+
+    public static boolean signedIn() {
+        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+        return session != null;
+    }
 
     public static void loadUser() {
         if (loginUser == null) {
