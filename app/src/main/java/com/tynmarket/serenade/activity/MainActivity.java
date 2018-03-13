@@ -105,9 +105,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
-                // TODO: FIX unable to load
-                TweetList.loadTweets(1, true, null);
                 //LoginUser.loadUser();
+                continueMainActivity();
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
                 TweetList.loadTwitterCards(1);
