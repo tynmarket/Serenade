@@ -18,6 +18,7 @@ import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
@@ -51,29 +52,35 @@ public class TweetListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Save data on screen rotation
         setRetainInstance(true);
+
+        Bundle bundle = getArguments();
+        this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
+
+        TweetList.loadTweets(sectionNumber, true, null);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         this.rv = rootView.findViewById(R.id.tweet_list);
         this.progressBar = rootView.findViewById(R.id.refresh);
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
-        }
 
         // Layout
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(manager);
 
-        // Adapter
-        ArrayList<Tweet> tweets = DummyTweet.tweets();
-        this.adapter = new TweetListAdapter(tweets);
+        if (adapter == null) {
+            // Adapter
+            ArrayList<Tweet> tweets = DummyTweet.tweets();
+            this.adapter = new TweetListAdapter(tweets);
+        }
+
         rv.setAdapter(adapter);
 
         // Infinite scroll

@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             int sectionNumber = mViewPager.getCurrentItem() + 1;
             TweetList.loadTweets(sectionNumber, true, null);
         });
-
-        TweetList.loadTweets(1, true, null);
     }
 
     private void startLoginActivity() {
