@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TabLayout.Tab;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        // Tab icon
+        Tab tabHome = tabLayout.getTabAt(0);
+        tabHome.setIcon(R.drawable.home_selector);
+        Tab tabFavorite = tabLayout.getTabAt(1);
+        tabFavorite.setIcon(R.drawable.favorite_selector);
 
         // TODO: Double click
         FloatingActionButton fab = findViewById(R.id.fab);

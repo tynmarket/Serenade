@@ -26,19 +26,4 @@ public class TweetListPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "ツイート";
-            case 1:
-                return "いいね";
-            case 2:
-                // TODO: mention timeline?
-                // TODO: Background fetch logic
-                return "未定";
-        }
-        return null;
-    }
 }
