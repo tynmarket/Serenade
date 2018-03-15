@@ -101,12 +101,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         startActivityForResult(intent, REQUEST_CODE_LOGIN);
     }
 
-    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             if (resultCode == RESULT_OK) {
                 //LoginUser.loadUser();
+                loadUser();
+
                 continueMainActivity();
             } else {
                 Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
@@ -114,23 +115,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                 //LoginUser.loadUser();
             }
         }
-
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                LoginUser.loadUser();
-            }
-        }.execute();
     }
 
     @Override
@@ -251,6 +235,26 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void loadUser() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                LoginUser.loadUser();
+            }
+        }.execute();
     }
 
     private void openDrawer() {
