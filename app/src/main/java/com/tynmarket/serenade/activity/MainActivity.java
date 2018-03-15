@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         boolean signedIn = LoginUser.signedIn();
 
         if (signedIn) {
+            loadUser();
             continueMainActivity();
         } else {
             startLoginActivity();
