@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="@dimen/spacing_x_large"
-        android:background="@color/tw__light_gray" />
+        android:background="@color/light_gray" />
 
     <!-- profile -->
     <!-- TODO: Make drawable size larger -->

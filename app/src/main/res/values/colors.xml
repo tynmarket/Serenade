@@ -2,14 +2,17 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#1DA1F2</color>
-
-    <color name="fav_on">#e0245e</color>
-    <color name="fav_off">#657786</color>
+    <color name="colorAccent">#35abf3</color>
 
     <!-- Primary color -->
     <color name="white">#ffffff</color>
     <color name="white_smoke">#f5f5f5</color>
+    <color name="light_gray">#d3d3d3</color>
     <color name="silver">#c0c0c0</color>
     <color name="dark_gray">#a9a9a9</color>
+
+    <color name="text_link">#1DA1F2</color>
+    <color name="twitter">#1DA1F2</color>
+    <color name="fav_on">#e0245e</color>
+    <color name="fav_off">#657786</color>
 </resources>
