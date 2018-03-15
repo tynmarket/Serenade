@@ -39,10 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/retweet_container">
-        <!-- TODO: https://github.com/hdodenhof/CircleImageView -->
-        <!-- TODO: Vector Image -->
+
         <!-- TODO: Move to profile -->
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/icon_size_list_item_tweet"
             android:layout_height="@dimen/icon_size_list_item_tweet"
