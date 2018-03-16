@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- TODO: Set textColor ?android:textColorPrimary or textColorPrimary -->
+    <!-- TODO: Set textColor @color/text_black or textColorPrimary -->
 
     <!-- TODO: Ripple Effect -->
     <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textStyle="bold"
-                android:textColor="?android:textColorPrimary"
+                android:textColor="@color/text_black"
                 tools:text="name" />
 
             <TextView
@@ -97,7 +97,7 @@
             android:layout_marginTop="@dimen/spacing_l_medium"
             android:layout_marginStart="@dimen/spacing_medium"
             android:textSize="@dimen/text_size_x_small"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/text_black"
             android:textColorLink="@color/text_link"
             android:autoLink="web"
             tools:text="tweet_text" />
@@ -135,7 +135,7 @@
             android:layout_marginStart="@dimen/spacing_large"
             android:maxLines="1"
             android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/text_black"
             tools:text="quoted_name" />
 
         <TextView
@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_large"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/text_black"
             android:textColorLink="@color/text_link"
             android:autoLink="web"
             tools:text="quoted_tweet_text" />
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/spacing_medium"
                 android:maxLines="2"
-                android:textColor="?android:textColorPrimary"
+                android:textColor="@color/text_black"
                 tools:text="summary_title" />
 
             <TextView
