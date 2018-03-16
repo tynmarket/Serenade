@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
                 android:maxLines="1"
-                android:textSize="@dimen/text_size_l_small"
+                android:textSize="@dimen/text_size_small"
                 tools:text="screen_name" />
 
             <TextView
@@ -144,7 +144,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_small"
             android:maxLines="1"
-            android:textSize="@dimen/text_size_l_small"
+            android:textSize="@dimen/text_size_small"
             tools:text="quoted_screen_name" />
 
         <TextView
