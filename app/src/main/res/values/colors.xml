@@ -11,9 +11,10 @@
     <color name="silver">#c0c0c0</color>
     <color name="dark_gray">#a9a9a9</color>
 
-    <color name="text_black">@color/primary_text_default_material_light</color>
+    <color name="text_black">@color/primary_text_default_material_light</color><!-- android:textColorPrimary in Platform.AppCompat -->
     <color name="text_link">#1DA1F2</color>
-    <color name="twitter">#1DA1F2</color>
+
+    <color name="twitter">#1DA1F2</color><!-- Twitter brand color -->
     <color name="fav_on">#e0245e</color>
     <color name="fav_off">#657786</color>
 </resources>

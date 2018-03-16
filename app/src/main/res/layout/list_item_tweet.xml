@@ -98,7 +98,6 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:textSize="@dimen/text_size_x_small"
             android:textColor="@color/text_black"
-            android:textColorLink="@color/text_link"
             android:autoLink="web"
             tools:text="tweet_text" />
 
@@ -155,7 +154,6 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_large"
             android:textColor="@color/text_black"
-            android:textColorLink="@color/text_link"
             android:autoLink="web"
             tools:text="quoted_tweet_text" />
 

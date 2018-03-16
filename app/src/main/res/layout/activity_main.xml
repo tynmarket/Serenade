@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
+            <!-- TODO: Fix rotation problem -->
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
