@@ -167,7 +167,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
                 manager.load(card.image).into(holder.cardSummaryImage);
             } else {
                 String domain = TweetUtil.expandedUrlDomain(tweet);
-                holder.cardSummaryLargeImageText.setText(domain.toUpperCase());
+                if (domain != null) {
+                    holder.cardSummaryLargeImageText.setText(domain.toUpperCase());
+                }
                 holder.cardSummaryLargeImageText.setVisibility(View.VISIBLE);
             }
 
