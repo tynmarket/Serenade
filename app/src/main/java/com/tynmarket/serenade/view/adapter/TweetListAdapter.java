@@ -84,41 +84,29 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Make Tweet wrapper class to use utility method
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
-        Tweet retweetedStatus = tweet.retweetedStatus;
         Tweet quotedStatus = tweet.quotedStatus;
 
         holder.tweet = tweet;
-        holder.tweetContent.tweet = tweet;
+        holder.tweetContent.setTweet(tweet);
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;
-        String name;
-        String screenName;
-        // TODO: Show displayUrl, move to url
-        String tweetText;
         String photoUrl = photoUrl(tweet);
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         // TODO: split by view type?
         // TODO: Retweet quoted tweet
         // Retweet
-        if (retweetedStatus != null) {
+        if (tweet.retweetedStatus != null) {
             holder.retweetUserName.setText(String.format("%sがリツイート", user.name));
             holder.retweetContainer.setVisibility(View.VISIBLE);
-            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(retweetedStatus.user);
-            name = retweetedStatus.user.name;
-            screenName = retweetedStatus.user.screenName;
-            tweetText = retweetedStatus.text;
+            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
         } else {
             holder.retweetContainer.setVisibility(View.GONE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
-            name = user.name;
-            screenName = user.screenName;
-            tweetText = tweet.text;
         }
 
         manager.load(profileImageUrlHttps).into(holder.icon);
-        setNameAndText(holder, name, screenName, tweetText);
         holder.createdAt.setText(tweet.createdAt);
 
         // Image
@@ -217,13 +205,5 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public void refreshCards(Map<String, TwitterCard> cards) {
         this.cards = cards;
-    }
-
-    private void setNameAndText(TweetViewHolder holder, String name, String screenName, String tweetText) {
-        holder.name.setText(name);
-        holder.screenName.setText(String.format("@%s", screenName));
-        // TODO: Move to profile on clicking screenName
-        // TODO: Replace escaped character
-        holder.tweetText.setText(tweetText);
     }
 }

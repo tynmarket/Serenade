@@ -46,8 +46,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     // Tweet
     public final ImageView icon;
     public final TweetContentView tweetContent;
-    public final TextView name;
-    public final TextView screenName;
     public final TextView createdAt;
     public final TextView tweetText;
     public final ImageView tweetPhoto;
@@ -80,8 +78,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
         this.tweetContent = itemView.findViewById(R.id.tweet_content);
-        this.name = itemView.findViewById(R.id.name);
-        this.screenName = itemView.findViewById(R.id.screen_name);
         this.createdAt = itemView.findViewById(R.id.created_at);
         this.tweetText = itemView.findViewById(R.id.tweet_text);
         this.tweetPhoto = itemView.findViewById(R.id.tweet_photo);
