@@ -47,44 +47,38 @@
             android:layout_height="@dimen/icon_size_list_item_tweet"
             app:srcCompat="@drawable/default_profile" />
 
-        <LinearLayout
-            android:id="@+id/nameContainer"
-            android:orientation="horizontal"
+        <TextView
+            android:id="@+id/name"
             android:layout_toEndOf="@+id/icon"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginEnd="0dp">
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:textColor="@color/text_black"
+            tools:text="name" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textStyle="bold"
-                android:textColor="@color/text_black"
-                tools:text="name" />
+        <TextView
+            android:id="@+id/screen_name"
+            android:layout_toEndOf="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_small"
+            tools:text="screen_name" />
 
-            <TextView
-                android:id="@+id/screen_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textSize="@dimen/text_size_small"
-                tools:text="screen_name" />
-
-            <TextView
-                android:id="@+id/created_at"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="created_at" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/created_at"
+            android:layout_toEndOf="@+id/screen_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="created_at" />
 
         <!-- TODO: show image, RT, link, hash tag -->
         <!-- TODO: Remove underline from links -->
@@ -93,7 +87,7 @@
         <!-- TODO: Wide clickable link area -->
         <TextView
             android:id="@+id/tweet_text"
-            android:layout_below="@+id/nameContainer"
+            android:layout_below="@+id/name"
             android:layout_toEndOf="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
