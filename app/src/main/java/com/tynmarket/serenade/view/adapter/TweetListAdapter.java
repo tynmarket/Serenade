@@ -103,15 +103,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Retweet quoted tweet
         // Retweet
         if (retweetedStatus != null) {
-            textLoader.setText(holder.retweetUserName, String.format("%sがリツイート", user.name),
-                    null, spacingSmall, null, spacingSmall);
+            holder.retweetUserName.setText(String.format("%sがリツイート", user.name));
+            holder.retweetContainer.setVisibility(View.VISIBLE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(retweetedStatus.user);
             name = retweetedStatus.user.name;
             screenName = retweetedStatus.user.screenName;
             tweetText = retweetedStatus.text;
         } else {
-            textLoader.unsetText(holder.retweetUserName,
-                    null, spacingLarge, null, 0);
+            holder.retweetContainer.setVisibility(View.GONE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
             name = user.name;
             screenName = user.screenName;

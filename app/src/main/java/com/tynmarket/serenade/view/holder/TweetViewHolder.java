@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public Tweet tweet;
     private boolean favorited;
 
+    public final LinearLayout retweetContainer;
     public final TextView retweetUserName;
     @SuppressWarnings("all")
     private final ImageView retweetByUser;
@@ -73,6 +75,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     public TweetViewHolder(View itemView) {
         super(itemView);
+        this.retweetContainer = itemView.findViewById(R.id.retweet_container);
         this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
         this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
