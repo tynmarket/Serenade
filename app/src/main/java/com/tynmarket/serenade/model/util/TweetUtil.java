@@ -3,7 +3,10 @@ package com.tynmarket.serenade.model.util;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
@@ -18,6 +21,17 @@ import java.util.List;
 
 public class TweetUtil {
     private static final String HOST_SPEAKERDECK = "https://speakerdeck.com";
+
+    public static void loadImage(ImageView view, Tweet tweet) {
+        String photoUrl = TweetUtil.photoUrl(tweet);
+        if (photoUrl != null) {
+            Glide.with(view.getContext()).load(photoUrl).into(view);
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+            view.setImageDrawable(null);
+        }
+    }
 
     @Nullable
     public static String photoUrl(Tweet tweet) {

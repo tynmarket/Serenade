@@ -48,7 +48,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final TweetContentView tweetContent;
     public final TextView createdAt;
     public final TextView tweetText;
-    public final ImageView tweetPhoto;
 
     // Quoted tweet
     public final TextView quotedName;
@@ -80,7 +79,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.tweetContent = itemView.findViewById(R.id.tweet_content);
         this.createdAt = itemView.findViewById(R.id.created_at);
         this.tweetText = itemView.findViewById(R.id.tweet_text);
-        this.tweetPhoto = itemView.findViewById(R.id.tweet_photo);
         this.quotedName = itemView.findViewById(R.id.quoted_name);
         this.quotedScreenName = itemView.findViewById(R.id.quoted_screen_name);
         this.quotedTweetText = itemView.findViewById(R.id.quoted_tweet_text);

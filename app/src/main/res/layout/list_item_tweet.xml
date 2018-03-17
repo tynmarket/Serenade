@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -62,22 +63,6 @@
             android:layout_height="wrap_content" />
 
         <!-- TODO: quotedStatus View -->
-
-        <!-- TODO: Movie -->
-        <!-- TODO: Custom view? -->
-        <!-- TODO: Boarder Radius -->
-        <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
-        <!-- TODO: Multi image -->
-        <!-- TODO: Must unfix layout_width -->
-        <ImageView
-            android:id="@+id/tweet_photo"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_below="@+id/tweet_content"
-            android:layout_width="@dimen/image_width_tweet_photo"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/peing" />
     </RelativeLayout>
 
     <RelativeLayout

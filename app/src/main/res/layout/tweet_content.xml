@@ -58,13 +58,29 @@
             android:layout_below="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_l_medium"
             android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_l_medium"
             android:textSize="@dimen/text_size_x_small"
             android:textColor="@color/text_black"
             android:autoLink="web"
             android:text="@{tweet.text}"
             tools:text="tweet_text" />
+
+        <!-- TODO: Movie -->
+        <!-- TODO: Boarder Radius -->
+        <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
+        <!-- TODO: Multi image -->
+        <ImageView
+            android:id="@+id/tweet_photo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_height_tweet_photo"
+            android:layout_below="@+id/tweet_text"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:tweetPhoto="@{tweet}"
+            tools:src="@drawable/peing" />
 
     </RelativeLayout>
 </layout>

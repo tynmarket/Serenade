@@ -7,12 +7,14 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
+import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 
 /**
@@ -55,6 +57,11 @@ public class TweetContentView extends RelativeLayout {
     @BindingAdapter("screenName")
     public static void setScreenName(TextView view, String screenName) {
         view.setText(String.format("@%s", screenName));
+    }
+
+    @BindingAdapter("tweetPhoto")
+    public static void setTweetPhoto(ImageView view, Tweet tweet) {
+        TweetUtil.loadImage(view, tweet);
     }
 
     private void setOnTweetTextClickListener() {

@@ -91,7 +91,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;
-        String photoUrl = photoUrl(tweet);
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         // TODO: split by view type?
@@ -108,15 +107,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
         manager.load(profileImageUrlHttps).into(holder.icon);
         holder.createdAt.setText(tweet.createdAt);
-
-        // Image
-        if (photoUrl != null) {
-            imageLoader.loadImage(holder.tweetPhoto, photoUrl, tweetPhotoHeight,
-                    null, tweetPhotoTopMargin, null, null);
-        } else {
-            imageLoader.unloadImage(holder.tweetPhoto,
-                    null, 0, null, null);
-        }
 
         // TODO: split by view type?
         // Quoted retweet
