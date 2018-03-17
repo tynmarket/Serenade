@@ -23,6 +23,7 @@ import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
+import com.tynmarket.serenade.view.custom.TweetContentView;
 
 import retrofit2.Call;
 
@@ -42,6 +43,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     // Tweet
     public final ImageView icon;
+    public final TweetContentView tweetContent;
     public final TextView name;
     public final TextView screenName;
     public final TextView createdAt;
@@ -74,6 +76,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
         this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
+        this.tweetContent = itemView.findViewById(R.id.tweet_content);
         this.name = itemView.findViewById(R.id.name);
         this.screenName = itemView.findViewById(R.id.screen_name);
         this.createdAt = itemView.findViewById(R.id.created_at);
@@ -96,9 +99,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // Open profile
         // TODO: Set listener to quoted status
         setOnIconClickListener();
-        // Open tweet
-        // TODO: Set listener to quoted status
-        setOnTweetTextClickListener();
+        // TODO: Set listener to quoted status tweetText
         // Open Twitter Card URL
         setOnCardSummaryClickListener();
         // Open slide
@@ -160,17 +161,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public void setFavorited(boolean favorited) {
         this.favorited = favorited;
         fav.setImageResource(favorited ? R.drawable.fav_on : R.drawable.fav_off);
-    }
-
-    private void setOnTweetTextClickListener() {
-        tweetText.setOnClickListener(v -> {
-            Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: FLAG_ACTIVITY
-            // TODO: Transition
-            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-            itemView.getContext().startActivity(intent);
-        });
     }
 
     @SuppressWarnings("SpellCheckingInspection")
