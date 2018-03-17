@@ -47,56 +47,11 @@
             android:layout_height="@dimen/icon_size_list_item_tweet"
             app:srcCompat="@drawable/default_profile" />
 
-        <TextView
-            android:id="@+id/name"
+        <com.tynmarket.serenade.view.custom.TweetContentView
+            android:id="@+id/tweet_content"
             android:layout_toEndOf="@+id/icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            android:textColor="@color/text_black"
-            tools:text="name" />
-
-        <TextView
-            android:id="@+id/screen_name"
-            android:layout_toEndOf="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="@dimen/text_size_small"
-            tools:text="screen_name" />
-
-        <TextView
-            android:id="@+id/created_at"
-            android:layout_toEndOf="@+id/screen_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:maxLines="1"
-            android:ellipsize="end"
-            tools:text="created_at" />
-
-        <!-- TODO: show image, RT, link, hash tag -->
-        <!-- TODO: Remove underline from links -->
-        <!-- TODO: Widen between lines -->
-        <!-- TODO: Effect when click a link -->
-        <!-- TODO: Wide clickable link area -->
-        <TextView
-            android:id="@+id/tweet_text"
-            android:layout_below="@+id/name"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_l_medium"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:textSize="@dimen/text_size_x_small"
-            android:textColor="@color/text_black"
-            android:autoLink="web"
-            tools:text="tweet_text" />
+            android:layout_height="wrap_content" />
 
         <!-- TODO: quotedStatus View -->
 
@@ -109,7 +64,7 @@
         <ImageView
             android:id="@+id/tweet_photo"
             android:layout_toEndOf="@+id/icon"
-            android:layout_below="@+id/tweet_text"
+            android:layout_below="@+id/tweet_content"
             android:layout_width="@dimen/image_width_tweet_photo"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_medium"
