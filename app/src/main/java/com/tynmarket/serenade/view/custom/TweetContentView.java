@@ -59,6 +59,11 @@ public class TweetContentView extends RelativeLayout {
         view.setText(String.format("@%s", screenName));
     }
 
+    @BindingAdapter("createdAt")
+    public static void setCreatedAt(TextView view, Tweet tweet) {
+        view.setText(TweetUtil.createdAt(tweet));
+    }
+
     @BindingAdapter("tweetPhoto")
     public static void setTweetPhoto(ImageView view, Tweet tweet) {
         TweetUtil.loadImage(view, tweet);

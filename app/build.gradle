@@ -63,6 +63,7 @@ dependencies {
         transitive = true
     }
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

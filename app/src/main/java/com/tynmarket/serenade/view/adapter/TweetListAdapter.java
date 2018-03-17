@@ -106,7 +106,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         manager.load(profileImageUrlHttps).into(holder.icon);
-        holder.createdAt.setText(tweet.createdAt);
 
         // TODO: split by view type?
         // Quoted retweet

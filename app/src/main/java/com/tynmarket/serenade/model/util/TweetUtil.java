@@ -13,7 +13,13 @@ import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.tynmarket.serenade.model.SpeakerDeck;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by tyn-iMarket on 2018/01/22.
@@ -114,6 +120,27 @@ public class TweetUtil {
             return urls.get(0);
         } else {
             return null;
+        }
+    }
+
+    public static String createdAt(Tweet tweet) {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+        ZonedDateTime d;
+
+        try {
+            d = ZonedDateTime.parse(tweet.createdAt, f);
+        } catch (Exception e) {
+            // TODO: Error reporting
+            return tweet.createdAt;
+        }
+
+        d = d.withZoneSameInstant(ZoneId.systemDefault());
+
+        // TODO: Locale
+        if (d.toLocalDate().equals(LocalDate.now())) {
+            return d.format(DateTimeFormatter.ofPattern("HH時mm分"));
+        } else {
+            return d.format(DateTimeFormatter.ofPattern("M月dd日"));
         }
     }
 

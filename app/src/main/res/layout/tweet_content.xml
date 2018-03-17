@@ -46,6 +46,7 @@
             android:gravity="end"
             android:maxLines="1"
             android:ellipsize="end"
+            app:createdAt="@{tweet}"
             tools:text="created_at" />
 
         <!-- TODO: show image, RT, link, hash tag -->
