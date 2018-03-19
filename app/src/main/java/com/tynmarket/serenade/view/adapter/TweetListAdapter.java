@@ -57,7 +57,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         Tweet quotedStatus = tweet.quotedStatus;
 
         holder.tweet = tweet;
+        // Tweet
         holder.binding.tweetContent.setTweet(tweet);
+        // Quote tweet
+        holder.binding.quoteTweetContent.setTweet(quotedStatus);
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;
@@ -67,17 +70,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // Retweet
         if (tweet.retweetedStatus != null) {
             holder.retweetUserName.setText(String.format("%sがリツイート", user.name));
-            holder.retweetContainer.setVisibility(View.VISIBLE);
+            holder.retweetUserName.setVisibility(View.VISIBLE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
         } else {
-            holder.retweetContainer.setVisibility(View.GONE);
+            holder.retweetUserName.setVisibility(View.GONE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
         }
 
         manager.load(profileImageUrlHttps).into(holder.icon);
-
-        // Quote tweet
-        holder.binding.quoteTweetContent.setTweet(quotedStatus);
 
         // Twitter Card Summary
         if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {

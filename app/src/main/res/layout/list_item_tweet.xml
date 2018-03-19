@@ -18,32 +18,26 @@
 
         <!-- TODO: Ripple Effect -->
         <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
-        <LinearLayout
-            android:id="@+id/retweet_container"
-            android:layout_below="@+id/top_margin"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small">
 
-            <!-- TODO: Reply to -->
-            <TextView
-                android:id="@+id/retweet_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_retweet_start"
-                android:maxLines="1"
-                android:textSize="@dimen/text_size_2l_small"
-                android:drawableStart="@drawable/retweeted"
-                android:drawablePadding="@dimen/spacing_medium"
-                tools:text="ティンがリツイート" />
-        </LinearLayout>
+        <!-- TODO: Reply to -->
+        <TextView
+            android:id="@+id/retweet_user_name"
+            android:layout_below="@+id/top_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_retweet_start"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_2l_small"
+            android:drawableStart="@drawable/retweeted"
+            android:drawablePadding="@dimen/spacing_medium"
+            tools:text="ティンがリツイート" />
 
         <RelativeLayout
             android:id="@+id/tweet_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/retweet_container">
+            android:layout_below="@+id/retweet_user_name">
 
             <!-- TODO: Move to profile -->
             <de.hdodenhof.circleimageview.CircleImageView
