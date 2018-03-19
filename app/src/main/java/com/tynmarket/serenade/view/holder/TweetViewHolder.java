@@ -1,6 +1,7 @@
 package com.tynmarket.serenade.view.holder;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,10 +22,10 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.activity.SlideActivity;
+import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
-import com.tynmarket.serenade.view.custom.TweetContentView;
 
 import retrofit2.Call;
 
@@ -33,6 +34,7 @@ import retrofit2.Call;
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
+    public ListItemTweetBinding binding;
     private TweetListAdapter adapter;
 
     public Tweet tweet;
@@ -45,10 +47,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     // Tweet
     public final ImageView icon;
-    public final TweetContentView tweetContent;
-
-    // Quote tweet
-    public final TweetContentView quoteTweetContent;
 
     // Twitter Card Summary
     public final RelativeLayout cardSummary;
@@ -68,12 +66,11 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public TweetViewHolder(View itemView) {
         super(itemView);
 
+        binding = DataBindingUtil.bind(itemView);
         this.retweetContainer = itemView.findViewById(R.id.retweet_container);
         this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
         this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
-        this.tweetContent = itemView.findViewById(R.id.tweet_content);
-        this.quoteTweetContent = itemView.findViewById(R.id.quoted_tweet_content);
         this.cardSummary = itemView.findViewById(R.id.card_summary);
         this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);
         this.cardSummaryLargeImageText = itemView.findViewById(R.id.card_summary_large_image_text);

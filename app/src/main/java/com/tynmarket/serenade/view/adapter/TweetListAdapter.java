@@ -49,8 +49,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-        // TODO: Method too long
-        // TODO: Control visibility by using View.GONE
         holder.setAdapter(this);
 
         // TODO: Make Tweet wrapper class to use utility method
@@ -59,7 +57,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         Tweet quotedStatus = tweet.quotedStatus;
 
         holder.tweet = tweet;
-        holder.tweetContent.setTweet(tweet);
+        holder.binding.tweetContent.setTweet(tweet);
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;
@@ -80,7 +78,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         manager.load(profileImageUrlHttps).into(holder.icon);
 
         // Quote tweet
-        holder.quoteTweetContent.setTweet(quotedStatus);
+        holder.binding.quoteTweetContent.setTweet(quotedStatus);
 
         // Twitter Card Summary
         if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
