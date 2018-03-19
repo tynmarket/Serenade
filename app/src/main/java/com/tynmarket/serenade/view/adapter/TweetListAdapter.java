@@ -15,7 +15,6 @@ import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
-import com.tynmarket.serenade.view.util.ViewContentLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,14 +30,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private Map<String, TwitterCard> cards;
 
     private RequestManager manager;
-    private ViewContentLoader textLoader;
-    private ViewContentLoader imageLoader;
-    // TODO: Utility class
-    private Integer tweetPhotoHeight;
-    private Integer tweetPhotoTopMargin;
-    private Integer spacingLarge;
-    private Integer spacingMedium;
-    private Integer spacingSmall;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
@@ -51,23 +42,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
         // TODO: GlideApp
         manager = Glide.with(parent.getContext());
-        textLoader = new ViewContentLoader();
-        imageLoader = new ViewContentLoader(manager);
-        if (tweetPhotoHeight == null) {
-            tweetPhotoHeight = parent.getContext().getResources().getDimensionPixelSize(R.dimen.image_height_tweet_photo);
-        }
-        if (tweetPhotoTopMargin == null) {
-            tweetPhotoTopMargin = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
-        }
-        if (spacingLarge == null) {
-            spacingLarge = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_large);
-        }
-        if (spacingMedium == null) {
-            spacingMedium = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_medium);
-        }
-        if (spacingSmall == null) {
-            spacingSmall = parent.getContext().getResources().getDimensionPixelSize(R.dimen.spacing_small);
-        }
 
         return new TweetViewHolder(view);
     }
