@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.tynmarket.serenade.model.util.TweetUtil.photoUrl;
-
 /**
  * Created by tyn-iMarket on 2017/12/18.
  */
@@ -107,31 +105,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
         manager.load(profileImageUrlHttps).into(holder.icon);
 
-        // TODO: split by view type?
-        // Quoted retweet
-        if (quotedStatus != null) {
-            textLoader.setText(holder.quotedName, quotedStatus.user.name,
-                    null, spacingMedium, null, null);
-            textLoader.setText(holder.quotedScreenName, quotedStatus.user.screenName,
-                    spacingSmall, spacingMedium, null, null);
-            textLoader.setText(holder.quotedTweetText, quotedStatus.text,
-                    null, spacingMedium, null, null);
-
-            String quotedPhotoUrl = TweetUtil.photoUrl(quotedStatus);
-            if (quotedPhotoUrl != null) {
-                imageLoader.loadImage(holder.quotedTweetPhoto, photoUrl(quotedStatus), tweetPhotoHeight,
-                        null, tweetPhotoTopMargin, null, null);
-            }
-        } else {
-            textLoader.unsetText(holder.quotedName,
-                    null, 0, null, null);
-            textLoader.unsetText(holder.quotedScreenName,
-                    0, 0, null, null);
-            textLoader.unsetText(holder.quotedTweetText,
-                    null, 0, null, null);
-            imageLoader.unloadImage(holder.quotedTweetPhoto,
-                    null, 0, null, null);
-        }
+        // Quote tweet
+        holder.quoteTweetContent.setTweet(quotedStatus);
 
         // Twitter Card Summary
         if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {

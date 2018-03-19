@@ -47,11 +47,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final ImageView icon;
     public final TweetContentView tweetContent;
 
-    // Quoted tweet
-    public final TextView quotedName;
-    public final TextView quotedScreenName;
-    public final TextView quotedTweetText;
-    public final ImageView quotedTweetPhoto;
+    // Quote tweet
+    public final TweetContentView quoteTweetContent;
 
     // Twitter Card Summary
     public final RelativeLayout cardSummary;
@@ -70,15 +67,13 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     public TweetViewHolder(View itemView) {
         super(itemView);
+
         this.retweetContainer = itemView.findViewById(R.id.retweet_container);
         this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
         this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
         this.tweetContent = itemView.findViewById(R.id.tweet_content);
-        this.quotedName = itemView.findViewById(R.id.quoted_name);
-        this.quotedScreenName = itemView.findViewById(R.id.quoted_screen_name);
-        this.quotedTweetText = itemView.findViewById(R.id.quoted_tweet_text);
-        this.quotedTweetPhoto = itemView.findViewById(R.id.quoted_tweet_photo);
+        this.quoteTweetContent = itemView.findViewById(R.id.quoted_tweet_content);
         this.cardSummary = itemView.findViewById(R.id.card_summary);
         this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);
         this.cardSummaryLargeImageText = itemView.findViewById(R.id.card_summary_large_image_text);

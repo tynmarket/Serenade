@@ -40,7 +40,11 @@ public class TweetUtil {
     }
 
     @Nullable
-    public static String photoUrl(Tweet tweet) {
+    public static String photoUrl(@Nullable Tweet tweet) {
+        if (tweet == null) {
+            return null;
+        }
+
         List<MediaEntity> media = tweet.entities.media;
         if (media.size() == 0) {
             return null;
@@ -114,6 +118,7 @@ public class TweetUtil {
         }
     }
 
+    @Nullable
     public static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {
@@ -123,7 +128,20 @@ public class TweetUtil {
         }
     }
 
-    public static String createdAt(Tweet tweet) {
+    @Nullable
+    public static String screenName(@Nullable Tweet tweet) {
+        if (tweet == null) {
+            return null;
+        }
+        return String.format("@%s", tweet.user.screenName);
+    }
+
+    @Nullable
+    public static String createdAt(@Nullable Tweet tweet) {
+        if (tweet == null) {
+            return null;
+        }
+
         DateTimeFormatter f = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
         ZonedDateTime d;
 

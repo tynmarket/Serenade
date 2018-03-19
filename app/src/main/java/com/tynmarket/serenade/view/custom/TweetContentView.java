@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -46,17 +47,22 @@ public class TweetContentView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setTweet(Tweet tweet) {
-        if (tweet.retweetedStatus != null) {
+    public void setTweet(@Nullable Tweet tweet) {
+        if (tweet != null && tweet.retweetedStatus != null) {
             binding.setTweet(tweet.retweetedStatus);
         } else {
             binding.setTweet(tweet);
         }
     }
 
+    @BindingAdapter("visibility")
+    public static void setVisibility(RelativeLayout layout, Tweet tweet) {
+        layout.setVisibility(tweet == null ? GONE : VISIBLE);
+    }
+
     @BindingAdapter("screenName")
-    public static void setScreenName(TextView view, String screenName) {
-        view.setText(String.format("@%s", screenName));
+    public static void setScreenName(TextView view, Tweet tweet) {
+        view.setText(TweetUtil.screenName(tweet));
     }
 
     @BindingAdapter("createdAt")

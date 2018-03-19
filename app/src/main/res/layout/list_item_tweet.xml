@@ -65,58 +65,18 @@
         <!-- TODO: quotedStatus View -->
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/quoted_tweet_container"
+    <com.tynmarket.serenade.view.custom.TweetContentView
+        android:id="@+id/quoted_tweet_content"
         android:layout_below="@+id/tweet_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_icon_and_margin">
-
-        <TextView
-            android:id="@+id/quoted_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textStyle="bold"
-            android:textColor="@color/text_black"
-            tools:text="quoted_name" />
-
-        <TextView
-            android:id="@+id/quoted_screen_name"
-            android:layout_toEndOf="@+id/quoted_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="@dimen/text_size_small"
-            tools:text="quoted_screen_name" />
-
-        <TextView
-            android:id="@+id/quoted_tweet_text"
-            android:layout_below="@+id/quoted_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:textColor="@color/text_black"
-            android:autoLink="web"
-            tools:text="quoted_tweet_text" />
-
-        <ImageView
-            android:id="@+id/quoted_tweet_photo"
-            android:layout_below="@+id/quoted_tweet_text"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:scaleType="centerCrop" />
-    </RelativeLayout>
+        android:layout_marginStart="@dimen/spacing_icon_and_margin"
+        android:layout_marginTop="@dimen/spacing_medium" />
 
     <!-- TODO: Larger size -->
     <RelativeLayout
         android:id="@+id/card_summary"
-        android:layout_below="@+id/quoted_tweet_container"
+        android:layout_below="@+id/quoted_tweet_content"
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
