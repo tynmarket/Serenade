@@ -14,7 +14,7 @@
         android:id="@+id/top_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_large" />
+        android:layout_marginTop="@dimen/spacing_x_medium" />
 
     <!-- TODO: Ripple Effect -->
     <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
