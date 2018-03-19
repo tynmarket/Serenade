@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout>
+
+    <data>
+
+        <variable
+            name="tweet"
+            type="com.twitter.sdk.android.core.models.Tweet" />
+    </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,6 +37,8 @@
             android:textSize="@dimen/text_size_2l_small"
             android:drawableStart="@drawable/retweeted"
             android:drawablePadding="@dimen/spacing_medium"
+            app:retweetUserName="@{tweet}"
+            app:retweetUserNameVisibility="@{tweet}"
             tools:text="ティンがリツイート" />
 
         <RelativeLayout

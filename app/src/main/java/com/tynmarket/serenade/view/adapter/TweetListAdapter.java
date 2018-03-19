@@ -1,10 +1,12 @@
 package com.tynmarket.serenade.view.adapter;
 
 import android.annotation.SuppressLint;
+import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -57,6 +59,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         Tweet quotedStatus = tweet.quotedStatus;
 
         holder.tweet = tweet;
+        holder.binding.setTweet(tweet);
         // Tweet
         holder.binding.tweetContent.setTweet(tweet);
         // Quote tweet
@@ -69,11 +72,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: split by view type?
         // Retweet
         if (tweet.retweetedStatus != null) {
-            holder.retweetUserName.setText(String.format("%sがリツイート", user.name));
-            holder.retweetUserName.setVisibility(View.VISIBLE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
         } else {
-            holder.retweetUserName.setVisibility(View.GONE);
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
         }
 
@@ -115,6 +115,16 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // Actions
         holder.reply.setText("reply");
         holder.retweet.setText("retweet");
+    }
+
+    @BindingAdapter("retweetUserName")
+    public static void setRetweetUserName(TextView view, Tweet tweet) {
+        view.setText(TweetUtil.retweetUserName(tweet));
+    }
+
+    @BindingAdapter("retweetUserNameVisibility")
+    public static void setRetweetUserNameVisibility(TextView view, Tweet tweet) {
+        view.setVisibility(tweet.retweetedStatus == null ? View.GONE : View.VISIBLE);
     }
 
     @Override

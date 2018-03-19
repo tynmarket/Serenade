@@ -39,8 +39,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public Tweet tweet;
     private boolean favorited;
 
-    public final TextView retweetUserName;
-
     // Tweet
     public final ImageView icon;
 
@@ -63,7 +61,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         binding = DataBindingUtil.bind(itemView);
-        this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
         this.icon = itemView.findViewById(R.id.icon);
         this.cardSummary = itemView.findViewById(R.id.card_summary);
         this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);

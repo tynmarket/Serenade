@@ -162,6 +162,15 @@ public class TweetUtil {
         }
     }
 
+    @Nullable
+    public static String retweetUserName(Tweet tweet) {
+        if (tweet.retweetedStatus == null) {
+            return null;
+        }
+
+        return String.format("%sがリツイート", tweet.user.name);
+    }
+
     public static void debugTimeline(List<Tweet> tweets) {
         for (int i = 0; i < tweets.size(); i++) {
             Tweet tweet = tweets.get(i);
