@@ -8,7 +8,6 @@
     <dimen name="drawer_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
-    <dimen name="spacing_icon_and_margin">56dp</dimen>
 
     <dimen name="icon_size_list_item_tweet">48dp</dimen>
     <dimen name="icon_size_action_with_padding">36dp</dimen><!-- icon size is 20dp -->
@@ -32,6 +31,9 @@
     <dimen name="spacing_x_medium">10dp</dimen>
     <dimen name="spacing_large">12dp</dimen>
     <dimen name="spacing_x_large">14dp</dimen>
+
+    <dimen name="spacing_icon_and_margin">56dp</dimen>
+    <dimen name="spacing_retweet_start">36dp</dimen>
 
     <!-- sing out -->
     <dimen name="padding_start_sing_out">3dp</dimen>

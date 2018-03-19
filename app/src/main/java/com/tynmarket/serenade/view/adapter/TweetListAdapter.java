@@ -64,7 +64,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         // TODO: split by view type?
-        // TODO: Retweet quoted tweet
         // Retweet
         if (tweet.retweetedStatus != null) {
             holder.retweetUserName.setText(String.format("%sがリツイート", user.name));

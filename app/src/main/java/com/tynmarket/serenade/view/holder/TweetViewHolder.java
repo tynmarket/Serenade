@@ -42,8 +42,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     public final LinearLayout retweetContainer;
     public final TextView retweetUserName;
-    @SuppressWarnings("all")
-    private final ImageView retweetByUser;
 
     // Tweet
     public final ImageView icon;
@@ -69,7 +67,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding = DataBindingUtil.bind(itemView);
         this.retweetContainer = itemView.findViewById(R.id.retweet_container);
         this.retweetUserName = itemView.findViewById(R.id.retweet_user_name);
-        this.retweetByUser = itemView.findViewById(R.id.retweet_by_user);
         this.icon = itemView.findViewById(R.id.icon);
         this.cardSummary = itemView.findViewById(R.id.card_summary);
         this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);

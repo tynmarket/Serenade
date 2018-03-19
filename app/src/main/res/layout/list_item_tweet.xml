@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- TODO: Set textColor @color/text_black or textColorPrimary -->
-
         <!-- Adjust margin top -->
         <View
             android:id="@+id/top_margin"
@@ -28,20 +26,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_small">
 
-            <!-- TODO: Show retweet icon -->
-            <ImageView
-                android:id="@+id/retweet_by_user"
-                android:layout_width="@dimen/icon_size_list_item_tweet"
-                android:layout_height="wrap_content" />
-
             <!-- TODO: Reply to -->
             <TextView
                 android:id="@+id/retweet_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/spacing_retweet_start"
                 android:maxLines="1"
                 android:textSize="@dimen/text_size_2l_small"
+                android:drawableStart="@drawable/retweeted"
+                android:drawablePadding="@dimen/spacing_medium"
                 tools:text="ティンがリツイート" />
         </LinearLayout>
 
