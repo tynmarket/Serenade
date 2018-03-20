@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="card"
+            type="com.tynmarket.serenade.model.TwitterCard" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_size_summary_image"
+        android:background="@drawable/shape_border">
+
+        <FrameLayout
+            android:id="@+id/image_or_text"
+            android:layout_width="@dimen/image_size_summary_image"
+            android:layout_height="@dimen/image_size_summary_image">
+
+            <!-- TODO: Corner radius -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/image_size_summary_image"
+                android:layout_height="@dimen/image_size_summary_image"
+                android:scaleType="centerCrop"
+                app:image="@{card}"
+                tools:src="@drawable/nhk" />
+
+            <!-- TODO: Border -->
+            <TextView
+                android:id="@+id/image_text"
+                android:layout_width="@dimen/image_size_summary_image"
+                android:layout_height="@dimen/image_size_summary_image"
+                android:gravity="center"
+                android:background="@color/white_smoke"
+                android:textColor="@color/silver"
+                app:imageText="@{card}"
+                tools:text="summary_large_image_text" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/image_or_text"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_medium"
+                android:maxLines="2"
+                android:textColor="@color/text_black"
+                android:text="@{card != null ? card.title : null}"
+                tools:text="summary_title" />
+
+            <TextView
+                android:id="@+id/card_summary_host"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:paddingStart="@dimen/spacing_medium"
+                android:textSize="@dimen/text_size_small"
+                android:text="@{card != null ? card.host : null}"
+                tools:text="summary_host" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

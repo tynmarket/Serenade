@@ -16,6 +16,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
+import com.tynmarket.serenade.view.custom.SummaryCardView;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
@@ -58,18 +59,25 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         User user = tweet.user;
         Tweet quotedStatus = tweet.quotedStatus;
 
+        TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
+        if (card != null) {
+            card.domain = TweetUtil.expandedUrlDomain(tweet);
+            card.host = TweetUtil.expandedUrlHost(tweet);
+        }
+
         holder.tweet = tweet;
         holder.binding.setTweet(tweet);
+        holder.binding.setCard(card);
         // Tweet
         holder.binding.tweetContent.setTweet(tweet);
         // Quote tweet
         holder.binding.quoteTweetContent.setTweet(quotedStatus);
+        // Twitter Card
+        holder.binding.summaryCard.binding.setCard(card);
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;
-        TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
-        // TODO: split by view type?
         // Retweet
         if (tweet.retweetedStatus != null) {
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
@@ -78,31 +86,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         manager.load(profileImageUrlHttps).into(holder.icon);
-
-        // Twitter Card Summary
-        if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
-            holder.cardSummaryTitle.setText(card.title);
-            holder.cardSummaryHost.setText(TweetUtil.expandedUrlHost(tweet));
-
-            if (card.isSummary()) {
-                holder.cardSummaryLargeImageText.setVisibility(View.GONE);
-                manager.load(card.image).into(holder.cardSummaryImage);
-            } else {
-                String domain = TweetUtil.expandedUrlDomain(tweet);
-                if (domain != null) {
-                    holder.cardSummaryLargeImageText.setText(domain.toUpperCase());
-                }
-                holder.cardSummaryLargeImageText.setVisibility(View.VISIBLE);
-            }
-
-            holder.cardSummary.setVisibility(View.VISIBLE);
-        } else {
-            holder.cardSummary.setVisibility(View.GONE);
-            holder.cardSummaryImage.setImageDrawable(null);
-            holder.cardSummaryLargeImageText.setText(null);
-            holder.cardSummaryTitle.setText(null);
-            holder.cardSummaryHost.setText(null);
-        }
 
         // Slide button
         // TODO: SlideShare
@@ -117,6 +100,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.retweet.setText("retweet");
     }
 
+    @Override
+    public int getItemCount() {
+        return this.tweets.size();
+    }
+
     @BindingAdapter("retweetUserName")
     public static void setRetweetUserName(TextView view, Tweet tweet) {
         view.setText(TweetUtil.retweetUserName(tweet));
@@ -127,9 +115,13 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         view.setVisibility(tweet.retweetedStatus == null ? View.GONE : View.VISIBLE);
     }
 
-    @Override
-    public int getItemCount() {
-        return this.tweets.size();
+    @BindingAdapter("summaryCardVisibility")
+    public static void setSummaryCardVisibility(SummaryCardView view, TwitterCard card) {
+        if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
     }
 
     public void refresh(List<Tweet> newTweets) {

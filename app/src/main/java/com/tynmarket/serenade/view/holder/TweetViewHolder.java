@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,13 +41,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     // Tweet
     public final ImageView icon;
 
-    // Twitter Card Summary
-    public final RelativeLayout cardSummary;
-    public final ImageView cardSummaryImage;
-    public final TextView cardSummaryLargeImageText;
-    public final TextView cardSummaryTitle;
-    public final TextView cardSummaryHost;
-
     // Slide
     public final Button slideButton;
 
@@ -62,11 +54,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
         binding = DataBindingUtil.bind(itemView);
         this.icon = itemView.findViewById(R.id.icon);
-        this.cardSummary = itemView.findViewById(R.id.card_summary);
-        this.cardSummaryImage = itemView.findViewById(R.id.card_summary_image);
-        this.cardSummaryLargeImageText = itemView.findViewById(R.id.card_summary_large_image_text);
-        this.cardSummaryTitle = itemView.findViewById(R.id.card_summary_title);
-        this.cardSummaryHost = itemView.findViewById(R.id.card_summary_host);
         this.slideButton = itemView.findViewById(R.id.slide_button);
         this.reply = itemView.findViewById(R.id.reply);
         this.retweet = itemView.findViewById(R.id.retweet);
@@ -154,7 +141,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setOnCardSummaryClickListener() {
-        cardSummary.setOnClickListener(v -> {
+        binding.summaryCard.setOnClickListener(v -> {
             String url = TweetUtil.expandedUrl(tweet);
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);

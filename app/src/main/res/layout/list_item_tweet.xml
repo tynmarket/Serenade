@@ -6,6 +6,10 @@
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
+
+        <variable
+            name="card"
+            type="com.tynmarket.serenade.model.TwitterCard" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,7 +64,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <!-- TODO: quotedStatus View -->
         </RelativeLayout>
 
         <!-- Quote tweet -->
@@ -72,65 +75,20 @@
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
             android:layout_marginTop="@dimen/spacing_medium" />
 
+        <!-- Summary Card -->
         <!-- TODO: Larger size -->
-        <RelativeLayout
-            android:id="@+id/card_summary"
+        <com.tynmarket.serenade.view.custom.SummaryCardView
+            android:id="@+id/summary_card"
             android:layout_below="@+id/quote_tweet_content"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            android:background="@drawable/shape_border">
-
-            <!-- TODO: Corner radius -->
-            <ImageView
-                android:id="@+id/card_summary_image"
-                android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/nhk" />
-
-            <!-- TODO: Border -->
-            <TextView
-                android:id="@+id/card_summary_large_image_text"
-                android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image"
-                android:gravity="center"
-                android:background="@color/white_smoke"
-                android:textColor="@color/silver"
-                tools:text="summary_large_image_text" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/card_summary_image"
-                android:layout_centerVertical="true">
-
-                <TextView
-                    android:id="@+id/card_summary_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/spacing_medium"
-                    android:maxLines="2"
-                    android:textColor="@color/text_black"
-                    tools:text="summary_title" />
-
-                <TextView
-                    android:id="@+id/card_summary_host"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/card_summary_title"
-                    android:paddingStart="@dimen/spacing_medium"
-                    android:textSize="@dimen/text_size_small"
-                    tools:text="summary_host" />
-
-            </RelativeLayout>
-        </RelativeLayout>
+            app:summaryCardVisibility="@{card}" />
 
         <Button
             android:id="@+id/slide_button"
-            android:layout_below="@+id/card_summary"
+            android:layout_below="@+id/summary_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"

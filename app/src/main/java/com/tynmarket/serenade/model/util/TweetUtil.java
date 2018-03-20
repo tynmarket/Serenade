@@ -96,25 +96,20 @@ public class TweetUtil {
         }
     }
 
-    @Nullable
     public static String expandedUrlDomain(Tweet tweet) {
         String expandedUrl = expandedUrl(tweet);
-        if (expandedUrl != null) {
-            Uri uri = Uri.parse(expandedUrl);
-            String[] parts = uri.getHost().split("\\.");
-            int length = parts[0].length();
+        Uri uri = Uri.parse(expandedUrl);
+        String[] parts = uri.getHost().split("\\.");
+        int length = parts[0].length();
 
-            if (parts[0].equals("www")) {
-                return parts[1];
-            } else if (length == 1 || length == 2) {
-                // b.hatena.ne.jp
-                // jp.routers.com
-                return parts[1];
-            } else {
-                return parts[0];
-            }
+        if (parts[0].equals("www")) {
+            return parts[1];
+        } else if (length == 1 || length == 2) {
+            // b.hatena.ne.jp
+            // jp.routers.com
+            return parts[1];
         } else {
-            return null;
+            return parts[0];
         }
     }
 
