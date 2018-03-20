@@ -55,11 +55,6 @@ public class TweetContentView extends RelativeLayout {
         }
     }
 
-    @BindingAdapter("visibility")
-    public static void setVisibility(RelativeLayout layout, Tweet tweet) {
-        layout.setVisibility(tweet == null ? GONE : VISIBLE);
-    }
-
     @BindingAdapter("screenName")
     public static void setScreenName(TextView view, Tweet tweet) {
         view.setText(TweetUtil.screenName(tweet));

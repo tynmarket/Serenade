@@ -110,11 +110,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         view.setText(TweetUtil.retweetUserName(tweet));
     }
 
-    @BindingAdapter("retweetUserNameVisibility")
-    public static void setRetweetUserNameVisibility(TextView view, Tweet tweet) {
-        view.setVisibility(tweet.retweetedStatus == null ? View.GONE : View.VISIBLE);
-    }
-
     @BindingAdapter("summaryCardVisibility")
     public static void setSummaryCardVisibility(SummaryCardView view, TwitterCard card) {
         if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {

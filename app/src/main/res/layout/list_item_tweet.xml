@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
@@ -41,8 +43,8 @@
             android:textSize="@dimen/text_size_2l_small"
             android:drawableStart="@drawable/retweeted"
             android:drawablePadding="@dimen/spacing_medium"
+            android:visibility="@{tweet.retweetedStatus != null ? View.VISIBLE : View.GONE}"
             app:retweetUserName="@{tweet}"
-            app:retweetUserNameVisibility="@{tweet}"
             tools:text="ティンがリツイート" />
 
         <RelativeLayout
