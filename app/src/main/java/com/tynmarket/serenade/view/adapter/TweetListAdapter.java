@@ -76,6 +76,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.binding.quoteTweetContent.setTweet(quotedStatus);
         // Twitter Card
         holder.binding.summaryCard.binding.setCard(card);
+        // Tweet action
+        holder.binding.tweetAction.binding.setTweet(tweet);
         holder.setFavorited(tweet.favorited);
 
         String profileImageUrlHttps;

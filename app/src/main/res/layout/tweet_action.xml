@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="tweet"
+            type="com.twitter.sdk.android.core.models.Tweet" />
+
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -29,11 +37,12 @@
         <!-- TODO: Fav count -->
         <ImageView
             android:id="@+id/fav"
-            app:srcCompat="@drawable/fav_off"
             android:layout_weight="1"
             android:layout_width="@dimen/icon_size_action_with_padding"
             android:layout_height="@dimen/icon_size_action_with_padding"
-            android:padding="@dimen/spacing_medium" />
+            android:padding="@dimen/spacing_medium"
+            android:src="@{tweet.favorited ? @drawable/fav_on : @drawable/fav_off}"
+            app:srcCompat="@drawable/fav_off" />
 
     </LinearLayout>
 </layout>

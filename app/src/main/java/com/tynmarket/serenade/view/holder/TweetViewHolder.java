@@ -81,6 +81,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                             if (throwable instanceof TwitterApiException) {
                                 if (((TwitterApiException) throwable).getStatusCode() == 404) {
                                     Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
+                                    // TODO: Map tweet
                                     adapter.replaceTweet(getAdapterPosition(), tweet);
                                 } else {
                                     Log.d("Serenade", "fav destroy: failure");
@@ -107,6 +108,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                             if (throwable instanceof TwitterApiException) {
                                 if (((TwitterApiException) throwable).getErrorCode() == 139) {
                                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
+                                    // TODO: Map tweet
                                     adapter.replaceTweet(getAdapterPosition(), tweet);
                                 } else {
                                     Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
@@ -130,7 +132,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     public void setFavorited(boolean favorited) {
         this.favorited = favorited;
-        fav.setImageResource(favorited ? R.drawable.fav_on : R.drawable.fav_off);
     }
 
     @SuppressWarnings("SpellCheckingInspection")
