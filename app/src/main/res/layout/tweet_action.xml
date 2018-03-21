@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/reply"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            android:text="reply"
+            tools:text="reply" />
+
+        <TextView
+            android:id="@+id/retweet"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            android:text="retweet"
+            tools:text="retweet" />
+
+        <!-- TODO: Fav count -->
+        <ImageView
+            android:id="@+id/fav"
+            app:srcCompat="@drawable/fav_off"
+            android:layout_weight="1"
+            android:layout_width="@dimen/icon_size_action_with_padding"
+            android:layout_height="@dimen/icon_size_action_with_padding"
+            android:padding="@dimen/spacing_medium" />
+
+    </LinearLayout>
+</layout>

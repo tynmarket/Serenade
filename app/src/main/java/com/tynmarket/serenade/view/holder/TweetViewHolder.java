@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.TwitterApiClient;
@@ -44,8 +43,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final Button slideButton;
 
     // Action
-    public final TextView reply;
-    public final TextView retweet;
     private final ImageView fav;
 
     public TweetViewHolder(View itemView) {
@@ -54,9 +51,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding = DataBindingUtil.bind(itemView);
         this.icon = itemView.findViewById(R.id.icon);
         this.slideButton = itemView.findViewById(R.id.slide_button);
-        this.reply = itemView.findViewById(R.id.reply);
-        this.retweet = itemView.findViewById(R.id.retweet);
-        this.fav = itemView.findViewById(R.id.fav);
+        this.fav = binding.tweetAction.binding.fav;
 
         // Open profile
         // TODO: Set listener to quoted status
