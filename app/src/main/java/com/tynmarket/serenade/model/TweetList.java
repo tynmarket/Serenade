@@ -23,12 +23,12 @@ import com.tynmarket.serenade.model.util.TweetUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -42,6 +42,7 @@ public class TweetList {
     private static final Retrofit retrofit = new Retrofit
             .Builder()
             .baseUrl(OGPSERVE_URL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -86,25 +87,15 @@ public class TweetList {
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
-        Call<HashMap<String, TwitterCard>> call = ogpServeApi().twitterCards(urls);
-        Log.d("Serenade", String.format("url: %s", call.request().url()));
-
-        call.enqueue(new retrofit2.Callback<HashMap<String, TwitterCard>>() {
-            @Override
-            public void onResponse(Call<HashMap<String, TwitterCard>> call, Response<HashMap<String, TwitterCard>> response) {
-                if (response.isSuccessful()) {
-                    eventBus().post(new LoadTwitterCardsEvent(sectionNumber, response.body()));
-                } else {
+        ogpServeApi()
+                .twitterCards(urls)
+                .subscribeOn(Schedulers.io())
+                .subscribe(cards -> {
+                    eventBus().post(new LoadTwitterCardsEvent(sectionNumber, cards));
+                }, throwable -> {
                     // TODO: Notify error
-                    Log.d("Serenade", String.format("twitterCards response error: %d", sectionNumber));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<HashMap<String, TwitterCard>> call, Throwable t) {
-                Log.d("Serenade", "twitterCards: failure");
-            }
-        });
+                    Log.e("Serenade", "loadTwitterCards: error", throwable);
+                });
     }
 
     private static EventBus eventBus() {

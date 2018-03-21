@@ -73,6 +73,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: Animation
         // TODO: Disable double click
         // TODO: Click RT/QT tweet
+        // TODO: RxJava https://qiita.com/tomoima525/items/c7a496be536bd1cc5ee7
         fav.setOnClickListener((View v) -> {
             TwitterApiClient client = TwitterCore.getInstance().getApiClient();
             FavoriteService service = client.getFavoriteService();
