@@ -3,11 +3,8 @@ package com.tynmarket.serenade.model;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
@@ -52,27 +49,22 @@ public class TweetList {
         EventBus.getDefault().post(new StartLoadTweetListEvent(sectionNumber));
         Call<List<Tweet>> call = callApi(sectionNumber, maxId);
 
-        // TODO: Lambda function?
-        call.enqueue(new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> result) {
-                Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
-                TweetUtil.debugTimeline(result.data);
+        RetrofitObserver
+                .create(call)
+                .subscribe(tweets -> {
+                    Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
+                    TweetUtil.debugTimeline(tweets);
 
-                // Request Twitter Cards to ogpserve
-                loadTwitterCards(sectionNumber, result.data);
+                    // Request Twitter Cards to ogpserve
+                    loadTwitterCards(sectionNumber, tweets);
 
-                eventBus().post(new LoadTweetListEvent(sectionNumber, result.data, refresh));
-            }
+                    eventBus().post(new LoadTweetListEvent(sectionNumber, tweets, refresh));
+                }, throwable -> {
+                    // TODO: Late limit(Status 429)
+                    Log.d("Serenade", String.format("loadTweets failure: %d", sectionNumber));
 
-            @Override
-            public void failure(TwitterException exception) {
-                // TODO: Late limit(Status 429)
-                Log.d("Serenade", String.format("loadTweets failure: %d", sectionNumber));
-
-                eventBus().post(new LoadFailureTweetListEvent(sectionNumber));
-            }
-        });
+                    eventBus().post(new LoadFailureTweetListEvent(sectionNumber));
+                });
     }
 
     @SuppressLint("StaticFieldLeak")
