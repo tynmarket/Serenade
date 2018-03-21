@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterApiException;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
@@ -70,7 +71,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: already created/destroyed
         // TODO: Animation
         // TODO: Disable double click
-        // TODO: Click RT/QT tweet
         fav.setOnClickListener((View v) -> {
             TwitterApiClient client = TwitterCore.getInstance().getApiClient();
             FavoriteService service = client.getFavoriteService();
@@ -81,12 +81,23 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 RetrofitObserver
                         .create(call)
                         .subscribe(tweet -> {
-                            Log.d("Serenade", "fav destroy: success");
                             Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
                             adapter.replaceTweet(getAdapterPosition(), tweet);
                         }, throwable -> {
-                            Log.d("Serenade", "fav destroy: failure");
-                            Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                            if (throwable instanceof TwitterApiException) {
+                                if (((TwitterApiException) throwable).getStatusCode() == 404) {
+                                    Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
+                                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                                } else {
+                                    Log.d("Serenade", "fav destroy: failure");
+                                    Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                                    fav.setImageResource(R.drawable.fav_on);
+                                }
+                            } else {
+                                Log.d("Serenade", "fav destroy: failure");
+                                Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                                fav.setImageResource(R.drawable.fav_on);
+                            }
                         });
                 fav.setImageResource(R.drawable.fav_off);
             } else {
@@ -95,13 +106,24 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 RetrofitObserver
                         .create(call)
                         .subscribe(tweet -> {
-                            Log.d("Serenade", "fav create: success");
                             Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                             adapter.replaceTweet(getAdapterPosition(), tweet);
 
                         }, throwable -> {
-                            Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
-                            Log.d("Serenade", "fav create: failure");
+                            if (throwable instanceof TwitterApiException) {
+                                if (((TwitterApiException) throwable).getErrorCode() == 139) {
+                                    Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
+                                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                                } else {
+                                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
+                                    fav.setImageResource(R.drawable.fav_off);
+                                    Log.d("Serenade", "fav create: failure");
+                                }
+                            } else {
+                                Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
+                                fav.setImageResource(R.drawable.fav_off);
+                                Log.d("Serenade", "fav create: failure");
+                            }
                         });
                 fav.setImageResource(R.drawable.fav_on);
             }
