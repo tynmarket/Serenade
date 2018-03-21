@@ -11,6 +11,8 @@ public class TwitterCard {
     public String card;
     public String image;
     public String title;
+
+    public String url;
     public String domain;
     public String host;
 

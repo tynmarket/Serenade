@@ -63,7 +63,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setOnIconClickListener();
         // TODO: Set listener to quoted status tweetText
         // Open Twitter Card URL
-        setOnCardSummaryClickListener();
         // Open slide
         setOnSlideButtonClickListener();
         // TODO: Show fullscreen image
@@ -149,15 +148,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-            itemView.getContext().startActivity(intent);
-        });
-    }
-
-    private void setOnCardSummaryClickListener() {
-        binding.summaryCard.setOnClickListener(v -> {
-            String url = TweetUtil.expandedUrl(tweet);
-            Uri uri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             itemView.getContext().startActivity(intent);
         });
     }

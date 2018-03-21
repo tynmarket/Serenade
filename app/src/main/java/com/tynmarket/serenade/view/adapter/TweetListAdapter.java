@@ -58,9 +58,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
         Tweet quotedStatus = tweet.quotedStatus;
+        String expandedUrl = TweetUtil.expandedUrl(tweet);
 
-        TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
+        TwitterCard card = cards.get(expandedUrl);
         if (card != null) {
+            card.url = expandedUrl;
             card.domain = TweetUtil.expandedUrlDomain(tweet);
             card.host = TweetUtil.expandedUrlHost(tweet);
         }
