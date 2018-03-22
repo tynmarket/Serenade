@@ -88,14 +88,14 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
         }
 
-        manager.load(profileImageUrlHttps).into(holder.icon);
+        manager.load(profileImageUrlHttps).into(holder.binding.icon);
 
         // Slide button
         // TODO: SlideShare
         if (TweetUtil.containSlide(tweet)) {
-            holder.slideButton.setVisibility(View.VISIBLE);
+            holder.binding.slideButton.setVisibility(View.VISIBLE);
         } else {
-            holder.slideButton.setVisibility(View.GONE);
+            holder.binding.slideButton.setVisibility(View.GONE);
         }
     }
 
