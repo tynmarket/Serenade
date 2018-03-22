@@ -22,17 +22,16 @@ public class FavoriteTweet {
         RetrofitObserver
                 .create(call)
                 .subscribe(newTweet -> {
-                    onSuccess.result(newTweet);
+                    onSuccess.result();
                 }, throwable -> {
                     if (throwable instanceof TwitterApiException) {
                         if (((TwitterApiException) throwable).getErrorCode() == 139) {
-                            // TODO: Map tweet
-                            onSuccess.result(tweet);
+                            onSuccess.result();
                         } else {
-                            onFailure.result(null);
+                            onFailure.result();
                         }
                     } else {
-                        onFailure.result(null);
+                        onFailure.result();
                     }
                 });
     }
@@ -45,17 +44,16 @@ public class FavoriteTweet {
         RetrofitObserver
                 .create(call)
                 .subscribe(newTweet -> {
-                    onSuccess.result(newTweet);
+                    onSuccess.result();
                 }, throwable -> {
                     if (throwable instanceof TwitterApiException) {
                         if (((TwitterApiException) throwable).getStatusCode() == 404) {
-                            // TODO: Map tweet
-                            onSuccess.result(tweet);
+                            onSuccess.result();
                         } else {
-                            onFailure.result(null);
+                            onFailure.result();
                         }
                     } else {
-                        onFailure.result(null);
+                        onFailure.result();
                     }
                 });
     }

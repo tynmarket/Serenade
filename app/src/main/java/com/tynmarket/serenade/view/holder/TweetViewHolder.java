@@ -15,6 +15,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
+import com.tynmarket.serenade.model.TweetMapper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -28,7 +29,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private TweetListAdapter adapter;
 
     public Tweet tweet;
-    private boolean favorited;
 
     // Tweet
     public final ImageView icon;
@@ -36,16 +36,12 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     // Slide
     public final Button slideButton;
 
-    // Action
-    private final ImageView fav;
-
     public TweetViewHolder(View itemView) {
         super(itemView);
 
         binding = DataBindingUtil.bind(itemView);
         this.icon = itemView.findViewById(R.id.icon);
         this.slideButton = itemView.findViewById(R.id.slide_button);
-        this.fav = binding.tweetAction.binding.fav;
 
         // Open profile
         // TODO: Set listener to quoted status
@@ -56,46 +52,38 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setOnSlideButtonClickListener();
         // TODO: Show fullscreen image
 
-        // TODO: already created/destroyed
         // TODO: Animation
         // TODO: Disable double click
-        fav.setOnClickListener((View v) -> {
-            if (!favorited) {
-                favorited = true;
+        binding.tweetAction.binding.fav.setOnClickListener((View v) -> {
+            Tweet oldTweet = tweet;
+            this.tweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
+            adapter.replaceTweet(getAdapterPosition(), tweet);
+            binding.tweetAction.binding.setTweet(tweet);
 
-                FavoriteTweet.favorite(tweet, newTweet -> {
+            if (!oldTweet.favorited) {
+                FavoriteTweet.favorite(oldTweet, () -> {
                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                }, newTweet -> {
-                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
-                    fav.setImageResource(R.drawable.fav_off);
+                }, () -> {
                     Log.d("Serenade", "fav create: failure");
+                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
+                    binding.tweetAction.binding.setTweet(oldTweet);
+                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
                 });
-
-                fav.setImageResource(R.drawable.fav_on);
             } else {
-                favorited = false;
-
-                FavoriteTweet.unFavorite(tweet, newTweet -> {
+                FavoriteTweet.unFavorite(oldTweet, () -> {
                     Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                }, newTweet -> {
+                }, () -> {
                     Log.d("Serenade", "fav destroy: failure");
+                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
+                    binding.tweetAction.binding.setTweet(oldTweet);
                     Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
-                    fav.setImageResource(R.drawable.fav_on);
                 });
-
-                fav.setImageResource(R.drawable.fav_off);
             }
         });
     }
 
     public void setAdapter(TweetListAdapter adapter) {
         this.adapter = adapter;
-    }
-
-    public void setFavorited(boolean favorited) {
-        this.favorited = favorited;
     }
 
     @SuppressWarnings("SpellCheckingInspection")
