@@ -10,20 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterApiException;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
-import com.tynmarket.serenade.model.RetrofitObserver;
+import com.tynmarket.serenade.model.FavoriteTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
-
-import retrofit2.Call;
 
 /**
  * Created by tyn-iMarket on 2017/12/18.
@@ -66,62 +60,32 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: Animation
         // TODO: Disable double click
         fav.setOnClickListener((View v) -> {
-            TwitterApiClient client = TwitterCore.getInstance().getApiClient();
-            FavoriteService service = client.getFavoriteService();
-
-            if (favorited) {
-                favorited = false;
-                Call<Tweet> call = service.destroy(tweet.id, true);
-                RetrofitObserver
-                        .create(call)
-                        .subscribe(tweet -> {
-                            Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
-                            adapter.replaceTweet(getAdapterPosition(), tweet);
-                        }, throwable -> {
-                            if (throwable instanceof TwitterApiException) {
-                                if (((TwitterApiException) throwable).getStatusCode() == 404) {
-                                    Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
-                                    // TODO: Map tweet
-                                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                                } else {
-                                    Log.d("Serenade", "fav destroy: failure");
-                                    Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
-                                    fav.setImageResource(R.drawable.fav_on);
-                                }
-                            } else {
-                                Log.d("Serenade", "fav destroy: failure");
-                                Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
-                                fav.setImageResource(R.drawable.fav_on);
-                            }
-                        });
-                fav.setImageResource(R.drawable.fav_off);
-            } else {
+            if (!favorited) {
                 favorited = true;
-                Call<Tweet> call = service.create(tweet.id, true);
-                RetrofitObserver
-                        .create(call)
-                        .subscribe(tweet -> {
-                            Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
-                            adapter.replaceTweet(getAdapterPosition(), tweet);
 
-                        }, throwable -> {
-                            if (throwable instanceof TwitterApiException) {
-                                if (((TwitterApiException) throwable).getErrorCode() == 139) {
-                                    Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
-                                    // TODO: Map tweet
-                                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                                } else {
-                                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
-                                    fav.setImageResource(R.drawable.fav_off);
-                                    Log.d("Serenade", "fav create: failure");
-                                }
-                            } else {
-                                Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
-                                fav.setImageResource(R.drawable.fav_off);
-                                Log.d("Serenade", "fav create: failure");
-                            }
-                        });
+                FavoriteTweet.favorite(tweet, newTweet -> {
+                    Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                }, newTweet -> {
+                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
+                    fav.setImageResource(R.drawable.fav_off);
+                    Log.d("Serenade", "fav create: failure");
+                });
+
                 fav.setImageResource(R.drawable.fav_on);
+            } else {
+                favorited = false;
+
+                FavoriteTweet.unFavorite(tweet, newTweet -> {
+                    Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                }, newTweet -> {
+                    Log.d("Serenade", "fav destroy: failure");
+                    Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                    fav.setImageResource(R.drawable.fav_on);
+                });
+
+                fav.setImageResource(R.drawable.fav_off);
             }
         });
     }
