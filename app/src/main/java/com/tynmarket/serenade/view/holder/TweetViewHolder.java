@@ -62,7 +62,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         }
 
         setTweetToBindings(tweet);
-        binding.setCard(card);
+        binding.summaryCard.binding.setCard(card);
     }
 
     public Tweet getTweet() {

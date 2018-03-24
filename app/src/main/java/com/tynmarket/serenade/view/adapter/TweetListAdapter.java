@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.view.adapter;
 
 import android.annotation.SuppressLint;
-import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
-import com.tynmarket.serenade.view.custom.SummaryCardView;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
@@ -83,15 +81,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
-    }
-
-    @BindingAdapter("summaryCardVisibility")
-    public static void setSummaryCardVisibility(SummaryCardView view, TwitterCard card) {
-        if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
     }
 
     public void refresh(List<Tweet> newTweets) {

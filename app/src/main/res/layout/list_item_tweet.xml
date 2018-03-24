@@ -10,10 +10,6 @@
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
-
-        <variable
-            name="card"
-            type="com.tynmarket.serenade.model.TwitterCard" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -87,8 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            app:summaryCardVisibility="@{card}" />
+            android:layout_marginStart="@dimen/spacing_icon_and_margin" />
 
         <Button
             android:id="@+id/slide_button"
