@@ -10,6 +10,9 @@
     <string name="support_link">お問い合わせ</string>
     <string name="sign_out">ログアウト</string>
 
+    <!-- Format -->
+    <string name="format_tweet_count">%d.%d万</string>
+
     <!-- Toast -->
     <string name="sign_out_success">ログアウトしました</string>
 </resources>

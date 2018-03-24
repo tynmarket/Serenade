@@ -11,6 +11,7 @@ import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
+import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.SpeakerDeck;
 
 import org.threeten.bp.LocalDate;
@@ -18,6 +19,7 @@ import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -164,6 +166,22 @@ public class TweetUtil {
         }
 
         return String.format("%sがリツイート", tweet.user.name);
+    }
+
+    public static String favoriteCount(Tweet tweet) {
+        if (tweet.favoriteCount == 0) {
+            return "";
+        } else if (tweet.favoriteCount < 10000) {
+            // TODO: NumberFormat for api level 24
+            return NumberFormat.getInstance().format(tweet.favoriteCount);
+        } else {
+            // 76K / 7.6万
+            String format = Resource.getResources().getString(R.string.format_tweet_count);
+            int countOver = tweet.favoriteCount / 10000;
+            int countUnder = (tweet.favoriteCount % 10000) / 1000;
+
+            return String.format(format, countOver, countUnder);
+        }
     }
 
     public static void debugTimeline(List<Tweet> tweets) {

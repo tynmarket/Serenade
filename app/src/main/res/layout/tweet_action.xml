@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="com.tynmarket.serenade.model.util.TweetUtil" />
+
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
@@ -56,7 +58,7 @@
             android:textColor="@{tweet.favorited ? @color/fav_on : @color/dark_gray}"
             android:drawableStart="@{tweet.favorited ? @drawable/fav_on : @drawable/fav_off}"
             android:drawablePadding="@dimen/spacing_medium"
-            android:text="10"
+            android:text="@{TweetUtil.favoriteCount(tweet)}"
             tools:text="10" />
 
     </android.support.constraint.ConstraintLayout>

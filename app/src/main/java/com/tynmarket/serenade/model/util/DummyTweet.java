@@ -37,6 +37,8 @@ public class DummyTweet {
                 tweet = tweetWithCardSummary(i);
             } else if (i == 5) {
                 tweet = tweetWithCardSummaryLarge(i);
+            } else if (i == 6) {
+                tweet = tweetWithFavoriteCount(tweet(i), 123456);
             } else {
                 tweet = tweet(i);
             }
@@ -167,5 +169,44 @@ public class DummyTweet {
                 null, 0, "sourceStatusIdStr",
                 "photo", null, null);
         return Collections.singletonList(entity);
+    }
+
+    private static Tweet tweetWithFavoriteCount(Tweet tweet, int favoriteCount) {
+        return new Tweet(
+                tweet.coordinates,
+                tweet.createdAt,
+                tweet.currentUserRetweet,
+                tweet.entities,
+                tweet.extendedEntities,
+                favoriteCount,
+                true,
+                tweet.filterLevel,
+                tweet.id,
+                tweet.idStr,
+                tweet.inReplyToScreenName,
+                tweet.inReplyToStatusId,
+                tweet.inReplyToStatusIdStr,
+                tweet.inReplyToUserId,
+                tweet.inReplyToUserIdStr,
+                tweet.lang,
+                tweet.place,
+                tweet.possiblySensitive,
+                tweet.scopes,
+                tweet.quotedStatusId,
+                tweet.quotedStatusIdStr,
+                tweet.quotedStatus,
+                tweet.retweetCount,
+                tweet.retweeted,
+                tweet.retweetedStatus,
+                tweet.source,
+                tweet.text,
+                tweet.displayTextRange,
+                tweet.truncated,
+                tweet.user,
+                tweet.withheldCopyright,
+                tweet.withheldInCountries,
+                tweet.withheldScope,
+                tweet.card
+        );
     }
 }

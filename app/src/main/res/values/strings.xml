@@ -9,6 +9,9 @@
     <string name="support_link">Support</string>
     <string name="sign_out">Sign out</string>
 
+    <!-- Format -->
+    <string name="format_tweet_count">%d%dK</string>
+
     <!-- Toast -->
     <string name="sign_out_success">Signed out successfully</string>
 </resources>
