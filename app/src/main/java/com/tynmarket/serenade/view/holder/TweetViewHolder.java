@@ -12,6 +12,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
+import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.TweetMapper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
@@ -42,7 +43,29 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: Show fullscreen image
 
         // TODO: Animation
-        // TODO: Disable double click
+        setOnFavoriteClickListener();
+        setOnRetweetClickListener();
+    }
+
+    public void setAdapter(TweetListAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    @SuppressWarnings("SpellCheckingInspection")
+    private void setOnIconClickListener() {
+        // TODO: State pressed
+        // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
+        binding.icon.setOnClickListener(v -> {
+            // TODO: Open correct profile when RT/QT
+            Uri uri = TwitterUtil.profileUri(tweet.user.screenName);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
+            itemView.getContext().startActivity(intent);
+        });
+    }
+
+    private void setOnFavoriteClickListener() {
         binding.tweetAction.binding.fav.setOnClickListener((View v) -> {
             Tweet oldTweet = tweet;
             this.tweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
@@ -71,21 +94,32 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setAdapter(TweetListAdapter adapter) {
-        this.adapter = adapter;
-    }
+    private void setOnRetweetClickListener() {
+        binding.tweetAction.binding.retweet.setOnClickListener((View v) -> {
+            Tweet oldTweet = tweet;
+            this.tweet = TweetMapper.withRetweeted(tweet, !tweet.retweeted);
+            adapter.replaceTweet(getAdapterPosition(), tweet);
+            binding.tweetAction.binding.setTweet(tweet);
 
-    @SuppressWarnings("SpellCheckingInspection")
-    private void setOnIconClickListener() {
-        // TODO: State pressed
-        // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
-        binding.icon.setOnClickListener(v -> {
-            // TODO: Open correct profile when RT/QT
-            Uri uri = TwitterUtil.profileUri(tweet.user.screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-            itemView.getContext().startActivity(intent);
+            if (!oldTweet.retweeted) {
+                RetweetTweet.retweet(oldTweet, () -> {
+                    Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
+                }, () -> {
+                    Log.d("Serenade", "fav create: failure");
+                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
+                    binding.tweetAction.binding.setTweet(oldTweet);
+                    Toast.makeText(v.getContext(), "リツイートできませんでした。", Toast.LENGTH_SHORT).show();
+                });
+            } else {
+                RetweetTweet.unRetweet(oldTweet, () -> {
+                    Toast.makeText(v.getContext(), "リツイートを取り消しました。", Toast.LENGTH_SHORT).show();
+                }, () -> {
+                    Log.d("Serenade", "fav destroy: failure");
+                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
+                    binding.tweetAction.binding.setTweet(oldTweet);
+                    Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                });
+            }
         });
     }
 

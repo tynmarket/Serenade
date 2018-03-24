@@ -39,6 +39,8 @@ public class DummyTweet {
                 tweet = tweetWithCardSummaryLarge(i);
             } else if (i == 6) {
                 tweet = tweetWithFavoriteCount(tweet(i), 123456);
+            } else if (i == 7) {
+                tweet = tweetWithRetweetCount(tweet(i), 12);
             } else {
                 tweet = tweet(i);
             }
@@ -197,6 +199,45 @@ public class DummyTweet {
                 tweet.quotedStatus,
                 tweet.retweetCount,
                 tweet.retweeted,
+                tweet.retweetedStatus,
+                tweet.source,
+                tweet.text,
+                tweet.displayTextRange,
+                tweet.truncated,
+                tweet.user,
+                tweet.withheldCopyright,
+                tweet.withheldInCountries,
+                tweet.withheldScope,
+                tweet.card
+        );
+    }
+
+    private static Tweet tweetWithRetweetCount(Tweet tweet, int retweetCount) {
+        return new Tweet(
+                tweet.coordinates,
+                tweet.createdAt,
+                tweet.currentUserRetweet,
+                tweet.entities,
+                tweet.extendedEntities,
+                tweet.favoriteCount,
+                tweet.favorited,
+                tweet.filterLevel,
+                tweet.id,
+                tweet.idStr,
+                tweet.inReplyToScreenName,
+                tweet.inReplyToStatusId,
+                tweet.inReplyToStatusIdStr,
+                tweet.inReplyToUserId,
+                tweet.inReplyToUserIdStr,
+                tweet.lang,
+                tweet.place,
+                tweet.possiblySensitive,
+                tweet.scopes,
+                tweet.quotedStatusId,
+                tweet.quotedStatusIdStr,
+                tweet.quotedStatus,
+                retweetCount,
+                true,
                 tweet.retweetedStatus,
                 tweet.source,
                 tweet.text,

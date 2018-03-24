@@ -168,17 +168,17 @@ public class TweetUtil {
         return String.format("%sがリツイート", tweet.user.name);
     }
 
-    public static String favoriteCount(Tweet tweet) {
-        if (tweet.favoriteCount == 0) {
+    public static String formatCount(int count) {
+        if (count == 0) {
             return "";
-        } else if (tweet.favoriteCount < 10000) {
+        } else if (count < 10000) {
             // TODO: NumberFormat for api level 24
-            return NumberFormat.getInstance().format(tweet.favoriteCount);
+            return NumberFormat.getInstance().format(count);
         } else {
             // 76K / 7.6万
             String format = Resource.getResources().getString(R.string.format_tweet_count);
-            int countOver = tweet.favoriteCount / 10000;
-            int countUnder = (tweet.favoriteCount % 10000) / 1000;
+            int countOver = count / 10000;
+            int countUnder = (count % 10000) / 1000;
 
             return String.format(format, countOver, countUnder);
         }

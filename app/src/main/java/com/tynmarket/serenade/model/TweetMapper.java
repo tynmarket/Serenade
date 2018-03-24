@@ -45,4 +45,43 @@ public class TweetMapper {
                 tweet.card
         );
     }
+
+    public static Tweet withRetweeted(Tweet tweet, boolean retweeted) {
+        return new Tweet(
+                tweet.coordinates,
+                tweet.createdAt,
+                tweet.currentUserRetweet,
+                tweet.entities,
+                tweet.extendedEntities,
+                tweet.favoriteCount,
+                tweet.favorited,
+                tweet.filterLevel,
+                tweet.id,
+                tweet.idStr,
+                tweet.inReplyToScreenName,
+                tweet.inReplyToStatusId,
+                tweet.inReplyToStatusIdStr,
+                tweet.inReplyToUserId,
+                tweet.inReplyToUserIdStr,
+                tweet.lang,
+                tweet.place,
+                tweet.possiblySensitive,
+                tweet.scopes,
+                tweet.quotedStatusId,
+                tweet.quotedStatusIdStr,
+                tweet.quotedStatus,
+                tweet.retweetCount,
+                retweeted,
+                tweet.retweetedStatus,
+                tweet.source,
+                tweet.text,
+                tweet.displayTextRange,
+                tweet.truncated,
+                tweet.user,
+                tweet.withheldCopyright,
+                tweet.withheldInCountries,
+                tweet.withheldScope,
+                tweet.card
+        );
+    }
 }

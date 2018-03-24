@@ -19,5 +19,6 @@
 
     <color name="twitter">#1DA1F2</color><!-- Twitter brand color -->
     <color name="fav_on">#e0245e</color>
-    <color name="action_off">#657786</color>
+    <color name="retweet_on">#5cd400</color>
+    <color name="action_off">#657786</color><!-- Used in Twitter -->
 </resources>

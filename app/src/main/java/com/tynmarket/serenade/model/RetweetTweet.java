@@ -4,7 +4,7 @@ import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterApiException;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
+import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.view.listner.TweetActionListener;
 
 import retrofit2.Call;
@@ -13,11 +13,11 @@ import retrofit2.Call;
  * Created by tynmarket on 2018/03/21.
  */
 
-public class FavoriteTweet {
-    public static void favorite(Tweet tweet, TweetActionListener onSuccess, TweetActionListener onFailure) {
+public class RetweetTweet {
+    public static void retweet(Tweet tweet, TweetActionListener onSuccess, TweetActionListener onFailure) {
         TwitterApiClient client = TwitterCore.getInstance().getApiClient();
-        FavoriteService service = client.getFavoriteService();
-        Call<Tweet> call = service.create(tweet.id, true);
+        StatusesService service = client.getStatusesService();
+        Call<Tweet> call = service.retweet(tweet.id, true);
 
         RetrofitObserver
                 .create(call)
@@ -25,8 +25,8 @@ public class FavoriteTweet {
                     onSuccess.result();
                 }, throwable -> {
                     if (throwable instanceof TwitterApiException) {
-                        // Already favorited
-                        if (((TwitterApiException) throwable).getErrorCode() == 139) {
+                        // Already retweeted
+                        if (((TwitterApiException) throwable).getErrorCode() == 327) {
                             onSuccess.result();
                         } else {
                             onFailure.result();
@@ -37,10 +37,10 @@ public class FavoriteTweet {
                 });
     }
 
-    public static void unFavorite(Tweet tweet, TweetActionListener onSuccess, TweetActionListener onFailure) {
+    public static void unRetweet(Tweet tweet, TweetActionListener onSuccess, TweetActionListener onFailure) {
         TwitterApiClient client = TwitterCore.getInstance().getApiClient();
-        FavoriteService service = client.getFavoriteService();
-        Call<Tweet> call = service.destroy(tweet.id, true);
+        StatusesService service = client.getStatusesService();
+        Call<Tweet> call = service.unretweet(tweet.id, true);
 
         RetrofitObserver
                 .create(call)
