@@ -89,7 +89,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
         binding.icon.setOnClickListener(v -> {
             // TODO: Open correct profile when RT/QT
-            Uri uri = TwitterUtil.profileUri(binding.getTweet().user.screenName);
+            Uri uri = TwitterUtil.profileUri(getTweet().user.screenName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
@@ -100,7 +100,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnSlideButtonClickListener() {
         // Open slide
         binding.slideButton.setOnClickListener(v -> {
-            String expandedUrl = TweetUtil.expandedUrl(binding.getTweet());
+            String expandedUrl = TweetUtil.expandedUrl(getTweet());
             Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
             intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
             itemView.getContext().startActivity(intent);
@@ -120,7 +120,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnFavoriteClickListener() {
         binding.tweetAction.binding.fav.setOnClickListener((View v) -> {
-            Tweet tweet = binding.tweetAction.binding.getTweet();
+            Tweet tweet = getTweet();
             Tweet newTweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
             replaceTweet(newTweet);
 
@@ -148,7 +148,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnRetweetClickListener() {
         binding.tweetAction.binding.retweet.setOnClickListener((View v) -> {
-            Tweet tweet = binding.tweetAction.binding.getTweet();
+            Tweet tweet = getTweet();
             Tweet newTweet = TweetMapper.withRetweeted(tweet, !tweet.retweeted);
             replaceTweet(newTweet);
 
