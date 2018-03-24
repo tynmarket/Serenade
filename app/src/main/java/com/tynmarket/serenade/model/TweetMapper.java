@@ -8,13 +8,21 @@ import com.twitter.sdk.android.core.models.Tweet;
 
 public class TweetMapper {
     public static Tweet withFavorited(Tweet tweet, boolean favorited) {
+        int favoriteCount = tweet.favoriteCount;
+
+        if (favorited) {
+            favoriteCount += 1;
+        } else if (favoriteCount > 0) {
+            favoriteCount -= 1;
+        }
+
         return new Tweet(
                 tweet.coordinates,
                 tweet.createdAt,
                 tweet.currentUserRetweet,
                 tweet.entities,
                 tweet.extendedEntities,
-                tweet.favoriteCount,
+                favoriteCount,
                 favorited,
                 tweet.filterLevel,
                 tweet.id,
@@ -47,6 +55,15 @@ public class TweetMapper {
     }
 
     public static Tweet withRetweeted(Tweet tweet, boolean retweeted) {
+        int retweetCount = tweet.retweetCount;
+
+        if (retweeted) {
+            retweetCount += 1;
+        } else if (retweetCount > 0) {
+            retweetCount -= 1;
+        }
+
+
         return new Tweet(
                 tweet.coordinates,
                 tweet.createdAt,
@@ -70,7 +87,7 @@ public class TweetMapper {
                 tweet.quotedStatusId,
                 tweet.quotedStatusIdStr,
                 tweet.quotedStatus,
-                tweet.retweetCount,
+                retweetCount,
                 retweeted,
                 tweet.retweetedStatus,
                 tweet.source,
