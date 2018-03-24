@@ -128,18 +128,16 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 FavoriteTweet.favorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "fav create: failure");
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                    binding.tweetAction.binding.setTweet(tweet);
+                    Log.d("Serenade", "favorite: failure");
+                    replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
                 });
             } else {
                 FavoriteTweet.unFavorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "fav destroy: failure");
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                    binding.tweetAction.binding.setTweet(tweet);
+                    Log.d("Serenade", "unFavorite: failure");
+                    replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
             }
@@ -156,18 +154,16 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 RetweetTweet.retweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "fav create: failure");
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                    binding.tweetAction.binding.setTweet(tweet);
+                    Log.d("Serenade", "retweet: failure");
+                    replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートできませんでした。", Toast.LENGTH_SHORT).show();
                 });
             } else {
                 RetweetTweet.unRetweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "fav destroy: failure");
-                    adapter.replaceTweet(getAdapterPosition(), tweet);
-                    binding.tweetAction.binding.setTweet(tweet);
+                    Log.d("Serenade", "unRetweet: failure");
+                    replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
             }
