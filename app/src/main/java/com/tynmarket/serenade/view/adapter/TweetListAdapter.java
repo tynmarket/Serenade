@@ -53,7 +53,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         holder.setAdapter(this);
 
-        // TODO: Make Tweet wrapper class to use utility method
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));

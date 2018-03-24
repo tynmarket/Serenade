@@ -110,7 +110,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnReplyClickListener() {
         binding.tweetAction.binding.reply.setOnClickListener(v -> {
-            String url = String.format("https://twitter.com/intent/tweet?in_reply_to=%d", getTweet().id);
+            String url = "https://twitter.com/intent/tweet?in_reply_to=" + getTweet().idStr;
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition

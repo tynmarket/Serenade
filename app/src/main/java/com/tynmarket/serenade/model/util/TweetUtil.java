@@ -28,8 +28,6 @@ import java.util.Locale;
  */
 
 public class TweetUtil {
-    private static final String HOST_SPEAKERDECK = "https://speakerdeck.com";
-
     public static void loadImage(ImageView view, Tweet tweet) {
         String photoUrl = TweetUtil.photoUrl(tweet);
         if (photoUrl != null) {
@@ -42,7 +40,7 @@ public class TweetUtil {
     }
 
     @Nullable
-    public static String photoUrl(@Nullable Tweet tweet) {
+    private static String photoUrl(@Nullable Tweet tweet) {
         if (tweet == null) {
             return null;
         }
@@ -70,11 +68,7 @@ public class TweetUtil {
 
     public static boolean containSlide(Tweet tweet) {
         UrlEntity url = urlEntity(tweet);
-        if (url != null) {
-            return url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
-        } else {
-            return false;
-        }
+        return url != null && url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
     }
 
     @Nullable
@@ -116,7 +110,7 @@ public class TweetUtil {
     }
 
     @Nullable
-    public static UrlEntity urlEntity(Tweet tweet) {
+    private static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {
             return urls.get(0);
