@@ -67,7 +67,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             card.host = TweetUtil.expandedUrlHost(tweet);
         }
 
-        holder.tweet = tweet;
         holder.binding.setTweet(tweet);
         holder.binding.setCard(card);
         // Tweet

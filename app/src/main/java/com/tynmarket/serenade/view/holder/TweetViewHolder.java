@@ -24,7 +24,6 @@ import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
     public ListItemTweetBinding binding;
-    public Tweet tweet;
 
     private TweetListAdapter adapter;
 
@@ -57,7 +56,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // http://snowrobin.tumblr.com/post/62229276876/androidimageview%E3%81%AB%E3%82%A8%E3%83%95%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%99%E3%82%8B
         binding.icon.setOnClickListener(v -> {
             // TODO: Open correct profile when RT/QT
-            Uri uri = TwitterUtil.profileUri(tweet.user.screenName);
+            Uri uri = TwitterUtil.profileUri(binding.getTweet().user.screenName);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
@@ -67,27 +66,27 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnFavoriteClickListener() {
         binding.tweetAction.binding.fav.setOnClickListener((View v) -> {
-            Tweet oldTweet = tweet;
-            this.tweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
-            adapter.replaceTweet(getAdapterPosition(), tweet);
-            binding.tweetAction.binding.setTweet(tweet);
+            Tweet tweet = binding.tweetAction.binding.getTweet();
+            Tweet newTweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
+            adapter.replaceTweet(getAdapterPosition(), newTweet);
+            binding.tweetAction.binding.setTweet(newTweet);
 
-            if (!oldTweet.favorited) {
-                FavoriteTweet.favorite(oldTweet, () -> {
+            if (!tweet.favorited) {
+                FavoriteTweet.favorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
                     Log.d("Serenade", "fav create: failure");
-                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
-                    binding.tweetAction.binding.setTweet(oldTweet);
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                    binding.tweetAction.binding.setTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
                 });
             } else {
-                FavoriteTweet.unFavorite(oldTweet, () -> {
+                FavoriteTweet.unFavorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
                     Log.d("Serenade", "fav destroy: failure");
-                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
-                    binding.tweetAction.binding.setTweet(oldTweet);
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                    binding.tweetAction.binding.setTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
             }
@@ -96,27 +95,27 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnRetweetClickListener() {
         binding.tweetAction.binding.retweet.setOnClickListener((View v) -> {
-            Tweet oldTweet = tweet;
-            this.tweet = TweetMapper.withRetweeted(tweet, !tweet.retweeted);
-            adapter.replaceTweet(getAdapterPosition(), tweet);
-            binding.tweetAction.binding.setTweet(tweet);
+            Tweet tweet = binding.tweetAction.binding.getTweet();
+            Tweet newTweet = TweetMapper.withRetweeted(tweet, !tweet.retweeted);
+            adapter.replaceTweet(getAdapterPosition(), newTweet);
+            binding.tweetAction.binding.setTweet(newTweet);
 
-            if (!oldTweet.retweeted) {
-                RetweetTweet.retweet(oldTweet, () -> {
+            if (!tweet.retweeted) {
+                RetweetTweet.retweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
                     Log.d("Serenade", "fav create: failure");
-                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
-                    binding.tweetAction.binding.setTweet(oldTweet);
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                    binding.tweetAction.binding.setTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートできませんでした。", Toast.LENGTH_SHORT).show();
                 });
             } else {
-                RetweetTweet.unRetweet(oldTweet, () -> {
+                RetweetTweet.unRetweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
                     Log.d("Serenade", "fav destroy: failure");
-                    adapter.replaceTweet(getAdapterPosition(), oldTweet);
-                    binding.tweetAction.binding.setTweet(oldTweet);
+                    adapter.replaceTweet(getAdapterPosition(), tweet);
+                    binding.tweetAction.binding.setTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
             }
@@ -126,7 +125,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnSlideButtonClickListener() {
         // Open slide
         binding.slideButton.setOnClickListener(v -> {
-            String expandedUrl = TweetUtil.expandedUrl(tweet);
+            String expandedUrl = TweetUtil.expandedUrl(binding.getTweet());
             Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
             intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
             itemView.getContext().startActivity(intent);
