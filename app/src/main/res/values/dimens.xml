@@ -37,7 +37,10 @@
     <dimen name="spacing_icon_and_margin">56dp</dimen>
     <dimen name="spacing_retweet_start">36dp</dimen>
 
-    <!-- sing out -->
+    <!-- Tweet -->
+    <dimen name="line_spacing_multiplier_tweet_text">1.1</dimen>
+
+    <!-- Sing out -->
     <dimen name="padding_start_sing_out">3dp</dimen>
     <dimen name="drawable_padding_sign_out">11dp</dimen>
 

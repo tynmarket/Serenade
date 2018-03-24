@@ -69,6 +69,7 @@
             android:layout_marginTop="@dimen/spacing_l_medium"
             android:textSize="@dimen/text_size_x_small"
             android:textColor="@color/text_black"
+            android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_tweet_text"
             android:autoLink="web"
             android:text="@{tweet.text}"
             tools:text="tweet_text" />
