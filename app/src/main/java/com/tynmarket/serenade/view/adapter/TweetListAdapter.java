@@ -70,6 +70,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
         }
 
+        // TODO: Loading image or border
         manager.load(profileImageUrlHttps).into(holder.binding.icon);
 
         // Slide button

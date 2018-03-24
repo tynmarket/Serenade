@@ -42,6 +42,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: Show fullscreen image
 
         // TODO: Animation
+        // TODO: Move to TweetActionView
         setOnReplyClickListener();
         setOnFavoriteClickListener();
         setOnRetweetClickListener();
