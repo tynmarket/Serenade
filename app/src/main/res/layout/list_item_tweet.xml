@@ -5,6 +5,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.tynmarket.serenade.model.util.TweetUtil" />
+
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
@@ -44,7 +46,7 @@
             android:drawableStart="@drawable/retweeted"
             android:drawablePadding="@dimen/spacing_medium"
             android:visibility="@{tweet.retweetedStatus != null ? View.VISIBLE : View.GONE}"
-            app:retweetUserName="@{tweet}"
+            android:text="@{TweetUtil.retweetUserName(tweet)}"
             tools:text="ティンがリツイート" />
 
         <RelativeLayout

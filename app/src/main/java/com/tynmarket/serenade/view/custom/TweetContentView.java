@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
@@ -53,16 +52,6 @@ public class TweetContentView extends RelativeLayout {
         } else {
             binding.setTweet(tweet);
         }
-    }
-
-    @BindingAdapter("screenName")
-    public static void setScreenName(TextView view, Tweet tweet) {
-        view.setText(TweetUtil.screenName(tweet));
-    }
-
-    @BindingAdapter("createdAt")
-    public static void setCreatedAt(TextView view, Tweet tweet) {
-        view.setText(TweetUtil.createdAt(tweet));
     }
 
     @BindingAdapter("tweetPhoto")

@@ -5,6 +5,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.tynmarket.serenade.model.util.TweetUtil" />
+
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
@@ -39,7 +41,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_small"
-            app:screenName="@{tweet}"
+            android:text="@{TweetUtil.screenName(tweet)}"
             tools:text="screen_name" />
 
         <TextView
@@ -50,7 +52,7 @@
             android:gravity="end"
             android:maxLines="1"
             android:ellipsize="end"
-            app:createdAt="@{tweet}"
+            android:text="@{TweetUtil.createdAt(tweet)}"
             tools:text="created_at" />
 
         <!-- TODO: show image, RT, link, hash tag -->

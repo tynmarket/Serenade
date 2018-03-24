@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -85,11 +84,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public int getItemCount() {
         return this.tweets.size();
-    }
-
-    @BindingAdapter("retweetUserName")
-    public static void setRetweetUserName(TextView view, Tweet tweet) {
-        view.setText(TweetUtil.retweetUserName(tweet));
     }
 
     @BindingAdapter("summaryCardVisibility")
