@@ -37,12 +37,12 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // TODO: Set listener to quoted status
         setOnIconClickListener();
         // TODO: Set listener to quoted status tweetText
-        // Open Twitter Card URL
         // Open slide
         setOnSlideButtonClickListener();
         // TODO: Show fullscreen image
 
         // TODO: Animation
+        setOnReplyClickListener();
         setOnFavoriteClickListener();
         setOnRetweetClickListener();
     }
@@ -94,6 +94,27 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             // TODO: Transition
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
             itemView.getContext().startActivity(intent);
+        });
+    }
+
+    private void setOnSlideButtonClickListener() {
+        // Open slide
+        binding.slideButton.setOnClickListener(v -> {
+            String expandedUrl = TweetUtil.expandedUrl(binding.getTweet());
+            Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
+            intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
+            itemView.getContext().startActivity(intent);
+        });
+    }
+
+    private void setOnReplyClickListener() {
+        binding.tweetAction.binding.reply.setOnClickListener(v -> {
+            String url = String.format("https://twitter.com/intent/tweet?in_reply_to=%d", getTweet().id);
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            // TODO: startActivityForResult
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -150,16 +171,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                     Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
             }
-        });
-    }
-
-    private void setOnSlideButtonClickListener() {
-        // Open slide
-        binding.slideButton.setOnClickListener(v -> {
-            String expandedUrl = TweetUtil.expandedUrl(binding.getTweet());
-            Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
-            intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
-            itemView.getContext().startActivity(intent);
         });
     }
 }
