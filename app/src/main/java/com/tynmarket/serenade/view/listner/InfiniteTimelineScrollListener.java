@@ -32,7 +32,7 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
             mRefreshing = true;
 
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
-            long maxId = lastItem.binding.getTweet().id - 1;
+            long maxId = lastItem.getTweet().id - 1;
             TweetList.loadTweets(sectionNumber, false, maxId);
         }
     }

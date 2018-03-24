@@ -14,6 +14,7 @@ import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
 import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.TweetMapper;
+import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -50,6 +51,38 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         this.adapter = adapter;
     }
 
+    public void setTweetAndCardToBindings(Tweet tweet, TwitterCard card) {
+        String expandedUrl = TweetUtil.expandedUrl(tweet);
+
+        if (card != null) {
+            card.url = expandedUrl;
+            card.domain = TweetUtil.expandedUrlDomain(tweet);
+            card.host = TweetUtil.expandedUrlHost(tweet);
+        }
+
+        setTweetToBindings(tweet);
+        binding.setCard(card);
+    }
+
+    public Tweet getTweet() {
+        return binding.getTweet();
+    }
+
+    private void setTweetToBindings(Tweet tweet) {
+        binding.setTweet(tweet);
+        // Tweet
+        binding.tweetContent.setTweet(tweet);
+        // Quote tweet
+        binding.quoteTweetContent.setTweet(tweet.quotedStatus);
+        // Tweet action
+        binding.tweetAction.binding.setTweet(tweet);
+    }
+
+    private void replaceTweet(Tweet tweet) {
+        adapter.replaceTweet(getAdapterPosition(), tweet);
+        setTweetToBindings(tweet);
+    }
+
     @SuppressWarnings("SpellCheckingInspection")
     private void setOnIconClickListener() {
         // TODO: State pressed
@@ -68,8 +101,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding.tweetAction.binding.fav.setOnClickListener((View v) -> {
             Tweet tweet = binding.tweetAction.binding.getTweet();
             Tweet newTweet = TweetMapper.withFavorited(tweet, !tweet.favorited);
-            adapter.replaceTweet(getAdapterPosition(), newTweet);
-            binding.tweetAction.binding.setTweet(newTweet);
+            replaceTweet(newTweet);
 
             if (!tweet.favorited) {
                 FavoriteTweet.favorite(tweet, () -> {
@@ -97,8 +129,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding.tweetAction.binding.retweet.setOnClickListener((View v) -> {
             Tweet tweet = binding.tweetAction.binding.getTweet();
             Tweet newTweet = TweetMapper.withRetweeted(tweet, !tweet.retweeted);
-            adapter.replaceTweet(getAdapterPosition(), newTweet);
-            binding.tweetAction.binding.setTweet(newTweet);
+            replaceTweet(newTweet);
 
             if (!tweet.retweeted) {
                 RetweetTweet.retweet(tweet, () -> {

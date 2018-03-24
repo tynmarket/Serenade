@@ -57,26 +57,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         // TODO: Make Tweet wrapper class to use utility method
         Tweet tweet = this.tweets.get(position);
         User user = tweet.user;
-        Tweet quotedStatus = tweet.quotedStatus;
-        String expandedUrl = TweetUtil.expandedUrl(tweet);
+        TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
-        TwitterCard card = cards.get(expandedUrl);
-        if (card != null) {
-            card.url = expandedUrl;
-            card.domain = TweetUtil.expandedUrlDomain(tweet);
-            card.host = TweetUtil.expandedUrlHost(tweet);
-        }
-
-        holder.binding.setTweet(tweet);
-        holder.binding.setCard(card);
-        // Tweet
-        holder.binding.tweetContent.setTweet(tweet);
-        // Quote tweet
-        holder.binding.quoteTweetContent.setTweet(quotedStatus);
-        // Twitter Card
-        holder.binding.summaryCard.binding.setCard(card);
-        // Tweet action
-        holder.binding.tweetAction.binding.setTweet(tweet);
+        holder.setTweetAndCardToBindings(tweet, card);
 
         String profileImageUrlHttps;
 
