@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="slide_button">Open slide</string>
     <string name="profile_link">Profile</string>
-    <string name="tweet_link">Post tweet</string>
+    <string name="tweet_link">Tweet</string>
     <string name="notification_link">Notification</string>
     <string name="search_link">Search</string>
     <string name="support_link">Support</string>
