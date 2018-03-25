@@ -15,8 +15,8 @@
     </color><!-- android:textColorPrimary in Platform.AppCompat -->
     <color name="text_gray">@color/secondary_text_default_material_light
     </color><!-- android:textColorSecondary in Platform.AppCompat -->
-    <color name="text_link">#22a3f2</color>
+    <color name="text_link">#2ba7f3</color>
 
-    <color name="fav_on">#e0245e</color>
+    <color name="fav_on">#e43f72</color>
     <color name="retweet_on">#5cd400</color>
 </resources>
