@@ -19,5 +19,4 @@
 
     <color name="fav_on">#e0245e</color>
     <color name="retweet_on">#5cd400</color>
-    <color name="action_off">#657786</color><!-- Used in Twitter -->
 </resources>
