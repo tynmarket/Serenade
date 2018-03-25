@@ -3,6 +3,12 @@
     <string name="app_name">Serenade</string>
     <string name="action_settings">設定</string>
     <string name="slide_button">スライドを開く</string>
+
+    <!-- Profile -->
+    <string name="follow">フォロー</string>
+    <string name="follower">フォロワー</string>
+
+    <!-- Navigation item -->
     <string name="profile_link">プロフィール</string>
     <string name="tweet_link">ツイートする</string>
     <string name="notification_link">通知</string>

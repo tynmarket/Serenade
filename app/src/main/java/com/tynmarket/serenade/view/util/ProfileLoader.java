@@ -9,7 +9,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.model.util.Resource;
 import com.tynmarket.serenade.model.util.UserUtil;
+
+import java.text.NumberFormat;
 
 /**
  * Created by tynmarket on 2018/03/03.
@@ -35,6 +38,13 @@ public class ProfileLoader {
         screenName.setText(String.format("@%s", user.screenName));
 
         // follow and follower
-        followAndFollower.setText("488フォロー  1,958フォロワー");
+        String followCount = NumberFormat.getInstance().format(488);
+        String follow = Resource.getResources().getString(R.string.follow);
+
+        String followerCount = NumberFormat.getInstance().format(1958);
+        String follower = Resource.getResources().getString(R.string.follower);
+
+        String text = String.format("%s %s  %s %s", followCount, follow, followerCount, follower);
+        followAndFollower.setText(text);
     }
 }
