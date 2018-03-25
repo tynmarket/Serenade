@@ -33,6 +33,10 @@
     <dimen name="spacing_x_medium">10dp</dimen>
     <dimen name="spacing_large">12dp</dimen>
     <dimen name="spacing_x_large">14dp</dimen>
+    <dimen name="spacing_2x_large">16dp</dimen>
+    <dimen name="spacing_3x_large">18dp</dimen>
+    <dimen name="spacing_4x_large">20dp</dimen>
+    <dimen name="spacing_5x_large">22dp</dimen>
 
     <dimen name="spacing_icon_and_margin">56dp</dimen>
     <dimen name="spacing_retweet_start">36dp</dimen>
@@ -40,9 +44,9 @@
     <!-- Tweet -->
     <dimen name="line_spacing_multiplier_tweet_text">1.1</dimen>
 
-    <!-- Sing out -->
-    <dimen name="padding_start_sing_out">3dp</dimen>
-    <dimen name="drawable_padding_sign_out">11dp</dimen>
+    <!-- Navigation -->
+    <dimen name="item_height_navigation">48dp</dimen>
+    <dimen name="icon_size_navigation">24dp</dimen>
 
     <!-- Tab indicator -->
     <dimen name="tab_indicator_height">3dp</dimen>

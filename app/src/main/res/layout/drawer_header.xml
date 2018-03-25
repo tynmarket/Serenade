@@ -52,8 +52,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="@dimen/spacing_x_large"
-        android:background="@color/light_gray" />
+        android:layout_marginTop="@dimen/spacing_5x_large"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:background="@color/silver" />
 
     <!-- profile -->
     <!-- TODO: Make drawable size larger -->
@@ -61,8 +62,9 @@
     <TextView
         android:id="@+id/profile_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/profile"
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
@@ -74,8 +76,9 @@
     <TextView
         android:id="@+id/tweet_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/twitter"
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
@@ -87,8 +90,9 @@
     <TextView
         android:id="@+id/notification_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/notification"
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
@@ -100,8 +104,9 @@
     <TextView
         android:id="@+id/search_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/search"
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
@@ -109,12 +114,20 @@
         android:text="@string/search_link"
         tools:text="検索" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:background="@color/silver" />
+
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/support_link"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/support"
         android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
@@ -126,11 +139,11 @@
     <TextView
         android:id="@+id/sign_out"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_x_large"
-        android:paddingStart="@dimen/padding_start_sing_out"
+        android:layout_height="@dimen/item_height_navigation"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/sign_out"
-        android:drawablePadding="@dimen/drawable_padding_sign_out"
+        android:drawablePadding="@dimen/spacing_x_large"
         android:textSize="@dimen/text_size_medium"
         android:textColor="?android:textColorPrimary"
         android:text="@string/sign_out"

@@ -1,7 +1,7 @@
-<vector android:height="27dp"
+<vector android:height="@dimen/icon_size_navigation"
     android:viewportHeight="24.0"
     android:viewportWidth="24.0"
-    android:width="27dp"
+    android:width="@dimen/icon_size_navigation"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path
         android:fillColor="@color/dark_gray"
