@@ -13,7 +13,6 @@
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list_item"
         android:layout_width="match_parent"
@@ -56,7 +55,8 @@
                 android:id="@+id/icon"
                 android:layout_width="@dimen/icon_size_list_item_tweet"
                 android:layout_height="@dimen/icon_size_list_item_tweet"
-                app:srcCompat="@drawable/default_profile" />
+                android:src="@drawable/default_profile"
+                tools:sec="@drawable/default_profile" />
 
             <com.tynmarket.serenade.view.custom.TweetContentView
                 android:id="@+id/tweet_content"

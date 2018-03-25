@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -20,7 +19,8 @@
             android:id="@+id/profile_icon"
             android:layout_width="@dimen/icon_size_list_item_tweet"
             android:layout_height="@dimen/icon_size_list_item_tweet"
-            app:srcCompat="@drawable/default_profile" />
+            android:src="@drawable/default_profile"
+            tools:src="@drawable/default_profile" />
 
         <!-- screen name -->
         <TextView
