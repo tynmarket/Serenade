@@ -162,6 +162,15 @@ public class TweetUtil {
         return String.format("%sがリツイート", tweet.user.name);
     }
 
+    public static String favoriteCountStr(Tweet tweet) {
+        Tweet tweetOrRetweetedStatus = tweetOrRetweetedStatus(tweet);
+        return formatCount(tweetOrRetweetedStatus.favoriteCount);
+    }
+
+    private static Tweet tweetOrRetweetedStatus(Tweet tweet) {
+        return tweet.retweetedStatus == null ? tweet : tweet.retweetedStatus;
+    }
+
     public static String formatCount(int count) {
         if (count == 0) {
             return "";
