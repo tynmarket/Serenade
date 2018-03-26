@@ -10,6 +10,14 @@
         <variable
             name="tweet"
             type="com.twitter.sdk.android.core.models.Tweet" />
+
+        <variable
+            name="showQuotedStatus"
+            type="boolean" />
+
+        <variable
+            name="showSummaryCard"
+            type="boolean" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -73,7 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            android:layout_marginTop="@dimen/spacing_medium" />
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:visibility="@{showQuotedStatus ? View.VISIBLE : View.GONE}" />
 
         <!-- Summary Card -->
         <!-- TODO: Larger size -->
@@ -82,8 +91,9 @@
             android:layout_below="@+id/quote_tweet_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_icon_and_margin"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginStart="@dimen/spacing_icon_and_margin" />
+            android:visibility="@{showSummaryCard ? View.VISIBLE : View.GONE}" />
 
         <Button
             android:id="@+id/slide_button"

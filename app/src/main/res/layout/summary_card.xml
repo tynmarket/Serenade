@@ -14,7 +14,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_size_summary_image"
-        app:summaryCardVisibility="@{card}"
         android:background="@drawable/shape_border">
 
         <FrameLayout

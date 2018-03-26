@@ -62,6 +62,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         }
 
         setTweetToBindings(tweet);
+        binding.setShowQuotedStatus(tweet.quotedStatus != null);
+        binding.setShowSummaryCard(card != null && (card.isSummary() || card.isSummaryLargeImage()));
         binding.summaryCard.binding.setCard(card);
     }
 
@@ -71,6 +73,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setTweetToBindings(Tweet tweet) {
         binding.setTweet(tweet);
+
         // Tweet
         binding.tweetContent.setTweet(tweet);
         // Quote tweet

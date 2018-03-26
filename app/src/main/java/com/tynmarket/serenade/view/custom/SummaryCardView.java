@@ -41,15 +41,6 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
         super(context, attrs, defStyleAttr);
     }
 
-    @BindingAdapter("summaryCardVisibility")
-    public static void setSummaryCardVisibility(View view, TwitterCard card) {
-        if (card != null && (card.isSummary() || card.isSummaryLargeImage())) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-    }
-
     @BindingAdapter("image")
     public static void setImage(ImageView view, TwitterCard card) {
         if (card != null && card.isSummary()) {
