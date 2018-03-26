@@ -167,7 +167,7 @@ public class TweetUtil {
         return formatCount(tweetOrRetweetedStatus.favoriteCount);
     }
 
-    private static Tweet tweetOrRetweetedStatus(Tweet tweet) {
+    public static Tweet tweetOrRetweetedStatus(Tweet tweet) {
         return tweet.retweetedStatus == null ? tweet : tweet.retweetedStatus;
     }
 
