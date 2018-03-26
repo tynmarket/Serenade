@@ -91,19 +91,19 @@
 
     <!-- TODO: Ripple effect -->
     <TextView
-        android:id="@+id/notification_link"
-        android:drawableStart="@drawable/notification"
-        android:text="@string/notification_link"
-        style="@style/AppTheme.NavigationItem"
-        tools:text="通知" />
-
-    <!-- TODO: Ripple effect -->
-    <TextView
         android:id="@+id/search_link"
         android:drawableStart="@drawable/search"
         android:text="@string/search_link"
         style="@style/AppTheme.NavigationItem"
         tools:text="検索" />
+
+    <!-- TODO: Ripple effect -->
+    <TextView
+        android:id="@+id/notification_link"
+        android:drawableStart="@drawable/notification"
+        android:text="@string/notification_link"
+        style="@style/AppTheme.NavigationItem"
+        tools:text="通知" />
 
     <!-- TODO: Ripple effect -->
     <TextView
