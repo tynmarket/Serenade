@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_large"
             android:visibility="@{showSummaryCard ? View.VISIBLE : View.GONE}" />
 
         <Button
@@ -110,7 +110,8 @@
             android:layout_below="@+id/slide_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_icon_and_margin" />
+            android:layout_marginStart="@dimen/spacing_icon_and_margin"
+            android:layout_marginTop="@dimen/spacing_medium" />
 
         <View
             android:layout_width="match_parent"
