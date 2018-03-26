@@ -23,4 +23,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.TweetActionItem">
+        <item name="android:layout_width">@dimen/text_width_action_with_padding</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/spacing_medium</item>
+        <item name="android:drawablePadding">@dimen/spacing_medium</item>
+    </style>
+
+    <style name="AppTheme.NavigationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/item_height_navigation</item>
+        <item name="android:paddingTop">@dimen/spacing_large</item>
+        <item name="android:paddingBottom">@dimen/spacing_medium</item>
+        <item name="android:drawablePadding">@dimen/spacing_x_large</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
 </resources>

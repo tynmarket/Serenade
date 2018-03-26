@@ -68,57 +68,33 @@
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/profile_link"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/profile"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/profile_link"
+        style="@style/AppTheme.NavigationItem"
         tools:text="プロフィール" />
 
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/tweet_link"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/twitter"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/tweet_link"
+        style="@style/AppTheme.NavigationItem"
         tools:text="ツイートする" />
 
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/notification_link"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/notification"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/notification_link"
+        style="@style/AppTheme.NavigationItem"
         tools:text="通知" />
 
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/search_link"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/search"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/search_link"
+        style="@style/AppTheme.NavigationItem"
         tools:text="検索" />
 
     <View
@@ -131,29 +107,17 @@
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/support_link"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/support"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/support_link"
+        style="@style/AppTheme.NavigationItem"
         tools:text="お問い合わせ" />
 
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/sign_out"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_navigation"
-        android:paddingTop="@dimen/spacing_large"
-        android:paddingBottom="@dimen/spacing_medium"
         android:drawableStart="@drawable/sign_out"
-        android:drawablePadding="@dimen/spacing_x_large"
-        android:textSize="@dimen/text_size_medium"
-        android:textColor="?android:textColorPrimary"
         android:text="@string/sign_out"
+        style="@style/AppTheme.NavigationItem"
         tools:text="ログアウト" />
 
 </LinearLayout>
