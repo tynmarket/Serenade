@@ -9,52 +9,10 @@
     android:layout_marginEnd="@dimen/drawer_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin">
 
-    <!-- TODO: Adjust margin vertical -->
-
-    <RelativeLayout
+    <!-- User profile -->
+    <com.tynmarket.serenade.view.custom.NavigationProfileView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!-- icon -->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_icon"
-            android:layout_width="@dimen/icon_size_navigation_profile"
-            android:layout_height="@dimen/icon_size_navigation_profile"
-            android:src="@drawable/default_profile"
-            tools:src="@drawable/default_profile" />
-
-        <!-- screen name -->
-        <TextView
-            android:id="@+id/profile_screen_name"
-            android:layout_toEndOf="@id/profile_icon"
-            android:layout_alignBottom="@id/profile_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:maxLines="1"
-            tools:text="\@screen_name" />
-
-    </RelativeLayout>
-
-    <!-- TODO: Two lines -->
-    <!-- name -->
-    <TextView
-        android:id="@+id/profile_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:maxLines="1"
-        android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold"
-        android:textColor="?android:textColorPrimary"
-        tools:text="name" />
-
-    <!-- follow and follower -->
-    <TextView
-        android:id="@+id/profile_follow_and_follower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        tools:text="488 フォロー  1,958 フォロワー" />
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"
