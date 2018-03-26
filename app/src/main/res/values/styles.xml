@@ -33,10 +33,10 @@
     <style name="AppTheme.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_height_navigation</item>
-        <item name="android:paddingTop">@dimen/spacing_large</item>
+        <item name="android:paddingTop">@dimen/spacing_2x_large</item>
         <item name="android:paddingBottom">@dimen/spacing_medium</item>
         <item name="android:drawablePadding">@dimen/spacing_x_large</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textSize">@dimen/text_size_2x_small</item>
         <item name="android:textColor">@color/text_black</item>
     </style>
 

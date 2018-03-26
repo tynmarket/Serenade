@@ -22,6 +22,7 @@
     <dimen name="text_size_l_small">13sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_x_small">15sp</dimen>
+    <dimen name="text_size_2x_small">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
 
     <dimen name="corner_radius">4dp</dimen>
