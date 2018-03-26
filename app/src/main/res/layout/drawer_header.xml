@@ -64,7 +64,6 @@
         android:background="@color/silver" />
 
     <!-- profile -->
-    <!-- TODO: Make drawable size larger -->
     <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/profile_link"
@@ -72,6 +71,15 @@
         android:text="@string/profile_link"
         style="@style/AppTheme.NavigationItem"
         tools:text="プロフィール" />
+
+    <!-- list -->
+    <!-- TODO: Ripple effect -->
+    <TextView
+        android:id="@+id/list_link"
+        android:drawableStart="@drawable/list"
+        android:text="@string/list_link"
+        style="@style/AppTheme.NavigationItem"
+        tools:text="リスト" />
 
     <!-- TODO: Ripple effect -->
     <TextView
@@ -94,6 +102,14 @@
         android:id="@+id/search_link"
         android:drawableStart="@drawable/search"
         android:text="@string/search_link"
+        style="@style/AppTheme.NavigationItem"
+        tools:text="検索" />
+
+    <!-- TODO: Ripple effect -->
+    <TextView
+        android:id="@+id/message_link"
+        android:drawableStart="@drawable/message"
+        android:text="@string/message_link"
         style="@style/AppTheme.NavigationItem"
         tools:text="検索" />
 

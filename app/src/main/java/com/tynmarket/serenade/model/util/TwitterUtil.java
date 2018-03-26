@@ -17,6 +17,14 @@ public class TwitterUtil {
         return Uri.parse(profileUrl(screenName) + "/status/" + idStr);
     }
 
+    public static Uri listUri(String screenName) {
+        return Uri.parse(profileUrl(screenName) + "/lists");
+    }
+
+    public static Uri messageUri() {
+        return Uri.parse("https://mobile.twitter.com/messages");
+    }
+
     private static String profileUrl(String screenName) {
         return TWITTER_URL + screenName;
     }

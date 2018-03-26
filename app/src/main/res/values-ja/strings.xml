@@ -10,9 +10,11 @@
 
     <!-- Navigation item -->
     <string name="profile_link">プロフィール</string>
+    <string name="list_link">リスト</string>
     <string name="tweet_link">ツイートする</string>
     <string name="notification_link">通知</string>
     <string name="search_link">検索</string>
+    <string name="message_link">ダイレクトメッセージ</string>
     <string name="support_link">お問い合わせ</string>
     <string name="sign_out">ログアウト</string>
 

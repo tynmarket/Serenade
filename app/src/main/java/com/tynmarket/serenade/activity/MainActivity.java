@@ -173,6 +173,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             startActivity(intent);
         });
 
+        // Open list
+        findViewById(R.id.list_link).setOnClickListener(v -> {
+            closeDrawer();
+
+            Uri uri = TwitterUtil.listUri(event.user.screenName);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
+
         // Open post tweet
         findViewById(R.id.tweet_link).setOnClickListener(v -> {
             closeDrawer();
@@ -201,6 +211,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
             // TODO: Transition
             Uri uri = Uri.parse("https://twitter.com/search?q=a");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            // TODO: Transition
+            startActivity(intent);
+        });
+
+        // Open messages
+        findViewById(R.id.message_link).setOnClickListener(v -> {
+            closeDrawer();
+
+            // TODO: Transition
+            Uri uri = TwitterUtil.messageUri();
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             // TODO: Transition
             startActivity(intent);

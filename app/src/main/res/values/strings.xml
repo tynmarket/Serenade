@@ -10,9 +10,11 @@
 
     <!-- Navigation item -->
     <string name="profile_link">Profile</string>
+    <string name="list_link">Lists</string>
     <string name="tweet_link">Tweet</string>
-    <string name="notification_link">Notification</string>
+    <string name="notification_link">Notifications</string>
     <string name="search_link">Search</string>
+    <string name="message_link">Messages</string>
     <string name="support_link">Support</string>
     <string name="sign_out">Sign out</string>
 
