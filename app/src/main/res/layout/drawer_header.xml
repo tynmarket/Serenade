@@ -17,8 +17,8 @@
         <!-- icon -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_icon"
-            android:layout_width="@dimen/icon_size_list_item_tweet"
-            android:layout_height="@dimen/icon_size_list_item_tweet"
+            android:layout_width="@dimen/icon_size_navigation_profile"
+            android:layout_height="@dimen/icon_size_navigation_profile"
             android:src="@drawable/default_profile"
             tools:src="@drawable/default_profile" />
 
