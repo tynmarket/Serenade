@@ -1,5 +1,7 @@
 package com.tynmarket.serenade.model.util;
 
+import android.support.annotation.Nullable;
+
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 
@@ -10,22 +12,40 @@ import java.text.NumberFormat;
  */
 
 public class UserUtil {
-    public static String get200xProfileImageUrlHttps(User user) {
+    @Nullable
+    public static String get200xProfileImageUrlHttps(@Nullable User user) {
+        if (user == null) {
+            return null;
+        }
         return user.profileImageUrlHttps.replace("_normal", "_200x200");
     }
 
-    public static String screenName(User user) {
+    @Nullable
+    public static String screenName(@Nullable User user) {
+        if (user == null) {
+            return null;
+        }
         return String.format("@%s", user.screenName);
     }
 
-    public static String follow(User user) {
+    @Nullable
+    public static String follow(@Nullable User user) {
+        if (user == null) {
+            return null;
+        }
+
         String followCount = NumberFormat.getInstance().format(user.friendsCount);
         String follow = Resource.getResources().getString(R.string.follow);
 
         return String.format("%s %s", followCount, follow);
     }
 
-    public static String follower(User user) {
+    @Nullable
+    public static String follower(@Nullable User user) {
+        if (user == null) {
+            return null;
+        }
+
         String followerCount = NumberFormat.getInstance().format(user.followersCount);
         String follower = Resource.getResources().getString(R.string.follower);
 
