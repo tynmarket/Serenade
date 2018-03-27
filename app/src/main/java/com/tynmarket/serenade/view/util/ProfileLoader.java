@@ -2,17 +2,8 @@ package com.tynmarket.serenade.view.util;
 
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.User;
-import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.util.Resource;
-import com.tynmarket.serenade.model.util.UserUtil;
-
-import java.text.NumberFormat;
 
 /**
  * Created by tynmarket on 2018/03/03.
@@ -21,6 +12,8 @@ import java.text.NumberFormat;
 public class ProfileLoader {
     @SuppressLint("SetTextI18n")
     public static void loadProfile(AppCompatActivity activity, User user) {
+
+        /*
         ImageView icon = activity.findViewById(R.id.profile_icon);
         TextView name = activity.findViewById(R.id.profile_name);
         TextView screenName = activity.findViewById(R.id.profile_screen_name);
@@ -46,5 +39,6 @@ public class ProfileLoader {
 
         String text = String.format("%s %s  %s %s", followCount, follow, followerCount, follower);
         followAndFollower.setText(text);
+        */
     }
 }

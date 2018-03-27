@@ -124,7 +124,7 @@ public class TweetUtil {
         if (tweet == null) {
             return null;
         }
-        return String.format("@%s", tweet.user.screenName);
+        return UserUtil.screenName(tweet.user);
     }
 
     @Nullable

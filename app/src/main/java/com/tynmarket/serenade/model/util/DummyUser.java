@@ -10,8 +10,8 @@ public class DummyUser {
     public static User tynmarket() {
         return new User(false, "createdAt", false,
                 false, "description", "emailAddress",
-                null, 0, false, 0,
-                0, false, 0, "idStr", false,
+                null, 0, false, 1958,
+                488, false, 0, "idStr", false,
                 "lang", 0, "location", "ティン＠iMarket管理人",
                 "profileBackgroundColor", "profileBackgroundImageUrl",
                 "profileBackgroundImageUrlHttps", false,
