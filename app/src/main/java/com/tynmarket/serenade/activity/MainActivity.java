@@ -2,7 +2,6 @@ package com.tynmarket.serenade.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,12 +26,12 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.databinding.NavigationProfileBinding;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
+import com.tynmarket.serenade.view.custom.NavigationProfileView;
 import com.tynmarket.serenade.view.listner.OpenDrawerOnSwipeListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
     private ViewPager mViewPager;
     private GestureDetector mGestureDetector;
-    private NavigationProfileBinding binding;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
     @Subscribe
     public void onLoadUserEvent(LoadUserEvent event) {
-        binding = DataBindingUtil.bind(findViewById(R.id.navigation_profile));
-        binding.setUser(event.user);
+        NavigationProfileView profile = findViewById(R.id.navigation_profile);
+        profile.binding.setUser(event.user);
 
         // Open profile
         findViewById(R.id.profile_link).setOnClickListener(v -> {
