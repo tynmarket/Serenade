@@ -19,7 +19,7 @@
 
         <!-- icon -->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_icon"
+            android:id="@+id/profile"
             android:layout_width="@dimen/icon_size_navigation_profile"
             android:layout_height="@dimen/icon_size_navigation_profile"
             app:profileImage="@{user}"
@@ -28,9 +28,9 @@
 
         <!-- screen name -->
         <TextView
-            android:id="@+id/profile_screen_name"
-            android:layout_toEndOf="@id/profile_icon"
-            android:layout_alignBottom="@id/profile_icon"
+            android:id="@+id/screen_name"
+            android:layout_toEndOf="@id/profile"
+            android:layout_alignBottom="@id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_large"
@@ -41,8 +41,8 @@
         <!-- TODO: Two lines -->
         <!-- name -->
         <TextView
-            android:id="@+id/profile_name"
-            android:layout_below="@+id/profile_icon"
+            android:id="@+id/name"
+            android:layout_below="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
@@ -55,8 +55,8 @@
 
         <!-- follow -->
         <TextView
-            android:id="@+id/profile_follow"
-            android:layout_below="@id/profile_name"
+            android:id="@+id/follow"
+            android:layout_below="@id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large"
@@ -65,9 +65,9 @@
 
         <!-- follower -->
         <TextView
-            android:id="@+id/profile_follower"
-            android:layout_below="@id/profile_name"
-            android:layout_toEndOf="@id/profile_follow"
+            android:id="@+id/follower"
+            android:layout_below="@id/name"
+            android:layout_toEndOf="@id/follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
