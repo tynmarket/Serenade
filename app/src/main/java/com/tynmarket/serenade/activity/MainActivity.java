@@ -163,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     public void onLoadUserEvent(LoadUserEvent event) {
         NavigationProfileView profile = findViewById(R.id.navigation_profile);
         profile.binding.setUser(event.user);
+        profile.setOnNavigationItemClickListener(v -> {
+            closeDrawer();
+        });
 
         // Open profile
         findViewById(R.id.profile_link).setOnClickListener(v -> {

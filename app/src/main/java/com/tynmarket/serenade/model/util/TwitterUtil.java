@@ -25,6 +25,14 @@ public class TwitterUtil {
         return Uri.parse("https://mobile.twitter.com/messages");
     }
 
+    public static Uri followUri(String screenName) {
+        return Uri.parse(profileUrl(screenName) + "/following");
+    }
+
+    public static Uri followerUri(String screenName) {
+        return Uri.parse(profileUrl(screenName) + "/followers");
+    }
+
     private static String profileUrl(String screenName) {
         return TWITTER_URL + screenName;
     }
