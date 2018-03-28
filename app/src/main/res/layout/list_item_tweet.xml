@@ -59,9 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/retweet_user_name">
 
-            <!-- TODO: Move to profile -->
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/icon"
+                android:id="@+id/profile"
                 android:layout_width="@dimen/icon_size_list_item_tweet"
                 android:layout_height="@dimen/icon_size_list_item_tweet"
                 app:profileImage="@{tweet}"
@@ -70,7 +69,7 @@
 
             <com.tynmarket.serenade.view.custom.TweetContentView
                 android:id="@+id/tweet_content"
-                android:layout_toEndOf="@+id/icon"
+                android:layout_toEndOf="@+id/profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
