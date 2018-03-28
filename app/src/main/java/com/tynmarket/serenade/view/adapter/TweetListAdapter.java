@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -43,7 +42,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
-        User user = tweet.user;
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         holder.setTweetAndCardToBindings(tweet, card);
