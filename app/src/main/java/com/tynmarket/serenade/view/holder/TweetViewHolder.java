@@ -1,14 +1,18 @@
 package com.tynmarket.serenade.view.holder;
 
 import android.content.Intent;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
@@ -17,6 +21,7 @@ import com.tynmarket.serenade.model.TweetMapper;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
+import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 /**
@@ -46,6 +51,15 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setOnReplyClickListener();
         setOnFavoriteClickListener();
         setOnRetweetClickListener();
+    }
+
+    @BindingAdapter("profileImage")
+    public static void setProfileImage(ImageView view, Tweet tweet) {
+        User user = TweetUtil.tweetOrRetweetedStatus(tweet).user;
+        String profileImageUrl = UserUtil.get200xProfileImageUrlHttps(user);
+        // TODO: GlideApp
+        // TODO: Loading image or border
+        Glide.with(view.getContext()).load(profileImageUrl).into(view);
     }
 
     public void setAdapter(TweetListAdapter adapter) {

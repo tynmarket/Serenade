@@ -1,19 +1,15 @@
 package com.tynmarket.serenade.view.adapter;
 
-import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
-import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 import java.util.ArrayList;
@@ -29,8 +25,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
     private Map<String, TwitterCard> cards;
 
-    private RequestManager manager;
-
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
         this.cards = new HashMap<>();
@@ -40,13 +34,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     // parent is RecyclerView
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_tweet, parent, false);
-        // TODO: GlideApp
-        manager = Glide.with(parent.getContext());
 
         return new TweetViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         holder.setAdapter(this);
@@ -56,18 +47,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
 
         holder.setTweetAndCardToBindings(tweet, card);
-
-        String profileImageUrlHttps;
-
-        // Retweet
-        if (tweet.retweetedStatus != null) {
-            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(tweet.retweetedStatus.user);
-        } else {
-            profileImageUrlHttps = UserUtil.get200xProfileImageUrlHttps(user);
-        }
-
-        // TODO: Loading image or border
-        manager.load(profileImageUrlHttps).into(holder.binding.icon);
 
         // Slide button
         // TODO: SlideShare
