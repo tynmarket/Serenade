@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -39,11 +40,18 @@ public class TweetContentView extends RelativeLayout {
 
         // Open tweet
         setOnTweetTextClickListener();
-        // TODO: Move to profile when click the screenName
+        // Open profile
+        setOnNameClickListener();
+        setOnScreenNameClickListener();
     }
 
     public TweetContentView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @BindingAdapter("tweetPhoto")
+    public static void setTweetPhoto(ImageView view, Tweet tweet) {
+        TweetUtil.loadImage(view, tweet);
     }
 
     public void setTweet(@Nullable Tweet tweet) {
@@ -52,11 +60,6 @@ public class TweetContentView extends RelativeLayout {
         } else {
             binding.setTweet(tweet);
         }
-    }
-
-    @BindingAdapter("tweetPhoto")
-    public static void setTweetPhoto(ImageView view, Tweet tweet) {
-        TweetUtil.loadImage(view, tweet);
     }
 
     private void setOnTweetTextClickListener() {
@@ -69,5 +72,25 @@ public class TweetContentView extends RelativeLayout {
             // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
             getContext().startActivity(intent);
         });
+    }
+
+    private void setOnNameClickListener() {
+        binding.name.setOnClickListener(v -> {
+            openProfile();
+        });
+    }
+
+    private void setOnScreenNameClickListener() {
+        binding.screenName.setOnClickListener(v -> {
+            openProfile();
+        });
+    }
+
+    private void openProfile() {
+        User user = TweetUtil.tweetOrRetweetedStatus(binding.getTweet()).user;
+        Uri uri = TwitterUtil.profileUri(user.screenName);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        // TODO: Transition
+        binding.getRoot().getContext().startActivity(intent);
     }
 }
