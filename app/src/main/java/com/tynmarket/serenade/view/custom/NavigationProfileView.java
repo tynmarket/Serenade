@@ -37,7 +37,9 @@ public class NavigationProfileView extends RelativeLayout {
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DataBindingUtil.inflate(inflater, R.layout.navigation_profile, this, true);
 
+        // Open following
         setOnFollowClickListener();
+        // Open followers
         setOnFollowerClickListener();
     }
 
