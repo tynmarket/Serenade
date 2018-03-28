@@ -146,10 +146,11 @@ public class TweetUtil {
         d = d.withZoneSameInstant(ZoneId.systemDefault());
 
         // TODO: Locale
+        // TODO: Format time as any other client
         if (d.toLocalDate().equals(LocalDate.now())) {
-            return d.format(DateTimeFormatter.ofPattern("HH時mm分"));
+            return d.format(DateTimeFormatter.ofPattern("H時m分"));
         } else {
-            return d.format(DateTimeFormatter.ofPattern("M月dd日"));
+            return d.format(DateTimeFormatter.ofPattern("M月d日"));
         }
     }
 
