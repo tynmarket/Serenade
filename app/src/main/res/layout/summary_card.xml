@@ -36,7 +36,7 @@
                 android:layout_height="@dimen/image_size_summary_image"
                 android:gravity="center"
                 android:textColor="@color/silver"
-                android:background="@drawable/corner_radius_left_area"
+                android:background="@drawable/border_left_area"
                 app:imageText="@{card}"
                 tools:text="summary_large_image_text" />
 
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toEndOf="@+id/image_or_text"
-            android:background="@drawable/corner_radius_right_area">
+            android:background="@drawable/border_right_area">
 
             <RelativeLayout
                 android:layout_width="match_parent"
