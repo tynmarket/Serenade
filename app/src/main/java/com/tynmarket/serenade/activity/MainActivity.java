@@ -1,9 +1,7 @@
 package com.tynmarket.serenade.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -263,27 +261,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         Twitter.initialize(config);
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void loadUser() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                LoginUser.loadUser();
-            }
-        }.execute();
+        LoginUser.loadUser();
     }
 
     private void openDrawer() {
+        // TODO: Update profile
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.openDrawer(GravityCompat.START);
     }

@@ -1,5 +1,7 @@
 package com.tynmarket.serenade.model;
 
+import android.util.Log;
+
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
@@ -8,13 +10,13 @@ import com.tynmarket.serenade.model.util.DummyUser;
 
 import org.greenrobot.eventbus.EventBus;
 
+import retrofit2.Call;
+
 /**
  * Created by tynmarket on 2018/03/03.
  */
 
 public class LoginUser {
-    private static LoginUser loginUser;
-
     private User user;
 
     public static boolean signedIn() {
@@ -23,29 +25,21 @@ public class LoginUser {
     }
 
     public static void loadUser() {
-        if (loginUser == null) {
-            User user = DummyUser.tynmarket();
-            EventBus.getDefault().post(new LoadUserEvent(user));
-            /*
-            TwitterApiClient client = TwitterCore.getInstance().getApiClient();
-            AccountService service = client.getAccountService();
+        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+        CustomTwitterApiClient client = new CustomTwitterApiClient(session);
+        long userId = session.getUserId();
 
-            Call<User> call = service.verifyCredentials(false, true, false);
-
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void success(Result<User> result) {
-                    Log.d("Serenade", "verifyCredentials success");
-                    EventBus.getDefault().post(new LoadUserEvent(result.data));
-                }
-
-                @Override
-                public void failure(TwitterException exception) {
-                    Log.d("Serenade", "verifyCredentials failure");
-                }
-            });
-            */
-        }
+        Call<User> call = client.getUsersService().show(userId, null, false);
+        RetrofitObserver
+                .create(call)
+                .subscribe(user -> {
+                    Log.d("Serenade", String.format("loadUser success"));
+                    EventBus.getDefault().post(new LoadUserEvent(user));
+                }, throwable -> {
+                    Log.d("Serenade", String.format("loadUser failure"));
+                    // TODO: Dummy or empty user
+                    EventBus.getDefault().post(new LoadUserEvent(DummyUser.tynmarket()));
+                });
     }
 
     public static void signOut() {
