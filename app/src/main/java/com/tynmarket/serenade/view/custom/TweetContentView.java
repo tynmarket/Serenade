@@ -9,12 +9,9 @@ import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +22,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
+import com.tynmarket.serenade.view.text.TweetTextClickableSpan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,51 +71,29 @@ public class TweetContentView extends RelativeLayout {
         Spannable spannable = new SpannableString(tweet.text);
 
         Matcher matcher = patternScreenName.matcher(tweet.text);
-        if (matcher.find()) {
+        while (matcher.find()) {
             String screenName = matcher.group(1);
             // TODO: Ripple effect
-            spannable.setSpan(new ClickableSpan() {
-                                  @Override
-                                  public void onClick(View widget) {
-                                      spanClicked = true;
-
-                                      Uri uri = TwitterUtil.profileUri(screenName);
-                                      Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                      // TODO: Transition
-                                      widget.getContext().startActivity(intent);
-                                  }
-
-                                  @Override
-                                  public void updateDrawState(TextPaint ds) {
-                                      super.updateDrawState(ds);
-                                      ds.setUnderlineText(false);
-                                  }
-                              }, matcher.start(), matcher.end(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new TweetTextClickableSpan() {
+                @Override
+                public Uri onClickSpannable() {
+                    spanClicked = true;
+                    return TwitterUtil.profileUri(screenName);
+                }
+            }, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         matcher = patternHashTag.matcher(tweet.text);
-        if (matcher.find()) {
+        while (matcher.find()) {
             String hashTag = matcher.group(1);
             // TODO: Ripple effect
-            spannable.setSpan(new ClickableSpan() {
-                                  @Override
-                                  public void onClick(View widget) {
-                                      spanClicked = true;
-
-                                      Uri uri = TwitterUtil.hashTagUri(hashTag);
-                                      Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                      // TODO: Transition
-                                      widget.getContext().startActivity(intent);
-                                  }
-
-                                  @Override
-                                  public void updateDrawState(TextPaint ds) {
-                                      super.updateDrawState(ds);
-                                      ds.setUnderlineText(false);
-                                  }
-                              }, matcher.start(), matcher.end(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new TweetTextClickableSpan() {
+                @Override
+                public Uri onClickSpannable() {
+                    spanClicked = true;
+                    return TwitterUtil.hashTagUri(hashTag);
+                }
+            }, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         view.setText(spannable, TextView.BufferType.SPANNABLE);
