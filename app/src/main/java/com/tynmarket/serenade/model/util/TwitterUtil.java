@@ -33,6 +33,10 @@ public class TwitterUtil {
         return Uri.parse(profileUrl(screenName) + "/followers");
     }
 
+    public static Uri hashTagUri(String hashTag) {
+        return Uri.parse(TWITTER_URL + "hashtag/" + hashTag + "?src=hash");
+    }
+
     private static String profileUrl(String screenName) {
         return TWITTER_URL + screenName;
     }

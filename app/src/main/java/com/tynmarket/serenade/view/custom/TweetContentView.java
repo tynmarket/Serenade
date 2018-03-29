@@ -34,7 +34,8 @@ import java.util.regex.Pattern;
  */
 
 public class TweetContentView extends RelativeLayout {
-    private static final Pattern pattern = Pattern.compile("@([\\p{Alnum}|_]+)");
+    private static final Pattern patternScreenName = Pattern.compile("@([\\p{Alnum}|_]+)");
+    private static final Pattern patternHashTag = Pattern.compile("#([\\w|_]+)");
     private static boolean spanClicked = false;
 
     private TweetContentBinding binding;
@@ -69,8 +70,9 @@ public class TweetContentView extends RelativeLayout {
             return;
         }
 
-        Matcher matcher = pattern.matcher(tweet.text);
         Spannable spannable = new SpannableString(tweet.text);
+
+        Matcher matcher = patternScreenName.matcher(tweet.text);
         if (matcher.find()) {
             String screenName = matcher.group(1);
             // TODO: Ripple effect
@@ -93,6 +95,31 @@ public class TweetContentView extends RelativeLayout {
                               }, matcher.start(), matcher.end(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
+        matcher = patternHashTag.matcher(tweet.text);
+        if (matcher.find()) {
+            String hashTag = matcher.group(1);
+            // TODO: Ripple effect
+            spannable.setSpan(new ClickableSpan() {
+                                  @Override
+                                  public void onClick(View widget) {
+                                      spanClicked = true;
+
+                                      Uri uri = TwitterUtil.hashTagUri(hashTag);
+                                      Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                      // TODO: Transition
+                                      widget.getContext().startActivity(intent);
+                                  }
+
+                                  @Override
+                                  public void updateDrawState(TextPaint ds) {
+                                      super.updateDrawState(ds);
+                                      ds.setUnderlineText(false);
+                                  }
+                              }, matcher.start(), matcher.end(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
         view.setText(spannable, TextView.BufferType.SPANNABLE);
         view.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -124,15 +151,6 @@ public class TweetContentView extends RelativeLayout {
                 getContext().startActivity(intent);
             }
         });
-        /*
-        binding.tweetText.setMovementMethod(new LinkMovementMethod() {
-            @Override
-            public boolean onTouchEvent(TextView widget, Spannable buffer,
-                                        MotionEvent event) {
-                return true;
-            }
-        });
-        */
     }
 
     private void setOnNameClickListener() {
