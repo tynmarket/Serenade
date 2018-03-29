@@ -84,6 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
             android:layout_marginTop="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium"
+            android:background="@drawable/corner_radius"
             android:visibility="@{showQuotedStatus ? View.VISIBLE : View.GONE}" />
 
         <!-- Summary Card -->
