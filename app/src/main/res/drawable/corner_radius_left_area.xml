@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" />
+    <!-- TODO: Lighten color, from resource -->
+    <stroke
+        android:width="1px"
+        android:color="@color/silver" />
+    <solid android:color="@color/white_smoke" />
+    <corners
+        android:topLeftRadius="@dimen/spacing_small"
+        android:bottomLeftRadius="@dimen/spacing_small" />
+</shape>

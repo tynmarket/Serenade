@@ -13,8 +13,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_size_summary_image"
-        android:background="@drawable/shape_border">
+        android:layout_height="@dimen/image_size_summary_image">
 
         <FrameLayout
             android:id="@+id/image_or_text"
@@ -36,8 +35,8 @@
                 android:layout_width="@dimen/image_size_summary_image"
                 android:layout_height="@dimen/image_size_summary_image"
                 android:gravity="center"
-                android:background="@color/white_smoke"
                 android:textColor="@color/silver"
+                android:background="@drawable/corner_radius_left_area"
                 app:imageText="@{card}"
                 tools:text="summary_large_image_text" />
 
@@ -45,29 +44,36 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_toEndOf="@+id/image_or_text"
-            android:layout_centerVertical="true">
+            android:background="@drawable/corner_radius_right_area">
 
-            <TextView
-                android:id="@+id/title"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/spacing_medium"
-                android:maxLines="2"
-                android:textColor="@color/text_black"
-                android:text="@{card != null ? card.title : null}"
-                tools:text="summary_title" />
+                android:layout_centerVertical="true">
 
-            <TextView
-                android:id="@+id/card_summary_host"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:paddingStart="@dimen/spacing_medium"
-                android:textSize="@dimen/text_size_small"
-                android:text="@{card != null ? card.host : null}"
-                tools:text="summary_host" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/spacing_medium"
+                    android:maxLines="2"
+                    android:textColor="@color/text_black"
+                    android:text="@{card != null ? card.title : null}"
+                    tools:text="summary_title" />
+
+                <TextView
+                    android:id="@+id/card_summary_host"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:paddingStart="@dimen/spacing_medium"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@{card != null ? card.host : null}"
+                    tools:text="summary_host" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
