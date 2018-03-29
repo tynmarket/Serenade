@@ -69,7 +69,7 @@
             android:textColor="@color/text_black"
             android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_tweet_text"
             android:autoLink="web"
-            android:text="@{tweet.text}"
+            app:tweetText="@{tweet}"
             tools:text="tweet_text" />
 
         <!-- TODO: Movie -->
