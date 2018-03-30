@@ -39,6 +39,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
         binding = DataBindingUtil.bind(itemView);
 
+        // Open Tweet
+        setOnLayoutClickListener();
+
         // Open profile
         // TODO: Set listener to quoted status
         setOnProfileClickListener();
@@ -100,6 +103,15 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void replaceTweet(Tweet tweet) {
         adapter.replaceTweet(getAdapterPosition(), tweet);
         setTweetToBindings(tweet);
+    }
+
+
+    private void setOnLayoutClickListener() {
+        binding.getRoot().setOnClickListener(v -> {
+            User user = TweetUtil.tweetOrRetweetedStatus(binding.getTweet()).user;
+            Uri uri = TwitterUtil.profileUri(user.screenName);
+            ActivityHelper.startUriActivity(binding.getRoot().getContext(), uri);
+        });
     }
 
     @SuppressWarnings("SpellCheckingInspection")

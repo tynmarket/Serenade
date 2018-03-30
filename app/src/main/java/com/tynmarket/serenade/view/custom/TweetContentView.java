@@ -50,11 +50,11 @@ public class TweetContentView extends RelativeLayout {
 
         // TODO: Show displayUrl, move to url
         // TODO: Replace escaped character in tweet
-        // TODO: Make ripple effect enable when touch the tweet text (autoLink, LinkMovementMethod, OnClickListener)
+        // TODO: Make ripple effect on root item view when touch the tweet text (autoLink, LinkMovementMethod, OnClickListener)
 
         // Open tweet
         setOnTweetTextClickListener();
-        setOnLayoutClickListener();
+
         // Open profile
         setOnNameClickListener();
         setOnScreenNameClickListener();
@@ -113,12 +113,6 @@ public class TweetContentView extends RelativeLayout {
         } else {
             binding.setTweet(tweet);
         }
-    }
-
-    private void setOnLayoutClickListener() {
-        binding.getRoot().setOnClickListener(v -> {
-            openTweet();
-        });
     }
 
     private void setOnTweetTextClickListener() {
