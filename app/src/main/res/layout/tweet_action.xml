@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:drawableStart="@drawable/reply"
+            android:background="?android:selectableItemBackground"
             style="@style/AppTheme.TweetActionItem"
             tools:text="5,555" />
 

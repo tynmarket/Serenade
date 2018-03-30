@@ -37,10 +37,6 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing_x_medium" />
 
-        <!-- TODO: Ripple Effect -->
-        <!-- http://atamo-dev.hatenablog.com/entry/2017/03/01/180530 -->
-
-        <!-- TODO: Reply to -->
         <TextView
             android:id="@+id/retweet_user_name"
             android:layout_below="@+id/top_margin"
@@ -54,6 +50,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             android:visibility="@{tweet.retweetedStatus != null ? View.VISIBLE : View.GONE}"
             android:text="@{TweetUtil.retweetUserName(tweet)}"
+            android:background="?android:selectableItemBackground"
             tools:text="ティンがリツイート" />
 
         <RelativeLayout
@@ -66,8 +63,9 @@
                 android:id="@+id/profile"
                 android:layout_width="@dimen/icon_size_list_item_tweet"
                 android:layout_height="@dimen/icon_size_list_item_tweet"
-                app:profileImage="@{tweet}"
                 android:src="@drawable/default_profile"
+                android:background="?android:selectableItemBackground"
+                app:profileImage="@{tweet}"
                 tools:sec="@drawable/default_profile" />
 
             <com.tynmarket.serenade.view.custom.TweetContentView
