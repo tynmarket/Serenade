@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                 //LoginUser.loadUser();
             }
         } else {
-            overridePendingTransition(0, android.R.anim.slide_out_right);
+            //overridePendingTransition(0, android.R.transition.fade);
         }
     }
 
