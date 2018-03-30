@@ -84,9 +84,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Tab icon
         Tab tabHome = tabLayout.getTabAt(0);
-        tabHome.setIcon(R.drawable.home_selector);
+        if (tabHome != null) {
+            tabHome.setIcon(R.drawable.home_selector);
+        }
         Tab tabFavorite = tabLayout.getTabAt(1);
-        tabFavorite.setIcon(R.drawable.favorite_selector);
+        if (tabFavorite != null) {
+            tabFavorite.setIcon(R.drawable.favorite_selector);
+        }
 
         // TODO: Double click
         FloatingActionButton fab = findViewById(R.id.fab);
