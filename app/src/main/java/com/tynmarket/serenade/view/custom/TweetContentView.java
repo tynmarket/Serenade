@@ -20,6 +20,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
+import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.text.TweetTextClickableSpan;
@@ -120,11 +121,7 @@ public class TweetContentView extends RelativeLayout {
             } else {
                 Tweet tweet = binding.getTweet();
                 Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                // TODO: FLAG_ACTIVITY
-                // TODO: Transition
-                // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-                getContext().startActivity(intent);
+                ActivityHelper.startUriActivity(getContext(), uri);
             }
         });
     }
@@ -145,7 +142,6 @@ public class TweetContentView extends RelativeLayout {
         User user = TweetUtil.tweetOrRetweetedStatus(binding.getTweet()).user;
         Uri uri = TwitterUtil.profileUri(user.screenName);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        // TODO: Transition
-        binding.getRoot().getContext().startActivity(intent);
+        ActivityHelper.startUriActivity(binding.getRoot().getContext(), uri);
     }
 }

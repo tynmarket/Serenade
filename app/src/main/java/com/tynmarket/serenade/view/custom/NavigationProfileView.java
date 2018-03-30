@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.view.custom;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -15,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.NavigationProfileBinding;
+import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.listner.OnNavigationItemClickListener;
@@ -62,9 +62,7 @@ public class NavigationProfileView extends RelativeLayout {
 
             // Open follow
             Uri uri = TwitterUtil.followUri(binding.getUser().screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            v.getContext().startActivity(intent);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
 
@@ -74,9 +72,7 @@ public class NavigationProfileView extends RelativeLayout {
 
             // Open follower
             Uri uri = TwitterUtil.followerUri(binding.getUser().screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            v.getContext().startActivity(intent);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
 }

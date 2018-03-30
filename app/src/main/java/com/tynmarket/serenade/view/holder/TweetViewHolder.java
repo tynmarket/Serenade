@@ -19,6 +19,7 @@ import com.tynmarket.serenade.model.FavoriteTweet;
 import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.TweetMapper;
 import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
@@ -108,10 +109,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding.profile.setOnClickListener(v -> {
             User user = TweetUtil.tweetOrRetweetedStatus(getTweet()).user;
             Uri uri = TwitterUtil.profileUri(user.screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-            itemView.getContext().startActivity(intent);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
 
@@ -128,12 +126,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnReplyClickListener() {
         binding.tweetAction.binding.reply.setOnClickListener(v -> {
             Tweet tweet = TweetUtil.tweetOrRetweetedStatus(getTweet());
-            String url = "https://twitter.com/intent/tweet?in_reply_to=" + tweet.idStr;
-            Uri uri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
+            Uri uri = TwitterUtil.replyUri(tweet.idStr);
             // TODO: startActivityForResult
-            v.getContext().startActivity(intent);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
 

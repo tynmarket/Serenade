@@ -27,6 +27,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
+import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
 import com.tynmarket.serenade.view.custom.NavigationProfileView;
@@ -170,9 +171,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             closeDrawer();
 
             Uri uri = TwitterUtil.profileUri(event.user.screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open list
@@ -180,53 +179,40 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             closeDrawer();
 
             Uri uri = TwitterUtil.listUri(event.user.screenName);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open post tweet
         findViewById(R.id.tweet_link).setOnClickListener(v -> {
             closeDrawer();
 
-            Uri uri = Uri.parse("https://twitter.com/intent/tweet");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
+            Uri uri = TwitterUtil.newTweetUri();
             // TODO: startActivityForResult
-            startActivity(intent);
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open notifications
         findViewById(R.id.notification_link).setOnClickListener(v -> {
             closeDrawer();
 
-            // TODO: Transition
-            Uri uri = Uri.parse("https://twitter.com/i/notifications");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            Uri uri = TwitterUtil.notificationUri();
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open search (dummy page of query 'a')
         findViewById(R.id.search_link).setOnClickListener(v -> {
             closeDrawer();
 
-            // TODO: Transition
-            Uri uri = Uri.parse("https://twitter.com/search?q=a");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            Uri uri = TwitterUtil.searchUri();
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open messages
         findViewById(R.id.message_link).setOnClickListener(v -> {
             closeDrawer();
 
-            // TODO: Transition
             Uri uri = TwitterUtil.messageUri();
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Open support page
@@ -235,9 +221,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
             // TODO: English version
             Uri uri = Uri.parse("https://goo.gl/forms/A1WAEstc076I49dx1");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            // TODO: Transition
-            startActivity(intent);
+            ActivityHelper.startUriActivity(this, uri);
         });
 
         // Sign out from twitter

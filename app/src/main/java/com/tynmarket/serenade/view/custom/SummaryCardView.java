@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.view.custom;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -16,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.SummaryCardBinding;
 import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.util.ActivityHelper;
 
 /**
  * Created by tynmarket on 2018/03/19.
@@ -67,7 +67,6 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
     public void onClick(View v) {
         String url = binding.getCard().url;
         Uri uri = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        v.getContext().startActivity(intent);
+        ActivityHelper.startUriActivity(v.getContext(), uri);
     }
 }

@@ -21,6 +21,18 @@ public class TwitterUtil {
         return Uri.parse(profileUrl(screenName) + "/lists");
     }
 
+    public static Uri newTweetUri() {
+        return Uri.parse(TWITTER_URL + "intent/tweet");
+    }
+
+    public static Uri notificationUri() {
+        return Uri.parse(TWITTER_URL + "i/notifications");
+    }
+
+    public static Uri searchUri() {
+        return Uri.parse(TWITTER_URL + "search?q=a");
+    }
+
     public static Uri messageUri() {
         return Uri.parse("https://mobile.twitter.com/messages");
     }
@@ -35,6 +47,10 @@ public class TwitterUtil {
 
     public static Uri hashTagUri(String hashTag) {
         return Uri.parse(TWITTER_URL + "hashtag/" + hashTag + "?src=hash");
+    }
+
+    public static Uri replyUri(String idStr) {
+        return Uri.parse(TWITTER_URL + "intent/tweet?in_reply_to=" + idStr);
     }
 
     private static String profileUrl(String screenName) {
