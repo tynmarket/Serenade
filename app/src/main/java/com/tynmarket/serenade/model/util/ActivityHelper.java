@@ -1,5 +1,6 @@
 package com.tynmarket.serenade.model.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,11 +10,18 @@ import android.net.Uri;
  */
 
 public class ActivityHelper {
+    private static final int REQUEST_CODE_NO_OP = 1000;
+
     public static void startUriActivity(Context context, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        // TODO: Transition
-        // https://developer.android.com/reference/android/app/Activity.html#overridePendingTransition(int, int)
-        context.startActivity(intent);
+
+        if (context instanceof Activity) {
+            Activity activity = (Activity) context;
+            activity.startActivityForResult(intent, REQUEST_CODE_NO_OP);
+            activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        } else {
+            context.startActivity(intent);
+        }
     }
 }
