@@ -108,9 +108,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     private void setOnLayoutClickListener() {
         binding.getRoot().setOnClickListener(v -> {
-            User user = TweetUtil.tweetOrRetweetedStatus(binding.getTweet()).user;
-            Uri uri = TwitterUtil.profileUri(user.screenName);
-            ActivityHelper.startUriActivity(binding.getRoot().getContext(), uri);
+            Tweet tweet = binding.getTweet();
+            Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
 
