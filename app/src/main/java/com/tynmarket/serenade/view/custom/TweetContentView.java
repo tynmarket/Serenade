@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.view.custom;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -51,9 +50,11 @@ public class TweetContentView extends RelativeLayout {
 
         // TODO: Show displayUrl, move to url
         // TODO: Replace escaped character in tweet
+        // TODO: Make ripple effect enable when touch the tweet text (autoLink, LinkMovementMethod, OnClickListener)
 
         // Open tweet
         setOnTweetTextClickListener();
+        setOnLayoutClickListener();
         // Open profile
         setOnNameClickListener();
         setOnScreenNameClickListener();
@@ -114,14 +115,18 @@ public class TweetContentView extends RelativeLayout {
         }
     }
 
+    private void setOnLayoutClickListener() {
+        binding.getRoot().setOnClickListener(v -> {
+            openTweet();
+        });
+    }
+
     private void setOnTweetTextClickListener() {
         binding.tweetText.setOnClickListener(v -> {
             if (spanClicked) {
                 spanClicked = false;
             } else {
-                Tweet tweet = binding.getTweet();
-                Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
-                ActivityHelper.startUriActivity(getContext(), uri);
+                openTweet();
             }
         });
     }
@@ -138,10 +143,15 @@ public class TweetContentView extends RelativeLayout {
         });
     }
 
+    private void openTweet() {
+        Tweet tweet = binding.getTweet();
+        Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
+        ActivityHelper.startUriActivity(getContext(), uri);
+    }
+
     private void openProfile() {
         User user = TweetUtil.tweetOrRetweetedStatus(binding.getTweet()).user;
         Uri uri = TwitterUtil.profileUri(user.screenName);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         ActivityHelper.startUriActivity(binding.getRoot().getContext(), uri);
     }
 }
