@@ -75,7 +75,7 @@ public class TweetContentView extends RelativeLayout {
         Matcher matcher = patternScreenName.matcher(tweet.text);
         while (matcher.find()) {
             String screenName = matcher.group(1);
-            // TODO: Ripple effect
+            // TODO: Disable ripple effect on other tweet text
             spannable.setSpan(new TweetTextClickableSpan() {
                 @Override
                 public Uri onClickSpannable() {
@@ -88,7 +88,7 @@ public class TweetContentView extends RelativeLayout {
         matcher = patternHashTag.matcher(tweet.text);
         while (matcher.find()) {
             String hashTag = matcher.group(1);
-            // TODO: Ripple effect
+            // TODO: Disable ripple effect on other tweet text
             spannable.setSpan(new TweetTextClickableSpan() {
                 @Override
                 public Uri onClickSpannable() {

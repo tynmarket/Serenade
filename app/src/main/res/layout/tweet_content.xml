@@ -28,6 +28,7 @@
             android:textStyle="bold"
             android:textColor="@color/text_black"
             android:text="@{tweet.user.name}"
+            android:background="?android:selectableItemBackground"
             tools:text="name" />
 
         <TextView
@@ -41,6 +42,7 @@
             android:ellipsize="end"
             android:textSize="@dimen/text_size_small"
             android:text="@{TweetUtil.screenName(tweet)}"
+            android:background="?android:selectableItemBackground"
             tools:text="screen_name" />
 
         <TextView
@@ -56,7 +58,6 @@
 
         <!-- TODO: show image, RT, link, hash tag -->
         <!-- TODO: Remove underline from links -->
-        <!-- TODO: Widen between lines -->
         <!-- TODO: Effect when click a link -->
         <!-- TODO: Wide clickable link area -->
         <TextView
@@ -69,6 +70,7 @@
             android:textColor="@color/text_black"
             android:lineSpacingMultiplier="@dimen/line_spacing_multiplier_tweet_text"
             android:autoLink="web"
+            android:background="?android:selectableItemBackground"
             app:tweetText="@{tweet}"
             tools:text="tweet_text" />
 
