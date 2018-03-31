@@ -25,6 +25,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Tweet action -->
     <style name="AppTheme.TweetActionItem">
         <item name="android:layout_width">@dimen/text_width_action_with_padding</item>
         <item name="android:layout_height">wrap_content</item>
@@ -32,6 +33,7 @@
         <item name="android:drawablePadding">@dimen/spacing_medium</item>
     </style>
 
+    <!-- Navigation item -->
     <style name="AppTheme.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_height_navigation</item>

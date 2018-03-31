@@ -63,6 +63,7 @@
             android:paddingTop="@dimen/spacing_l_medium"
             android:paddingBottom="@dimen/spacing_large"
             android:text="@{UserUtil.follow(user)}"
+            android:background="?android:selectableItemBackground"
             tools:text="488 フォロー" />
 
         <!-- follower -->
@@ -77,6 +78,7 @@
             android:paddingTop="@dimen/spacing_l_medium"
             android:paddingBottom="@dimen/spacing_large"
             android:text="@{UserUtil.follower(user)}"
+            android:background="?android:selectableItemBackground"
             tools:text="1,958 フォロワー" />
 
     </RelativeLayout>

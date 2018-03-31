@@ -43,9 +43,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setOnLayoutClickListener();
 
         // Open profile
-        // TODO: Set listener to quoted status
         setOnProfileClickListener();
-        // TODO: Set listener to quoted status tweetText
+
         // Open slide
         setOnSlideButtonClickListener();
         // TODO: Show fullscreen image
