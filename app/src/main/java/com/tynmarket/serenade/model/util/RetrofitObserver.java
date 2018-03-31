@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.model;
+package com.tynmarket.serenade.model.util;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;

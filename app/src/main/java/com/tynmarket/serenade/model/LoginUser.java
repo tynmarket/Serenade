@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.util.DummyUser;
+import com.tynmarket.serenade.model.util.RetrofitObserver;
 
 import org.greenrobot.eventbus.EventBus;
 

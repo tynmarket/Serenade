@@ -5,6 +5,7 @@ import com.twitter.sdk.android.core.TwitterApiException;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.model.util.RetrofitObserver;
 import com.tynmarket.serenade.view.listner.TweetActionListener;
 
 import retrofit2.Call;

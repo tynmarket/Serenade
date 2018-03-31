@@ -9,12 +9,13 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
-import com.tynmarket.serenade.model.api.OgpServeApi;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.api.OgpServeApi;
 import com.tynmarket.serenade.model.util.DummyTweet;
+import com.tynmarket.serenade.model.util.RetrofitObserver;
 import com.tynmarket.serenade.model.util.TweetUtil;
 
 import org.greenrobot.eventbus.EventBus;
