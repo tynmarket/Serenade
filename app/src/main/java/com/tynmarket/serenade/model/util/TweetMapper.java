@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.model;
+package com.tynmarket.serenade.model.util;
 
 import android.support.annotation.Nullable;
 
