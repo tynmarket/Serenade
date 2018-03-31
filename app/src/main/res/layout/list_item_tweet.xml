@@ -84,8 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:padding="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:padding="@dimen/spacing_x_medium"
             android:background="@drawable/border"
             android:visibility="@{showQuotedStatus ? View.VISIBLE : View.GONE}" />
 
