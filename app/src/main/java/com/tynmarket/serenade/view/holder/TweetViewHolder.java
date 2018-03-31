@@ -43,6 +43,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setOnLayoutClickListener();
 
         // Open profile
+        setOnRetweetUserNameClickListener();
         setOnProfileClickListener();
 
         // Open slide
@@ -108,6 +109,14 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         binding.getRoot().setOnClickListener(v -> {
             Tweet tweet = binding.getTweet();
             Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
+            ActivityHelper.startUriActivity(v.getContext(), uri);
+        });
+    }
+
+    private void setOnRetweetUserNameClickListener() {
+        binding.retweetUserName.setOnClickListener(v -> {
+            User user = getTweet().user;
+            Uri uri = TwitterUtil.profileUri(user.screenName);
             ActivityHelper.startUriActivity(v.getContext(), uri);
         });
     }
