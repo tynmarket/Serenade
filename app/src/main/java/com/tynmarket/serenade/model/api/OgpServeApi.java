@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.api;
+package com.tynmarket.serenade.model.api;
 
 import com.tynmarket.serenade.model.entity.TwitterCard;
 

@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.api;
+package com.tynmarket.serenade.model.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

@@ -2,7 +2,7 @@ package com.tynmarket.serenade.model;
 
 import android.support.annotation.Nullable;
 
-import com.tynmarket.serenade.api.SpeakerDeckApi;
+import com.tynmarket.serenade.model.api.SpeakerDeckApi;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
