@@ -4,6 +4,10 @@
     <string name="action_settings">設定</string>
     <string name="slide_button">スライドを開く</string>
 
+    <!-- common -->
+    <string name="text_ok">はい</string>
+    <string name="text_cancel">いいえ</string>
+
     <!-- Profile -->
     <string name="follow">フォロー</string>
     <string name="follower">フォロワー</string>
@@ -20,6 +24,9 @@
 
     <!-- Format -->
     <string name="format_tweet_count">%d.%d万</string>
+
+    <!-- Sign out -->
+    <string name="sign_out_prompt_message">ログアウトしますか？</string>
 
     <!-- Toast -->
     <string name="login_success">ログインしました</string>

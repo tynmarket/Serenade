@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout.Tab;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     private void handleResultLogin(int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
-            //LoginUser.loadUser();
             loadUser();
 
             continueMainActivity();
@@ -243,11 +243,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Sign out from twitter
         findViewById(R.id.sign_out).setOnClickListener(v -> {
-            LoginUser.signOut();
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.sign_out_prompt_message)
+                    .setPositiveButton(R.string.text_ok, (dialog, which) -> {
+                        Toast.makeText(this, R.string.sign_out_success, Toast.LENGTH_LONG).show();
 
-            String text = getString(R.string.sign_out_success);
-            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-            // TODO: Move to sign in page
+                        LoginUser.signOut();
+                        startLoginActivity();
+                    })
+                    .setNegativeButton(R.string.text_cancel, null)
+                    .show();
 
             closeDrawer();
         });

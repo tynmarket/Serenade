@@ -4,6 +4,10 @@
     <string name="action_settings">Settings</string>
     <string name="slide_button">Open slide</string>
 
+    <!-- common -->
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+
     <!-- Profile -->
     <string name="follow">follows</string>
     <string name="follower">followers</string>
@@ -20,6 +24,9 @@
 
     <!-- Format -->
     <string name="format_tweet_count">%d%dK</string>
+
+    <!-- Sign out -->
+    <string name="sign_out_prompt_message">Are you sure you want to sign out?</string>
 
     <!-- Toast -->
     <string name="login_success">Login success</string>
