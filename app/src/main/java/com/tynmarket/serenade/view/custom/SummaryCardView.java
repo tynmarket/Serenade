@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.SummaryCardBinding;
-import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 
 /**

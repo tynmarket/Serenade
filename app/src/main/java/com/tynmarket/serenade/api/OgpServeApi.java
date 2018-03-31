@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.api;
 
-import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 
 import java.util.HashMap;
 

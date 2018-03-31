@@ -5,7 +5,7 @@
 
         <variable
             name="card"
-            type="com.tynmarket.serenade.model.TwitterCard" />
+            type="com.tynmarket.serenade.model.entity.TwitterCard" />
     </data>
 
     <!-- TODO: ConstraintLayout -->

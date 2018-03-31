@@ -5,7 +5,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.twitter.sdk.android.core.models.User;
-import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 
 import java.util.ArrayList;
 import java.util.Arrays;

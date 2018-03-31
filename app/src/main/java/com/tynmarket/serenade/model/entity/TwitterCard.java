@@ -1,4 +1,4 @@
-package com.tynmarket.serenade.model;
+package com.tynmarket.serenade.model.entity;
 
 /**
  * Created by tynmarket on 2018/02/10.

@@ -17,7 +17,7 @@ import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
 import com.tynmarket.serenade.model.RetweetTweet;
-import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TweetMapper;
 import com.tynmarket.serenade.model.util.TweetUtil;

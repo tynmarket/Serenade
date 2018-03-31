@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.TwitterCard;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
