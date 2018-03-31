@@ -98,7 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
             android:layout_marginTop="@dimen/spacing_large"
-            android:visibility="@{showSummaryCard ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{showSummaryCard ? View.VISIBLE : View.GONE}"
+            android:foreground="?android:selectableItemBackground" />
 
         <Button
             android:id="@+id/slide_button"
