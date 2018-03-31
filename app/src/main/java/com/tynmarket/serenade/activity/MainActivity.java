@@ -3,6 +3,7 @@ package com.tynmarket.serenade.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.Tab;
@@ -262,7 +263,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     }
 
     private void closeDrawer() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        Handler handler = new Handler();
+
+        // Add delay before Closing the drawer to recognize ripple effect
+        handler.postDelayed(() -> {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }, 250);
     }
 }
