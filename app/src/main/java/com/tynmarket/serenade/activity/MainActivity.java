@@ -109,18 +109,27 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
-            if (resultCode == RESULT_OK) {
-                //LoginUser.loadUser();
-                loadUser();
-
-                continueMainActivity();
-            } else {
-                Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
-                TweetList.loadTwitterCards(1);
-                //LoginUser.loadUser();
-            }
+            // Login
+            handleResultLogin(resultCode, data);
         } else {
+            // Reenter
             overridePendingTransition(0, android.R.anim.slide_out_right);
+        }
+    }
+
+    private void handleResultLogin(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
+            //LoginUser.loadUser();
+            loadUser();
+
+            continueMainActivity();
+        } else if (resultCode == LoginActivity.RESULT_CODE_LOGIN_BACK) {
+            finish();
+        } else {
+            Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
+            Toast.makeText(this, R.string.login_failure, Toast.LENGTH_LONG).show();
+            startLoginActivity();
         }
     }
 

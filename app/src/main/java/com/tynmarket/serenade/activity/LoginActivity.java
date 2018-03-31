@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.view.KeyEvent;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -18,6 +18,8 @@ import com.tynmarket.serenade.R;
  */
 
 public class LoginActivity extends AppCompatActivity {
+    public static final int RESULT_CODE_LOGIN_BACK = 1000;
+
     private TwitterLoginButton mLoginButton;
 
     @Override
@@ -34,19 +36,25 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            setResult(RESULT_CODE_LOGIN_BACK);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void setTwitterLoginButtonCallback() {
         mLoginButton = findViewById(R.id.login_button);
         mLoginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                Toast.makeText(LoginActivity.this, "ログイン成功", Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
             }
 
             @Override
             public void failure(TwitterException exception) {
-                Toast.makeText(LoginActivity.this, "ログイン失敗", Toast.LENGTH_LONG).show();
                 finish();
             }
         });

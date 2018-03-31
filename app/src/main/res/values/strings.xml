@@ -22,5 +22,7 @@
     <string name="format_tweet_count">%d%dK</string>
 
     <!-- Toast -->
+    <string name="login_success">Login success</string>
+    <string name="login_failure">Login failed</string>
     <string name="sign_out_success">Signed out successfully</string>
 </resources>
