@@ -45,6 +45,7 @@ public class TwitterCardList {
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
+        // TODO: dispose? https://android.benigumo.com/20160405/rxjava-part4/
         ogpServeApi()
                 .twitterCards(urls)
                 .subscribeOn(Schedulers.io())
