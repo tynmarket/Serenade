@@ -18,6 +18,8 @@ google-services-debug.base64
 .idea/dictionaries
 .idea/libraries
 .idea/inspectionProfiles
+.idea/codeStyles
+.idea/caches
 
 .DS_Store
 /build
