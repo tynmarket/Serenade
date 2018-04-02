@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.model.api.OgpServeApi;
+import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
 
@@ -15,6 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -45,8 +47,7 @@ public class TwitterCardList {
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
-        // TODO: dispose? https://android.benigumo.com/20160405/rxjava-part4/
-        ogpServeApi()
+        Disposable disposable = ogpServeApi()
                 .twitterCards(urls)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
@@ -55,6 +56,8 @@ public class TwitterCardList {
                     // TODO: Notify error
                     Log.e("Serenade", "loadTwitterCards: error", throwable);
                 });
+
+        DisposableHelper.add(disposable, sectionNumber);
     }
 
     private static ArrayList<String> urlsFromTweets(List<Tweet> tweets) {
