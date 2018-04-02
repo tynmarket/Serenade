@@ -58,7 +58,9 @@ public class TweetListFragment extends Fragment {
         setRetainInstance(true);
 
         Bundle bundle = getArguments();
-        this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
+        if (bundle != null) {
+            this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
+        }
 
         TweetList.loadTweets(sectionNumber, true, null);
     }
