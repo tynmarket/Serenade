@@ -19,9 +19,12 @@ import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.TweetList;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
+import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
+import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -148,6 +151,16 @@ public class TweetListFragment extends Fragment {
     public void onLoadTwitterCardsEvent(LoadTwitterCardsEvent event) {
         if (event.sectionNumber == sectionNumber) {
             adapter.refreshCards(event.cards);
+
+            LinearLayoutManager manager = (LinearLayoutManager) rv.getLayoutManager();
+            int first = manager.findFirstVisibleItemPosition();
+            int last = manager.findLastVisibleItemPosition();
+
+            for (int i = first; i < last + 1; i++) {
+                TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(i);
+                TwitterCard card = event.cards.get(TweetUtil.expandedUrl(holder.getTweet()));
+                holder.setCardToBindings(card);
+            }
         }
     }
 

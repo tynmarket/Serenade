@@ -70,6 +70,13 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setTweetAndCardToBindings(Tweet tweet, TwitterCard card) {
+        setTweetToBindings(tweet);
+        binding.setShowQuotedStatus(tweet.quotedStatus != null);
+        setCardToBindings(card);
+    }
+
+    public void setCardToBindings(TwitterCard card) {
+        Tweet tweet = getTweet();
         String expandedUrl = TweetUtil.expandedUrl(tweet);
 
         if (card != null) {
@@ -78,8 +85,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             card.host = TweetUtil.expandedUrlHost(tweet);
         }
 
-        setTweetToBindings(tweet);
-        binding.setShowQuotedStatus(tweet.quotedStatus != null);
         binding.setShowSummaryCard(card != null && (card.isSummary() || card.isSummaryLargeImage()));
         binding.summaryCard.binding.setCard(card);
     }
@@ -103,7 +108,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         adapter.replaceTweet(getAdapterPosition(), tweet);
         setTweetToBindings(tweet);
     }
-
 
     private void setOnLayoutClickListener() {
         binding.getRoot().setOnClickListener(v -> {
