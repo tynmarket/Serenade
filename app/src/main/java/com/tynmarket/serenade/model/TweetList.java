@@ -10,6 +10,7 @@ import com.twitter.sdk.android.core.services.StatusesService;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.dao.TweetDao;
 import com.tynmarket.serenade.model.util.RetrofitObserver;
 import com.tynmarket.serenade.model.util.TweetUtil;
 
@@ -36,7 +37,11 @@ public class TweetList {
                 .create(call)
                 .subscribe(tweets -> {
                     Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
+                    // TODO: Only when debug
                     TweetUtil.debugTimeline(tweets);
+
+                    // Replace tweets in DB
+                    TweetDao.replaceTweets(tweets, sectionNumber);
 
                     // Request Twitter Cards to ogpserve
                     TwitterCardList.loadTwitterCards(sectionNumber, tweets);
