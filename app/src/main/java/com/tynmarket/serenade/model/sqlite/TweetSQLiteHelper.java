@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class TweetSQLiteHelper extends SQLiteOpenHelper {
-    private static final String TABLE_NAME = "tweets";
+    public static final String TABLE_NAME = "tweets";
     private static final String DB_NAME = TABLE_NAME + ".sqlite";
     private static final int VERSION = 1;
 
