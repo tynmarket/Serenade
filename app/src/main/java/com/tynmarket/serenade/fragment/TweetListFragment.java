@@ -1,25 +1,30 @@
 package com.tynmarket.serenade.fragment;
 
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
-import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.entity.TwitterCard;
+import com.tynmarket.serenade.model.sqlite.TweetSQLiteHelper;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -65,7 +70,7 @@ public class TweetListFragment extends Fragment {
             this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
         }
 
-        TweetList.loadTweets(sectionNumber, true, null);
+        //TweetList.loadTweets(sectionNumber, true, null);
     }
 
     @Nullable
@@ -82,8 +87,30 @@ public class TweetListFragment extends Fragment {
         rv.setLayoutManager(manager);
 
         if (adapter == null) {
+            boolean debug = false;
+            ArrayList<Tweet> tweets;
+
             // Adapter
-            ArrayList<Tweet> tweets = DummyTweet.tweets();
+            if (debug) {
+                tweets = DummyTweet.tweets();
+            } else {
+                tweets = new ArrayList<>();
+                TweetSQLiteHelper helper = TweetSQLiteHelper.getHelper();
+                SQLiteDatabase db = helper.getReadableDatabase();
+
+                long count = DatabaseUtils.queryNumEntries(db, "tweets");
+                Log.d("Serenade", String.format("count: %d", count));
+
+                Cursor cursor = db.rawQuery(TweetSQLiteHelper.SELECT_STATEMENT, new String[]{String.valueOf(sectionNumber)});
+                while (cursor.moveToNext()) {
+                    String json = cursor.getString(cursor.getColumnIndex("tweet"));
+                    Gson gson = new Gson();
+                    Tweet tweet = gson.fromJson(json, Tweet.class);
+                    tweets.add(tweet);
+                }
+                cursor.close();
+                db.close();
+            }
             this.adapter = new TweetListAdapter(tweets);
         }
 
@@ -91,7 +118,7 @@ public class TweetListFragment extends Fragment {
 
         // Infinite scroll
         this.scrollListener = new InfiniteTimelineScrollListener(sectionNumber);
-        rv.addOnScrollListener(scrollListener);
+        //rv.addOnScrollListener(scrollListener);
 
         return rootView;
     }

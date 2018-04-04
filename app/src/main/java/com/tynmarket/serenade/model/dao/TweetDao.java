@@ -31,7 +31,7 @@ public class TweetDao {
                 .subscribe(o -> {
                     db.beginTransaction();
 
-                    db.execSQL(TweetSQLiteHelper.DELETE_STATEMENT);
+                    db.execSQL(TweetSQLiteHelper.DELETE_STATEMENT, new String[]{String.valueOf(sectionNumber)});
 
                     SQLiteStatement stmt = db.compileStatement(TweetSQLiteHelper.INSERT_STATEMENT);
                     Gson gson = new Gson();

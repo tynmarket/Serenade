@@ -14,7 +14,8 @@ public class TweetSQLiteHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     public static final String INSERT_STATEMENT = "INSERT INTO " + TABLE_NAME + " (section_number, tweet) VALUES(?, ?);";
-    public static final String DELETE_STATEMENT = "DELETE FROM " + TABLE_NAME + ";";
+    public static final String DELETE_STATEMENT = "DELETE FROM " + TABLE_NAME + " WHERE section_number = ?;";
+    public static final String SELECT_STATEMENT = "SELECT * FROM " + TABLE_NAME + " WHERE section_number = ? ORDER BY id ASC;";
 
     private static TweetSQLiteHelper helper;
 
@@ -36,7 +37,7 @@ public class TweetSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (id integer primary key, sction_number integer, tweet text not null)");
+        db.execSQL("create table " + TABLE_NAME + " (id integer primary key, section_number integer, tweet text not null)");
     }
 
     @Override
