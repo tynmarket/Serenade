@@ -1,31 +1,25 @@
 package com.tynmarket.serenade.fragment;
 
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.entity.TwitterCard;
-import com.tynmarket.serenade.model.sqlite.TweetSQLiteHelper;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -44,7 +38,6 @@ import java.util.ArrayList;
 
 public class TweetListFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private static final String KEY_SCROLL_POSITION = "KEY_SCROLL_POSITION";
 
     private int sectionNumber;
 
@@ -71,10 +64,9 @@ public class TweetListFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
-            TweetSQLiteHelper.init(getContext(), sectionNumber);
         }
 
-        //TweetList.loadTweets(sectionNumber, true, null);
+        TweetList.loadTweets(sectionNumber, true, null);
     }
 
     @Nullable
@@ -99,42 +91,11 @@ public class TweetListFragment extends Fragment {
                 tweets = DummyTweet.tweets();
             } else {
                 tweets = new ArrayList<>();
-                TweetSQLiteHelper helper = TweetSQLiteHelper.getHelper(sectionNumber);
-                SQLiteDatabase db = helper.getReadableDatabase();
-
-                Cursor cursor = db.rawQuery(TweetSQLiteHelper.SELECT_STATEMENT, new String[]{String.valueOf(sectionNumber)});
-                while (cursor.moveToNext()) {
-                    String json = cursor.getString(cursor.getColumnIndex("tweet"));
-                    Gson gson = new Gson();
-                    Tweet tweet = gson.fromJson(json, Tweet.class);
-                    tweets.add(tweet);
-                }
-                cursor.close();
-                db.close();
             }
             this.adapter = new TweetListAdapter(tweets);
         }
 
         rv.setAdapter(adapter);
-
-        int position;
-        if (savedInstanceState == null) {
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-            position = pref.getInt(getKeyScrollPosition(), 0);
-
-            String log = String.format("Restore position from pref: %d", position);
-            Log.d("Serenade", log);
-            Toast.makeText(this.getContext(), log, Toast.LENGTH_SHORT).show();
-        } else {
-            position = savedInstanceState.getInt(getKeyScrollPosition());
-
-            String log = String.format("Restore position from savedInstanceState: %d", position);
-            Log.d("Serenade", log);
-            Toast.makeText(this.getContext(), log, Toast.LENGTH_SHORT).show();
-        }
-
-        manager.scrollToPosition(position);
-
 
         // Infinite scroll
         this.scrollListener = new InfiniteTimelineScrollListener(sectionNumber);
@@ -156,33 +117,9 @@ public class TweetListFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        LinearLayoutManager manager = (LinearLayoutManager) rv.getLayoutManager();
-        int position = manager.findFirstVisibleItemPosition();
-
-        String log = String.format("Save position: %d", position);
-        Log.d("Serenade", log);
-        Toast.makeText(this.getContext(), log, Toast.LENGTH_SHORT).show();
-
-        outState.putInt(getKeyScrollPosition(), position);
-
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt(getKeyScrollPosition(), position);
-        editor.apply();
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        TweetSQLiteHelper.clear(sectionNumber);
-        super.onDestroyView();
     }
 
     @Subscribe
@@ -241,9 +178,5 @@ public class TweetListFragment extends Fragment {
 
     private void hideRefreshIndicator() {
         progressBar.setVisibility(View.GONE);
-    }
-
-    private String getKeyScrollPosition() {
-        return KEY_SCROLL_POSITION + "_" + String.valueOf(sectionNumber);
     }
 }
