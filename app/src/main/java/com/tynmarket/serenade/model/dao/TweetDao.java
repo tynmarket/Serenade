@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TweetDao {
     public static void replaceTweets(List<Tweet> tweets, int sectionNumber) {
-        TweetSQLiteHelper helper = TweetSQLiteHelper.getHelper();
+        TweetSQLiteHelper helper = TweetSQLiteHelper.getHelper(sectionNumber);
         SQLiteDatabase db = helper.getWritableDatabase();
 
         Disposable disposable = Observable

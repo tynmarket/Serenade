@@ -29,7 +29,6 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
-import com.tynmarket.serenade.model.sqlite.TweetSQLiteHelper;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
@@ -138,13 +137,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        TweetSQLiteHelper.init(this);
     }
 
     @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
-        TweetSQLiteHelper.clear();
         super.onStop();
     }
 

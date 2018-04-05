@@ -41,9 +41,7 @@ public class TweetList {
                     TweetUtil.debugTimeline(tweets);
 
                     // Replace tweets in DB
-                    if (sectionNumber == 1) {
-                        TweetDao.replaceTweets(tweets, sectionNumber);
-                    }
+                    TweetDao.replaceTweets(tweets, sectionNumber);
 
                     // Request Twitter Cards to ogpserve
                     TwitterCardList.loadTwitterCards(sectionNumber, tweets);
