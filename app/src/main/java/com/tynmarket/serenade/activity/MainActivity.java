@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             // Login
-            handleResultLogin(resultCode, data);
+            handleResultLogin(resultCode);
         } else {
             // Reenter
             overridePendingTransition(0, android.R.anim.slide_out_right);
         }
     }
 
-    private void handleResultLogin(int resultCode, Intent data) {
+    private void handleResultLogin(int resultCode) {
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
             loadUser();
