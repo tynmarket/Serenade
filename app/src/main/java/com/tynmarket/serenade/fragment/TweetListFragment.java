@@ -38,6 +38,7 @@ import java.util.ArrayList;
 
 public class TweetListFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static boolean debug = false;
 
     private int sectionNumber;
 
@@ -66,7 +67,9 @@ public class TweetListFragment extends Fragment {
             this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
         }
 
-        TweetList.loadTweets(sectionNumber, true, null);
+        if (!debug) {
+            TweetList.loadTweets(sectionNumber, true, null);
+        }
     }
 
     @Nullable
@@ -83,7 +86,6 @@ public class TweetListFragment extends Fragment {
         rv.setLayoutManager(manager);
 
         if (adapter == null) {
-            boolean debug = false;
             ArrayList<Tweet> tweets;
 
             // Adapter
