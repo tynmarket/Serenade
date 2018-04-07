@@ -15,6 +15,7 @@ public class TwitterCard {
     public String url;
     public String domain;
     public String host;
+    public boolean showLargeImage;
 
     public TwitterCard(String card, String image, String title) {
         this.card = card;

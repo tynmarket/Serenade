@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.model.api.OgpServeApi;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -14,6 +15,7 @@ import com.tynmarket.serenade.model.util.TweetUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -47,10 +49,16 @@ public class TwitterCardList {
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
+        boolean domainEnabled = domainEnabled();
+
         Disposable disposable = ogpServeApi()
-                .twitterCards(domainEnabled(), urls)
+                .twitterCards(domainEnabled, urls)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
+                    // Show Summary with large image
+                    if (domainEnabled) {
+                        setShowLargeImage(cards.values());
+                    }
                     eventBus().post(new LoadTwitterCardsEvent(sectionNumber, cards));
                 }, throwable -> {
                     // TODO: Notify error
@@ -74,6 +82,12 @@ public class TwitterCardList {
 
     private static boolean domainEnabled() {
         return Throttle.enabled();
+    }
+
+    private static void setShowLargeImage(Collection<TwitterCard> cards) {
+        for (TwitterCard card : cards) {
+            card.showLargeImage = true;
+        }
     }
 
     private static OgpServeApi ogpServeApi() {

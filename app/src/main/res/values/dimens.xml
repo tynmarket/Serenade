@@ -13,7 +13,6 @@
     <dimen name="icon_size_action_with_padding">36dp</dimen><!-- icon size is 20dp -->
     <dimen name="image_width_tweet_photo">328dp</dimen>
     <dimen name="image_height_tweet_photo">190dp</dimen>
-    <dimen name="image_size_summary_image">80dp</dimen>
     <dimen name="image_size_action">20dp</dimen>
     <dimen name="text_width_action_with_padding">80dp</dimen>
 
@@ -44,6 +43,10 @@
 
     <!-- Tweet -->
     <dimen name="line_spacing_multiplier_tweet_text">1.1</dimen>
+
+    <!-- Twitter Card -->
+    <dimen name="image_size_summary_image">80dp</dimen>
+    <dimen name="image_height_summary_large_image">160dp</dimen>
 
     <!-- Navigation -->
     <dimen name="icon_size_navigation_profile">56dp</dimen>

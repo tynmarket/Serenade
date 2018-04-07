@@ -8,74 +8,129 @@
             type="com.tynmarket.serenade.model.entity.TwitterCard" />
     </data>
 
-    <!-- TODO: ConstraintLayout -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_size_summary_image">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/image_or_text"
-            android:layout_width="@dimen/image_size_summary_image"
-            android:layout_height="@dimen/image_size_summary_image">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:summary_card_with_large_image_visibility="@{card}">
 
             <!-- TODO: Corner radius -->
             <ImageView
-                android:id="@+id/image"
-                android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image"
+                android:id="@+id/large_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_height_summary_large_image"
                 android:scaleType="centerCrop"
-                app:image="@{card}"
-                tools:src="@drawable/nhk" />
+                app:large_image="@{card}"
+                tools:src="@drawable/summary_large_image" />
 
-            <!-- TODO: Border -->
-            <TextView
-                android:id="@+id/image_text"
-                android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image"
-                android:gravity="center"
-                android:textColor="@color/silver"
-                android:background="@drawable/border_left_area"
-                app:imageText="@{card}"
-                tools:text="summary_large_image_text" />
-
-        </FrameLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/image_or_text"
-            android:background="@drawable/border_right_area">
-
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true">
+                android:padding="@dimen/spacing_x_medium"
+                android:background="@drawable/border_left_bottom_right_area">
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/title_in_large_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/spacing_medium"
                     android:maxLines="2"
                     android:textColor="@color/text_black"
                     android:text="@{card != null ? card.title : null}"
-                    tools:text="summary_title" />
+                    tools:text="summary_title\n summary_title" />
 
                 <TextView
-                    android:id="@+id/card_summary_host"
+                    android:id="@+id/card_summary_host_in_large_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/title"
-                    android:paddingStart="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_l_medium"
                     android:textSize="@dimen/text_size_small"
                     android:text="@{card != null ? card.host : null}"
+                    android:theme="@style/AppTheme.NoExtraPadding"
                     tools:text="summary_host" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- TODO: ConstraintLayout -->
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_size_summary_image"
+            app:summary_card_visibility="@{card}">
+
+            <FrameLayout
+                android:id="@+id/image_or_text"
+                android:layout_width="@dimen/image_size_summary_image"
+                android:layout_height="@dimen/image_size_summary_image">
+
+                <!-- TODO: Corner radius -->
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/image_size_summary_image"
+                    android:layout_height="@dimen/image_size_summary_image"
+                    android:scaleType="centerCrop"
+                    app:image="@{card}"
+                    tools:src="@drawable/nhk" />
+
+                <!-- TODO: Border -->
+                <TextView
+                    android:id="@+id/image_text"
+                    android:layout_width="@dimen/image_size_summary_image"
+                    android:layout_height="@dimen/image_size_summary_image"
+                    android:gravity="center"
+                    android:textColor="@color/silver"
+                    android:background="@drawable/border_left_area"
+                    app:imageText="@{card}"
+                    tools:text="summary_large_image_text" />
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/image_or_text"
+                android:background="@drawable/border_right_area">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/spacing_medium"
+                        android:maxLines="2"
+                        android:textColor="@color/text_black"
+                        android:text="@{card != null ? card.title : null}"
+                        tools:text="summary_title" />
+
+                    <TextView
+                        android:id="@+id/card_summary_host"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title"
+                        android:paddingStart="@dimen/spacing_medium"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@{card != null ? card.host : null}"
+                        tools:text="summary_host" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </FrameLayout>
+
 </layout>

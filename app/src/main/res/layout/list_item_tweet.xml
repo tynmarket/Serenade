@@ -68,7 +68,7 @@
                 android:src="@drawable/default_profile"
                 android:background="?android:selectableItemBackground"
                 app:profileImage="@{tweet}"
-                tools:sec="@drawable/default_profile" />
+                tools:src="@drawable/default_profile" />
 
             <com.tynmarket.serenade.view.custom.TweetContentView
                 android:id="@+id/tweet_content"
