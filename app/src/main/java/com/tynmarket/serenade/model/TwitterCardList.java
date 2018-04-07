@@ -48,7 +48,7 @@ public class TwitterCardList {
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
         Disposable disposable = ogpServeApi()
-                .twitterCards(urls)
+                .twitterCards(domainEnabled(), urls)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
                     eventBus().post(new LoadTwitterCardsEvent(sectionNumber, cards));
@@ -70,6 +70,10 @@ public class TwitterCardList {
             }
         }
         return urls;
+    }
+
+    private static boolean domainEnabled() {
+        return Throttle.enabled();
     }
 
     private static OgpServeApi ogpServeApi() {

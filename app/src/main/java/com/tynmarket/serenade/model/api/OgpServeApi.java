@@ -15,5 +15,5 @@ import retrofit2.http.Query;
 public interface OgpServeApi {
     // TODO: /twitter_cards
     @GET("/twitter")
-    Observable<HashMap<String, TwitterCard>> twitterCards(@Query("urls[]") String... urls);
+    Observable<HashMap<String, TwitterCard>> twitterCards(@Query("domain") boolean domain, @Query("urls[]") String... urls);
 }
