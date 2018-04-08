@@ -1,5 +1,7 @@
 package com.tynmarket.serenade.model.entity;
 
+import android.text.TextUtils;
+
 /**
  * Created by tynmarket on 2018/02/10.
  */
@@ -24,7 +26,7 @@ public class TwitterCard {
     }
 
     public boolean isSummary() {
-        return card.equals(CARD_SUMMARY);
+        return card.equals(CARD_SUMMARY) || (TextUtils.isEmpty(card) && !TextUtils.isEmpty(image));
     }
 
     public boolean isSummaryLargeImage() {
