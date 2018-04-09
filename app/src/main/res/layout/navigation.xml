@@ -28,7 +28,6 @@
 
     <!-- TODO: Custom view or custom navigation menu item -->
 
-    <!-- profile -->
     <TextView
         android:id="@+id/profile_link"
         android:drawableStart="@drawable/profile"
@@ -37,7 +36,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="プロフィール" />
 
-    <!-- list -->
     <TextView
         android:id="@+id/list_link"
         android:drawableStart="@drawable/list"
