@@ -42,7 +42,9 @@
     <style name="AppTheme.NavigationItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/item_height_navigation</item>
+        <item name="android:paddingStart">@dimen/drawer_horizontal_margin</item>
         <item name="android:paddingTop">@dimen/spacing_2x_large</item>
+        <item name="android:paddingEnd">@dimen/drawer_horizontal_margin</item>
         <item name="android:paddingBottom">@dimen/spacing_medium</item>
         <item name="android:drawablePadding">@dimen/spacing_x_large</item>
         <item name="android:textSize">@dimen/text_size_2x_small</item>

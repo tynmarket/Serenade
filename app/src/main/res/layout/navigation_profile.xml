@@ -49,7 +49,7 @@
             android:maxLines="1"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/text_black"
             android:text="@{user.name}"
             tools:text="name" />
 
@@ -62,8 +62,8 @@
             android:layout_marginTop="@dimen/spacing_l_medium"
             android:paddingTop="@dimen/spacing_l_medium"
             android:paddingBottom="@dimen/spacing_large"
-            android:text="@{UserUtil.follow(user)}"
             android:background="?android:selectableItemBackground"
+            android:text="@{UserUtil.follow(user)}"
             tools:text="488 フォロー" />
 
         <!-- follower -->
@@ -77,8 +77,8 @@
             android:layout_marginTop="@dimen/spacing_l_medium"
             android:paddingTop="@dimen/spacing_l_medium"
             android:paddingBottom="@dimen/spacing_large"
-            android:text="@{UserUtil.follower(user)}"
             android:background="?android:selectableItemBackground"
+            android:text="@{UserUtil.follower(user)}"
             tools:text="1,958 フォロワー" />
 
     </RelativeLayout>

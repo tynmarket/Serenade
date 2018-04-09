@@ -4,28 +4,31 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/drawer_horizontal_margin"
-    android:layout_marginEnd="@dimen/drawer_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/ultra_light_gray" />
 
     <!-- User profile -->
     <com.tynmarket.serenade.view.custom.NavigationProfileView
         android:id="@+id/navigation_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/drawer_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/drawer_horizontal_margin"
+        android:background="@color/colorPrimaryDark" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginBottom="@dimen/spacing_l_medium"
-        android:background="@color/silver" />
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_l_medium" />
 
     <!-- TODO: Custom view or custom navigation menu item -->
 
     <!-- profile -->
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/profile_link"
         android:drawableStart="@drawable/profile"
@@ -35,7 +38,6 @@
         tools:text="プロフィール" />
 
     <!-- list -->
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/list_link"
         android:drawableStart="@drawable/list"
@@ -44,7 +46,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="リスト" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/tweet_link"
         android:drawableStart="@drawable/twitter"
@@ -53,7 +54,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="ツイートする" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/search_link"
         android:drawableStart="@drawable/search"
@@ -62,7 +62,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="検索" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/notification_link"
         android:drawableStart="@drawable/notification"
@@ -71,7 +70,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="通知" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/message_link"
         android:drawableStart="@drawable/message"
@@ -83,11 +81,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginStart="@dimen/drawer_horizontal_margin"
         android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/drawer_horizontal_margin"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:background="@color/silver" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/support_link"
         android:drawableStart="@drawable/support"
@@ -96,7 +95,6 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="お問い合わせ" />
 
-    <!-- TODO: Ripple effect -->
     <TextView
         android:id="@+id/sign_out"
         android:drawableStart="@drawable/sign_out"
