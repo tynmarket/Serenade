@@ -81,7 +81,7 @@ public class TwitterCardList {
     }
 
     private static boolean domainEnabled() {
-        return Throttle.enabled();
+        return Throttle.requestToTop();
     }
 
     private static void setShowLargeImage(Collection<TwitterCard> cards) {

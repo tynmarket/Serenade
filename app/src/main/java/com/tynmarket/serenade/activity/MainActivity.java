@@ -20,6 +20,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -49,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         super.onCreate(savedInstanceState);
 
         initTwitterConfig();
-        boolean signedIn = LoginUser.signedIn();
+        initFirebaseConfig();
 
-        if (signedIn) {
+        if (LoginUser.signedIn()) {
             loadUser();
             continueMainActivity();
         } else {
@@ -265,6 +267,28 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+    }
+
+    private void initFirebaseConfig() {
+        FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .build();
+        config.setConfigSettings(configSettings);
+        config.setDefaults(R.xml.remote_config_defaults);
+
+        long cacheExpiration = 3600;
+        if (config.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+
+        config.fetch(cacheExpiration).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                config.activateFetched();
+            } else {
+                Log.d("Serenade", "RemoteConfig fetch failed");
+            }
+        });
     }
 
     private void loadUser() {
