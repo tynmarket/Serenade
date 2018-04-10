@@ -7,6 +7,7 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.FavoriteService;
 import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
@@ -36,8 +37,9 @@ public class TweetList {
                 .create(call)
                 .subscribe(tweets -> {
                     Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
-                    // TODO: Only when debug
-                    TweetUtil.debugTimeline(tweets);
+                    if (BuildConfig.DEBUG) {
+                        TweetUtil.debugTimeline(tweets);
+                    }
 
                     // Request Twitter Cards to ogpserve
                     TwitterCardList.loadTwitterCards(sectionNumber, tweets);

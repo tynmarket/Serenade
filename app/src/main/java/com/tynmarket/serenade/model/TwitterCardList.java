@@ -11,6 +11,7 @@ import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
+import com.tynmarket.serenade.model.util.TwitterCardUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -59,6 +60,11 @@ public class TwitterCardList {
                     if (domainEnabled) {
                         setShowLargeImage(cards.values());
                     }
+
+                    if (BuildConfig.DEBUG) {
+                        TwitterCardUtil.debugCards(cards);
+                    }
+
                     eventBus().post(new LoadTwitterCardsEvent(sectionNumber, cards));
                 }, throwable -> {
                     // TODO: Notify error
