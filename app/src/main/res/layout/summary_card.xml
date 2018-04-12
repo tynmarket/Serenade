@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_x_medium"
-                android:background="@drawable/border_left_bottom_right_area">
+                android:background="@drawable/border_summary_card_large_bottom">
 
                 <TextView
                     android:id="@+id/title_in_large_image"
@@ -88,7 +88,7 @@
                     android:layout_height="@dimen/image_size_summary_image"
                     android:gravity="center"
                     android:textColor="@color/silver"
-                    android:background="@drawable/border_left_area"
+                    android:background="@drawable/border_summary_card_left"
                     app:imageText="@{card}"
                     tools:text="summary_large_image_text" />
 
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/image_or_text"
-                android:background="@drawable/border_right_area">
+                android:background="@drawable/border_summary_card_right">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
