@@ -20,6 +20,7 @@ google-services-debug.base64
 .idea/inspectionProfiles
 .idea/codeStyles
 .idea/caches
+.idea/assetWizardSettings.xml
 
 .DS_Store
 /build
