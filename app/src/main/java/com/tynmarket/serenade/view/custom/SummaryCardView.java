@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.SummaryCardBinding;
 import com.tynmarket.serenade.model.entity.TwitterCard;
@@ -23,6 +24,10 @@ import com.tynmarket.serenade.model.util.ActivityHelper;
 
 public class SummaryCardView extends RelativeLayout implements View.OnClickListener {
     public SummaryCardBinding binding;
+    private static RequestOptions summaryRequestOptions = RequestOptions.placeholderOf(
+            R.drawable.border_summary_card_left);
+    private static RequestOptions summaryLargeRequestOptions = RequestOptions.placeholderOf(
+            R.drawable.border_summary_card_large_top);
 
     public SummaryCardView(Context context) {
         super(context);
@@ -65,7 +70,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
     @BindingAdapter("image")
     public static void setImage(ImageView view, TwitterCard card) {
         if (card != null && card.isSummary()) {
-            Glide.with(view.getContext()).load(card.image).into(view);
+            Glide.with(view.getContext()).load(card.image).apply(summaryRequestOptions).into(view);
             view.setVisibility(VISIBLE);
         } else {
             view.setVisibility(GONE);
@@ -87,7 +92,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
     @BindingAdapter("large_image")
     public static void setLargeImage(ImageView view, TwitterCard card) {
         if (card != null && card.isSummaryLargeImage() && card.showLargeImage) {
-            Glide.with(view.getContext()).load(card.image).into(view);
+            Glide.with(view.getContext()).load(card.image).apply(summaryLargeRequestOptions).into(view);
             view.setVisibility(VISIBLE);
         } else {
             view.setVisibility(GONE);
