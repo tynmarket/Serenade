@@ -13,9 +13,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
+import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
@@ -137,6 +139,10 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setOnSlideButtonClickListener() {
+        if (!BuildConfig.DEBUG || !LoginUser.isTynmarket()) {
+            return;
+        }
+
         // Open slide
         binding.slideButton.setOnClickListener(v -> {
             String expandedUrl = TweetUtil.expandedUrl(getTweet());

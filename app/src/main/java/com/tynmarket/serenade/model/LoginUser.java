@@ -18,7 +18,7 @@ import retrofit2.Call;
  */
 
 public class LoginUser {
-    private User user;
+    private static final long TYNMARKET_USER_ID = 35427589;
 
     public static boolean signedIn() {
         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
@@ -34,7 +34,6 @@ public class LoginUser {
         RetrofitObserver
                 .create(call)
                 .subscribe(user -> {
-                    Log.d("Serenade", String.format("loadUser success"));
                     EventBus.getDefault().post(new LoadUserEvent(user));
                 }, throwable -> {
                     Log.d("Serenade", String.format("loadUser failure"));
@@ -45,5 +44,10 @@ public class LoginUser {
 
     public static void signOut() {
         TwitterCore.getInstance().getSessionManager().clearActiveSession();
+    }
+
+    public static boolean isTynmarket() {
+        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+        return session.getUserId() == TYNMARKET_USER_ID;
     }
 }
