@@ -48,7 +48,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
 
     @BindingAdapter("summary_card_with_large_image_visibility")
     public static void setSummaryCardWithLargeImageVisibility(View view, TwitterCard card) {
-        if (card != null && card.isSummaryLargeImage() && card.showLargeImage) {
+        if (card != null && card.isSummaryLargeImage()) {
             view.setVisibility(VISIBLE);
         } else {
             view.setVisibility(GONE);
@@ -57,10 +57,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
 
     @BindingAdapter("summary_card_visibility")
     public static void setSummaryCardVisibility(View view, TwitterCard card) {
-        if (card == null) {
-            view.setVisibility(GONE);
-        } else if ((!card.showLargeImage && (card.isSummary() || card.isSummaryLargeImage())) ||
-                (card.showLargeImage && card.isSummary())) {
+        if (card != null && card.isSummary()) {
             view.setVisibility(VISIBLE);
         } else {
             view.setVisibility(GONE);
