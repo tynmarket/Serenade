@@ -82,6 +82,16 @@ public class TweetUtil {
     }
 
     @Nullable
+    public static String expandedUrlWithoutTwitter(Tweet tweet) {
+        UrlEntity url = urlEntity(tweet);
+        if (url != null && !url.expandedUrl.contains("twitter.com")) {
+            return url.expandedUrl;
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
     public static String expandedUrlHost(Tweet tweet) {
         String expandedUrl = expandedUrl(tweet);
         if (expandedUrl != null) {

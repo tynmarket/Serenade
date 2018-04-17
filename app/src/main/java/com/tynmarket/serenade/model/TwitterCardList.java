@@ -71,7 +71,7 @@ public class TwitterCardList {
         ArrayList<String> urls = new ArrayList<>();
 
         for (Tweet tweet : tweets) {
-            String expandedUrl = TweetUtil.expandedUrl(tweet);
+            String expandedUrl = TweetUtil.expandedUrlWithoutTwitter(tweet);
             if (expandedUrl != null) {
                 urls.add(expandedUrl);
             }
