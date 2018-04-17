@@ -67,37 +67,19 @@
             android:layout_height="@dimen/image_size_summary_image"
             app:summary_card_visibility="@{card}">
 
-            <FrameLayout
-                android:id="@+id/image_or_text"
+            <!-- TODO: Corner radius -->
+            <ImageView
+                android:id="@+id/image"
                 android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image">
-
-                <!-- TODO: Corner radius -->
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="@dimen/image_size_summary_image"
-                    android:layout_height="@dimen/image_size_summary_image"
-                    android:scaleType="centerCrop"
-                    app:image="@{card}"
-                    tools:src="@drawable/nhk" />
-
-                <!-- TODO: Border -->
-                <TextView
-                    android:id="@+id/image_text"
-                    android:layout_width="@dimen/image_size_summary_image"
-                    android:layout_height="@dimen/image_size_summary_image"
-                    android:gravity="center"
-                    android:textColor="@color/silver"
-                    android:background="@drawable/border_summary_card_left"
-                    app:imageText="@{card}"
-                    tools:text="summary_large_image_text" />
-
-            </FrameLayout>
+                android:layout_height="@dimen/image_size_summary_image"
+                android:scaleType="centerCrop"
+                app:image="@{card}"
+                tools:src="@drawable/nhk" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/image_or_text"
+                android:layout_toEndOf="@+id/image"
                 android:background="@drawable/border_summary_card_right">
 
                 <RelativeLayout

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -75,20 +74,9 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
         }
     }
 
-    @BindingAdapter("imageText")
-    public static void setImageText(TextView view, TwitterCard card) {
-        if (card != null && card.isSummaryLargeImage() && !card.showLargeImage) {
-            view.setText(card.domain);
-            view.setVisibility(VISIBLE);
-        } else {
-            view.setVisibility(GONE);
-            view.setText(null);
-        }
-    }
-
     @BindingAdapter("large_image")
     public static void setLargeImage(ImageView view, TwitterCard card) {
-        if (card != null && card.isSummaryLargeImage() && card.showLargeImage) {
+        if (card != null && card.isSummaryLargeImage()) {
             Glide.with(view.getContext()).load(card.image).apply(summaryLargeRequestOptions).into(view);
             view.setVisibility(VISIBLE);
         } else {
