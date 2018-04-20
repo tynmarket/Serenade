@@ -29,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TwitterCardList {
     private static final String OGPSERVE_URL = BuildConfig.OGPSERVE_URL;
+    private static final String TAG_TIMELINE = "timeline";
+    private static final String TAG_FAVORITE = "favorite";
     private static final Retrofit retrofit = new Retrofit
             .Builder()
             .baseUrl(OGPSERVE_URL)
@@ -49,9 +51,10 @@ public class TwitterCardList {
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
         boolean domainEnabled = domainEnabled();
+        String tag = getTag(sectionNumber);
 
         Disposable disposable = ogpServeApi()
-                .twitterCards(domainEnabled, urls)
+                .twitterCards(domainEnabled, tag, urls)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
                     if (BuildConfig.DEBUG) {
@@ -81,6 +84,17 @@ public class TwitterCardList {
 
     private static boolean domainEnabled() {
         return Throttle.requestToTop();
+    }
+
+    private static String getTag(int sectionNumber) {
+        switch (sectionNumber) {
+            case 1:
+                return TAG_TIMELINE;
+            case 2:
+                return TAG_FAVORITE;
+            default:
+                return "";
+        }
     }
 
     private static OgpServeApi ogpServeApi() {
