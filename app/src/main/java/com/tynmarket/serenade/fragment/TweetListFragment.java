@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
+import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.TweetList;
@@ -23,6 +26,7 @@ import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
+import com.tynmarket.serenade.model.util.TwitterCardUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
@@ -170,6 +174,39 @@ public class TweetListFragment extends Fragment {
                 TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(i);
                 TwitterCard card = event.cards.get(TweetUtil.expandedUrl(holder.getTweet()));
                 holder.setCardToBindings(card);
+            }
+        }
+    }
+
+    @Subscribe
+    public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
+        if (event.sectionNumber == sectionNumber) {
+            if (BuildConfig.DEBUG) {
+                Log.d("Serenade", "onLoadTwitterCardEvent");
+                TwitterCardUtil.debugCard(event.card);
+            }
+
+            if (event.card == null) {
+                if (BuildConfig.DEBUG) {
+                    TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(event.position);
+                    Tweet tweet = holder.getTweet();
+                    String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
+                    Log.d("Serenade", String.format("url: %s", url));
+                }
+                return;
+            }
+
+            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(event.position);
+            Tweet tweet = holder.getTweet();
+
+            if (tweet.id == event.tweetId) {
+                Log.d("Serenade", "replace TwitterCard");
+                holder.setCardToBindings(event.card);
+            } else {
+                // Tweets refreshed
+                if (BuildConfig.DEBUG) {
+                    Log.d("Serenade", String.format("tweet id = %d, event.tweet id = %d", tweet.id, event.tweetId));
+                }
             }
         }
     }

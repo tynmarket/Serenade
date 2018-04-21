@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.BuildConfig;
+import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.model.api.OgpServeApi;
 import com.tynmarket.serenade.model.util.DisposableHelper;
@@ -31,6 +32,7 @@ public class TwitterCardList {
     private static final String OGPSERVE_URL = BuildConfig.OGPSERVE_URL;
     private static final String TAG_TIMELINE = "timeline";
     private static final String TAG_FAVORITE = "favorite";
+    private static final String TAG_CACHE = "cache";
     private static final Retrofit retrofit = new Retrofit
             .Builder()
             .baseUrl(OGPSERVE_URL)
@@ -44,9 +46,30 @@ public class TwitterCardList {
         loadTwitterCards(sectionNumber, urls);
     }
 
-    static void loadTwitterCards(int sectionNumber, List<Tweet> tweets) {
+    public static void loadTwitterCards(int sectionNumber, List<Tweet> tweets) {
         List<String> urls = urlsFromTweets(tweets);
         loadTwitterCards(sectionNumber, urls.toArray(new String[urls.size()]));
+    }
+
+    public static void loadTwitterCard(int sectionNumber, int position, Tweet tweet) {
+        boolean domainEnabled = domainEnabled();
+        String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
+
+        Disposable disposable = ogpServeApi()
+                .twitterCards(domainEnabled, TAG_CACHE, url)
+                .subscribeOn(Schedulers.io())
+                .subscribe(cards -> {
+                    if (BuildConfig.DEBUG) {
+                        TwitterCardUtil.debugCards(cards);
+                    }
+
+                    eventBus().post(new LoadTwitterCardEvent(sectionNumber, position, tweet.id, cards.get(url)));
+                }, throwable -> {
+                    // TODO: Notify error
+                    Log.e("Serenade", "loadTwitterCard: error", throwable);
+                });
+
+        DisposableHelper.add(disposable, sectionNumber);
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {

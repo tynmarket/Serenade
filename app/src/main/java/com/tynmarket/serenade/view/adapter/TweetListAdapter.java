@@ -23,6 +23,7 @@ import java.util.Map;
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     private final ArrayList<Tweet> tweets;
     private Map<String, TwitterCard> cards;
+    private boolean cardsLoaded = false;
 
     public TweetListAdapter(ArrayList<Tweet> tweets) {
         this.tweets = tweets;
@@ -78,5 +79,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public void refreshCards(Map<String, TwitterCard> cards) {
         this.cards = cards;
+        cardsLoaded = true;
+    }
+
+    public boolean cardsLoaded() {
+        return cardsLoaded;
     }
 }

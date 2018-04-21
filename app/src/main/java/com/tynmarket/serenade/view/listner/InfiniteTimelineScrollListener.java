@@ -4,6 +4,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.tynmarket.serenade.model.TweetList;
+import com.tynmarket.serenade.model.TwitterCardList;
+import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 /**
@@ -11,10 +13,10 @@ import com.tynmarket.serenade.view.holder.TweetViewHolder;
  */
 
 public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListener {
-    // TODO: https://github.com/JakeWharton/RxBinding
     public boolean mRefreshing = false;
 
     private final int sectionNumber;
+    private int lastPosition;
 
     public InfiniteTimelineScrollListener(int sectionNumber) {
         this.sectionNumber = sectionNumber;
@@ -26,6 +28,8 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
         int position = manager.findFirstVisibleItemPosition();
         int totalCount = recyclerView.getAdapter().getItemCount();
         int childCount = recyclerView.getChildCount();
+        boolean cardsLoaded = ((TweetListAdapter) recyclerView.getAdapter()).cardsLoaded();
+        int lastPosition = manager.findLastVisibleItemPosition();
 
         // TODO: Not load if last tweet is loaded
         if (!mRefreshing && position + childCount == totalCount) {
@@ -34,6 +38,15 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
             long maxId = lastItem.getTweet().id - 1;
             TweetList.loadTweets(sectionNumber, false, maxId);
+        }
+
+        if (cardsLoaded && !mRefreshing && lastPosition != this.lastPosition) {
+            this.lastPosition = lastPosition;
+            TweetViewHolder holder = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(lastPosition);
+
+            if (holder.requestCardCache()) {
+                TwitterCardList.loadTwitterCard(sectionNumber, lastPosition, holder.getTweet());
+            }
         }
     }
 }
