@@ -1,6 +1,8 @@
 package com.tynmarket.serenade.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,7 @@ import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.TweetList;
+import com.tynmarket.serenade.model.TwitterCardList;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
@@ -42,6 +45,7 @@ import java.util.ArrayList;
 
 public class TweetListFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final long LOAD_TWITTER_CARD_CACHE_DELAY = 500;
     private static boolean debug = false;
 
     private int sectionNumber;
@@ -168,13 +172,26 @@ public class TweetListFragment extends Fragment {
 
             LinearLayoutManager manager = (LinearLayoutManager) rv.getLayoutManager();
             int first = manager.findFirstVisibleItemPosition();
-            int last = manager.findLastVisibleItemPosition();
+            int last = manager.findLastVisibleItemPosition() + 1;
+            ArrayList<Integer> postDelays = new ArrayList<>();
 
-            for (int i = first; i < last + 1; i++) {
-                TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(i);
-                TwitterCard card = event.cards.get(TweetUtil.expandedUrl(holder.getTweet()));
-                holder.setCardToBindings(card);
+            for (int position = first; position <= last; position++) {
+                if (adapter.requestCardCache(position)) {
+                    postDelays.add(position);
+                } else {
+                    TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
+                    TwitterCard card = event.cards.get(TweetUtil.expandedUrl(holder.getTweet()));
+                    holder.setCardToBindings(card);
+                }
             }
+
+            // TODO: Rx thread?
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                for (Integer position : postDelays) {
+                    Tweet tweet = adapter.getTweet(position);
+                    TwitterCardList.loadTwitterCard(sectionNumber, position, tweet);
+                }
+            }, LOAD_TWITTER_CARD_CACHE_DELAY);
         }
     }
 

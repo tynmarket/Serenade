@@ -41,6 +41,8 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
             TweetList.loadTweets(sectionNumber, false, maxId);
         }
 
+        // TODO: Move to other listener
+        // TODO: Request before scrolling?
         if (cardsLoaded && !mRefreshing && lastPosition != this.lastPosition) {
             this.lastPosition = lastPosition;
             int loadPosition = lastPosition + 1;
