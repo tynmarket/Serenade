@@ -8,6 +8,7 @@ import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
 import com.tynmarket.serenade.model.api.OgpServeApi;
+import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -63,7 +64,11 @@ public class TwitterCardList {
                         TwitterCardUtil.debugCards(cards);
                     }
 
-                    eventBus().post(new LoadTwitterCardEvent(sectionNumber, position, tweet.id, cards.get(url)));
+                    TwitterCard card = cards.get(url);
+                    if (card != null) {
+                        card.url = url;
+                    }
+                    eventBus().post(new LoadTwitterCardEvent(sectionNumber, position, tweet.id, card));
                 }, throwable -> {
                     // TODO: Notify error
                     Log.e("Serenade", "loadTwitterCard: error", throwable);

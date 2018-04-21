@@ -3,6 +3,7 @@ package com.tynmarket.serenade.view.listner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.TwitterCardList;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
@@ -42,10 +43,12 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
 
         if (cardsLoaded && !mRefreshing && lastPosition != this.lastPosition) {
             this.lastPosition = lastPosition;
-            TweetViewHolder holder = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(lastPosition);
+            int loadPosition = lastPosition + 1;
+            TweetListAdapter adapter = (TweetListAdapter) recyclerView.getAdapter();
 
-            if (holder.requestCardCache()) {
-                TwitterCardList.loadTwitterCard(sectionNumber, lastPosition, holder.getTweet());
+            if (adapter.requestCardCache(loadPosition)) {
+                Tweet tweet = adapter.getTweet(loadPosition);
+                TwitterCardList.loadTwitterCard(sectionNumber, loadPosition, tweet);
             }
         }
     }

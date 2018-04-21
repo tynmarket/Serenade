@@ -95,14 +95,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         return binding.getTweet();
     }
 
-    public boolean requestCardCache() {
-        Tweet tweet = getTweet();
-        String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
-        TwitterCard card = binding.summaryCard.binding.getCard();
-
-        return (url != null && card == null) || (card != null && card.isRequestToTop());
-    }
-
     private void setTweetToBindings(Tweet tweet) {
         binding.setTweet(tweet);
 

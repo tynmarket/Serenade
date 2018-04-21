@@ -183,11 +183,8 @@ public class TweetListFragment extends Fragment {
     public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
         if (event.sectionNumber == sectionNumber) {
             int position = event.position;
+            long tweetId = event.tweetId;
             TwitterCard card = event.card;
-
-            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
-            Tweet tweet = holder.getTweet();
-            String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
 
             if (BuildConfig.DEBUG) {
                 Log.d("Serenade", "onLoadTwitterCardEvent");
@@ -196,19 +193,29 @@ public class TweetListFragment extends Fragment {
 
             if (card == null) {
                 if (BuildConfig.DEBUG) {
-                    Log.d("Serenade", String.format("url: %s", url));
+                    //Log.d("Serenade", String.format("url: %s", url));
                 }
                 return;
             }
 
-            if (tweet.id == event.tweetId) {
+            String url = card.url;
+            adapter.replaceCard(url, card);
+
+            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
+            Tweet tweet = null;
+
+            if (holder != null) {
+                tweet = holder.getTweet();
+            }
+
+            if (tweet != null && tweet.id == tweetId) {
+                // Tweet is visible
                 Log.d("Serenade", "replace TwitterCard");
-                adapter.replaceCard(url, card);
                 holder.setCardToBindings(event.card);
             } else {
-                // Tweets refreshed
+                // Tweet is invisible or refreshed
                 if (BuildConfig.DEBUG) {
-                    Log.d("Serenade", String.format("tweet id = %d, event.tweet id = %d", tweet.id, event.tweetId));
+                    Log.d("Serenade", "Tweet is invisible");
                 }
             }
         }
