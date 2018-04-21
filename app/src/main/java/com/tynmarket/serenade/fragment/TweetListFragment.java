@@ -178,29 +178,32 @@ public class TweetListFragment extends Fragment {
         }
     }
 
+    // TODO: Remove debugging
     @Subscribe
     public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
         if (event.sectionNumber == sectionNumber) {
+            int position = event.position;
+            TwitterCard card = event.card;
+
+            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
+            Tweet tweet = holder.getTweet();
+            String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
+
             if (BuildConfig.DEBUG) {
                 Log.d("Serenade", "onLoadTwitterCardEvent");
-                TwitterCardUtil.debugCard(event.card);
+                TwitterCardUtil.debugCard(card);
             }
 
-            if (event.card == null) {
+            if (card == null) {
                 if (BuildConfig.DEBUG) {
-                    TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(event.position);
-                    Tweet tweet = holder.getTweet();
-                    String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
                     Log.d("Serenade", String.format("url: %s", url));
                 }
                 return;
             }
 
-            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(event.position);
-            Tweet tweet = holder.getTweet();
-
             if (tweet.id == event.tweetId) {
                 Log.d("Serenade", "replace TwitterCard");
+                adapter.replaceCard(url, card);
                 holder.setCardToBindings(event.card);
             } else {
                 // Tweets refreshed
