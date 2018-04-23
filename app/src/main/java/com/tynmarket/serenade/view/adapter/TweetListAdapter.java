@@ -70,7 +70,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
         TwitterCard card = cards.get(url);
 
-        return (url != null && card == null) || (card != null && card.isRequestToTop());
+        return (url != null && card == null) || (card != null && card.retry);
     }
 
     public void refresh(List<Tweet> newTweets) {

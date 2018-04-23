@@ -24,7 +24,7 @@ public class TwitterCardUtil {
             Log.d("Serenade", String.format("card: %s", card.card));
             Log.d("Serenade", String.format("title: %s", card.title));
             Log.d("Serenade", String.format("image: %s", card.image));
-            Log.d("Serenade", String.format("requestToTop: %s", card.requestToTop));
+            Log.d("Serenade", String.format("retry: %s", card.retry));
         }
     }
 }

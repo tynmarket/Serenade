@@ -13,7 +13,7 @@ public class TwitterCard {
     public String card;
     public String image;
     public String title;
-    public String requestToTop;
+    public boolean retry;
 
     public String url;
     public String domain;
@@ -31,9 +31,5 @@ public class TwitterCard {
 
     public boolean isSummaryLargeImage() {
         return card.equals(CARD_SUMMARY_LARGE_Image);
-    }
-
-    public boolean isRequestToTop() {
-        return "true".equals(requestToTop);
     }
 }
