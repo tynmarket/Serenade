@@ -29,7 +29,6 @@ import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.TweetUtil;
-import com.tynmarket.serenade.model.util.TwitterCardUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
@@ -195,7 +194,6 @@ public class TweetListFragment extends Fragment {
         }
     }
 
-    // TODO: Remove debugging
     @Subscribe
     public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
         if (event.sectionNumber == sectionNumber) {
@@ -205,18 +203,13 @@ public class TweetListFragment extends Fragment {
 
             if (BuildConfig.DEBUG) {
                 Log.d("Serenade", "onLoadTwitterCardEvent");
-                TwitterCardUtil.debugCard(card);
             }
 
             if (card == null) {
-                if (BuildConfig.DEBUG) {
-                    //Log.d("Serenade", String.format("url: %s", url));
-                }
                 return;
             }
 
-            String url = card.url;
-            adapter.replaceCard(url, card);
+            adapter.replaceCard(card);
 
             TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
             Tweet tweet = null;
@@ -227,12 +220,14 @@ public class TweetListFragment extends Fragment {
 
             if (tweet != null && tweet.id == tweetId) {
                 // Tweet is visible
-                Log.d("Serenade", "replace TwitterCard");
-                holder.setCardToBindings(event.card);
+                if (BuildConfig.DEBUG) {
+                    Log.d("Serenade", "replace TwitterCard");
+                }
+                holder.setCardToBindings(card);
             } else {
                 // Tweet is invisible or refreshed
                 if (BuildConfig.DEBUG) {
-                    Log.d("Serenade", "Tweet is invisible");
+                    Log.d("Serenade", "Tweet is invisible or refreshed");
                 }
             }
         }

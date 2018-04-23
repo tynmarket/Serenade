@@ -94,8 +94,8 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         cardsLoaded = true;
     }
 
-    public void replaceCard(String url, TwitterCard card) {
-        cards.put(url, card);
+    public void replaceCard(TwitterCard card) {
+        cards.put(card.url, card);
     }
 
     public boolean cardsLoaded() {

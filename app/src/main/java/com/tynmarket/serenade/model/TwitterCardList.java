@@ -60,14 +60,16 @@ public class TwitterCardList {
                 .twitterCards(domainEnabled, TAG_CACHE, url)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
+                    TwitterCard card = cards.get(url);
+
                     if (BuildConfig.DEBUG) {
-                        TwitterCardUtil.debugCards(cards);
+                        TwitterCardUtil.debugCard(card);
                     }
 
-                    TwitterCard card = cards.get(url);
                     if (card != null) {
                         card.url = url;
                     }
+
                     eventBus().post(new LoadTwitterCardEvent(sectionNumber, position, tweet.id, card));
                 }, throwable -> {
                     // TODO: Notify error
