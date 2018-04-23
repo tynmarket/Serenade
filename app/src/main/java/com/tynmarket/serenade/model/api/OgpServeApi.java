@@ -16,7 +16,8 @@ public interface OgpServeApi {
     // TODO: /twitter_cards
     @GET("/twitter")
     Observable<HashMap<String, TwitterCard>> twitterCards(
-            @Query("domain") boolean domain,
+            @Query("request_to_top") boolean requestToTop,
+            @Query("skip_crawl") boolean skipCrawl,
             @Query("tag") String tag,
             @Query("urls[]") String... urls);
 }

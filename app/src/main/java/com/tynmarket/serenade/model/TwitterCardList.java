@@ -53,11 +53,11 @@ public class TwitterCardList {
     }
 
     public static void loadTwitterCard(int sectionNumber, int position, Tweet tweet) {
-        boolean domainEnabled = domainEnabled();
+        boolean requestToTop = requestToTop();
         String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
 
         Disposable disposable = ogpServeApi()
-                .twitterCards(domainEnabled, TAG_CACHE, url)
+                .twitterCards(requestToTop, true, TAG_CACHE, url)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
                     TwitterCard card = cards.get(url);
@@ -80,11 +80,11 @@ public class TwitterCardList {
     }
 
     private static void loadTwitterCards(int sectionNumber, String[] urls) {
-        boolean domainEnabled = domainEnabled();
+        boolean requestToTop = requestToTop();
         String tag = getTag(sectionNumber);
 
         Disposable disposable = ogpServeApi()
-                .twitterCards(domainEnabled, tag, urls)
+                .twitterCards(requestToTop, false, tag, urls)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cards -> {
                     if (BuildConfig.DEBUG) {
@@ -112,7 +112,7 @@ public class TwitterCardList {
         return urls;
     }
 
-    private static boolean domainEnabled() {
+    private static boolean requestToTop() {
         return Throttle.requestToTop();
     }
 
