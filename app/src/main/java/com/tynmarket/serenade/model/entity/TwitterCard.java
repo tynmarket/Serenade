@@ -26,7 +26,7 @@ public class TwitterCard {
     }
 
     public boolean isSummary() {
-        return card.equals(CARD_SUMMARY) || (TextUtils.isEmpty(card) && !TextUtils.isEmpty(image));
+        return card.equals(CARD_SUMMARY) && !TextUtils.isEmpty(image);
     }
 
     public boolean isSummaryLargeImage() {
