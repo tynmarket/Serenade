@@ -2,7 +2,6 @@ package com.tynmarket.serenade.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -184,8 +183,7 @@ public class TweetListFragment extends Fragment {
                 }
             }
 
-            // TODO: Rx thread?
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            new Handler().postDelayed(() -> {
                 for (Integer position : postDelays) {
                     Tweet tweet = adapter.getTweet(position);
                     TwitterCardList.loadTwitterCard(sectionNumber, position, tweet);

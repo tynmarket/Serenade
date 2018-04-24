@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -59,6 +60,7 @@ public class TwitterCardList {
         Disposable disposable = ogpServeApi()
                 .twitterCards(requestToTop, true, TAG_CACHE, url)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(cards -> {
                     TwitterCard card = cards.get(url);
 
@@ -86,6 +88,7 @@ public class TwitterCardList {
         Disposable disposable = ogpServeApi()
                 .twitterCards(requestToTop, false, tag, urls)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(cards -> {
                     if (BuildConfig.DEBUG) {
                         TwitterCardUtil.debugCards(cards);
