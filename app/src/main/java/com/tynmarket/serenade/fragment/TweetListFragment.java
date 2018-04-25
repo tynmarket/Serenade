@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,9 +28,7 @@ import com.tynmarket.serenade.model.TwitterCardList;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
-import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
-import com.tynmarket.serenade.view.holder.TweetViewHolder;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -91,10 +90,13 @@ public class TweetListFragment extends Fragment {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(manager);
 
+        // Animation
+        muteAnimation();
+
+        // Adapter
         if (adapter == null) {
             ArrayList<Tweet> tweets;
 
-            // Adapter
             if (debug) {
                 tweets = DummyTweet.tweets();
             } else {
@@ -102,7 +104,6 @@ public class TweetListFragment extends Fragment {
             }
             this.adapter = new TweetListAdapter(tweets);
         }
-
         rv.setAdapter(adapter);
 
         // Infinite scroll
@@ -177,9 +178,7 @@ public class TweetListFragment extends Fragment {
                 if (adapter.requestCardCache(position)) {
                     postDelays.add(position);
                 } else {
-                    TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
-                    TwitterCard card = event.cards.get(TweetUtil.expandedUrl(holder.getTweet()));
-                    holder.setCardToBindings(card);
+                    adapter.notifyItemChanged(position);
                 }
             }
 
@@ -196,7 +195,6 @@ public class TweetListFragment extends Fragment {
     public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
         if (event.sectionNumber == sectionNumber) {
             int position = event.position;
-            long tweetId = event.tweetId;
             TwitterCard card = event.card;
 
             if (BuildConfig.DEBUG) {
@@ -208,26 +206,7 @@ public class TweetListFragment extends Fragment {
             }
 
             adapter.replaceCard(card);
-
-            TweetViewHolder holder = (TweetViewHolder) rv.findViewHolderForAdapterPosition(position);
-            Tweet tweet = null;
-
-            if (holder != null) {
-                tweet = holder.getTweet();
-            }
-
-            if (tweet != null && tweet.id == tweetId) {
-                // Tweet is visible
-                if (BuildConfig.DEBUG) {
-                    Log.d("Serenade", "replace TwitterCard");
-                }
-                holder.setCardToBindings(card);
-            } else {
-                // Tweet is invisible or refreshed
-                if (BuildConfig.DEBUG) {
-                    Log.d("Serenade", "Tweet is invisible or refreshed");
-                }
-            }
+            adapter.notifyItemChanged(position);
         }
     }
 
@@ -237,5 +216,10 @@ public class TweetListFragment extends Fragment {
 
     private void hideRefreshIndicator() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    private void muteAnimation() {
+        rv.getItemAnimator().setChangeDuration(0);
+        ((DefaultItemAnimator) rv.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 }

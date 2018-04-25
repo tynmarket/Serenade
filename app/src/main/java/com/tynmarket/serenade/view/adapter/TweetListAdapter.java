@@ -1,11 +1,13 @@
 package com.tynmarket.serenade.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -41,6 +43,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         holder.setAdapter(this);
+
+        if (BuildConfig.DEBUG) {
+            Log.d("Serenade", String.format("onBindViewHolder: position=%d", position));
+        }
 
         Tweet tweet = this.tweets.get(position);
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
