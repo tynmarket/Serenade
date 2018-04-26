@@ -96,7 +96,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     }
 
     public void refreshCards(Map<String, TwitterCard> cards) {
-        this.cards = cards;
+        if (cards.size() == 0) {
+            this.cards = cards;
+        } else {
+            cards.putAll(cards);
+        }
         cardsLoaded = true;
     }
 
