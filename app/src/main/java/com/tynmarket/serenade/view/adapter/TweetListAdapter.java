@@ -99,7 +99,7 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         if (cards.size() == 0) {
             this.cards = cards;
         } else {
-            cards.putAll(cards);
+            this.cards.putAll(cards);
         }
         cardsLoaded = true;
     }
