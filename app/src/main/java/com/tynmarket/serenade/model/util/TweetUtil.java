@@ -73,7 +73,9 @@ public class TweetUtil {
 
     @Nullable
     public static String expandedUrl(Tweet tweet) {
+        tweet = tweet.quotedStatus != null ? tweet.quotedStatus : tweet;
         UrlEntity url = urlEntity(tweet);
+
         if (url != null) {
             return url.expandedUrl;
         } else {
@@ -83,9 +85,9 @@ public class TweetUtil {
 
     @Nullable
     public static String expandedUrlWithoutTwitter(Tweet tweet) {
-        UrlEntity url = urlEntity(tweet);
-        if (url != null && !url.expandedUrl.contains("twitter.com")) {
-            return url.expandedUrl;
+        String url = expandedUrl(tweet);
+        if (url != null && !url.contains("twitter.com")) {
+            return url;
         } else {
             return null;
         }
