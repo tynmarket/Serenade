@@ -34,7 +34,7 @@ public class TwitterCardList {
     private static final String OGPSERVE_URL = BuildConfig.OGPSERVE_URL;
     private static final String TAG_TIMELINE = "timeline";
     private static final String TAG_FAVORITE = "favorite";
-    private static final String TAG_CACHE = "cache";
+    private static final String TAG_RETRY = "retry";
     private static final Retrofit retrofit = new Retrofit
             .Builder()
             .baseUrl(OGPSERVE_URL)
@@ -55,10 +55,11 @@ public class TwitterCardList {
 
     public static void loadTwitterCard(int sectionNumber, int position, Tweet tweet) {
         boolean requestToTop = requestToTop();
+        String tag = getTagWithRetry(sectionNumber);
         String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
 
         Disposable disposable = ogpServeApi()
-                .twitterCards(requestToTop, true, TAG_CACHE, url)
+                .twitterCards(requestToTop, true, tag, url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(cards -> {
@@ -117,6 +118,11 @@ public class TwitterCardList {
 
     private static boolean requestToTop() {
         return Throttle.requestToTop();
+    }
+
+    private static String getTagWithRetry(int sectionNumber) {
+        String tagSection = getTag(sectionNumber);
+        return tagSection + "," + TAG_RETRY;
     }
 
     private static String getTag(int sectionNumber) {
