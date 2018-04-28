@@ -55,6 +55,8 @@ public class TweetContentView extends RelativeLayout {
 
         // Open tweet
         setOnTweetTextClickListener();
+        // Works well with quote tweet
+        setOnTweetPhotoClickListener();
 
         // Open profile
         setOnNameClickListener();
@@ -130,6 +132,12 @@ public class TweetContentView extends RelativeLayout {
             } else {
                 openTweet();
             }
+        });
+    }
+
+    private void setOnTweetPhotoClickListener() {
+        binding.tweetPhoto.setOnClickListener(v -> {
+            openTweet();
         });
     }
 
