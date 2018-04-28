@@ -73,23 +73,19 @@ public class TweetUtil {
     }
 
     public static String tweetText(Tweet tweet) {
-        String text;
+        String text = tweet.text;
 
         if (tweet.quotedStatus != null) {
             String url = url(tweet);
 
             if (url != null) {
                 text = tweet.text.replace(url, "");
-            } else {
-                text = tweet.text;
             }
         } else {
             MediaEntity entity = mediaEntity(tweet);
 
             if (entity != null) {
                 text = tweet.text.replace(entity.url, "");
-            } else {
-                text = tweet.text;
             }
         }
 
@@ -97,12 +93,21 @@ public class TweetUtil {
     }
 
     public static String tweetText(TweetWithTwitterCard tweet) {
+        String text = tweet.text;
+
+        // Hide the same url as Twitter Card
         if (tweet.twitterCard.showSummaryCard()) {
             String url = tweet.entities.urls.get(0).url;
-            return replaceChRef(tweet.text.replace(url, ""));
-        } else {
-            return replaceChRef(tweet.text);
+            text = tweet.text.replace(url, "");
         }
+
+        // Hide the photo url
+        MediaEntity entity = mediaEntity(tweet);
+        if (entity != null) {
+            text = text.replace(entity.url, "");
+        }
+
+        return replaceChRef(text);
     }
 
     public static String replaceChRef(String text) {
@@ -182,6 +187,7 @@ public class TweetUtil {
     @Nullable
     private static UrlEntity urlEntity(Tweet tweet) {
         List<UrlEntity> urls = tweet.entities.urls;
+
         if (urls.size() > 0) {
             return urls.get(0);
         } else {
@@ -192,6 +198,7 @@ public class TweetUtil {
     @Nullable
     private static MediaEntity mediaEntity(Tweet tweet) {
         List<MediaEntity> entities = tweet.entities.media;
+
         if (entities.size() > 0) {
             return entities.get(0);
         } else {
