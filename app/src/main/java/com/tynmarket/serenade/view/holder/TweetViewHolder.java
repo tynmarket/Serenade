@@ -77,7 +77,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         setCardToBindings(card);
     }
 
-    public void setCardToBindings(TwitterCard card) {
+    private void setCardToBindings(TwitterCard card) {
         Tweet tweet = getTweet();
         String expandedUrl = TweetUtil.expandedUrl(tweet);
 
