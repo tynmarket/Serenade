@@ -87,6 +87,7 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:scaleType="centerCrop"
             android:visibility="gone"
+            android:foreground="?android:selectableItemBackground"
             app:tweetPhoto="@{tweet}"
             tools:src="@drawable/peing" />
 
