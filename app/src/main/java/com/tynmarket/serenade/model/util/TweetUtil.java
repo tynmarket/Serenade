@@ -89,7 +89,7 @@ public class TweetUtil {
             }
         }
 
-        return replaceChRef(text);
+        return replaceChRef(text).trim();
     }
 
     public static String tweetText(TweetWithTwitterCard tweet) {
@@ -107,7 +107,7 @@ public class TweetUtil {
             text = text.replace(entity.url, "");
         }
 
-        return replaceChRef(text);
+        return replaceChRef(text).trim();
     }
 
     public static String replaceChRef(String text) {
