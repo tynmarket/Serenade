@@ -92,7 +92,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             card.host = TweetUtil.expandedUrlHost(tweet);
         }
 
-        binding.setShowSummaryCard(card != null && (card.isSummary() || card.isSummaryLargeImage()));
+        binding.setShowSummaryCard(card != null && card.showSummaryCard());
         binding.summaryCard.binding.setCard(card);
     }
 

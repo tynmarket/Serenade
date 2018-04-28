@@ -6,8 +6,7 @@ import com.twitter.sdk.android.core.models.Tweet;
  * Created by tynmarket on 2018/04/28.
  */
 public class TweetWithTwitterCard extends Tweet {
-    @SuppressWarnings("all")
-    private TwitterCard twitterCard;
+    public TwitterCard twitterCard;
 
     public TweetWithTwitterCard(Tweet tweet, TwitterCard twitterCard) {
         super(

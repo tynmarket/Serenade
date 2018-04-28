@@ -97,8 +97,12 @@ public class TweetUtil {
     }
 
     public static String tweetText(TweetWithTwitterCard tweet) {
-        String url = tweet.entities.urls.get(0).url;
-        return replaceChRef(tweet.text.replace(url, ""));
+        if (tweet.twitterCard.showSummaryCard()) {
+            String url = tweet.entities.urls.get(0).url;
+            return replaceChRef(tweet.text.replace(url, ""));
+        } else {
+            return replaceChRef(tweet.text);
+        }
     }
 
     public static String replaceChRef(String text) {

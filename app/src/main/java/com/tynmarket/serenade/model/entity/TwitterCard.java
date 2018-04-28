@@ -25,6 +25,10 @@ public class TwitterCard {
         this.title = title;
     }
 
+    public boolean showSummaryCard() {
+        return isSummary() || isSummaryLargeImage();
+    }
+
     public boolean isSummary() {
         return card.equals(CARD_SUMMARY) && !TextUtils.isEmpty(image);
     }
