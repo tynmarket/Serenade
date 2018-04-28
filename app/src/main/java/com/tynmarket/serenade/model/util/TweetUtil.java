@@ -13,6 +13,7 @@ import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.SpeakerDeck;
+import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
@@ -83,6 +84,11 @@ public class TweetUtil {
         } else {
             return tweet.text;
         }
+    }
+
+    public static String tweetText(TweetWithTwitterCard tweet) {
+        String url = tweet.entities.urls.get(0).url;
+        return tweet.text.replace(url, "");
     }
 
     @Nullable

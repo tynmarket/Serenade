@@ -19,6 +19,7 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
+import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
@@ -70,7 +71,13 @@ public class TweetContentView extends RelativeLayout {
             return;
         }
 
-        String text = TweetUtil.tweetText(tweet);
+        String text;
+        if (tweet instanceof TweetWithTwitterCard) {
+            text = TweetUtil.tweetText((TweetWithTwitterCard) tweet);
+        } else {
+            text = TweetUtil.tweetText(tweet);
+        }
+
         Spannable spannable = new SpannableString(text);
 
         Matcher matcher = patternScreenName.matcher(text);

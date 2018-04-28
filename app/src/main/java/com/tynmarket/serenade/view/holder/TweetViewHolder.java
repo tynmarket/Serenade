@@ -19,6 +19,7 @@ import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.RetweetTweet;
+import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.TweetMapper;
@@ -72,6 +73,10 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setTweetAndCardToBindings(Tweet tweet, TwitterCard card) {
+        if (card != null) {
+            tweet = new TweetWithTwitterCard(tweet, card);
+        }
+
         setTweetToBindings(tweet);
         binding.setShowQuotedStatus(tweet.quotedStatus != null);
         setCardToBindings(card);
