@@ -73,28 +73,43 @@ public class TweetUtil {
     }
 
     public static String tweetText(Tweet tweet) {
+        String text;
+
         if (tweet.quotedStatus != null) {
             String url = url(tweet);
 
             if (url != null) {
-                return tweet.text.replace(url, "");
+                text = tweet.text.replace(url, "");
             } else {
-                return tweet.text;
+                text = tweet.text;
             }
         } else {
             MediaEntity entity = mediaEntity(tweet);
 
             if (entity != null) {
-                return tweet.text.replace(entity.url, "");
+                text = tweet.text.replace(entity.url, "");
             } else {
-                return tweet.text;
+                text = tweet.text;
             }
         }
+
+        return replaceChRef(text);
     }
 
     public static String tweetText(TweetWithTwitterCard tweet) {
         String url = tweet.entities.urls.get(0).url;
-        return tweet.text.replace(url, "");
+        return replaceChRef(tweet.text.replace(url, ""));
+    }
+
+    public static String replaceChRef(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        return text
+                .replace("&amp;", "&")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">");
     }
 
     @Nullable

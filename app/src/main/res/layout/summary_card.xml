@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="com.tynmarket.serenade.model.util.TweetUtil" />
+
         <variable
             name="card"
             type="com.tynmarket.serenade.model.entity.TwitterCard" />
@@ -94,7 +96,7 @@
                         android:paddingStart="@dimen/spacing_medium"
                         android:maxLines="2"
                         android:textColor="@color/text_black"
-                        android:text="@{card != null ? card.title : null}"
+                        android:text="@{card != null ? TweetUtil.replaceChRef(card.title) : null}"
                         tools:text="summary_title" />
 
                     <TextView
