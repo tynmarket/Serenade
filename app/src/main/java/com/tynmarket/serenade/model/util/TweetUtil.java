@@ -71,6 +71,31 @@ public class TweetUtil {
         return url != null && url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
     }
 
+    public static String tweetText(Tweet tweet) {
+        if (tweet.quotedStatus != null) {
+            String url = url(tweet);
+
+            if (url != null) {
+                return tweet.text.replace(url, "");
+            } else {
+                return tweet.text;
+            }
+        } else {
+            return tweet.text;
+        }
+    }
+
+    @Nullable
+    public static String url(Tweet tweet) {
+        UrlEntity url = urlEntity(tweet);
+
+        if (url != null) {
+            return url.url;
+        } else {
+            return null;
+        }
+    }
+
     @Nullable
     public static String expandedUrl(Tweet tweet) {
         tweet = tweet.quotedStatus != null ? tweet.quotedStatus : tweet;
@@ -86,6 +111,7 @@ public class TweetUtil {
     @Nullable
     public static String expandedUrlWithoutTwitter(Tweet tweet) {
         String url = expandedUrl(tweet);
+
         if (url != null && !url.contains("twitter.com")) {
             return url;
         } else {
@@ -96,6 +122,7 @@ public class TweetUtil {
     @Nullable
     public static String expandedUrlHost(Tweet tweet) {
         String expandedUrl = expandedUrl(tweet);
+
         if (expandedUrl != null) {
             Uri uri = Uri.parse(expandedUrl);
             return uri.getHost();

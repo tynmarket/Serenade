@@ -70,9 +70,10 @@ public class TweetContentView extends RelativeLayout {
             return;
         }
 
-        Spannable spannable = new SpannableString(tweet.text);
+        String text = TweetUtil.tweetText(tweet);
+        Spannable spannable = new SpannableString(text);
 
-        Matcher matcher = patternScreenName.matcher(tweet.text);
+        Matcher matcher = patternScreenName.matcher(text);
         while (matcher.find()) {
             String screenName = matcher.group(1);
             // TODO: Disable ripple effect on other tweet text
@@ -85,7 +86,7 @@ public class TweetContentView extends RelativeLayout {
             }, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        matcher = patternHashTag.matcher(tweet.text);
+        matcher = patternHashTag.matcher(text);
         while (matcher.find()) {
             String hashTag = matcher.group(1);
             // TODO: Disable ripple effect on other tweet text
