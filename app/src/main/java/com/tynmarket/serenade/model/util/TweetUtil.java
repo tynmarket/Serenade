@@ -82,7 +82,13 @@ public class TweetUtil {
                 return tweet.text;
             }
         } else {
-            return tweet.text;
+            MediaEntity entity = mediaEntity(tweet);
+
+            if (entity != null) {
+                return tweet.text.replace(entity.url, "");
+            } else {
+                return tweet.text;
+            }
         }
     }
 
@@ -159,6 +165,16 @@ public class TweetUtil {
         List<UrlEntity> urls = tweet.entities.urls;
         if (urls.size() > 0) {
             return urls.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
+    private static MediaEntity mediaEntity(Tweet tweet) {
+        List<MediaEntity> entities = tweet.entities.media;
+        if (entities.size() > 0) {
+            return entities.get(0);
         } else {
             return null;
         }
