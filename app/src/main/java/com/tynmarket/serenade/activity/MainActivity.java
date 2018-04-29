@@ -42,6 +42,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnTouchListener {
     private static final int REQUEST_CODE_LOGIN = 1001;
+    private static final int REQUEST_CODE_LOGIN_AFTER_SIGN_OUT = 1002;
 
     private ViewPager mViewPager;
     private GestureDetector mGestureDetector;
@@ -109,14 +110,33 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         startActivityForResult(intent, REQUEST_CODE_LOGIN);
     }
 
+
+    private void startLoginActivityAfterSignOut() {
+        Intent intent = new Intent(this, com.tynmarket.serenade.activity.LoginActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_LOGIN_AFTER_SIGN_OUT);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
             // Login
             handleResultLogin(resultCode);
+        } else if (requestCode == REQUEST_CODE_LOGIN_AFTER_SIGN_OUT) {
+            handleResultLoginAfterSignOut(resultCode);
         } else {
             // Reenter
             overridePendingTransition(0, android.R.anim.slide_out_right);
+        }
+    }
+
+    private void handleResultLoginAfterSignOut(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
+            loadUser();
+            TweetList.loadTweets(1, true, null);
+            TweetList.loadTweets(2, true, null);
+        } else {
+            handleResultLogin(resultCode);
         }
     }
 
@@ -249,14 +269,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                     .setMessage(R.string.sign_out_prompt_message)
                     .setPositiveButton(R.string.text_ok, (dialog, which) -> {
                         Toast.makeText(this, R.string.sign_out_success, Toast.LENGTH_LONG).show();
+                        closeDrawer();
 
                         LoginUser.signOut();
-                        startLoginActivity();
+                        startLoginActivityAfterSignOut();
                     })
                     .setNegativeButton(R.string.text_cancel, null)
                     .show();
-
-            closeDrawer();
         });
     }
 

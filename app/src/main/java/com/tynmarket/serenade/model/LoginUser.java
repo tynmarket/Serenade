@@ -6,6 +6,7 @@ import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
+import com.tynmarket.serenade.event.SignOutEvent;
 import com.tynmarket.serenade.model.util.DummyUser;
 import com.tynmarket.serenade.model.util.RetrofitObserver;
 
@@ -36,7 +37,7 @@ public class LoginUser {
                 .subscribe(user -> {
                     EventBus.getDefault().post(new LoadUserEvent(user));
                 }, throwable -> {
-                    Log.d("Serenade", String.format("loadUser failure"));
+                    Log.d("Serenade", "loadUser failure");
                     // TODO: Dummy or empty user
                     EventBus.getDefault().post(new LoadUserEvent(DummyUser.tynmarket()));
                 });
@@ -44,6 +45,7 @@ public class LoginUser {
 
     public static void signOut() {
         TwitterCore.getInstance().getSessionManager().clearActiveSession();
+        EventBus.getDefault().post(new SignOutEvent());
     }
 
     public static boolean isTynmarket() {

@@ -71,6 +71,10 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     }
 
     public boolean requestCardCache(int position) {
+        if (tweets.size() == 0) {
+            return false;
+        }
+
         Tweet tweet = tweets.get(position);
         String url = TweetUtil.expandedUrlWithoutTwitter(tweet);
         TwitterCard card = cards.get(url);
@@ -109,5 +113,11 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     public boolean cardsLoaded() {
         return cardsLoaded;
+    }
+
+    public void clearAll() {
+        tweets.clear();
+        cards.clear();
+        notifyDataSetChanged();
     }
 }

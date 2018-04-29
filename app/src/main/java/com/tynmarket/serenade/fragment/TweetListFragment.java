@@ -22,6 +22,7 @@ import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;
+import com.tynmarket.serenade.event.SignOutEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.TwitterCardList;
@@ -208,6 +209,11 @@ public class TweetListFragment extends Fragment {
             adapter.replaceCard(card);
             adapter.notifyItemChanged(position);
         }
+    }
+
+    @Subscribe
+    public void onSignOutEvent(SignOutEvent event) {
+        adapter.clearAll();
     }
 
     private void showRefreshIndicator() {
