@@ -75,11 +75,9 @@
             tools:text="tweet_text" />
 
         <!-- TODO: Movie -->
-        <!-- TODO: Boarder Radius -->
-        <!-- TODO: http://www.viralandroid.com/2015/11/how-to-make-imageview-image-rounded-corner-in-android.html -->
         <!-- TODO: Multi image -->
         <!-- TODO: Full screen image on touch -->
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/tweet_photo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_height_tweet_photo"
@@ -88,6 +86,7 @@
             android:scaleType="centerCrop"
             android:visibility="gone"
             android:foreground="?android:selectableItemBackground"
+            app:riv_corner_radius="@dimen/corner_radius"
             app:tweetPhoto="@{tweet}"
             tools:src="@drawable/peing" />
 

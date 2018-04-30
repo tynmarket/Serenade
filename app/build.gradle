@@ -57,6 +57,7 @@ dependencies {
 
     // UI
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // Net
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
