@@ -4,4 +4,8 @@
         <key>request_to_top_ratio</key>
         <value>100</value>
     </entry>
+    <entry>
+        <key>ogpserve_url</key>
+        <value>https://github.com/tynmarket/Serenade/</value><!-- TODO: Mock endpoint -->
+    </entry>
 </defaultsMap>

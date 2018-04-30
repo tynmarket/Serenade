@@ -12,6 +12,7 @@ import com.tynmarket.serenade.R;
  */
 public class FirebaseRemoteConfigHelper {
     private static final long CACHE_EXPIRATION = 3600;
+    private static final String KEY_OGPSERVE_URL = "ogpserve_url";
 
     public static void init() {
         FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
@@ -41,5 +42,10 @@ public class FirebaseRemoteConfigHelper {
         });
 
         return config;
+    }
+
+    public static String getOgpserveUrl() {
+        FirebaseRemoteConfig config = fetch();
+        return config.getString(KEY_OGPSERVE_URL);
     }
 }

@@ -11,6 +11,7 @@ import com.tynmarket.serenade.model.api.OgpServeApi;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
+import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterCardUtil;
 
@@ -31,16 +32,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class TwitterCardList {
-    private static final String OGPSERVE_URL = BuildConfig.OGPSERVE_URL;
     private static final String TAG_TIMELINE = "timeline";
     private static final String TAG_FAVORITE = "favorite";
     private static final String TAG_RETRY = "retry";
-    private static final Retrofit retrofit = new Retrofit
-            .Builder()
-            .baseUrl(OGPSERVE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+
+    private static String currentOgpserveUrl;
+    private static OgpServeApi ogpServeApi;
 
     @SuppressLint("StaticFieldLeak")
     public static void loadTwitterCards(int sectionNumber) {
@@ -137,7 +134,24 @@ public class TwitterCardList {
     }
 
     private static OgpServeApi ogpServeApi() {
-        return retrofit.create(OgpServeApi.class);
+        String ogpserveUrl = FirebaseRemoteConfigHelper.getOgpserveUrl();
+
+        if (!ogpserveUrl.equals(currentOgpserveUrl)) {
+            currentOgpserveUrl = ogpserveUrl;
+            ogpServeApi = null;
+        }
+
+        if (ogpServeApi == null) {
+            Retrofit retrofit = new Retrofit
+                    .Builder()
+                    .baseUrl(currentOgpserveUrl)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ogpServeApi = retrofit.create(OgpServeApi.class);
+        }
+        return ogpServeApi;
     }
 
     private static EventBus eventBus() {
