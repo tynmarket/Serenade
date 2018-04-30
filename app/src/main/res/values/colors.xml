@@ -2,6 +2,8 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#f5f5f5</color>
+
+    <!-- 13% lighten from #1e90ff -->
     <color name="colorAccent">#60b1ff</color>
 
     <!-- Primary color -->
@@ -12,12 +14,17 @@
     <color name="silver">#c0c0c0</color>
     <color name="dark_gray">#a9a9a9</color>
 
-    <color name="text_black">@color/primary_text_default_material_light
-    </color><!-- android:textColorPrimary in Platform.AppCompat -->
-    <color name="text_gray">@color/secondary_text_default_material_light
-    </color><!-- android:textColorSecondary in Platform.AppCompat -->
-    <color name="text_link">#2ba7f3</color>
+    <!-- android:textColorPrimary in Platform.AppCompat -->
+    <color name="text_black">@color/primary_text_default_material_light</color>
+
+    <!-- android:textColorSecondary in Platform.AppCompat -->
+    <color name="text_gray">@color/secondary_text_default_material_light</color>
+
+    <!-- 18% darken from #87cefa -->
+    <color name="text_link">#2faaf6</color>
 
     <color name="fav_on">#e43f72</color>
+
+    <!-- 10% lighten from #00ff00 -->
     <color name="retweet_on">#00cc00</color>
 </resources>
