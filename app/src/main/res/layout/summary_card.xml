@@ -11,109 +11,122 @@
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:orientation="vertical"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:summary_card_with_large_image_visibility="@{card}">
+            app:summary_card_with_large_image_visibility="@{card}"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="0dp">
 
-            <!-- TODO: Corner radius -->
-            <ImageView
-                android:id="@+id/large_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/image_height_summary_large_image"
-                android:scaleType="centerCrop"
-                app:large_image="@{card}"
-                tools:src="@drawable/summary_large_image" />
-
-            <LinearLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_x_medium"
-                android:background="@drawable/border_summary_card_large_bottom">
+                app:summary_card_with_large_image_visibility="@{card}">
 
-                <TextView
-                    android:id="@+id/title_in_large_image"
+                <ImageView
+                    android:id="@+id/large_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_height_summary_large_image"
+                    android:scaleType="centerCrop"
+                    app:large_image="@{card}"
+                    tools:src="@drawable/summary_large_image" />
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:textColor="@color/text_black"
-                    android:text="@{card != null ? card.title : null}"
-                    tools:text="summary_title\n summary_title" />
+                    android:padding="@dimen/spacing_x_medium"
+                    android:background="@drawable/border_summary_card_large_bottom">
 
-                <TextView
-                    android:id="@+id/card_summary_host_in_large_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_l_medium"
-                    android:textSize="@dimen/text_size_small"
-                    android:text="@{card != null ? card.host : null}"
-                    android:theme="@style/AppTheme.NoExtraPadding"
-                    tools:text="summary_host" />
+                    <TextView
+                        android:id="@+id/title_in_large_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:textColor="@color/text_black"
+                        android:text="@{card != null ? card.title : null}"
+                        tools:text="summary_title\n summary_title" />
+
+                    <TextView
+                        android:id="@+id/card_summary_host_in_large_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_l_medium"
+                        android:textSize="@dimen/text_size_small"
+                        android:text="@{card != null ? card.host : null}"
+                        android:theme="@style/AppTheme.NoExtraPadding"
+                        tools:text="summary_host" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-        <!-- TODO: ConstraintLayout -->
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/image_size_summary_image"
-            app:summary_card_visibility="@{card}">
+            android:layout_height="wrap_content"
+            app:summary_card_visibility="@{card}"
+            app:cardCornerRadius="@dimen/corner_radius"
+            app:cardElevation="0dp">
 
-            <!-- TODO: Corner radius -->
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="@dimen/image_size_summary_image"
-                android:layout_height="@dimen/image_size_summary_image"
-                android:scaleType="centerCrop"
-                app:image="@{card}"
-                tools:src="@drawable/nhk" />
-
-            <RelativeLayout
+            <!-- TODO: ConstraintLayout -->
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/image"
-                android:background="@drawable/border_summary_card_right">
+                android:layout_height="@dimen/image_size_summary_image">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/image_size_summary_image"
+                    android:layout_height="@dimen/image_size_summary_image"
+                    android:scaleType="centerCrop"
+                    app:image="@{card}"
+                    tools:src="@drawable/nhk" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true">
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/image"
+                    android:background="@drawable/border_summary_card_right">
 
-                    <TextView
-                        android:id="@+id/title"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="@dimen/spacing_medium"
-                        android:maxLines="2"
-                        android:textColor="@color/text_black"
-                        android:text="@{card != null ? TweetUtil.replaceChRef(card.title) : null}"
-                        tools:text="summary_title" />
+                        android:layout_centerVertical="true">
 
-                    <TextView
-                        android:id="@+id/card_summary_host"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
-                        android:paddingStart="@dimen/spacing_medium"
-                        android:textSize="@dimen/text_size_small"
-                        android:text="@{card != null ? card.host : null}"
-                        tools:text="summary_host" />
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/spacing_medium"
+                            android:maxLines="2"
+                            android:textColor="@color/text_black"
+                            android:text="@{card != null ? TweetUtil.replaceChRef(card.title) : null}"
+                            tools:text="summary_title" />
+
+                        <TextView
+                            android:id="@+id/card_summary_host"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/title"
+                            android:paddingStart="@dimen/spacing_medium"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@{card != null ? card.host : null}"
+                            tools:text="summary_host" />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
             </RelativeLayout>
 
-        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
     </FrameLayout>
 
