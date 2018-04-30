@@ -20,8 +20,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -32,6 +30,7 @@ import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
 import com.tynmarket.serenade.view.custom.NavigationProfileView;
@@ -289,25 +288,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     }
 
     private void initFirebaseConfig() {
-        FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
-        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.DEBUG)
-                .build();
-        config.setConfigSettings(configSettings);
-        config.setDefaults(R.xml.remote_config_defaults);
-
-        long cacheExpiration = 3600;
-        if (config.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
-            cacheExpiration = 0;
-        }
-
-        config.fetch(cacheExpiration).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                config.activateFetched();
-            } else {
-                Log.d("Serenade", "RemoteConfig fetch failed");
-            }
-        });
+        FirebaseRemoteConfigHelper.init();
     }
 
     private void loadUser() {

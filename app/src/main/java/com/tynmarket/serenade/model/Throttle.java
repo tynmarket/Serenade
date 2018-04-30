@@ -3,6 +3,7 @@ package com.tynmarket.serenade.model;
 import android.util.Log;
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
 
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class Throttle {
     private static final String KEY_REQUEST_TO_TOP_RATIO = "request_to_top_ratio";
 
     public static boolean requestToTop() {
-        FirebaseRemoteConfig config = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfig config = FirebaseRemoteConfigHelper.fetch();
         long requestToTopRatio = config.getLong(KEY_REQUEST_TO_TOP_RATIO);
         Log.d("Serenade", String.format("requestToTopRatio: %d", requestToTopRatio));
 
