@@ -20,8 +20,8 @@
     <!-- android:textColorSecondary in Platform.AppCompat -->
     <color name="text_gray">@color/secondary_text_default_material_light</color>
 
-    <!-- 18% darken from #87cefa -->
-    <color name="text_link">#2faaf6</color>
+    <!-- 18% darken from #87cefa and desaturate 5% -->
+    <color name="text_link">#34a9f1</color>
 
     <color name="fav_on">#e43f72</color>
 
