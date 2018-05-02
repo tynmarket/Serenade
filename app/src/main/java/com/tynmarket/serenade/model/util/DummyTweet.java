@@ -60,7 +60,7 @@ public class DummyTweet {
         );
 
         TwitterCard summaryLarge = new TwitterCard(
-                TwitterCard.CARD_SUMMARY_LARGE_Image,
+                TwitterCard.CARD_SUMMARY_LARGE_IMAGE,
                 "http://dol.ismcdn.jp/mwimgs/7/c/-/img_7cf57e479808fe68c759edf1cb35160567079.jpg",
                 "三流リーダーは気前がよく、二流リーダーは単なるケチ、一流リーダーは「○○なケチ」である。 | 優れたリーダーはみな小心者である。 | ダイヤモンド・オンライン,"
         );

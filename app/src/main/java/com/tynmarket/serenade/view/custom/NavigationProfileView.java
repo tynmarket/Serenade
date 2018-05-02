@@ -15,6 +15,7 @@ import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.NavigationProfileBinding;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.listner.OnNavigationItemClickListener;
@@ -25,6 +26,7 @@ import com.tynmarket.serenade.view.listner.OnNavigationItemClickListener;
 
 public class NavigationProfileView extends RelativeLayout {
     public NavigationProfileBinding binding;
+    private FirebaseAnalyticsHelper analytics;
     private OnNavigationItemClickListener listener;
 
     public NavigationProfileView(Context context) {
@@ -36,6 +38,7 @@ public class NavigationProfileView extends RelativeLayout {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DataBindingUtil.inflate(inflater, R.layout.navigation_profile, this, true);
+        analytics = new FirebaseAnalyticsHelper(context);
 
         // Open following
         setOnFollowClickListener();
@@ -58,6 +61,7 @@ public class NavigationProfileView extends RelativeLayout {
 
     private void setOnFollowClickListener() {
         binding.follow.setOnClickListener(v -> {
+            analytics.logViewFollow();
             listener.onClick(v);
 
             // Open follow
@@ -68,6 +72,7 @@ public class NavigationProfileView extends RelativeLayout {
 
     private void setOnFollowerClickListener() {
         binding.follower.setOnClickListener(v -> {
+            analytics.logViewFollower();
             listener.onClick(v);
 
             // Open follower

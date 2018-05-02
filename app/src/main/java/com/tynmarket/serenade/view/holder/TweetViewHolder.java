@@ -21,6 +21,7 @@ import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.TweetMapper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
@@ -33,6 +34,7 @@ import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
     public ListItemTweetBinding binding;
+    private FirebaseAnalyticsHelper analytics;
 
     private TweetListAdapter adapter;
 
@@ -40,6 +42,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         binding = DataBindingUtil.bind(itemView);
+        analytics = new FirebaseAnalyticsHelper(itemView.getContext());
 
         // Open Tweet
         setOnLayoutClickListener();
@@ -118,6 +121,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnLayoutClickListener() {
         binding.getRoot().setOnClickListener(v -> {
             Tweet tweet = binding.getTweet();
+            analytics.logViewTweet(tweet);
+
             Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
             ActivityHelper.startUriActivity(v.getContext(), uri);
         });
@@ -159,6 +164,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnReplyClickListener() {
         binding.tweetAction.binding.reply.setOnClickListener(v -> {
             Tweet tweet = TweetUtil.tweetOrRetweetedStatus(getTweet());
+            analytics.logReply(tweet);
+
             Uri uri = TwitterUtil.replyUri(tweet.idStr);
             // TODO: startActivityForResult
             ActivityHelper.startUriActivity(v.getContext(), uri);
@@ -172,6 +179,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             replaceTweet(newTweet);
 
             if (!tweet.favorited) {
+                analytics.logFavorite(tweet);
+
                 FavoriteTweet.favorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
@@ -198,6 +207,8 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             replaceTweet(newTweet);
 
             if (!tweet.retweeted) {
+                analytics.logRetweet(tweet);
+
                 RetweetTweet.retweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
                 }, () -> {

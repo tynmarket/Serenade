@@ -21,6 +21,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.text.TweetTextClickableSpan;
@@ -38,6 +39,7 @@ public class TweetContentView extends RelativeLayout {
     private static boolean spanClicked = false;
 
     private TweetContentBinding binding;
+    private FirebaseAnalyticsHelper analytics;
 
     public TweetContentView(Context context) {
         super(context);
@@ -48,6 +50,7 @@ public class TweetContentView extends RelativeLayout {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DataBindingUtil.inflate(inflater, R.layout.tweet_content, this, true);
+        analytics = new FirebaseAnalyticsHelper(context);
 
         // TODO: Show displayUrl, move to url
         // TODO: Replace escaped character in tweet
@@ -155,6 +158,8 @@ public class TweetContentView extends RelativeLayout {
 
     private void openTweet() {
         Tweet tweet = binding.getTweet();
+        analytics.logViewTweet(tweet);
+
         Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
         ActivityHelper.startUriActivity(getContext(), uri);
     }

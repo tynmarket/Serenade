@@ -51,6 +51,9 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
         Tweet tweet = this.tweets.get(position);
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
+        if (card != null) {
+            card.tweet = tweet;
+        }
 
         holder.setTweetAndCardToBindings(tweet, card);
 

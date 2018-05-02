@@ -30,6 +30,7 @@ import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     private static final int REQUEST_CODE_LOGIN = 1001;
     private static final int REQUEST_CODE_LOGIN_AFTER_SIGN_OUT = 1002;
 
+    private FirebaseAnalyticsHelper analytics;
     private ViewPager mViewPager;
     private GestureDetector mGestureDetector;
 
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
             int sectionNumber = mViewPager.getCurrentItem() + 1;
+            analytics.logRefreshTweetList(sectionNumber);
             TweetList.loadTweets(sectionNumber, true, null);
         });
     }
@@ -206,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open profile
         findViewById(R.id.profile_link).setOnClickListener(v -> {
+            analytics.logViewProfile();
             closeDrawer();
 
             Uri uri = TwitterUtil.profileUri(event.user.screenName);
@@ -214,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open list
         findViewById(R.id.list_link).setOnClickListener(v -> {
+            analytics.logViewList();
             closeDrawer();
 
             Uri uri = TwitterUtil.listUri(event.user.screenName);
@@ -222,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open post tweet
         findViewById(R.id.tweet_link).setOnClickListener(v -> {
+            analytics.logViewPostTweet();
             closeDrawer();
 
             Uri uri = TwitterUtil.newTweetUri();
@@ -231,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open notifications
         findViewById(R.id.notification_link).setOnClickListener(v -> {
+            analytics.logViewNotification();
             closeDrawer();
 
             Uri uri = TwitterUtil.notificationUri();
@@ -239,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open search (dummy page of query 'a')
         findViewById(R.id.search_link).setOnClickListener(v -> {
+            analytics.logViewSearch();
             closeDrawer();
 
             Uri uri = TwitterUtil.searchUri();
@@ -247,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open messages
         findViewById(R.id.message_link).setOnClickListener(v -> {
+            analytics.logViewMessage();
             closeDrawer();
 
             Uri uri = TwitterUtil.messageUri();
@@ -255,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Open support page
         findViewById(R.id.support_link).setOnClickListener(v -> {
+            analytics.logViewSupport();
             closeDrawer();
 
             // TODO: English version
@@ -264,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
         // Sign out from twitter
         findViewById(R.id.sign_out).setOnClickListener(v -> {
+            analytics.logViewSignOut();
             new AlertDialog.Builder(this)
                     .setMessage(R.string.sign_out_prompt_message)
                     .setPositiveButton(R.string.text_ok, (dialog, which) -> {
@@ -289,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
     private void initFirebaseConfig() {
         FirebaseRemoteConfigHelper.init();
+        this.analytics = new FirebaseAnalyticsHelper(this);
     }
 
     private void loadUser() {

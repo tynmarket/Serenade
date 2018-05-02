@@ -29,6 +29,7 @@ import com.tynmarket.serenade.model.TwitterCardList;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
@@ -47,6 +48,7 @@ public class TweetListFragment extends Fragment {
     private static boolean debug = false;
 
     private int sectionNumber;
+    private FirebaseAnalyticsHelper analytics;
 
     private RecyclerView rv;
     private ProgressBar progressBar;
@@ -72,6 +74,7 @@ public class TweetListFragment extends Fragment {
         if (bundle != null) {
             this.sectionNumber = bundle.getInt(ARG_SECTION_NUMBER);
         }
+        this.analytics = new FirebaseAnalyticsHelper(this.getContext());
 
         if (!debug) {
             TweetList.loadTweets(sectionNumber, true, null);
@@ -108,7 +111,7 @@ public class TweetListFragment extends Fragment {
         rv.setAdapter(adapter);
 
         // Infinite scroll
-        this.scrollListener = new InfiniteTimelineScrollListener(sectionNumber);
+        this.scrollListener = new InfiniteTimelineScrollListener(sectionNumber, analytics);
         rv.addOnScrollListener(scrollListener);
 
         return rootView;

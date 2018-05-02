@@ -16,6 +16,7 @@ import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.SummaryCardBinding;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 
 /**
  * Created by tynmarket on 2018/03/19.
@@ -23,6 +24,8 @@ import com.tynmarket.serenade.model.util.ActivityHelper;
 
 public class SummaryCardView extends RelativeLayout implements View.OnClickListener {
     public SummaryCardBinding binding;
+    private FirebaseAnalyticsHelper analytics;
+
     private static RequestOptions summaryRequestOptions = RequestOptions.placeholderOf(
             R.drawable.border_summary_card_left);
     private static RequestOptions summaryLargeRequestOptions = RequestOptions.placeholderOf(
@@ -37,6 +40,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
 
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DataBindingUtil.inflate(inflater, R.layout.summary_card, this, true);
+        analytics = new FirebaseAnalyticsHelper(context);
 
         setOnClickListener(this);
     }
@@ -87,6 +91,7 @@ public class SummaryCardView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        analytics.logViewTwitterCard(binding.getCard());
         String url = binding.getCard().url;
         Uri uri = Uri.parse(url);
         ActivityHelper.startUriActivity(v.getContext(), uri);

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.TwitterCardList;
+import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
@@ -17,10 +18,12 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
     public boolean mRefreshing = false;
 
     private final int sectionNumber;
+    private FirebaseAnalyticsHelper analytics;
     private int lastPosition;
 
-    public InfiniteTimelineScrollListener(int sectionNumber) {
+    public InfiniteTimelineScrollListener(int sectionNumber, FirebaseAnalyticsHelper analytics) {
         this.sectionNumber = sectionNumber;
+        this.analytics = analytics;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListene
 
         // TODO: Not load if last tweet is loaded
         if (!mRefreshing && position + childCount == totalCount) {
+            analytics.logReadMoreTweetList(sectionNumber);
             mRefreshing = true;
 
             TweetViewHolder lastItem = (TweetViewHolder) recyclerView.findViewHolderForAdapterPosition(totalCount - 1);
