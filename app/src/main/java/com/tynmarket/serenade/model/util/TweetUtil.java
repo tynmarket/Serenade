@@ -29,7 +29,7 @@ import java.util.Locale;
  */
 
 public class TweetUtil {
-    public static void loadImage(ImageView view, Tweet tweet) {
+    public static void loadTweetPhoto(ImageView view, Tweet tweet) {
         String photoUrl = TweetUtil.photoUrl(tweet);
         if (photoUrl != null) {
             Glide.with(view.getContext()).load(photoUrl).into(view);

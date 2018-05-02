@@ -114,7 +114,7 @@ public class TweetContentView extends RelativeLayout {
 
     @BindingAdapter("tweetPhoto")
     public static void setTweetPhoto(ImageView view, Tweet tweet) {
-        TweetUtil.loadImage(view, tweet);
+        TweetUtil.loadTweetPhoto(view, tweet);
     }
 
     public void setTweet(@Nullable Tweet tweet) {
