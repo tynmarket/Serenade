@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.SpeakerDeck;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.view.adapter.SlideViewerPagerAdapter;
 
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class SlideActivity extends AppCompatActivity {
                     try {
                         String html = resp.string();
                         String slideUrl = SpeakerDeck.slideUrlFromHtml(html);
-                        Log.d("Serenade", String.format("slideUrl: %s", slideUrl));
+                        LogUtil.d(String.format("slideUrl: %s", slideUrl));
 
                         // TODO: setContentView again?
                         initViewPager(slideUrl);

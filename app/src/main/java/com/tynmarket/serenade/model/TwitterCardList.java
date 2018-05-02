@@ -1,7 +1,6 @@
 package com.tynmarket.serenade.model;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.BuildConfig;
@@ -12,6 +11,7 @@ import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterCardUtil;
 
@@ -73,7 +73,7 @@ public class TwitterCardList {
                     eventBus().post(new LoadTwitterCardEvent(sectionNumber, position, tweet.id, card));
                 }, throwable -> {
                     // TODO: Notify error
-                    Log.e("Serenade", "loadTwitterCard: error", throwable);
+                    LogUtil.e("loadTwitterCard: error", throwable);
                 });
 
         DisposableHelper.add(disposable, sectionNumber);
@@ -95,7 +95,7 @@ public class TwitterCardList {
                     eventBus().post(new LoadTwitterCardsEvent(sectionNumber, cards));
                 }, throwable -> {
                     // TODO: Notify error
-                    Log.e("Serenade", "loadTwitterCards: error", throwable);
+                    LogUtil.e("loadTwitterCards: error", throwable);
                 });
 
         DisposableHelper.add(disposable, sectionNumber);

@@ -5,7 +5,6 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,6 +21,7 @@ import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.TweetMapper;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
@@ -184,7 +184,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 FavoriteTweet.favorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "favorite: failure");
+                    LogUtil.d("favorite: failure");
                     replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
                 });
@@ -192,7 +192,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 FavoriteTweet.unFavorite(tweet, () -> {
                     Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "unFavorite: failure");
+                    LogUtil.d("unFavorite: failure");
                     replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });
@@ -212,7 +212,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 RetweetTweet.retweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "retweet: failure");
+                    LogUtil.d("retweet: failure");
                     replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートできませんでした。", Toast.LENGTH_SHORT).show();
                 });
@@ -220,7 +220,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 RetweetTweet.unRetweet(tweet, () -> {
                     Toast.makeText(v.getContext(), "リツイートを取り消しました。", Toast.LENGTH_SHORT).show();
                 }, () -> {
-                    Log.d("Serenade", "unRetweet: failure");
+                    LogUtil.d("unRetweet: failure");
                     replaceTweet(tweet);
                     Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
                 });

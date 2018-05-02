@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.models.Tweet;
-import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
@@ -30,6 +28,7 @@ import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
@@ -198,13 +197,10 @@ public class TweetListFragment extends Fragment {
     @Subscribe
     public void onLoadTwitterCardEvent(LoadTwitterCardEvent event) {
         if (event.sectionNumber == sectionNumber) {
+            LogUtil.d("onLoadTwitterCardEvent");
+
             int position = event.position;
             TwitterCard card = event.card;
-
-            if (BuildConfig.DEBUG) {
-                Log.d("Serenade", "onLoadTwitterCardEvent");
-            }
-
             if (card == null) {
                 return;
             }

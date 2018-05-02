@@ -1,7 +1,5 @@
 package com.tynmarket.serenade.model.util;
 
-import android.util.Log;
-
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.tynmarket.serenade.BuildConfig;
@@ -37,7 +35,7 @@ public class FirebaseRemoteConfigHelper {
             if (task.isSuccessful()) {
                 config.activateFetched();
             } else {
-                Log.d("Serenade", "RemoteConfig init failed");
+                LogUtil.d("RemoteConfig init failed");
             }
         });
 

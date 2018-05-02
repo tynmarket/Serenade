@@ -1,13 +1,12 @@
 package com.tynmarket.serenade.model;
 
-import android.util.Log;
-
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.event.SignOutEvent;
 import com.tynmarket.serenade.model.util.DummyUser;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.RetrofitObserver;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,7 +36,7 @@ public class LoginUser {
                 .subscribe(user -> {
                     EventBus.getDefault().post(new LoadUserEvent(user));
                 }, throwable -> {
-                    Log.d("Serenade", "loadUser failure");
+                    LogUtil.e("loadUser failure", throwable);
                     // TODO: Dummy or empty user
                     EventBus.getDefault().post(new LoadUserEvent(DummyUser.tynmarket()));
                 });

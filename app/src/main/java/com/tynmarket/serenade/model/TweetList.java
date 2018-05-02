@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.model;
 
-import android.util.Log;
+import android.annotation.SuppressLint;
 
 import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -11,6 +11,7 @@ import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;
 import com.tynmarket.serenade.event.StartLoadTweetListEvent;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.RetrofitObserver;
 import com.tynmarket.serenade.model.util.TweetUtil;
 
@@ -28,6 +29,7 @@ public class TweetList {
     private static final int ITEM_COUNT = 50;
 
     // TODO: Caching
+    @SuppressLint("DefaultLocale")
     public static void loadTweets(int sectionNumber, boolean refresh, Long maxId) {
         // TODO: Progress bar displayed infinitely?
         EventBus.getDefault().post(new StartLoadTweetListEvent(sectionNumber));
@@ -36,7 +38,7 @@ public class TweetList {
         RetrofitObserver
                 .create(call)
                 .subscribe(tweets -> {
-                    Log.d("Serenade", String.format("loadTweets success: %d", sectionNumber));
+                    LogUtil.d(String.format("loadTweets success: %d", sectionNumber));
                     if (BuildConfig.DEBUG) {
                         TweetUtil.debugTimeline(tweets);
                     }
@@ -47,7 +49,7 @@ public class TweetList {
                     eventBus().post(new LoadTweetListEvent(sectionNumber, tweets, refresh));
                 }, throwable -> {
                     // TODO: Late limit(Status 429)
-                    Log.d("Serenade", String.format("loadTweets failure: %d", sectionNumber));
+                    LogUtil.e(String.format("loadTweets failure: %d", sectionNumber), throwable);
 
                     eventBus().post(new LoadFailureTweetListEvent(sectionNumber));
                 });

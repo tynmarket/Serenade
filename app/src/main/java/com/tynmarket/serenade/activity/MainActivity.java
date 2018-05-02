@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
@@ -32,6 +30,7 @@ import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.ActivityHelper;
 import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.FirebaseRemoteConfigHelper;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.TwitterUtil;
 import com.tynmarket.serenade.view.adapter.TweetListPagerAdapter;
 import com.tynmarket.serenade.view.custom.NavigationProfileView;
@@ -145,14 +144,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     private void handleResultLogin(int resultCode) {
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
-            loadUser();
 
+            loadUser();
             continueMainActivity();
         } else if (resultCode == LoginActivity.RESULT_CODE_LOGIN_BACK) {
             finish();
         } else {
-            Log.d("Serenade", "LoginActivity resultCode != RESULT_OK");
+            LogUtil.d("LoginActivity resultCode != RESULT_OK");
             Toast.makeText(this, R.string.login_failure, Toast.LENGTH_LONG).show();
+
             startLoginActivity();
         }
     }
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
     private void initTwitterConfig() {
         TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
+                .logger(LogUtil.twitterLogger())
                 .twitterAuthConfig(new TwitterAuthConfig(BuildConfig.API_KEY, BuildConfig.API_SECRET))
                 .debug(true)
                 .build();

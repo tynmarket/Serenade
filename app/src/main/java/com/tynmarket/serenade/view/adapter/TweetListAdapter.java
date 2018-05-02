@@ -1,16 +1,16 @@
 package com.tynmarket.serenade.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.models.Tweet;
-import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.entity.TwitterCard;
+import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.TweetUtil;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
@@ -41,13 +41,12 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         return new TweetViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-        holder.setAdapter(this);
+        LogUtil.d(String.format("onBindViewHolder: position=%d", position));
 
-        if (BuildConfig.DEBUG) {
-            Log.d("Serenade", String.format("onBindViewHolder: position=%d", position));
-        }
+        holder.setAdapter(this);
 
         Tweet tweet = this.tweets.get(position);
         TwitterCard card = cards.get(TweetUtil.expandedUrl(tweet));
