@@ -9,8 +9,8 @@ android {
         minSdkVersion 23
         targetSdkVersion 26
         // Auto increment https://qiita.com/mickamy/items/0285ce1035ec1a224ae7
-        versionCode 7
-        versionName "0.0.7-alpha"
+        versionCode 11
+        versionName "0.0.11-alpha"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         def properties = new Properties()
