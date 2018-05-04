@@ -27,6 +27,7 @@
 
     <!-- Twitter login -->
     <string name="install_official_client_prompt">公式クライアントのインストールはお済みでしょうか？\nまだの場合は、こちらからインストールをお願いします。</string>
+    <string name="official_client_link">https://play.google.com/store/apps/details?id=com.twitter.android</string>
 
     <!-- Sign out -->
     <string name="sign_out_prompt_message">ログアウトしますか？</string>
@@ -41,7 +42,9 @@
     <string name="terms_and_service_text_1">本アプリを利用することにより被った損害について、一切責任を負わないものとします。</string>
     <string name="terms_and_service_text_2">本アプリが利用しているAPIサーバは、本アプリからのみアクセスを許可します。</string>
     <string name="terms_and_service_text_3">本アプリのソースコードはMITライセンスの下、以下のURLにて公開されています。</string>
+    <string name="terms_and_service_text_4">https://github.com/tynmarket/Serenade</string>
 
     <!-- Version -->
     <string name="version">バージョン</string>
+    <string name="version_code">1.0.0</string>
 </resources>
