@@ -34,8 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/image_height_summary_large_image"
                     android:scaleType="centerCrop"
-                    app:large_image="@{card}"
-                    tools:src="@drawable/summary_large_image" />
+                    app:large_image="@{card}" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -86,8 +85,7 @@
                     android:layout_width="@dimen/image_size_summary_image"
                     android:layout_height="@dimen/image_size_summary_image"
                     android:scaleType="centerCrop"
-                    app:image="@{card}"
-                    tools:src="@drawable/nhk" />
+                    app:image="@{card}" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

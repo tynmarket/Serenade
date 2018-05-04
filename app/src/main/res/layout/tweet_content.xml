@@ -87,8 +87,7 @@
             android:visibility="gone"
             android:foreground="?android:selectableItemBackground"
             app:riv_corner_radius="@dimen/corner_radius"
-            app:tweetPhoto="@{tweet}"
-            tools:src="@drawable/peing" />
+            app:tweetPhoto="@{tweet}" />
 
     </RelativeLayout>
 </layout>
