@@ -22,7 +22,7 @@ import java.util.List;
 import retrofit2.Call;
 
 /**
- * Created by tyn-iMarket on 2018/02/01.
+ * Created by tynmarket on 2018/02/01.
  */
 
 public class TweetList {

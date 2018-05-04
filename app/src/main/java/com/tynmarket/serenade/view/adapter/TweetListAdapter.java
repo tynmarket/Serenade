@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tyn-iMarket on 2017/12/18.
+ * Created by tynmarket on 2017/12/18.
  */
 
 public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {

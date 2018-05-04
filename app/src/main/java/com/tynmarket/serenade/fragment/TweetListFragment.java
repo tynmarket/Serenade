@@ -38,7 +38,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 
 /**
- * Created by tyn-iMarket on 2018/01/29.
+ * Created by tynmarket on 2018/01/29.
  */
 
 public class TweetListFragment extends Fragment {

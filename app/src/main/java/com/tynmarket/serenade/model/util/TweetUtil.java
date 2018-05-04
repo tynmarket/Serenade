@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by tyn-iMarket on 2018/01/22.
+ * Created by tynmarket on 2018/01/22.
  */
 
 public class TweetUtil {

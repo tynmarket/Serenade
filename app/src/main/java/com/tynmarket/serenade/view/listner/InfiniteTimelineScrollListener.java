@@ -11,7 +11,7 @@ import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.holder.TweetViewHolder;
 
 /**
- * Created by tyn-iMarket on 2018/01/14.
+ * Created by tynmarket on 2018/01/14.
  */
 
 public class InfiniteTimelineScrollListener extends RecyclerView.OnScrollListener {

@@ -29,7 +29,7 @@ import com.tynmarket.serenade.model.util.UserUtil;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 
 /**
- * Created by tyn-iMarket on 2017/12/18.
+ * Created by tynmarket on 2017/12/18.
  */
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {

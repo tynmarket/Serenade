@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.tynmarket.serenade.fragment.TweetListFragment;
 
 /**
- * Created by tyn-iMarket on 2018/01/15.
+ * Created by tynmarket on 2018/01/15.
  */
 
 public class TweetListPagerAdapter extends FragmentPagerAdapter {

@@ -14,7 +14,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.tynmarket.serenade.R;
 
 /**
- * Created by tyn-iMarket on 2017/12/30.
+ * Created by tynmarket on 2017/12/30.
  */
 
 public class LoginActivity extends AppCompatActivity {
