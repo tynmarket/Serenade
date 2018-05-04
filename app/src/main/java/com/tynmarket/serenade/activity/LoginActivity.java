@@ -1,10 +1,12 @@
 package com.tynmarket.serenade.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -28,6 +30,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         setTwitterLoginButtonCallback();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        try {
+            final PackageManager manager = getPackageManager();
+            manager.getApplicationInfo("com.twitter.android", 0);
+            View view = findViewById(R.id.install_twitter);
+            view.setVisibility(View.GONE);
+        } catch (PackageManager.NameNotFoundException e) {
+            // Do nothing
+        }
     }
 
     @Override

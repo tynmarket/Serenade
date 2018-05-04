@@ -25,6 +25,9 @@
     <!-- Format -->
     <string name="format_tweet_count">%d.%d万</string>
 
+    <!-- Twitter login -->
+    <string name="install_official_client_prompt">公式クライアントのインストールはお済みでしょうか？\nまだの場合は、こちらからインストールをお願いします。</string>
+
     <!-- Sign out -->
     <string name="sign_out_prompt_message">ログアウトしますか？</string>
 

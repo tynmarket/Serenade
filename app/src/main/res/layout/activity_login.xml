@@ -15,6 +15,7 @@
         android:layout_below="@id/login_button">
 
         <RelativeLayout
+            android:id="@+id/install_twitter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true">
@@ -25,8 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_5x_large"
                 android:layout_marginEnd="@dimen/spacing_5x_large"
-                android:text="公式クライアントのインストールはお済みでしょうか？\nまだの場合は、こちらからインストールをお願いします。" />
-
+                android:text="@string/install_official_client_prompt" />
 
             <TextView
                 android:id="@+id/official_link"
@@ -37,7 +37,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginEnd="@dimen/spacing_5x_large"
                 android:autoLink="web"
-                android:text="https://play.google.com/store/apps/details?id=com.twitter.android" />
+                android:text="@string/official_client_link" />
 
         </RelativeLayout>
 
