@@ -40,10 +40,6 @@
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 
--dontwarn okhttp3.**
--dontwarn okio.**
--dontwarn javax.annotation.**
-
 # eventbus
 -keepattributes *Annotation*
 -keepclassmembers class ** {
@@ -52,9 +48,6 @@
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 # glide
--keep class com.bumptech.glide.**  { *; }
--keep interface com.bumptech.glide.**  { *; }
-
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
@@ -65,3 +58,6 @@
 
 # serenade
 -keepnames class com.tynmarket.serenade.model.entity.** { *; }
+
+# stack trace
+-keepattributes SourceFile,LineNumberTable
