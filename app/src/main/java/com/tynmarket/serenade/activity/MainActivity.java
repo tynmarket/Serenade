@@ -42,6 +42,8 @@ import org.greenrobot.eventbus.Subscribe;
 public class MainActivity extends AppCompatActivity implements ViewPager.OnTouchListener {
     private static final int REQUEST_CODE_LOGIN = 1001;
     private static final int REQUEST_CODE_LOGIN_AFTER_SIGN_OUT = 1002;
+    private static final int REQUEST_CODE_POST_TWEET = 1003;
+    public static final int REQUEST_CODE_POST_REPLY = 1004;
 
     private FirebaseAnalyticsHelper analytics;
     private ViewPager mViewPager;
@@ -120,24 +122,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_LOGIN) {
-            // Login
             handleResultLogin(resultCode);
         } else if (requestCode == REQUEST_CODE_LOGIN_AFTER_SIGN_OUT) {
             handleResultLoginAfterSignOut(resultCode);
+        } else if (requestCode == REQUEST_CODE_POST_TWEET) {
+            handleResultPostTweet(resultCode);
+        } else if (requestCode == REQUEST_CODE_POST_REPLY) {
+            handleResultPostReply(resultCode);
         } else {
             // Reenter
             overridePendingTransition(0, android.R.anim.slide_out_right);
-        }
-    }
-
-    private void handleResultLoginAfterSignOut(int resultCode) {
-        if (resultCode == RESULT_OK) {
-            Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
-            loadUser();
-            TweetList.loadTweets(1, true, null);
-            TweetList.loadTweets(2, true, null);
-        } else {
-            handleResultLogin(resultCode);
         }
     }
 
@@ -154,6 +148,29 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             Toast.makeText(this, R.string.login_failure, Toast.LENGTH_LONG).show();
 
             startLoginActivity();
+        }
+    }
+
+    private void handleResultLoginAfterSignOut(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
+            loadUser();
+            TweetList.loadTweets(1, true, null);
+            TweetList.loadTweets(2, true, null);
+        } else {
+            handleResultLogin(resultCode);
+        }
+    }
+
+    private void handleResultPostTweet(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.post_tweet, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleResultPostReply(int resultCode) {
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.post_reply, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -231,8 +248,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             closeDrawer();
 
             Uri uri = TwitterUtil.newTweetUri();
-            // TODO: startActivityForResult
-            ActivityHelper.startUriActivity(this, uri);
+            ActivityHelper.startUriActivityForResult(this, uri, REQUEST_CODE_POST_TWEET);
         });
 
         // Open notifications

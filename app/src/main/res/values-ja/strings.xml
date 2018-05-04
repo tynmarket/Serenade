@@ -28,6 +28,10 @@
     <!-- Twitter login -->
     <string name="install_official_client_prompt">公式クライアントのインストールはお済みでしょうか？\nまだの場合は、こちらからインストールをお願いします。</string>
 
+    <!-- Post tweet -->
+    <string name="post_tweet">ツイートを投稿しました</string>
+    <string name="post_reply">リプライを投稿しました</string>
+
     <!-- Sign out -->
     <string name="sign_out_prompt_message">ログアウトしますか？</string>
 

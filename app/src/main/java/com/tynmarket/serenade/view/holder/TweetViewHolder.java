@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.activity.MainActivity;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
@@ -168,7 +169,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
             Uri uri = TwitterUtil.replyUri(tweet.idStr);
             // TODO: startActivityForResult
-            ActivityHelper.startUriActivity(v.getContext(), uri);
+            ActivityHelper.startUriActivityForResult(v.getContext(), uri, MainActivity.REQUEST_CODE_POST_REPLY);
         });
     }
 

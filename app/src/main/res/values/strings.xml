@@ -29,6 +29,10 @@
     <string name="install_official_client_prompt">Please install official Twitter client too\nSerenade is designed to use with official client</string>
     <string name="official_client_link">https://play.google.com/store/apps/details?id=com.twitter.android</string>
 
+    <!-- Post tweet -->
+    <string name="post_tweet">Tweet posted</string>
+    <string name="post_reply">Reply posted</string>
+
     <!-- Sign out -->
     <string name="sign_out_prompt_message">Are you sure you want to sign out?</string>
 
