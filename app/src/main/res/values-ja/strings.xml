@@ -37,7 +37,7 @@
     <string name="terms_and_service_title">利用規約</string>
     <string name="terms_and_service_text_1">本アプリを利用することにより被った損害について、一切責任を負わないものとします。</string>
     <string name="terms_and_service_text_2">本アプリが利用しているAPIサーバは、本アプリからのみアクセスを許可します。</string>
-    <string name="terms_and_service_text_3">本アプリのソースコードはMITライセンスの下、以下のURLにて公開されています。\nhttps://github.com/tynmarket/Serenade</string>
+    <string name="terms_and_service_text_3">本アプリのソースコードはMITライセンスの下、以下のURLにて公開されています。</string>
 
     <!-- Version -->
     <string name="version">バージョン</string>

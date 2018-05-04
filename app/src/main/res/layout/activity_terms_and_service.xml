@@ -34,15 +34,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_2"
         android:layout_marginTop="@dimen/spacing_5x_large"
-        android:autoLink="web"
         android:text="@string/terms_and_service_text_3" />
 
+    <TextView
+        android:id="@+id/text_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_3"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:autoLink="web"
+        android:text="@string/terms_and_service_text_4" />
 
     <TextView
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_3"
+        android:layout_below="@id/text_4"
         android:layout_marginTop="@dimen/spacing_5x_large"
         android:textSize="@dimen/text_size_medium"
         android:textStyle="bold"
