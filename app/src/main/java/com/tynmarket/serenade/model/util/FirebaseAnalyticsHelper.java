@@ -34,6 +34,7 @@ public class FirebaseAnalyticsHelper {
     private static final String NAME_MESSAGE = "message";
     private static final String NAME_SUPPORT = "support";
     private static final String NAME_SIGN_OUT = "sign_out";
+    private static final String NAME_TERMS_AND_SERVICE = "termes_and_service";
 
     private static final String ID_REFRESH_HOME_TIMELINE = "1";
     private static final String ID_REFRESH_FAVORITE_LIST = "2";
@@ -49,6 +50,7 @@ public class FirebaseAnalyticsHelper {
     private static final String ID_NAVIGATION_MESSAGE = "12";
     private static final String ID_NAVIGATION_SUPPORT = "13";
     private static final String ID_NAVIGATION_SIGN_OUT = "14";
+    private static final String ID_NAVIGATION_TERMS_AND_SERVICE = "15";
 
     private FirebaseAnalytics analytics;
 
@@ -159,6 +161,10 @@ public class FirebaseAnalyticsHelper {
 
     public void logViewSignOut() {
         logViewItem(ID_NAVIGATION_SIGN_OUT, NAME_SIGN_OUT, CATEGORY_NAVIGATION);
+    }
+
+    public void logViewTermsAndService() {
+        logViewItem(ID_NAVIGATION_TERMS_AND_SERVICE, NAME_TERMS_AND_SERVICE, CATEGORY_NAVIGATION);
     }
 
     private void logViewItem(String idStr, String name, String category) {

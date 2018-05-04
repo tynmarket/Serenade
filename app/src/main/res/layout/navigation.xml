@@ -101,4 +101,12 @@
         style="@style/AppTheme.NavigationItem"
         tools:text="ログアウト" />
 
+    <TextView
+        android:id="@+id/terms_and_service"
+        android:drawableStart="@drawable/terms_and_service"
+        android:text="@string/terms_and_service_title"
+        android:background="?android:selectableItemBackground"
+        style="@style/AppTheme.NavigationItem"
+        tools:text="利用規約" />
+
 </LinearLayout>

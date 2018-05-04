@@ -287,6 +287,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
                     .setNegativeButton(R.string.text_cancel, null)
                     .show();
         });
+
+
+        // Open terms and service
+        findViewById(R.id.terms_and_service).setOnClickListener(v -> {
+            analytics.logViewTermsAndService();
+            closeDrawer();
+
+            Intent intent = new Intent(this, com.tynmarket.serenade.activity.TermsAndServiceActivity.class);
+            ActivityHelper.startActivity(this, intent);
+        });
     }
 
     private void initTwitterConfig() {

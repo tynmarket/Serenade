@@ -32,4 +32,8 @@
     <string name="login_success">Login success</string>
     <string name="login_failure">Login failed</string>
     <string name="sign_out_success">Signed out successfully</string>
+
+    <!-- Terms and service -->
+    <string name="terms_and_service_title">Terms and service</string>
+    <string name="terms_and_service_text">利用規約文言</string>
 </resources>
