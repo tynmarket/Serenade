@@ -35,5 +35,11 @@
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">Terms and service</string>
-    <string name="terms_and_service_text">利用規約文言</string>
+    <string name="terms_and_service_text_1">I am not responsible for any damage incurred by using this application.</string>
+    <string name="terms_and_service_text_2">The API server used by this application can only be accessed from this application.</string>
+    <string name="terms_and_service_text_3">The source code of this application is published under the MIT license at GitHub。\n\nhttps://github.com/tynmarket/Serenade</string>
+
+    <!-- Version -->
+    <string name="version">Version</string>
+    <string name="version_code">1.0.0</string>
 </resources>
