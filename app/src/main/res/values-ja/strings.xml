@@ -36,6 +36,14 @@
     <string name="login_success">ログインしました</string>
     <string name="login_failure">ログインできませんでした</string>
     <string name="sign_out_success">ログアウトしました</string>
+    <string name="retweet_success">リツイートしました</string>
+    <string name="retweet_failure">リツイートできませんでした</string>
+    <string name="cancel_retweet_success">リツイートを取り消しました</string>
+    <string name="cancel_retweet_failure">リツイートを取り消せませんでした</string>
+    <string name="favorite_success">いいねしました</string>
+    <string name="favorite_failure">いいねできませんでした</string>
+    <string name="cancel_favorite_success">いいねを取り消しました</string>
+    <string name="cancel_favorite_failure">いいねを取り消せませんでした</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">利用規約</string>

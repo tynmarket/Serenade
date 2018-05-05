@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
@@ -182,19 +183,19 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 analytics.logFavorite(tweet);
 
                 FavoriteTweet.favorite(tweet, () -> {
-                    Toast.makeText(v.getContext(), "いいねに追加しました。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.favorite_success, Toast.LENGTH_SHORT).show();
                 }, () -> {
                     LogUtil.d("favorite: failure");
                     replaceTweet(tweet);
-                    Toast.makeText(v.getContext(), "いいねに追加できませんでした。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.favorite_failure, Toast.LENGTH_SHORT).show();
                 });
             } else {
                 FavoriteTweet.unFavorite(tweet, () -> {
-                    Toast.makeText(v.getContext(), "いいねを取り消しました。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.cancel_favorite_success, Toast.LENGTH_SHORT).show();
                 }, () -> {
                     LogUtil.d("unFavorite: failure");
                     replaceTweet(tweet);
-                    Toast.makeText(v.getContext(), "いいねを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.cancel_favorite_failure, Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -210,19 +211,19 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
                 analytics.logRetweet(tweet);
 
                 RetweetTweet.retweet(tweet, () -> {
-                    Toast.makeText(v.getContext(), "リツイートしました。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.retweet_success, Toast.LENGTH_SHORT).show();
                 }, () -> {
                     LogUtil.d("retweet: failure");
                     replaceTweet(tweet);
-                    Toast.makeText(v.getContext(), "リツイートできませんでした。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.retweet_failure, Toast.LENGTH_SHORT).show();
                 });
             } else {
                 RetweetTweet.unRetweet(tweet, () -> {
-                    Toast.makeText(v.getContext(), "リツイートを取り消しました。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.cancel_retweet_success, Toast.LENGTH_SHORT).show();
                 }, () -> {
                     LogUtil.d("unRetweet: failure");
                     replaceTweet(tweet);
-                    Toast.makeText(v.getContext(), "リツイートを取り消せませんでした。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.cancel_retweet_failure, Toast.LENGTH_SHORT).show();
                 });
             }
         });

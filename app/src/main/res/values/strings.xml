@@ -36,6 +36,14 @@
     <string name="login_success">Login success</string>
     <string name="login_failure">Login failed</string>
     <string name="sign_out_success">Signed out successfully</string>
+    <string name="retweet_success">Retweet success</string>
+    <string name="retweet_failure">Retweet failed</string>
+    <string name="cancel_retweet_success">Cancel retweet success</string>
+    <string name="cancel_retweet_failure">Cancel retweet failed</string>
+    <string name="favorite_success">Favorite success</string>
+    <string name="favorite_failure">Favorite failed</string>
+    <string name="cancel_favorite_success">Cancel favorite success</string>
+    <string name="cancel_favorite_failure">Cancel favorite failed</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">Terms and service</string>
