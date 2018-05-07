@@ -47,9 +47,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        initTwitterConfig();
+
         super.onCreate(savedInstanceState);
 
-        initTwitterConfig();
         initFirebaseConfig();
 
         if (LoginUser.signedIn()) {
