@@ -54,5 +54,5 @@
 
     <!-- Version -->
     <string name="version">Version</string>
-    <string name="version_code">1.0.0</string>
+    <string name="version_code">1.0.1-preview</string>
 </resources>
