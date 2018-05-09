@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 
 /**
@@ -55,6 +56,11 @@ public class FirebaseAnalyticsHelper {
     private FirebaseAnalytics analytics;
 
     public FirebaseAnalyticsHelper(Context context) {
+        // Do not track tynmarket
+        if (LoginUser.isTynmarket()) {
+            return;
+        }
+
         this.analytics = FirebaseAnalytics.getInstance(context);
     }
 
@@ -168,6 +174,11 @@ public class FirebaseAnalyticsHelper {
     }
 
     private void logViewItem(String idStr, String name, String category) {
+        // Do not track tynmarket
+        if (LoginUser.isTynmarket()) {
+            return;
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, idStr);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
