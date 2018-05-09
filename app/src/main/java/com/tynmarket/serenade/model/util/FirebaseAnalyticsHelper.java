@@ -34,7 +34,7 @@ public class FirebaseAnalyticsHelper {
     private static final String NAME_MESSAGE = "message";
     private static final String NAME_SUPPORT = "support";
     private static final String NAME_SIGN_OUT = "sign_out";
-    private static final String NAME_TERMS_AND_SERVICE = "termes_and_service";
+    private static final String NAME_TERMS_AND_SERVICE = "terms_and_service";
 
     private static final String ID_REFRESH_HOME_TIMELINE = "1";
     private static final String ID_REFRESH_FAVORITE_LIST = "2";
