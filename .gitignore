@@ -3,6 +3,7 @@
 local.properties
 *.jks
 app/release
+app/staging
 google-services.json
 google-services.base64
 google-services-debug.base64
