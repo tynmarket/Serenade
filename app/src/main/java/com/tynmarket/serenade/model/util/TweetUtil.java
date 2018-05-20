@@ -247,7 +247,8 @@ public class TweetUtil {
             return null;
         }
 
-        return String.format("%sがリツイート", tweet.user.name);
+        String format = Resource.getString(R.string.retweet_user_name);
+        return String.format(format, tweet.user.name);
     }
 
     public static String favoriteCountStr(Tweet tweet) {

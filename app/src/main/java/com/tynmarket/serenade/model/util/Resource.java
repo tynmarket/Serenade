@@ -9,6 +9,10 @@ import android.content.res.Resources;
 public class Resource {
     private static Resources resources;
 
+    public static String getString(int id) {
+        return getResources().getString(id);
+    }
+
     public static Resources getResources() {
         return resources;
     }

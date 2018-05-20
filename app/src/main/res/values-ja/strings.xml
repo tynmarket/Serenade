@@ -25,6 +25,9 @@
     <!-- Format -->
     <string name="format_tweet_count">%d.%d万</string>
 
+    <!-- Tweet -->
+    <string name="retweet_user_name">%sがリツイート</string>
+
     <!-- Twitter login -->
     <string name="install_official_client_prompt">公式クライアントのインストールはお済みでしょうか？\nまだの場合は、こちらからインストールをお願いします。</string>
     <string name="official_client_link">https://play.google.com/store/apps/details?id=com.twitter.android</string>
