@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 
 /**
@@ -34,7 +35,7 @@ public class FirebaseAnalyticsHelper {
     private static final String NAME_MESSAGE = "message";
     private static final String NAME_SUPPORT = "support";
     private static final String NAME_SIGN_OUT = "sign_out";
-    private static final String NAME_TERMS_AND_SERVICE = "termes_and_service";
+    private static final String NAME_TERMS_AND_SERVICE = "terms_and_service";
 
     private static final String ID_REFRESH_HOME_TIMELINE = "1";
     private static final String ID_REFRESH_FAVORITE_LIST = "2";
@@ -55,6 +56,11 @@ public class FirebaseAnalyticsHelper {
     private FirebaseAnalytics analytics;
 
     public FirebaseAnalyticsHelper(Context context) {
+        // Do not track tynmarket
+        if (LoginUser.isTynmarket()) {
+            return;
+        }
+
         this.analytics = FirebaseAnalytics.getInstance(context);
     }
 
@@ -168,6 +174,11 @@ public class FirebaseAnalyticsHelper {
     }
 
     private void logViewItem(String idStr, String name, String category) {
+        // Do not track tynmarket
+        if (LoginUser.isTynmarket()) {
+            return;
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, idStr);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
