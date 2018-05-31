@@ -6,8 +6,10 @@ package com.tynmarket.serenade.event;
 
 public class LoadFailureTweetListEvent {
     public final int sectionNumber;
+    public final Throwable throwable;
 
-    public LoadFailureTweetListEvent(int sectionNumber) {
+    public LoadFailureTweetListEvent(int sectionNumber, Throwable throwable) {
         this.sectionNumber = sectionNumber;
+        this.throwable = throwable;
     }
 }

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.twitter.sdk.android.core.TwitterApiErrorConstants;
+import com.twitter.sdk.android.core.TwitterApiException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
@@ -29,6 +31,7 @@ import com.tynmarket.serenade.model.util.DisposableHelper;
 import com.tynmarket.serenade.model.util.DummyTweet;
 import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;
 import com.tynmarket.serenade.model.util.LogUtil;
+import com.tynmarket.serenade.model.util.Resource;
 import com.tynmarket.serenade.view.adapter.TweetListAdapter;
 import com.tynmarket.serenade.view.listner.InfiniteTimelineScrollListener;
 
@@ -159,10 +162,22 @@ public class TweetListFragment extends Fragment {
     @Subscribe
     public void onLoadFailureTweetListEvent(LoadFailureTweetListEvent event) {
         if (event.sectionNumber == sectionNumber) {
-            // TODO: I18n
-            Toast.makeText(rv.getContext(), "タイムラインを読み込めませんでした。", Toast.LENGTH_SHORT).show();
-            scrollListener.mRefreshing = false;
+            TwitterApiException twitterApiException = null;
 
+            if (event.throwable instanceof TwitterApiException) {
+                twitterApiException = (TwitterApiException) event.throwable;
+            }
+
+            if (twitterApiException != null &&
+                    twitterApiException.getErrorCode() == TwitterApiErrorConstants.RATE_LIMIT_EXCEEDED) {
+                String message = String.format(
+                        Resource.getString(R.string.rate_limit_exceeded), twitterApiException.getTwitterRateLimit().getLimit());
+                Toast.makeText(rv.getContext(), message, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(rv.getContext(), R.string.load_tweet_failure, Toast.LENGTH_LONG).show();
+            }
+
+            scrollListener.mRefreshing = false;
             hideRefreshIndicator();
         }
     }

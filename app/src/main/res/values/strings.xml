@@ -47,6 +47,8 @@
     <string name="favorite_failure">Favorite failed</string>
     <string name="cancel_favorite_success">Cancel favorite success</string>
     <string name="cancel_favorite_failure">Cancel favorite failed</string>
+    <string name="load_tweet_failure">Failed to load tweet</string>
+    <string name="rate_limit_exceeded">Rate limit exceeded (%d times per minute)</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">Terms and service</string>

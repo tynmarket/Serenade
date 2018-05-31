@@ -47,6 +47,8 @@
     <string name="favorite_failure">いいねできませんでした</string>
     <string name="cancel_favorite_success">いいねを取り消しました</string>
     <string name="cancel_favorite_failure">いいねを取り消せませんでした</string>
+    <string name="load_tweet_failure">ツイートを読み込めませんでした</string>
+    <string name="rate_limit_exceeded">Twitterの制限に達しました（1分間に%d回まで）</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">利用規約</string>

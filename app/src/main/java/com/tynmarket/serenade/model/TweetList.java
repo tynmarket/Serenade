@@ -51,7 +51,7 @@ public class TweetList {
                     // TODO: Late limit(Status 429)
                     LogUtil.e(String.format("loadTweets failure: %d", sectionNumber), throwable);
 
-                    eventBus().post(new LoadFailureTweetListEvent(sectionNumber));
+                    eventBus().post(new LoadFailureTweetListEvent(sectionNumber, throwable));
                 });
     }
 
