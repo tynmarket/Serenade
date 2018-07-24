@@ -49,6 +49,6 @@ public class LoginUser {
 
     public static boolean isTynmarket() {
         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        return session.getUserId() == TYNMARKET_USER_ID;
+        return session != null && session.getUserId() == TYNMARKET_USER_ID;
     }
 }
