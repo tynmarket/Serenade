@@ -20,6 +20,7 @@ package com.tynmarket.serenade.core;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.core.internal.SessionMonitor;
 import com.tynmarket.serenade.core.internal.TwitterApi;
 import com.tynmarket.serenade.core.internal.TwitterSessionVerifier;
@@ -92,7 +93,7 @@ public class TwitterCore {
     }
 
     public String getVersion() {
-        return BuildConfig.VERSION_NAME + "." + BuildConfig.BUILD_NUMBER;
+        return BuildConfig.VERSION_NAME;
     }
 
     public TwitterAuthConfig getAuthConfig() {
@@ -112,7 +113,7 @@ public class TwitterCore {
     }
 
     public String getIdentifier() {
-        return BuildConfig.GROUP + ":" + BuildConfig.ARTIFACT_ID;
+        return "BuildConfig.GROUP" + ":" + "BuildConfig.ARTIFACT_ID";
     }
 
 
@@ -145,7 +146,7 @@ public class TwitterCore {
     /**
      * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} from default
      * {@link com.tynmarket.serenade.core.Session}.
-     *
+     * <p>
      * Caches internally for efficient access.
      */
     public TwitterApiClient getApiClient() {
@@ -160,8 +161,9 @@ public class TwitterCore {
     /**
      * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} from authenticated
      * {@link com.tynmarket.serenade.core.Session} provided.
-     *
+     * <p>
      * Caches internally for efficient access.
+     *
      * @param session the session
      */
     public TwitterApiClient getApiClient(TwitterSession session) {
@@ -173,7 +175,7 @@ public class TwitterCore {
 
     /**
      * Add custom {@link com.tynmarket.serenade.core.TwitterApiClient} for guest auth access.
-     *
+     * <p>
      * Only adds guest auth client if it's not already defined. Caches internally for efficient
      * access and storing it in TwitterCore's singleton.
      *
@@ -188,11 +190,11 @@ public class TwitterCore {
     /**
      * Add custom {@link com.tynmarket.serenade.core.TwitterApiClient} for authenticated
      * {@link com.tynmarket.serenade.core.Session} access.
-     *
+     * <p>
      * Only adds session auth client if it's not already defined. Caches internally for efficient
      * access and storing it in TwitterCore's singleton.
      *
-     * @param session the session
+     * @param session                the session
      * @param customTwitterApiClient the custom twitter api client
      */
     public void addApiClient(TwitterSession session, TwitterApiClient customTwitterApiClient) {
@@ -203,7 +205,7 @@ public class TwitterCore {
 
     /**
      * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} using guest authentication.
-     *
+     * <p>
      * Caches internally for efficient access.
      */
     public TwitterApiClient getGuestApiClient() {
