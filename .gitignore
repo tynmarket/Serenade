@@ -9,18 +9,11 @@ google-services-debug.base64
 
 # IntelliJ
 *.iml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/misc.xml
-.idea/saveactions_settings.xml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/dictionaries
-.idea/libraries
-.idea/inspectionProfiles
-.idea/codeStyles
-.idea/caches
-.idea/assetWizardSettings.xml
+/.idea/*
+!/.idea/codeStyles/
+!/.idea/dictionaries/
+!.idea/icon.png
+!.idea/icon_dark.png
 
 .DS_Store
 /build
