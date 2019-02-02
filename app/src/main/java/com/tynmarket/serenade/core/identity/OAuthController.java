@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,17 +27,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthException;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.internal.oauth.OAuth1aService;
-import com.twitter.sdk.android.core.internal.oauth.OAuthConstants;
-import com.twitter.sdk.android.core.internal.oauth.OAuthResponse;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.Result;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthException;
+import com.tynmarket.serenade.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.TwitterException;
+import com.tynmarket.serenade.core.internal.oauth.OAuth1aService;
+import com.tynmarket.serenade.core.internal.oauth.OAuthConstants;
+import com.tynmarket.serenade.core.internal.oauth.OAuthResponse;
 
 class OAuthController implements OAuthWebViewClient.Listener {
 

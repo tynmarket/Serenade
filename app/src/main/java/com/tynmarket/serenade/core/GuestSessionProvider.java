@@ -15,10 +15,10 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
-import com.twitter.sdk.android.core.internal.oauth.GuestAuthToken;
-import com.twitter.sdk.android.core.internal.oauth.OAuth2Service;
+import com.tynmarket.serenade.core.internal.oauth.GuestAuthToken;
+import com.tynmarket.serenade.core.internal.oauth.OAuth2Service;
 
 import java.util.concurrent.CountDownLatch;
 

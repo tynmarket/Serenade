@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
@@ -26,8 +26,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.twitter.sdk.android.core.internal.oauth.GuestAuthToken;
-import com.twitter.sdk.android.core.internal.oauth.OAuth2Token;
+import com.tynmarket.serenade.core.internal.oauth.GuestAuthToken;
+import com.tynmarket.serenade.core.internal.oauth.OAuth2Token;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ import java.util.Map;
 
 /**
  * Provides custom serialization and deserialization for classes that hold any type of
- * {@link com.twitter.sdk.android.core.AuthToken}.
+ * {@link com.tynmarket.serenade.core.AuthToken}.
  */
 public class AuthTokenAdapter implements JsonSerializer<AuthToken>, JsonDeserializer<AuthToken> {
 

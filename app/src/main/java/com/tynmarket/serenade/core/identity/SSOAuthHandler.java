@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -25,12 +25,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.IntentUtils;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterSession;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.IntentUtils;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.TwitterSession;
 
 /**
  * Single Sign On implementation of an {@link AuthHandler}

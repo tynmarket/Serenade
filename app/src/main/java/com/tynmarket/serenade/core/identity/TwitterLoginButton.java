@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -30,20 +30,20 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.R;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.internal.CommonUtils;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.internal.CommonUtils;
 
 import java.lang.ref.WeakReference;
 
 /**
  * Log in button for logging into Twitter. When the button is clicked, an authorization request
  * is started and the user is presented with a screen requesting access to the user's Twitter
- * account. If successful, a {@link com.twitter.sdk.android.core.TwitterSession} is provided
- * in the {@link com.twitter.sdk.android.core.Callback#success(com.twitter.sdk.android.core.Result)}
+ * account. If successful, a {@link com.tynmarket.serenade.core.TwitterSession} is provided
+ * in the {@link com.tynmarket.serenade.core.Callback#success(com.twitter.sdk.android.core.Result)}
  */
 public class TwitterLoginButton extends Button {
     static final String TAG = TwitterCore.TAG;
@@ -99,7 +99,7 @@ public class TwitterLoginButton extends Button {
     }
 
     /**
-     * Sets the {@link com.twitter.sdk.android.core.Callback} to invoke when login completes.
+     * Sets the {@link com.tynmarket.serenade.core.Callback} to invoke when login completes.
      *
      * @param callback The callback interface to invoke when login completes.
      * @throws java.lang.IllegalArgumentException if callback is null.
@@ -112,7 +112,7 @@ public class TwitterLoginButton extends Button {
     }
 
     /**
-     * @return the current {@link com.twitter.sdk.android.core.Callback}
+     * @return the current {@link com.tynmarket.serenade.core.Callback}
      */
     public Callback<TwitterSession> getCallback() {
         return callback;

@@ -2,7 +2,7 @@ package com.tynmarket.serenade.model;
 
 import android.annotation.SuppressLint;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadTwitterCardEvent;
 import com.tynmarket.serenade.event.LoadTwitterCardsEvent;

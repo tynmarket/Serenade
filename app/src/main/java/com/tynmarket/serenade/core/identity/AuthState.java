@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterCore;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterCore;
 
 import java.util.concurrent.atomic.AtomicReference;
 

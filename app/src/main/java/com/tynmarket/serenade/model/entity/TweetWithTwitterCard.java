@@ -1,11 +1,11 @@
 package com.tynmarket.serenade.model.entity;
 
-import com.twitter.sdk.android.core.models.Card;
-import com.twitter.sdk.android.core.models.Coordinates;
-import com.twitter.sdk.android.core.models.Place;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.TweetEntities;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.Card;
+import com.tynmarket.serenade.core.models.Coordinates;
+import com.tynmarket.serenade.core.models.Place;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.models.TweetEntities;
+import com.tynmarket.serenade.core.models.User;
 
 import java.util.List;
 

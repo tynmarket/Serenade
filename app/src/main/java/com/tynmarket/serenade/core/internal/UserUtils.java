@@ -15,11 +15,11 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
 import android.text.TextUtils;
 
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.User;
 
 public final class UserUtils {
     private UserUtils() {}

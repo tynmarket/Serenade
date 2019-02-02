@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.network;
+package com.tynmarket.serenade.core.internal.network;
 
-import com.twitter.sdk.android.core.GuestSessionProvider;
-import com.twitter.sdk.android.core.Session;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.GuestSessionProvider;
+import com.tynmarket.serenade.core.Session;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthToken;
 
 import okhttp3.CertificatePinner;
 import okhttp3.OkHttpClient;

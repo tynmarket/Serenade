@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;

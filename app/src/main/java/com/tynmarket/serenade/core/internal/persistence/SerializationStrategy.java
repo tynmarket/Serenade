@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.persistence;
+package com.tynmarket.serenade.core.internal.persistence;
 
 public interface SerializationStrategy<T> {
     String serialize(T object);

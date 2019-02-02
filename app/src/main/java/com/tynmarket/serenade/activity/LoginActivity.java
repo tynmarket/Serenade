@@ -8,11 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.Result;
+import com.tynmarket.serenade.core.TwitterException;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.identity.TwitterLoginButton;
 import com.tynmarket.serenade.R;
 
 /**

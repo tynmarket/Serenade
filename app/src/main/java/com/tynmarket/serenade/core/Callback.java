@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import retrofit2.Call;
 import retrofit2.Response;

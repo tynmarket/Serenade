@@ -15,17 +15,17 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthException;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterSession;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.Result;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthException;
+import com.tynmarket.serenade.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.TwitterSession;
 
 /**
  * Abstract class for handling authorization requests.

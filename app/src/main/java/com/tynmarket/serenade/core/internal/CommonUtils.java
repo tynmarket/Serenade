@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.twitter.sdk.android.core.Twitter;
+import com.tynmarket.serenade.core.Twitter;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.io.OutputStream;
 import java.util.Scanner;
 
 public class CommonUtils {
-    static final String TRACE_ENABLED_RESOURCE_NAME = "com.twitter.sdk.android.TRACE_ENABLED";
+    static final String TRACE_ENABLED_RESOURCE_NAME = "com.tynmarket.serenade.TRACE_ENABLED";
     static final boolean TRACE_ENABLED_DEFAULT = false;
     private static Boolean clsTrace;
 
@@ -186,7 +186,7 @@ public class CommonUtils {
     }
 
     /**
-     * Used internally to log only when the com.twitter.sdk.android.TRACE_ENABLED resource value
+     * Used internally to log only when the com.tynmarket.serenade.TRACE_ENABLED resource value
      * is set to true.  When it is, this API passes processing to the log API.
      */
     public static void logControlled(Context context, String msg){
@@ -196,7 +196,7 @@ public class CommonUtils {
     }
 
     /**
-     * Used internally to log errors only when the com.twitter.sdk.android.TRACE_ENABLED resource
+     * Used internally to log errors only when the com.tynmarket.serenade.TRACE_ENABLED resource
      * value is set to true.  When it is, this API passes processing to the logError API.
      */
     public static void logControlledError(Context context, String msg, Throwable tr){
@@ -206,7 +206,7 @@ public class CommonUtils {
     }
 
     /**
-     * Used internally to log only when the com.twitter.sdk.android.TRACE_ENABLED resource value
+     * Used internally to log only when the com.tynmarket.serenade.TRACE_ENABLED resource value
      * is set to true.  When it is, this API passes processing to the log API.
      */
     public static void logControlled(Context context, int level, String tag, String msg) {

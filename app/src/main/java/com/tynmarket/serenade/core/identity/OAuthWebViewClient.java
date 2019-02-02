@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.net.http.SslError;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.twitter.sdk.android.core.internal.network.UrlUtils;
+import com.tynmarket.serenade.core.internal.network.UrlUtils;
 
 import java.net.URI;
 import java.util.Map;

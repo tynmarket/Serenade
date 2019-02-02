@@ -1,10 +1,10 @@
 package com.tynmarket.serenade.model;
 
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterApiException;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
+import com.tynmarket.serenade.core.TwitterApiClient;
+import com.tynmarket.serenade.core.TwitterApiException;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.services.FavoriteService;
 import com.tynmarket.serenade.model.util.RetrofitObserver;
 import com.tynmarket.serenade.view.listner.TweetActionListener;
 

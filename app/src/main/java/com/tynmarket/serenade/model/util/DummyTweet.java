@@ -1,10 +1,10 @@
 package com.tynmarket.serenade.model.util;
 
-import com.twitter.sdk.android.core.models.MediaEntity;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.TweetEntities;
-import com.twitter.sdk.android.core.models.UrlEntity;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.MediaEntity;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.models.TweetEntities;
+import com.tynmarket.serenade.core.models.UrlEntity;
+import com.tynmarket.serenade.core.models.User;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 
 import java.util.ArrayList;

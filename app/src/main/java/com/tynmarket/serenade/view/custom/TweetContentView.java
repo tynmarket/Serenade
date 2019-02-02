@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetContentBinding;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;

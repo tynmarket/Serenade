@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
 /**
  * Internal interface representing a time source. Useful for mocking out in tests so that system time can be

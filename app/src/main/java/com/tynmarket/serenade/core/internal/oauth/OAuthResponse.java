@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.TwitterAuthToken;
 
 /**
  * Represents an authorization response.

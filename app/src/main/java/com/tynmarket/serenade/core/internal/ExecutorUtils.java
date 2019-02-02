@@ -15,9 +15,9 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
-import com.twitter.sdk.android.core.Twitter;
+import com.tynmarket.serenade.core.Twitter;
 
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;

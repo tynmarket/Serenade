@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 

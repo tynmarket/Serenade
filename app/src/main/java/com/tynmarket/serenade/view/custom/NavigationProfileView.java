@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.NavigationProfileBinding;
 import com.tynmarket.serenade.model.util.ActivityHelper;

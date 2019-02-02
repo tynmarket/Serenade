@@ -15,13 +15,13 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.twitter.sdk.android.core.AuthToken;
+import com.tynmarket.serenade.core.AuthToken;
 
 /**
  * OAuth2.0 token.

@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.network;
+package com.tynmarket.serenade.core.internal.network;
 
 import android.text.TextUtils;
 

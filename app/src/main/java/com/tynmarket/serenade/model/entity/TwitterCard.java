@@ -2,7 +2,7 @@ package com.tynmarket.serenade.model.entity;
 
 import android.text.TextUtils;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 
 /**
  * Created by tynmarket on 2018/02/10.

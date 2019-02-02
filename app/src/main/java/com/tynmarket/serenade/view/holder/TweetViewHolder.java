@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.models.User;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;

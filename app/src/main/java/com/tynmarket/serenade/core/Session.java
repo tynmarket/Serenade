@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Base class for session associated with {@link com.twitter.sdk.android.core.AuthToken}.
+ * Base class for session associated with {@link com.tynmarket.serenade.core.AuthToken}.
  */
 public class Session<T extends AuthToken> {
     @SerializedName("auth_token")

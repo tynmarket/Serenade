@@ -15,21 +15,21 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.SessionManager;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthException;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.Result;
+import com.tynmarket.serenade.core.SessionManager;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthException;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.TwitterException;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.models.User;
 
 import retrofit2.Call;
 

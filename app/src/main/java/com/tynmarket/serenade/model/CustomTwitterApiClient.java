@@ -1,8 +1,8 @@
 package com.tynmarket.serenade.model;
 
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.TwitterApiClient;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.models.User;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

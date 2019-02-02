@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.twitter.sdk.android.core.models.MediaEntity;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.TweetEntities;
-import com.twitter.sdk.android.core.models.UrlEntity;
+import com.tynmarket.serenade.core.models.MediaEntity;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.models.TweetEntities;
+import com.tynmarket.serenade.core.models.UrlEntity;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.model.SpeakerDeck;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;

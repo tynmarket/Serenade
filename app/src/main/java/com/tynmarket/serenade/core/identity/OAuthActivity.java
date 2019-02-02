@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,11 +24,11 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-import com.twitter.sdk.android.core.R;
-import com.twitter.sdk.android.core.TwitterAuthException;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.internal.TwitterApi;
-import com.twitter.sdk.android.core.internal.oauth.OAuth1aService;
+import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.core.TwitterAuthException;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.internal.TwitterApi;
+import com.tynmarket.serenade.core.internal.oauth.OAuth1aService;
 
 /**
  * Activity for performing OAuth flow when Single Sign On is not available. This activity should not

@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.content.Context;
 import android.content.Intent;

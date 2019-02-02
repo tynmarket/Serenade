@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.models;
+package com.tynmarket.serenade.core.models;
 
 /**
  * Identifiable is an abstraction of types with long identifiers.

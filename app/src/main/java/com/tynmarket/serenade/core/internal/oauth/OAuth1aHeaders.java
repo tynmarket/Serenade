@@ -15,10 +15,10 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthToken;
 
 import java.util.HashMap;
 import java.util.Map;

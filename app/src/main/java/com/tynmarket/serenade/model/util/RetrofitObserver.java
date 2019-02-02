@@ -1,8 +1,8 @@
 package com.tynmarket.serenade.model.util;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.Result;
+import com.tynmarket.serenade.core.TwitterException;
 
 import io.reactivex.exceptions.CompositeException;
 import io.reactivex.exceptions.Exceptions;

@@ -15,17 +15,17 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import com.twitter.sdk.android.core.models.ApiError;
-import com.twitter.sdk.android.core.models.ApiErrors;
-import com.twitter.sdk.android.core.models.SafeListAdapter;
-import com.twitter.sdk.android.core.models.SafeMapAdapter;
+import com.tynmarket.serenade.core.models.ApiError;
+import com.tynmarket.serenade.core.models.ApiErrors;
+import com.tynmarket.serenade.core.models.SafeListAdapter;
+import com.tynmarket.serenade.core.models.SafeMapAdapter;
 
 import retrofit2.Response;
 

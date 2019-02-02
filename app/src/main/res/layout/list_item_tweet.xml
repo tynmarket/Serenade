@@ -9,7 +9,7 @@
 
         <variable
             name="tweet"
-            type="com.twitter.sdk.android.core.models.Tweet" />
+            type="com.tynmarket.serenade.core.models.Tweet" />
 
         <variable
             name="showQuotedStatus"

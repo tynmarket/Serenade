@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 /**
  * Error codes that may be returned from the API. For complete list of error codes, see

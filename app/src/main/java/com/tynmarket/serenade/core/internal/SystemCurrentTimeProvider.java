@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
 /**
  * Default implementation of the {@link CurrentTimeProvider} which returns the system time

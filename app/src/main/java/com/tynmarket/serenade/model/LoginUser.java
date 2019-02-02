@@ -1,8 +1,8 @@
 package com.tynmarket.serenade.model;
 
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.models.User;
 import com.tynmarket.serenade.event.LoadUserEvent;
 import com.tynmarket.serenade.event.SignOutEvent;
 import com.tynmarket.serenade.model.util.DummyUser;

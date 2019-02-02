@@ -15,9 +15,9 @@
  *
  */
 
-package com.twitter.sdk.android.core.services;
+package com.tynmarket.serenade.core.services;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 
 import java.util.List;
 

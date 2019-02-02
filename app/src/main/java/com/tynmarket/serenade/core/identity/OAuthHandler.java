@@ -15,14 +15,14 @@
  *
  */
 
-package com.twitter.sdk.android.core.identity;
+package com.tynmarket.serenade.core.identity;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterSession;
+import com.tynmarket.serenade.core.Callback;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterSession;
 
 /**
  * OAuth 1.0a implementation of an {@link AuthHandler}
@@ -30,7 +30,7 @@ import com.twitter.sdk.android.core.TwitterSession;
 class OAuthHandler extends AuthHandler {
 
     /**
-     * @param authConfig The {@link com.twitter.sdk.android.core.TwitterAuthConfig}.
+     * @param authConfig The {@link com.tynmarket.serenade.core.TwitterAuthConfig}.
      * @param callback   The listener to callback when authorization completes.
      */
     OAuthHandler(TwitterAuthConfig authConfig, Callback<TwitterSession> callback,

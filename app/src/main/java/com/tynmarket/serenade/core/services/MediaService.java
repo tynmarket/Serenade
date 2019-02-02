@@ -15,9 +15,9 @@
  *
  */
 
-package com.twitter.sdk.android.core.services;
+package com.tynmarket.serenade.core.services;
 
-import com.twitter.sdk.android.core.models.Media;
+import com.tynmarket.serenade.core.models.Media;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;

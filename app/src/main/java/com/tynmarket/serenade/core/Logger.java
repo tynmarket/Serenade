@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 /**
  * Interface to support custom logger.

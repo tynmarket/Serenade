@@ -15,13 +15,13 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.internal.network.UrlUtils;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.internal.network.UrlUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;

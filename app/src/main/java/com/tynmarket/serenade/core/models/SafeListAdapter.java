@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.models;
+package com.tynmarket.serenade.core.models;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

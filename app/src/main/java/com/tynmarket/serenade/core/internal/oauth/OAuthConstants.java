@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
 public class OAuthConstants {
     public static final String HEADER_AUTHORIZATION = "Authorization";

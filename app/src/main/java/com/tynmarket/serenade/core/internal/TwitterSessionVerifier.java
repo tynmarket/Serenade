@@ -15,11 +15,11 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.services.AccountService;
+import com.tynmarket.serenade.core.TwitterApiClient;
+import com.tynmarket.serenade.core.TwitterSession;
+import com.tynmarket.serenade.core.services.AccountService;
 
 import java.io.IOException;
 

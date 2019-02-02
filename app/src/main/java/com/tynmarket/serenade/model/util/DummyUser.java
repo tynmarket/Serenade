@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.model.util;
 
-import com.twitter.sdk.android.core.models.User;
+import com.tynmarket.serenade.core.models.User;
 
 /**
  * Created by tynmarket on 2018/03/04.

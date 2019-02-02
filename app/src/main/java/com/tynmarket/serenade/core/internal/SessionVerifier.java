@@ -15,9 +15,9 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
-import com.twitter.sdk.android.core.Session;
+import com.tynmarket.serenade.core.Session;
 
 public interface SessionVerifier<T extends Session> {
     void verifySession(T session);

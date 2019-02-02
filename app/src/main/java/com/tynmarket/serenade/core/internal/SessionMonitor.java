@@ -15,13 +15,13 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
 import android.app.Activity;
 import android.text.format.DateUtils;
 
-import com.twitter.sdk.android.core.Session;
-import com.twitter.sdk.android.core.SessionManager;
+import com.tynmarket.serenade.core.Session;
+import com.tynmarket.serenade.core.SessionManager;
 
 import java.util.Calendar;
 import java.util.TimeZone;

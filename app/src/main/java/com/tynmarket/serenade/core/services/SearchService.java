@@ -15,10 +15,10 @@
  *
  */
 
-package com.twitter.sdk.android.core.services;
+package com.tynmarket.serenade.core.services;
 
-import com.twitter.sdk.android.core.models.Search;
-import com.twitter.sdk.android.core.services.params.Geocode;
+import com.tynmarket.serenade.core.models.Search;
+import com.tynmarket.serenade.core.services.params.Geocode;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

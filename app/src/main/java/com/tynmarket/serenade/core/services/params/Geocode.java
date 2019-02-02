@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.services.params;
+package com.tynmarket.serenade.core.services.params;
 
 /**
  *

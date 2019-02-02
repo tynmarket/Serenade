@@ -15,24 +15,24 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.twitter.sdk.android.core.internal.TwitterApi;
-import com.twitter.sdk.android.core.internal.network.OkHttpClientHelper;
-import com.twitter.sdk.android.core.models.BindingValues;
-import com.twitter.sdk.android.core.models.BindingValuesAdapter;
-import com.twitter.sdk.android.core.models.SafeListAdapter;
-import com.twitter.sdk.android.core.models.SafeMapAdapter;
-import com.twitter.sdk.android.core.services.AccountService;
-import com.twitter.sdk.android.core.services.CollectionService;
-import com.twitter.sdk.android.core.services.ConfigurationService;
-import com.twitter.sdk.android.core.services.FavoriteService;
-import com.twitter.sdk.android.core.services.ListService;
-import com.twitter.sdk.android.core.services.MediaService;
-import com.twitter.sdk.android.core.services.SearchService;
-import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.core.internal.TwitterApi;
+import com.tynmarket.serenade.core.internal.network.OkHttpClientHelper;
+import com.tynmarket.serenade.core.models.BindingValues;
+import com.tynmarket.serenade.core.models.BindingValuesAdapter;
+import com.tynmarket.serenade.core.models.SafeListAdapter;
+import com.tynmarket.serenade.core.models.SafeMapAdapter;
+import com.tynmarket.serenade.core.services.AccountService;
+import com.tynmarket.serenade.core.services.CollectionService;
+import com.tynmarket.serenade.core.services.ConfigurationService;
+import com.tynmarket.serenade.core.services.FavoriteService;
+import com.tynmarket.serenade.core.services.ListService;
+import com.tynmarket.serenade.core.services.MediaService;
+import com.tynmarket.serenade.core.services.SearchService;
+import com.tynmarket.serenade.core.services.StatusesService;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A class to allow authenticated access to Twitter API endpoints.
  * Can be extended to provided additional endpoints by extending and providing Retrofit API
- * interfaces to {@link com.twitter.sdk.android.core.TwitterApiClient#getService(Class)}
+ * interfaces to {@link com.tynmarket.serenade.core.TwitterApiClient#getService(Class)}
  */
 public class TwitterApiClient {
     final ConcurrentHashMap<Class, Object> services;
@@ -120,35 +120,35 @@ public class TwitterApiClient {
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.AccountService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.AccountService} to access TwitterApi
      */
     public AccountService getAccountService() {
         return getService(AccountService.class);
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.FavoriteService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.FavoriteService} to access TwitterApi
      */
     public FavoriteService getFavoriteService() {
         return getService(FavoriteService.class);
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.StatusesService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.StatusesService} to access TwitterApi
      */
     public StatusesService getStatusesService() {
         return getService(StatusesService.class);
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.SearchService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.SearchService} to access TwitterApi
      */
     public SearchService getSearchService() {
         return getService(SearchService.class);
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.ListService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.ListService} to access TwitterApi
      */
     public ListService getListService() {
         return getService(ListService.class);
@@ -163,14 +163,14 @@ public class TwitterApiClient {
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.ConfigurationService} to access TwitterApi
+     * @return {@link com.tynmarket.serenade.core.services.ConfigurationService} to access TwitterApi
      */
     public ConfigurationService getConfigurationService() {
         return getService(ConfigurationService.class);
     }
 
     /**
-     * @return {@link com.twitter.sdk.android.core.services.MediaService} to access Twitter API
+     * @return {@link com.tynmarket.serenade.core.services.MediaService} to access Twitter API
      * upload endpoints.
      */
     public MediaService getMediaService() {

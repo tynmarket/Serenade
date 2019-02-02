@@ -2,11 +2,11 @@ package com.tynmarket.serenade.model;
 
 import android.annotation.SuppressLint;
 
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.FavoriteService;
-import com.twitter.sdk.android.core.services.StatusesService;
+import com.tynmarket.serenade.core.TwitterApiClient;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.models.Tweet;
+import com.tynmarket.serenade.core.services.FavoriteService;
+import com.tynmarket.serenade.core.services.StatusesService;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;

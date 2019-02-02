@@ -3,7 +3,7 @@ package com.tynmarket.serenade.view.listner;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.TwitterCardList;
 import com.tynmarket.serenade.model.util.FirebaseAnalyticsHelper;

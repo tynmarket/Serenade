@@ -15,11 +15,11 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal;
+package com.tynmarket.serenade.core.internal;
 
-import com.twitter.sdk.android.core.models.Card;
-import com.twitter.sdk.android.core.models.ImageValue;
-import com.twitter.sdk.android.core.models.UserValue;
+import com.tynmarket.serenade.core.models.Card;
+import com.tynmarket.serenade.core.models.ImageValue;
+import com.tynmarket.serenade.core.models.UserValue;
 
 public class VineCardUtils {
     public static final String PLAYER_CARD = "player";

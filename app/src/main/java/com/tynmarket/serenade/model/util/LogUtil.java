@@ -2,8 +2,8 @@ package com.tynmarket.serenade.model.util;
 
 import android.util.Log;
 
-import com.twitter.sdk.android.core.DefaultLogger;
-import com.twitter.sdk.android.core.Logger;
+import com.tynmarket.serenade.core.DefaultLogger;
+import com.tynmarket.serenade.core.Logger;
 import com.tynmarket.serenade.BuildConfig;
 
 /**

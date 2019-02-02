@@ -17,9 +17,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterConfig;
+import com.tynmarket.serenade.core.Twitter;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadUserEvent;

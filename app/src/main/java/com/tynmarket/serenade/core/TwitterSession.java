@@ -15,16 +15,16 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.twitter.sdk.android.core.internal.persistence.SerializationStrategy;
+import com.tynmarket.serenade.core.internal.persistence.SerializationStrategy;
 
 /**
- * Represents a Twitter session that is associated with a {@link com.twitter.sdk.android.core.TwitterAuthToken}.
+ * Represents a Twitter session that is associated with a {@link com.tynmarket.serenade.core.TwitterAuthToken}.
  */
 public class TwitterSession extends Session<TwitterAuthToken> {
     public static final long UNKNOWN_USER_ID = -1L;

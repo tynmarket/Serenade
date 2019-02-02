@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.event;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 
 import java.util.List;
 

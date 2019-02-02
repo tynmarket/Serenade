@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.persistence;
+package com.tynmarket.serenade.core.internal.persistence;
 
 import android.content.Context;
 import android.os.Environment;
 
-import com.twitter.sdk.android.core.Twitter;
+import com.tynmarket.serenade.core.Twitter;
 
 import java.io.File;
 

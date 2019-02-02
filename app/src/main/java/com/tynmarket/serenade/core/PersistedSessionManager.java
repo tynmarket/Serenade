@@ -15,11 +15,11 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
-import com.twitter.sdk.android.core.internal.persistence.PreferenceStore;
-import com.twitter.sdk.android.core.internal.persistence.PreferenceStoreStrategy;
-import com.twitter.sdk.android.core.internal.persistence.SerializationStrategy;
+import com.tynmarket.serenade.core.internal.persistence.PreferenceStore;
+import com.tynmarket.serenade.core.internal.persistence.PreferenceStoreStrategy;
+import com.tynmarket.serenade.core.internal.persistence.SerializationStrategy;
 
 import java.util.Collections;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Implementation of {@link com.twitter.sdk.android.core.SessionManager} that persists sessions.
+ * Implementation of {@link com.tynmarket.serenade.core.SessionManager} that persists sessions.
  */
 public class PersistedSessionManager<T extends Session> implements SessionManager<T> {
 

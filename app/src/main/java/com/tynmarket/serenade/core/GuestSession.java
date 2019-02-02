@@ -15,14 +15,14 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.twitter.sdk.android.core.internal.oauth.GuestAuthToken;
-import com.twitter.sdk.android.core.internal.persistence.SerializationStrategy;
+import com.tynmarket.serenade.core.internal.oauth.GuestAuthToken;
+import com.tynmarket.serenade.core.internal.persistence.SerializationStrategy;
 
 public class GuestSession extends Session<GuestAuthToken> {
     public static final long LOGGED_OUT_USER_ID = 0L;

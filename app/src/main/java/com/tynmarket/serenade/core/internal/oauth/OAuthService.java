@@ -15,11 +15,11 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.oauth;
+package com.tynmarket.serenade.core.internal.oauth;
 
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.internal.TwitterApi;
-import com.twitter.sdk.android.core.internal.network.OkHttpClientHelper;
+import com.tynmarket.serenade.core.TwitterCore;
+import com.tynmarket.serenade.core.internal.TwitterApi;
+import com.tynmarket.serenade.core.internal.network.OkHttpClientHelper;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

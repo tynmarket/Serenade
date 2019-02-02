@@ -15,13 +15,13 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.network;
+package com.tynmarket.serenade.core.internal.network;
 
-import com.twitter.sdk.android.core.Session;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.internal.oauth.OAuth1aHeaders;
-import com.twitter.sdk.android.core.internal.oauth.OAuthConstants;
+import com.tynmarket.serenade.core.Session;
+import com.tynmarket.serenade.core.TwitterAuthConfig;
+import com.tynmarket.serenade.core.TwitterAuthToken;
+import com.tynmarket.serenade.core.internal.oauth.OAuth1aHeaders;
+import com.tynmarket.serenade.core.internal.oauth.OAuthConstants;
 
 import java.io.IOException;
 import java.util.HashMap;

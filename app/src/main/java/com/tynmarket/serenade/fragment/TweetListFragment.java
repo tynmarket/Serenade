@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.TwitterApiErrorConstants;
-import com.twitter.sdk.android.core.TwitterApiException;
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.TwitterApiErrorConstants;
+import com.tynmarket.serenade.core.TwitterApiException;
+import com.tynmarket.serenade.core.models.Tweet;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadFailureTweetListEvent;
 import com.tynmarket.serenade.event.LoadTweetListEvent;

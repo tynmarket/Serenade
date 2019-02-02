@@ -15,12 +15,12 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.network;
+package com.tynmarket.serenade.core.internal.network;
 
-import com.twitter.sdk.android.core.GuestSession;
-import com.twitter.sdk.android.core.GuestSessionProvider;
-import com.twitter.sdk.android.core.internal.oauth.GuestAuthToken;
-import com.twitter.sdk.android.core.internal.oauth.OAuthConstants;
+import com.tynmarket.serenade.core.GuestSession;
+import com.tynmarket.serenade.core.GuestSessionProvider;
+import com.tynmarket.serenade.core.internal.oauth.GuestAuthToken;
+import com.tynmarket.serenade.core.internal.oauth.OAuthConstants;
 
 import java.io.IOException;
 

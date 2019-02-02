@@ -15,16 +15,16 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.twitter.sdk.android.core.internal.SessionMonitor;
-import com.twitter.sdk.android.core.internal.TwitterApi;
-import com.twitter.sdk.android.core.internal.TwitterSessionVerifier;
-import com.twitter.sdk.android.core.internal.oauth.OAuth2Service;
-import com.twitter.sdk.android.core.internal.persistence.PreferenceStoreImpl;
+import com.tynmarket.serenade.core.internal.SessionMonitor;
+import com.tynmarket.serenade.core.internal.TwitterApi;
+import com.tynmarket.serenade.core.internal.TwitterSessionVerifier;
+import com.tynmarket.serenade.core.internal.oauth.OAuth2Service;
+import com.tynmarket.serenade.core.internal.persistence.PreferenceStoreImpl;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -121,7 +121,7 @@ public class TwitterCore {
      **********************************************************************************************/
 
     /**
-     * @return the {@link com.twitter.sdk.android.core.SessionManager} for user sessions.
+     * @return the {@link com.tynmarket.serenade.core.SessionManager} for user sessions.
      */
     public SessionManager<TwitterSession> getSessionManager() {
         return twitterSessionManager;
@@ -143,8 +143,8 @@ public class TwitterCore {
     }
 
     /**
-     * Creates {@link com.twitter.sdk.android.core.TwitterApiClient} from default
-     * {@link com.twitter.sdk.android.core.Session}.
+     * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} from default
+     * {@link com.tynmarket.serenade.core.Session}.
      *
      * Caches internally for efficient access.
      */
@@ -158,8 +158,8 @@ public class TwitterCore {
     }
 
     /**
-     * Creates {@link com.twitter.sdk.android.core.TwitterApiClient} from authenticated
-     * {@link com.twitter.sdk.android.core.Session} provided.
+     * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} from authenticated
+     * {@link com.tynmarket.serenade.core.Session} provided.
      *
      * Caches internally for efficient access.
      * @param session the session
@@ -172,7 +172,7 @@ public class TwitterCore {
     }
 
     /**
-     * Add custom {@link com.twitter.sdk.android.core.TwitterApiClient} for guest auth access.
+     * Add custom {@link com.tynmarket.serenade.core.TwitterApiClient} for guest auth access.
      *
      * Only adds guest auth client if it's not already defined. Caches internally for efficient
      * access and storing it in TwitterCore's singleton.
@@ -186,8 +186,8 @@ public class TwitterCore {
     }
 
     /**
-     * Add custom {@link com.twitter.sdk.android.core.TwitterApiClient} for authenticated
-     * {@link com.twitter.sdk.android.core.Session} access.
+     * Add custom {@link com.tynmarket.serenade.core.TwitterApiClient} for authenticated
+     * {@link com.tynmarket.serenade.core.Session} access.
      *
      * Only adds session auth client if it's not already defined. Caches internally for efficient
      * access and storing it in TwitterCore's singleton.
@@ -202,7 +202,7 @@ public class TwitterCore {
     }
 
     /**
-     * Creates {@link com.twitter.sdk.android.core.TwitterApiClient} using guest authentication.
+     * Creates {@link com.tynmarket.serenade.core.TwitterApiClient} using guest authentication.
      *
      * Caches internally for efficient access.
      */

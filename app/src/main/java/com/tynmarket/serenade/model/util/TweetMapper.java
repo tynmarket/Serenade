@@ -2,7 +2,7 @@ package com.tynmarket.serenade.model.util;
 
 import android.support.annotation.Nullable;
 
-import com.twitter.sdk.android.core.models.Tweet;
+import com.tynmarket.serenade.core.models.Tweet;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 
 /**

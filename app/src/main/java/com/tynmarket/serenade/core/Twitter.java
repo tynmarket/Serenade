@@ -15,14 +15,14 @@
  *
  */
 
-package com.twitter.sdk.android.core;
+package com.tynmarket.serenade.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.twitter.sdk.android.core.internal.ActivityLifecycleManager;
-import com.twitter.sdk.android.core.internal.CommonUtils;
-import com.twitter.sdk.android.core.internal.ExecutorUtils;
+import com.tynmarket.serenade.core.internal.ActivityLifecycleManager;
+import com.tynmarket.serenade.core.internal.CommonUtils;
+import com.tynmarket.serenade.core.internal.ExecutorUtils;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -32,8 +32,8 @@ import java.util.concurrent.ExecutorService;
  */
 public class Twitter {
     public static final String TAG = "Twitter";
-    private static final String CONSUMER_KEY = "com.twitter.sdk.android.CONSUMER_KEY";
-    private static final String CONSUMER_SECRET = "com.twitter.sdk.android.CONSUMER_SECRET";
+    private static final String CONSUMER_KEY = "com.tynmarket.serenade.CONSUMER_KEY";
+    private static final String CONSUMER_SECRET = "com.tynmarket.serenade.CONSUMER_SECRET";
     private static final String NOT_INITIALIZED_MESSAGE = "Must initialize Twitter before using getInstance()";
     static final Logger DEFAULT_LOGGER = new DefaultLogger();
 

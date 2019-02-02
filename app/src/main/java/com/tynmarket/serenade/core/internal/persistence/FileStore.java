@@ -15,7 +15,7 @@
  *
  */
 
-package com.twitter.sdk.android.core.internal.persistence;
+package com.tynmarket.serenade.core.internal.persistence;
 
 
 import java.io.File;
