@@ -24,14 +24,14 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.Button;
 
-import com.tynmarket.serenade.core.Callback;
 import com.tynmarket.serenade.R;
+import com.tynmarket.serenade.core.Callback;
 import com.tynmarket.serenade.core.Twitter;
 import com.tynmarket.serenade.core.TwitterCore;
 import com.tynmarket.serenade.core.TwitterSession;
@@ -45,7 +45,7 @@ import java.lang.ref.WeakReference;
  * account. If successful, a {@link com.tynmarket.serenade.core.TwitterSession} is provided
  * in the {@link com.tynmarket.serenade.core.Callback#success(com.twitter.sdk.android.core.Result)}
  */
-public class TwitterLoginButton extends Button {
+public class TwitterLoginButton extends AppCompatButton {
     static final String TAG = TwitterCore.TAG;
     static final String ERROR_MSG_NO_ACTIVITY = "TwitterLoginButton requires an activity."
             + " Override getActivity to provide the activity for this button.";
@@ -68,7 +68,7 @@ public class TwitterLoginButton extends Button {
     }
 
     TwitterLoginButton(Context context, AttributeSet attrs, int defStyle,
-            TwitterAuthClient authClient) {
+                       TwitterAuthClient authClient) {
         super(context, attrs, defStyle);
         this.activityRef = new WeakReference<>(getActivity());
         this.authClient = authClient;
@@ -123,8 +123,8 @@ public class TwitterLoginButton extends Button {
      * is called to complete the authorization flow.
      *
      * @param requestCode the request code used for SSO
-     * @param resultCode the result code returned by the SSO activity
-     * @param data the result data returned by the SSO activity
+     * @param resultCode  the result code returned by the SSO activity
+     * @param data        the result data returned by the SSO activity
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == getTwitterAuthClient().getRequestCode()) {
