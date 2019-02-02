@@ -39,6 +39,7 @@ public class TweetWithTwitterCard extends Tweet {
                 tweet.quotedStatusId,
                 tweet.quotedStatusIdStr,
                 tweet.quotedStatus,
+                tweet.replyCount,
                 tweet.retweetCount,
                 tweet.retweeted,
                 tweet.retweetedStatus,
@@ -61,7 +62,7 @@ public class TweetWithTwitterCard extends Tweet {
                                 String inReplyToScreenName, long inReplyToStatusId, String inReplyToStatusIdStr,
                                 long inReplyToUserId, String inReplyToUserIdStr, String lang, Place place,
                                 boolean possiblySensitive, Object scopes, long quotedStatusId, String quotedStatusIdStr,
-                                Tweet quotedStatus, int retweetCount, boolean retweeted, Tweet retweetedStatus,
+                                Tweet quotedStatus, int replyCount, int retweetCount, boolean retweeted, Tweet retweetedStatus,
                                 String source, String text, List<Integer> displayTextRange, boolean truncated,
                                 User user, boolean withheldCopyright, List<String> withheldInCountries,
                                 String withheldScope, Card card, TwitterCard twitterCard) {
@@ -72,7 +73,7 @@ public class TweetWithTwitterCard extends Tweet {
                 inReplyToScreenName, inReplyToStatusId, inReplyToStatusIdStr,
                 inReplyToUserId, inReplyToUserIdStr, lang, place,
                 possiblySensitive, scopes, quotedStatusId, quotedStatusIdStr,
-                quotedStatus, retweetCount, retweeted, retweetedStatus,
+                quotedStatus, replyCount, retweetCount, retweeted, retweetedStatus,
                 source, text, displayTextRange, truncated,
                 user, withheldCopyright, withheldInCountries,
                 withheldScope, card);

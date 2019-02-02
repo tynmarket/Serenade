@@ -42,6 +42,7 @@ public class TweetBuilder {
     private long quotedStatusId;
     private String quotedStatusIdStr;
     private Tweet quotedStatus;
+    private int replyCount;
     private int retweetCount;
     private boolean retweeted;
     private Tweet retweetedStatus;
@@ -165,6 +166,11 @@ public class TweetBuilder {
         return this;
     }
 
+    public TweetBuilder setReplyCount(int replyCount) {
+        this.replyCount = replyCount;
+        return this;
+    }
+
     public TweetBuilder setRetweetCount(int retweetCount) {
         this.retweetCount = retweetCount;
         return this;
@@ -248,6 +254,7 @@ public class TweetBuilder {
         this.quotedStatusId = tweet.quotedStatusId;
         this.quotedStatusIdStr = tweet.quotedStatusIdStr;
         this.quotedStatus = tweet.quotedStatus;
+        this.replyCount = tweet.replyCount;
         this.retweetCount = tweet.retweetCount;
         this.retweeted = tweet.retweeted;
         this.retweetedStatus = tweet.retweetedStatus;
@@ -268,7 +275,7 @@ public class TweetBuilder {
                 favoriteCount, favorited, filterLevel, id, idStr, inReplyToScreenName,
                 inReplyToStatusId, inReplyToStatusIdStr, inReplyToUserId, inReplyToUserIdStr,
                 lang, place, possiblySensitive, scopes, quotedStatusId, quotedStatusIdStr,
-                quotedStatus, retweetCount, retweeted, retweetedStatus, source, text,
+                quotedStatus, replyCount, retweetCount, retweeted, retweetedStatus, source, text,
                 displayTextRange, truncated, user, withheldCopyright, withheldInCountries,
                 withheldScope, card);
     }
