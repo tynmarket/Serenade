@@ -26,6 +26,7 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.TermsAndServiceActivity" />
         <activity android:name=".activity.SlideActivity" />
+        <activity android:name=".core.identity.OAuthActivity" />
     </application>
 
 </manifest>
