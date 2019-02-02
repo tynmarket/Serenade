@@ -24,6 +24,7 @@ import com.tynmarket.serenade.core.TwitterAuthToken;
 
 import okhttp3.CertificatePinner;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class OkHttpClientHelper {
     public static OkHttpClient getOkHttpClient(GuestSessionProvider guestSessionProvider) {
@@ -31,16 +32,25 @@ public class OkHttpClientHelper {
     }
 
     public static OkHttpClient getOkHttpClient(Session<? extends TwitterAuthToken> session,
-            TwitterAuthConfig authConfig) {
+                                               TwitterAuthConfig authConfig) {
         if (session == null) {
             throw new IllegalArgumentException("Session must not be null.");
         }
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        // set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        return addSessionAuth(new OkHttpClient.Builder(), session, authConfig).build();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        // add your other interceptors …
+
+        // add logging as last interceptor
+        httpClient.addInterceptor(logging);  // <-- this is the important line!
+
+        return addSessionAuth(httpClient, session, authConfig).build();
     }
 
     public static OkHttpClient getCustomOkHttpClient(OkHttpClient httpClient,
-            GuestSessionProvider guestSessionProvider) {
+                                                     GuestSessionProvider guestSessionProvider) {
         if (httpClient == null) {
             throw new IllegalArgumentException("HttpClient must not be null.");
         }
