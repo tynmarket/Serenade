@@ -28,8 +28,8 @@
         <activity android:name=".activity.SlideActivity" />
 
         <meta-data
-            android:name="google_analytics_adid_collection_enabled"
-            android:value="false" />
+            android:name="firebase_analytics_collection_deactivated"
+            android:value="true" />
     </application>
 
 </manifest>
