@@ -158,7 +158,7 @@ public class TweetContentView extends RelativeLayout {
 
     private void openTweet() {
         Tweet tweet = binding.getTweet();
-        analytics.logViewTweet(tweet);
+        analytics.logViewTweet();
 
         Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
         ActivityHelper.startUriActivity(getContext(), uri);

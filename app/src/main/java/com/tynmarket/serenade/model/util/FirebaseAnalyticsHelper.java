@@ -20,6 +20,7 @@ public class FirebaseAnalyticsHelper {
     private static final String CATEGORY_TWEET_ACTION = "tweet_action";
     private static final String CATEGORY_NAVIGATION = "navigation";
 
+    private static final String NAME_VIEW_TWEET = "view_tweet";
     private static final String NAME_HOME_TIMELINE = "home_timeline";
     private static final String NAME_FAVORITE_LIST = "favorite_list";
     private static final String NAME_REPLY = "reply";
@@ -37,6 +38,7 @@ public class FirebaseAnalyticsHelper {
     private static final String NAME_SIGN_OUT = "sign_out";
     private static final String NAME_TERMS_AND_SERVICE = "terms_and_service";
 
+    private static final String ID_VIEW_TWEET = "0";
     private static final String ID_REFRESH_HOME_TIMELINE = "1";
     private static final String ID_REFRESH_FAVORITE_LIST = "2";
     private static final String ID_READ_MORE_HOME_TIMELINE = "3";
@@ -64,9 +66,8 @@ public class FirebaseAnalyticsHelper {
         this.analytics = FirebaseAnalytics.getInstance(context);
     }
 
-    public void logViewTweet(Tweet tweet) {
-        tweet = TweetUtil.tweetOrRetweetedStatus(tweet);
-        logViewItem(tweet.idStr, tweet.user.screenName, CATEGORY_TWEET);
+    public void logViewTweet() {
+        logViewItem(ID_VIEW_TWEET, NAME_VIEW_TWEET, CATEGORY_TWEET);
     }
 
     public void logViewTwitterCard(TwitterCard twitterCard) {

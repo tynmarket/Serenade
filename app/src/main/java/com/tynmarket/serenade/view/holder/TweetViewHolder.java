@@ -122,7 +122,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     private void setOnLayoutClickListener() {
         binding.getRoot().setOnClickListener(v -> {
             Tweet tweet = binding.getTweet();
-            analytics.logViewTweet(tweet);
+            analytics.logViewTweet();
 
             Uri uri = TwitterUtil.tweetUri(tweet.user.screenName, tweet.idStr);
             ActivityHelper.startUriActivity(v.getContext(), uri);
