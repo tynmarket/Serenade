@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.Tab;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -23,6 +24,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.event.LoadUserEvent;
+import com.tynmarket.serenade.fragment.PrivacyPolicyFragment;
 import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.TweetList;
 import com.tynmarket.serenade.model.util.ActivityHelper;
@@ -160,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        DialogFragment fragment = new PrivacyPolicyFragment();
+        fragment.show(getSupportFragmentManager(), PrivacyPolicyFragment.TAG);
     }
 
     @Override
