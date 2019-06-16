@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.Toast;
 
+import com.tynmarket.serenade.R;
+
 public class PrivacyPolicyFragment extends AppCompatDialogFragment {
     public static final String TAG = "privacy_policy";
 
@@ -14,8 +16,8 @@ public class PrivacyPolicyFragment extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("message") // R.string.dialog_fire_missiles
-                .setTitle("title") // R.string.dialog_title
+        builder.setTitle(R.string.privacy_title)
+                .setMessage(R.string.privacy_message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() { // R.string.fire
                     public void onClick(DialogInterface dialog, int id) {
                         Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
