@@ -2,12 +2,14 @@ package com.tynmarket.serenade.fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.widget.Toast;
 
 import com.tynmarket.serenade.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class PrivacyPolicyFragment extends AppCompatDialogFragment {
     public static final String TAG = "privacy_policy";
@@ -22,12 +24,10 @@ public class PrivacyPolicyFragment extends AppCompatDialogFragment {
                 .setMessage(R.string.privacy_message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), R.string.text_ok, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), R.string.text_cancel, Toast.LENGTH_SHORT).show();
+                        SharedPreferences pref = getContext().getSharedPreferences(PrivacyPolicyFragment.PREF_NAME, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putBoolean(PrivacyPolicyFragment.AGREE, true);
+                        editor.apply();
                     }
                 });
         // Create the AlertDialog object and return it
