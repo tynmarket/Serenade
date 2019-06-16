@@ -52,7 +52,7 @@
 
     <!-- Privacy Policy -->
     <string name="privacy_title">Privacy Policy</string>
-    <string name="privacy_message">Message</string>
+    <string name="privacy_message">Information Collection and Use</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">Terms and service</string>

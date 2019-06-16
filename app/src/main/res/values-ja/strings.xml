@@ -52,7 +52,7 @@
 
     <!-- Privacy Policy -->
     <string name="privacy_title">プライバシーポリシー</string>
-    <string name="privacy_message">メッセージ</string>
+    <string name="privacy_message">情報の収集と利用</string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">利用規約</string>

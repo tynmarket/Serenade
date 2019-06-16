@@ -11,6 +11,8 @@ import com.tynmarket.serenade.R;
 
 public class PrivacyPolicyFragment extends AppCompatDialogFragment {
     public static final String TAG = "privacy_policy";
+    public static final String PREF_NAME = "privacy_policy";
+    public static final String AGREE = "agree";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -18,14 +20,14 @@ public class PrivacyPolicyFragment extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.privacy_title)
                 .setMessage(R.string.privacy_message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() { // R.string.fire
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.text_ok, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() { // R.string.cancel
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getContext(), "ng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.text_cancel, Toast.LENGTH_SHORT).show();
                     }
                 });
         // Create the AlertDialog object and return it

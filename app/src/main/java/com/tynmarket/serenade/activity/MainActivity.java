@@ -1,6 +1,7 @@
 package com.tynmarket.serenade.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -162,8 +163,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        DialogFragment fragment = new PrivacyPolicyFragment();
-        fragment.show(getSupportFragmentManager(), PrivacyPolicyFragment.TAG);
+        showPrivacyPolicy();
     }
 
     @Override
@@ -278,6 +278,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnTouch
             Intent intent = new Intent(this, com.tynmarket.serenade.activity.TermsAndServiceActivity.class);
             ActivityHelper.startActivity(this, intent);
         });
+    }
+
+    private void showPrivacyPolicy() {
+        SharedPreferences pref = getSharedPreferences(PrivacyPolicyFragment.PREF_NAME, MODE_PRIVATE);
+        boolean agree = pref.getBoolean(PrivacyPolicyFragment.AGREE, false);
+
+        if (!agree) {
+            DialogFragment fragment = new PrivacyPolicyFragment();
+            fragment.show(getSupportFragmentManager(), PrivacyPolicyFragment.TAG);
+        }
     }
 
     private void initTwitterConfig() {
