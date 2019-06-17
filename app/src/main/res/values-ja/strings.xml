@@ -51,7 +51,7 @@
     <string name="rate_limit_exceeded">Twitterの制限に達しました（1分間に%d回まで）</string>
 
     <!-- Privacy Policy -->
-    <string name="privacy_title">プライバシーポリシー</string>
+    <string name="privacy_title">情報の収集と利用</string>
     <string name="privacy_message">情報の収集と利用</string>
 
     <!-- Terms and service -->

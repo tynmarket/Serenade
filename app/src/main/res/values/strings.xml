@@ -51,8 +51,8 @@
     <string name="rate_limit_exceeded">Rate limit exceeded (%d times per minute)</string>
 
     <!-- Privacy Policy -->
-    <string name="privacy_title">Privacy Policy</string>
-    <string name="privacy_message">Information Collection and Use</string>
+    <string name="privacy_title">Information Collection and Use</string>
+    <string name="privacy_message"></string>
 
     <!-- Terms and service -->
     <string name="terms_and_service_title">Terms and service</string>
