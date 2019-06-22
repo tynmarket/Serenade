@@ -50,16 +50,17 @@
     <string name="load_tweet_failure">ツイートを読み込めませんでした</string>
     <string name="rate_limit_exceeded">Twitterの制限に達しました（1分間に%d回まで）</string>
 
-    <!-- Privacy Policy -->
-    <string name="privacy_title">情報の収集と利用</string>
-    <string name="privacy_message">情報の収集と利用</string>
-
     <!-- Terms and service -->
     <string name="terms_and_service_title">利用規約</string>
     <string name="terms_and_service_text_1">本アプリを利用することにより被った損害について、一切責任を負わないものとします。</string>
     <string name="terms_and_service_text_2">本アプリが利用するAPIサーバは、本アプリからのみアクセスを許可します。</string>
     <string name="terms_and_service_text_3">本アプリのソースコードはMITライセンスの下、以下のURLにて公開されています。</string>
     <string name="terms_and_service_text_4">https://github.com/tynmarket/Serenade</string>
+
+    <!-- Privacy Policy -->
+    <string name="privacy_title">プライバシーポリシー</string>
+    <string name="privacy_text">本アプリの利用者の個人情報の取り扱いに対して、下記リンク先のページの内容の通り定めます。</string>
+    <string name="privacy_link">https://serenade-197604.firebaseapp.com/privacy-policy-ja.html</string>
 
     <!-- Version -->
     <string name="version">バージョン</string>
