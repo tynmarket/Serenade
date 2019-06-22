@@ -57,6 +57,11 @@
     <string name="terms_and_service_text_3">本アプリのソースコードはMITライセンスの下、以下のURLにて公開されています。</string>
     <string name="terms_and_service_text_4">https://github.com/tynmarket/Serenade</string>
 
+    <!-- Privacy Policy -->
+    <string name="privacy_title">プライバシーポリシー</string>
+    <string name="privacy_text">本アプリの利用者の個人情報の取り扱いに対して、下記リンク先のページの内容の通り定めます。</string>
+    <string name="privacy_link">https://serenade-197604.firebaseapp.com/privacy-policy-ja.html</string>
+
     <!-- Version -->
     <string name="version">バージョン</string>
     <string name="version_code">1.0.1-preview</string>

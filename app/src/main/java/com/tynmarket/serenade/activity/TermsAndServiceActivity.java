@@ -3,7 +3,9 @@ package com.tynmarket.serenade.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
+import com.tynmarket.serenade.BuildConfig;
 import com.tynmarket.serenade.R;
 
 /**
@@ -14,6 +16,9 @@ public class TermsAndServiceActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_and_service);
+
+        TextView versionCode = findViewById(R.id.version_code);
+        versionCode.setText(BuildConfig.VERSION_NAME);
         // TODO: Set title
         //getSupportActionBar().setTitle(R.string.terms_and_service_title);
     }
