@@ -47,7 +47,7 @@ public class TweetUtil {
         }
 
         List<MediaEntity> media = tweet.entities.media;
-        if (media.size() == 0) {
+        if (media != null && media.size() == 0) {
             return null;
         }
 

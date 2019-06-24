@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.twitter.sdk.android.core.models.Tweet;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.entity.TwitterCard;
 import com.tynmarket.serenade.model.util.LogUtil;
 import com.tynmarket.serenade.model.util.TweetUtil;
@@ -55,12 +54,6 @@ public class TweetListAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         }
 
         holder.setTweetAndCardToBindings(tweet, card);
-
-        if (LoginUser.isTynmarket() && TweetUtil.containSlide(tweet)) {
-            holder.binding.slideButton.setVisibility(View.VISIBLE);
-        } else {
-            holder.binding.slideButton.setVisibility(View.GONE);
-        }
     }
 
     @Override

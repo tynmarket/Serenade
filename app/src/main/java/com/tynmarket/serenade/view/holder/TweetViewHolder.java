@@ -1,6 +1,5 @@
 package com.tynmarket.serenade.view.holder;
 
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -13,10 +12,8 @@ import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.activity.SlideActivity;
 import com.tynmarket.serenade.databinding.ListItemTweetBinding;
 import com.tynmarket.serenade.model.FavoriteTweet;
-import com.tynmarket.serenade.model.LoginUser;
 import com.tynmarket.serenade.model.RetweetTweet;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 import com.tynmarket.serenade.model.entity.TwitterCard;
@@ -51,9 +48,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         // Open profile
         setOnRetweetUserNameClickListener();
         setOnProfileClickListener();
-
-        // Open slide
-        setOnSlideButtonClickListener();
 
         // TODO: Animation
         // TODO: Move to TweetActionView
@@ -145,20 +139,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
             User user = TweetUtil.tweetOrRetweetedStatus(getTweet()).user;
             Uri uri = TwitterUtil.profileUri(user.screenName);
             ActivityHelper.startUriActivity(v.getContext(), uri);
-        });
-    }
-
-    private void setOnSlideButtonClickListener() {
-        if (!LoginUser.isTynmarket()) {
-            return;
-        }
-
-        // Open slide
-        binding.slideButton.setOnClickListener(v -> {
-            String expandedUrl = TweetUtil.expandedUrl(getTweet());
-            Intent intent = new Intent(itemView.getContext(), com.tynmarket.serenade.activity.SlideActivity.class);
-            intent.putExtra(SlideActivity.EXPANDED_URL, expandedUrl);
-            itemView.getContext().startActivity(intent);
         });
     }
 
