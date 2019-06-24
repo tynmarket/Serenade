@@ -103,20 +103,9 @@
             android:visibility="@{showSummaryCard ? View.VISIBLE : View.GONE}"
             android:foreground="?android:selectableItemBackground" />
 
-        <Button
-            android:id="@+id/slide_button"
-            android:layout_below="@+id/summary_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginStart="@dimen/spacing_icon_and_margin"
-            android:visibility="gone"
-            android:text="@string/slide_button"
-            android:foreground="?android:selectableItemBackground" />
-
         <com.tynmarket.serenade.view.custom.TweetActionView
             android:id="@+id/tweet_action"
-            android:layout_below="@+id/slide_button"
+            android:layout_below="@+id/summary_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_icon_and_margin"
