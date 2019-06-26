@@ -186,9 +186,15 @@ public class TweetUtil {
 
     @Nullable
     private static UrlEntity urlEntity(Tweet tweet) {
-        List<UrlEntity> urls = tweet.entities.urls;
+        TweetEntities entities = tweet.entities;
 
-        if (urls.size() > 0) {
+        if (entities == null) {
+            return null;
+        }
+
+        List<UrlEntity> urls = entities.urls;
+
+        if (urls != null && urls.size() > 0) {
             return urls.get(0);
         } else {
             return null;
@@ -197,10 +203,16 @@ public class TweetUtil {
 
     @Nullable
     private static MediaEntity mediaEntity(Tweet tweet) {
-        List<MediaEntity> entities = tweet.entities.media;
+        TweetEntities entities = tweet.entities;
 
-        if (entities.size() > 0) {
-            return entities.get(0);
+        if (entities == null) {
+            return null;
+        }
+
+        List<MediaEntity> media = entities.media;
+
+        if (media != null && media.size() > 0) {
+            return media.get(0);
         } else {
             return null;
         }
