@@ -13,7 +13,6 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.SpeakerDeck;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 
 import org.threeten.bp.LocalDate;
@@ -66,11 +65,6 @@ public class TweetUtil {
         } else {
             return null;
         }
-    }
-
-    public static boolean containSlide(Tweet tweet) {
-        UrlEntity url = urlEntity(tweet);
-        return url != null && url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
     }
 
     public static String tweetText(Tweet tweet) {
