@@ -3,14 +3,14 @@ apply plugin: 'deploygate'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.tynmarket.serenade"
         minSdkVersion 23
-        targetSdkVersion 26
+        targetSdkVersion 28
         // Auto increment https://qiita.com/mickamy/items/0285ce1035ec1a224ae7
-        versionCode 27
-        versionName "1.0.10"
+        versionCode 28
+        versionName "1.0.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         def properties = new Properties()
@@ -58,9 +58,9 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.google.firebase:firebase-config:17.0.0'
+    implementation 'com.google.firebase:firebase-config:18.0.0'
 
     // UI
     implementation 'de.hdodenhof:circleimageview:2.2.0'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // Twitter
     implementation 'com.twitter.sdk.android:twitter-core:3.2.0'
