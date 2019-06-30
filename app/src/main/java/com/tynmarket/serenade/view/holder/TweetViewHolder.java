@@ -1,12 +1,13 @@
 package com.tynmarket.serenade.view.holder;
 
-import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.Tweet;

@@ -135,6 +135,7 @@ public class TwitterCardList {
 
     private static OgpServeApi ogpServeApi() {
         String ogpserveUrl = FirebaseRemoteConfigHelper.getOgpserveUrl();
+        //String ogpserveUrl = "https://tyn-imarket.com/";
 
         if (!ogpserveUrl.equals(currentOgpserveUrl)) {
             currentOgpserveUrl = ogpserveUrl;

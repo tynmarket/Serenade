@@ -1,14 +1,15 @@
 package com.tynmarket.serenade.view.custom;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

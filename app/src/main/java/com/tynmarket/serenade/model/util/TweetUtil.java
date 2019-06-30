@@ -1,10 +1,11 @@
 package com.tynmarket.serenade.model.util;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.MediaEntity;
@@ -12,7 +13,6 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.TweetEntities;
 import com.twitter.sdk.android.core.models.UrlEntity;
 import com.tynmarket.serenade.R;
-import com.tynmarket.serenade.model.SpeakerDeck;
 import com.tynmarket.serenade.model.entity.TweetWithTwitterCard;
 
 import org.threeten.bp.LocalDate;
@@ -65,11 +65,6 @@ public class TweetUtil {
         } else {
             return null;
         }
-    }
-
-    public static boolean containSlide(Tweet tweet) {
-        UrlEntity url = urlEntity(tweet);
-        return url != null && url.expandedUrl.startsWith(SpeakerDeck.SPEAKER_DECK_URL);
     }
 
     public static String tweetText(Tweet tweet) {
