@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.model.util;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.twitter.sdk.android.core.models.User;
 import com.tynmarket.serenade.R;

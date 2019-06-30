@@ -1,10 +1,11 @@
 package com.tynmarket.serenade.model.util;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.twitter.sdk.android.core.models.MediaEntity;

@@ -1,6 +1,6 @@
 package com.tynmarket.serenade.model;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.tynmarket.serenade.model.api.SpeakerDeckApi;
 

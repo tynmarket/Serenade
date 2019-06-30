@@ -1,11 +1,12 @@
 package com.tynmarket.serenade.view.custom;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.tynmarket.serenade.R;
 import com.tynmarket.serenade.databinding.TweetActionBinding;

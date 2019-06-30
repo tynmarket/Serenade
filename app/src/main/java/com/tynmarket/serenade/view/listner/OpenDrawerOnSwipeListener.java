@@ -1,8 +1,9 @@
 package com.tynmarket.serenade.view.listner;
 
-import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by tynmarket on 2018/03/07.
