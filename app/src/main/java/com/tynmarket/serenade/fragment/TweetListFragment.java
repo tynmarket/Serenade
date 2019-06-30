@@ -94,7 +94,7 @@ public class TweetListFragment extends Fragment {
 
         // Layout
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        manager.setOrientation(RecyclerView.VERTICAL);
         rv.setLayoutManager(manager);
 
         // Animation
