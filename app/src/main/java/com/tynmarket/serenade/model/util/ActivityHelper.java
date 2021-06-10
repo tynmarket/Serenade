@@ -17,7 +17,7 @@ public class ActivityHelper {
     public static void startUriActivity(Context context, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         // TODO: Set only if url is twitter
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(context, intent);
     }
 
