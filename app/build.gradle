@@ -6,8 +6,8 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.tynmarket.serenade"
-        minSdkVersion 23
-        targetSdkVersion 29
+        minSdkVersion 24
+        targetSdkVersion 30
         // Auto increment https://qiita.com/mickamy/items/0285ce1035ec1a224ae7
         versionCode 28
         versionName "1.0.11"
